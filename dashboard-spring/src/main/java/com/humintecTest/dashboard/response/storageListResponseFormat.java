@@ -1,12 +1,23 @@
-package com.humintecTest.dashboard.vo;
+package com.humintecTest.dashboard.response;
 
-public class StorageListVo {
+import com.humintecTest.dashboard.vo.StorageListVo;
+
+public class storageListResponseFormat {
 	private int id;
 	private String storageName;
 	private Long total;
-	private Long	used;
+	private Long used;
 	private Long free;
-	private String serverIp;
+	private String server_ip;
+	
+	public storageListResponseFormat(StorageListVo vo){
+		id = vo.getId();
+		storageName = vo.getStorageName();
+		total = vo.getTotal();
+		used = vo.getUsed();
+		free = vo.getFree();
+		server_ip = vo.getServerIp();
+	}
 	
 	public int getId() {
 		return id;
@@ -23,8 +34,8 @@ public class StorageListVo {
 	public Long getFree() {
 		return free;
 	}
-	public String getServerIp() {
-		return serverIp;
+	public String getServer_ip() {
+		return server_ip;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -41,9 +52,7 @@ public class StorageListVo {
 	public void setFree(Long free) {
 		this.free = free;
 	}
-	public void setServer_ip(String serverIp) {
-		this.serverIp = serverIp;
+	public void setServer_ip(String server_ip) {
+		this.server_ip = server_ip;
 	}
-	
-	
 }
