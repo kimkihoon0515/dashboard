@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.BasefolderListDao">
+    <select id="selectBasefolderList" parameterType="basefolderListVo" resultType="basefolderListVo">
+        SELECT
+            id as id,
+            basefolder_name as basefolder_name,
+            basefolder_path as basefolder_path,
+            current_write_YN as current_write_YN,
+            longterm_YN as longterm_YN,
+            hupax_or_sectra as hupax_or_sectra,
+            slide_count as slide_count,
+            storage_name as storage_name
+        FROM
+            basefolder_list
+    </select>
+</mapper>

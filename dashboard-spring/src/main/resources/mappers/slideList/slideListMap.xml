@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.SlideListDao">
+    <select id="selectSlideList" parameterType="slideListVo" resultType="slideListVo">
+        SELECT
+            sid as sid,
+            filename as filename,
+            pathology_id as pathology_id,
+            pathology_id_ref as pathology_id_ref,
+            block as block,
+            stain as stain,
+            pathID_ch as pathID_ch,
+            create_date as create_date,
+            modify_date as modify_date,
+            first_scan_date as first_scan_date,
+            last_scan_date as last_scan_date,
+            image_type as image_type,
+            scanner_type as scanner_type,
+            hupax_basefolder_name as hupax_basefolder_name,
+            sectra_basefolder_name as sectra_basefolder_name,
+            file_path as file_path,
+            file_size as file_size,
+            download_count as download_count
+        FROM
+            slide_list
+    </select>
+</mapper>
