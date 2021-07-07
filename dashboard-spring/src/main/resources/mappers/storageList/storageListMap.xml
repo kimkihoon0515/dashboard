@@ -10,7 +10,7 @@
 			total as total,
 			used as used,
 			free as free,
-			server_ip as serverIP
+			server_ip as serverIp
 		FROM
 			storage_list
 	</select>
