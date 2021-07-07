@@ -20,7 +20,7 @@ import com.humintecTest.dashboard.service.StorageListService;
 import com.humintecTest.dashboard.vo.StorageListVo;
 
 @RestController
-public class storageListController {
+public class StorageListController {
 	@Autowired
 	StorageListService storageListService;
 	

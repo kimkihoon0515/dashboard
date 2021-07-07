@@ -1,5 +1,8 @@
 package com.humintecTest.dashboard.vo;
 
+import lombok.Data;
+
+@Data
 public class StorageListVo {
 	private int id;
 	private String storageName;
@@ -44,6 +47,5 @@ public class StorageListVo {
 	public void setServer_ip(String serverIp) {
 		this.serverIp = serverIp;
 	}
-	
 	
 }
