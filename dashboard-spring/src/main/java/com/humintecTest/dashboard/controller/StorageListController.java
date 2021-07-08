@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +21,14 @@ import com.humintecTest.dashboard.service.StorageListService;
 import com.humintecTest.dashboard.vo.StorageListVo;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class StorageListController {
 	@Autowired
 	StorageListService storageListService;
 	
 	@GetMapping("/storageList")
 	@Transactional(readOnly = true)
-	public List<storageListResponseFormat> selectStorageList(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
+	public List<storageListResponseFormat> selectStorageList(){
 		StorageListVo vo = new StorageListVo();
 		List<StorageListVo> vList = storageListService.selectStorageList(vo);
 		
