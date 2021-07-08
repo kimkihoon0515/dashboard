@@ -1,7 +1,7 @@
 package com.humintecTest.dashboard.dao;
 
-import com.humintecTest.dashboard.vo.ScannerListVo;
+import com.humintecTest.dashboard.vo.ScannerSlideListVo;
 
 public interface ScannerListDao {
-    public void insertScannerList(ScannerListVo vo);
+    public void insertScannerList(ScannerSlideListVo vo);
 }

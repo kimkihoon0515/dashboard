@@ -4,7 +4,7 @@
 
 <mapper namespace="com.humintecTest.dashboard.dao.ScannerListDao">
 
-    <insert id="insertScannerList">
+    <insert id="insertScannerList" parameterType="com.humintecTest.dashboard.dao.ScannerListDao">
         insert into scaner_per_slide(scanner_type,slide_sum) values (#{scanner_type},#{slide_sum})
     </insert>
 </mapper>
