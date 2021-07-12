@@ -2,6 +2,9 @@ package com.humintecTest.dashboard.response;
 
 import com.humintecTest.dashboard.vo.StorageListVo;
 
+import lombok.Data;
+
+@Data
 public class storageListResponseFormat {
 	private int id;
 	private String storageName;
