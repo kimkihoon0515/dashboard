@@ -6,5 +6,6 @@ import lombok.Data;
 public class ScannerSlideListVo {
     private String scanner_type;
     private int slide_sum;
-
 }
+
+

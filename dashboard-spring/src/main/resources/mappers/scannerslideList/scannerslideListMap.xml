@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.ScannerSlideListDao">
+    <insert id="insertScannerSlideList">
+        <selectKey keyProperty="scanner_type,slide_sum" resultType="String" order="BEFORE">
+            select scanner_type, count(*) as slide_sum from slide_list group by scanner_type
+        </selectKey>
+        insert into scanner_per_slide
+        (scanner_type,slide_sum)
+        values
+        (#{scanner_type},#{slide_sum})
+    </insert>
+</mapper>
