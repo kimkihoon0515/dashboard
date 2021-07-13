@@ -88,4 +88,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: sh /root/ci-cd/auto-run.sh
+          script: nohup sh /root/ci-cd/auto-run.sh
