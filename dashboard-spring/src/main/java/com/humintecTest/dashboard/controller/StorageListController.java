@@ -25,26 +25,26 @@ import com.humintecTest.dashboard.vo.StorageListVo;
 public class StorageListController {
 	@Autowired
 	StorageListService storageListService;
-	
+
 	@GetMapping("/storageList")
 	@Transactional(readOnly = true)
 	public List<storageListResponseFormat> selectStorageList(){
 		StorageListVo vo = new StorageListVo();
 		List<StorageListVo> vList = storageListService.selectStorageList(vo);
-		
+
 		ArrayList<storageListResponseFormat> resList = new ArrayList<storageListResponseFormat>();
-		
+
 		for(StorageListVo selectVo : vList) {
 			resList.add(new storageListResponseFormat(selectVo));
 		}
-		
+
 		return resList;
 	}
-	
+
 	@GetMapping("/requestCheck")
 	@Transactional(readOnly = true)
 	public int requestCheck(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
-		
+
 		return req.getCheck();
 	}
 }
