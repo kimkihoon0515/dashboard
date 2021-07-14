@@ -5,7 +5,6 @@ import com.humintecTest.dashboard.vo.ScannerSlideVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ScannerSlideListServiceImpl implements ScannerSlideListService{
@@ -13,7 +12,13 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     ScannerSlideListDao scannerSlideListDao;
 
     @Override
-    public List<ScannerSlideVo> insertScanner(ScannerSlideVo vo) {
-        return scannerSlideListDao.insertScanner(vo);
+    public int insertScanner(ScannerSlideVo vo) {
+        try{
+            scannerSlideListDao.insertScanner(vo);
+            return 0;
+        }
+        catch (Exception e){
+            return -1;
+        }
     }
 }

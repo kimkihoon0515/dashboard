@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface ScannerSlideListDao {
-    public List<ScannerSlideVo> insertScanner(ScannerSlideVo vo);
+    public int insertScanner(ScannerSlideVo vo);
 }
