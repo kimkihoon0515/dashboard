@@ -16,10 +16,5 @@ public class PidController {
     @Autowired
     PidService pidService;
 
-    @RequestMapping("pid")
-    public @ResponseBody List<PidVo> insertPid(@ModelAttribute("searchVo") PidVo vo, ModelMap modelMap) throws Exception{
-        List<PidVo> vlist = pidService.insertPid(vo);
-        return vlist;
-    }
 
 }
