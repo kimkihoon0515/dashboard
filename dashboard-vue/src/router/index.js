@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/views/Home'
+import VueChartJS from '@/views/VueChartJS'
 
 Vue.use(Router)
 
@@ -8,13 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
     },
     {
-      path: '/sample',
-      name: 'Sample',
-      component: () => import(/* webpackChunkName: "about" */ '../views/Sample.vue')
+      path: '/chartjs',
+      name: 'VueChartJS',
+      component: VueChartJS
     }
   ]
 })
