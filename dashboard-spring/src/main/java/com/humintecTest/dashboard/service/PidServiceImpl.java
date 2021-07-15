@@ -14,7 +14,19 @@ public class PidServiceImpl implements PidService{
     PidDao pidDao;
 
     @Override
-    public List<PidVo> insertPid(PidVo vo) {
-        return pidDao.insertPid(vo);
+    public List<PidVo> selectPid(PidVo vo) {
+        return pidDao.selectPid(vo);
+    }
+
+    @Override
+    public int insertPid(PidVo vo) {
+        try {
+            pidDao.insertPid(vo);
+            return 0;
+        }
+        catch (Exception e)
+        {
+            return -1;
+        }
     }
 }

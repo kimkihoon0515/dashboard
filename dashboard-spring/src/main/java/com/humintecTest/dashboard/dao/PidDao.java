@@ -8,5 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface PidDao {
-    public List<PidVo> insertPid (PidVo vo);
+    public List<PidVo> selectPid (PidVo vo);
+    public int insertPid(PidVo vo);
 }

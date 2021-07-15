@@ -6,5 +6,6 @@ import com.humintecTest.dashboard.vo.PidVo;
 import java.util.List;
 
 public interface PidService {
-    public List<PidVo> insertPid (PidVo vo);
+    public List<PidVo> selectPid (PidVo vo);
+    public int insertPid (PidVo vo);
 }

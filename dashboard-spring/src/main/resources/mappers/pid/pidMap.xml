@@ -13,6 +13,9 @@
         order by last_scan_date asc
     </select>
     <insert id = "insertPid" parameterType="PidVo">
-        insert pathid_table
+        insert into
+            pathid_table(last_scan_date,pathID_ch,amount)
+        values
+            (#{last_scan_date},#{pathID_ch},#{amount})
     </insert>
 </mapper>
