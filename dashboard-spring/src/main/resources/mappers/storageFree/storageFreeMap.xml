@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.StorageFreeDao">
+    <select id = "selectStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo">
+        select last_scan_date,
+               storage_name,
+               daily_sum,
+               abs(total-daily_sum) as free,
+               total
+        from storage_per_date
+    </select>
+    <insert id = "insertStorageFree" parameterType="StorageFreeVo">
+        insert into
+            storage_free(last_scan_date, storage_name,daily_used, free, total)
+        values
+            (${last_scan_date},${storage_name},${daily_used},${free},${total})
+    </insert>
+</mapper>
