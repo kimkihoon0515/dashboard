@@ -36,8 +36,9 @@ public class StorageDateController {
             if(storageDateService.insertStorageDate(target)==0){
 
             }
-            else
+            else {
                 return "false";
+            }
         }
         return "ok";
     }
