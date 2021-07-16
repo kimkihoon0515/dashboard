@@ -16,6 +16,11 @@ export default new Router({
       path: '/chartjs',
       name: 'VueChartJS',
       component: VueChartJS
+    },
+    {
+      path: '/sample',
+      name: 'Sample',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Sample.vue')
     }
   ]
 })
