@@ -1,6 +1,7 @@
 package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageTableDao;
+import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageTableVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,16 @@ public class StorageTableServiceImpl implements StorageTableService{
         }
         catch (Exception e){
             return -1;
+        }
+    }
+
+    @Override
+    public int deleteStorageTable(StorageTableVo vo) {
+        try{
+            storageTableDao.deleteStorageTable(vo);
+            return 1;
+        }catch (Exception e){
+            return 0;
         }
     }
 }

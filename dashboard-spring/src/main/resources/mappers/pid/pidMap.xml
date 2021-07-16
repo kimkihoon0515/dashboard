@@ -18,4 +18,7 @@
         values
             (#{last_scan_date},#{pathID_ch},#{amount})
     </insert>
+    <delete id = "deletePid">
+        truncate pathid_table
+    </delete>
 </mapper>

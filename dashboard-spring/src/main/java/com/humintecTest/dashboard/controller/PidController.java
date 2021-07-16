@@ -40,4 +40,13 @@ public class PidController {
         }
         return "ok";
     }
+
+    @PutMapping("deletePid")
+    public String deletePid(PidVo vo) {
+        if(pidService.deletePid(vo) == 1) {
+            return "false";
+        }
+        else
+            return "ok";
+    }
 }

@@ -4,10 +4,7 @@ import com.humintecTest.dashboard.response.scannerResponseFormat;
 import com.humintecTest.dashboard.service.ScannerSlideListService;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,4 +40,13 @@ public class ScannerSlideListController {
         return res;
     }
 
+    @PutMapping("/deleteScanner")
+    public String deleteScanner(ScannerSlideVo vo){
+        if(scannerSlideListService.deleteScanner(vo) == 1){
+        }
+        else {
+            return "false";
+        }
+        return "ok";
+    }
 }
