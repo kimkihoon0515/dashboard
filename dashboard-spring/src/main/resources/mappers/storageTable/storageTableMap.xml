@@ -22,6 +22,10 @@
         values
                 (#{date},#{used},#{storage_name})
     </insert>
+    <delete id="deleteStorageTable">
+        truncate
+            storage_table
+    </delete>
 </mapper>
 
 

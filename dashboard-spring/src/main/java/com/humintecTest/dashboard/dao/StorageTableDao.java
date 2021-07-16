@@ -9,4 +9,5 @@ import java.util.List;
 public interface StorageTableDao {
     public List<StorageTableVo> selectStorageTable(StorageTableVo vo);
     public int insertStorageTable(StorageTableVo vo);
+    public int deleteStorageTable(StorageTableVo vo);
 }

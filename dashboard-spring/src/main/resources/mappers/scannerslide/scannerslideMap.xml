@@ -18,4 +18,8 @@
         values
             (#{scanner_type},#{slide_sum})
     </insert>
+    <delete id = "deleteScanner">
+        truncate
+            scanner_per_slide
+    </delete>
 </mapper>
