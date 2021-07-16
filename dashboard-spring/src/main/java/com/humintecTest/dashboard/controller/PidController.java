@@ -43,7 +43,7 @@ public class PidController {
 
     @PutMapping("deletePid")
     public String deletePid(PidVo vo) {
-        if(pidService.deletePid(vo) == 0) {
+        if(pidService.deletePid(vo) == 1) {
             return "false";
         }
         else
