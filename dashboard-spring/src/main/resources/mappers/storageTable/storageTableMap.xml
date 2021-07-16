@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.StorageTableDao">
+    <select id = "selectStorageTable" parameterType="StorageTableVo" resultType="StorageTableVo">
+        select
+               date_format(slide_list.last_scan_date, '%Y-%m-%d') as date,
+                sum(slide_list.file_size)as used,
+                 basefolder_list.storage_name as storage_name
+        from
+                slide_list, basefolder_list
+        where
+                slide_list.hupax_basefolder_name = basefolder_list.basefolder_name
+        group by date, storage_name
+        order by date asc
+    </select>
+    <insert id ="insertStorageTable" parameterType="StorageTableVo">
+        insert into
+                storage_table
+                (date,used,storage_name)
+        values
+                (#{date},#{used},#{storage_name})
+    </insert>
+    <delete id="deleteStorageTable">
+        truncate
+            storage_table
+    </delete>
+</mapper>
+
+
