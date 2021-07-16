@@ -26,4 +26,15 @@ public class StorageDateserviceImpl implements StorageDateService{
             return -1;
         }
     }
+
+    @Override
+    public int deleteStorageDate(StorageDateVo vo) {
+        try{
+            storageDateDao.deleteStorageDate(vo);
+            return 1;
+        }
+        catch (Exception e) {
+            return 0;
+        }
+    }
 }

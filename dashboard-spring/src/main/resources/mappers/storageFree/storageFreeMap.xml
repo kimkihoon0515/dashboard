@@ -17,4 +17,8 @@
         values
             (${last_scan_date},${storage_name},${daily_used},${free},${total})
     </insert>
+    <delete id = "deleteStorageFree">
+        truncate
+            storage_free
+    </delete>
 </mapper>

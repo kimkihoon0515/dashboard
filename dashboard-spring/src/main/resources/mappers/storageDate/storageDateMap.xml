@@ -19,5 +19,9 @@
             values
             (${last_scan_date},${daily_sum},${storage_name},${total})
     </insert>
+    <delete id = "deleteStorageDate">
+        truncate
+            sotrage_per_date
+    </delete>
 </mapper>
 

@@ -17,27 +17,35 @@ public class StorageFreeController {
     StorageFreeService storageFreeService;
 
     @GetMapping("/selectStorageFree")
-    public List<storageFreeResponseFormat> selectFreeStorage(StorageFreeVo vo){
+    public List<storageFreeResponseFormat> selectFreeStorage(StorageFreeVo vo) {
         StorageFreeVo vo1 = new StorageFreeVo();
         List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo1);
         ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
 
-        for(StorageFreeVo target : vList){
+        for (StorageFreeVo target : vList) {
             res.add(new storageFreeResponseFormat(target));
         }
         return res;
     }
 
     @PutMapping("/insertStorageFree")
-    public String insertStorageFree(StorageFreeVo vo){
+    public String insertStorageFree(StorageFreeVo vo) {
         List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo);
 
-        for(StorageFreeVo target : vList){
-            if(storageFreeService.insertStorageFree(target)==0){
+        for (StorageFreeVo target : vList) {
+            if (storageFreeService.insertStorageFree(target) == 0) {
 
-            }
-            else
+            } else
                 return "false";
+        }
+        return "ok";
+    }
+
+    @PutMapping("/deleteStorageFree")
+    public String deleteStorageFree(StorageFreeVo vo) {
+        if (storageFreeService.deleteStorageFree(vo) == 1) {
+        } else {
+            return "false";
         }
         return "ok";
     }

@@ -40,4 +40,13 @@ public class ScannerSlideListController {
         return res;
     }
 
+    @PutMapping("/deleteScanner")
+    public String deleteScanner(ScannerSlideVo vo){
+        if(scannerSlideListService.deleteScanner(vo) == 1){
+        }
+        else {
+            return "false";
+        }
+        return "ok";
+    }
 }

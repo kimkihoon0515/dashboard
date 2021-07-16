@@ -9,4 +9,5 @@ import java.util.List;
 public interface StorageFreeDao {
     public List<StorageFreeVo> selectStorageFree(StorageFreeVo vo);
     public int insertStorageFree(StorageFreeVo vo);
+    public int deleteStorageFree(StorageFreeVo vo);
 }

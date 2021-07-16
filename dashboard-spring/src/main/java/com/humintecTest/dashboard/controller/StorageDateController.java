@@ -41,4 +41,15 @@ public class StorageDateController {
         }
         return "ok";
     }
+
+    @PutMapping("/deleteStorageDate")
+    public String deleteStorageDate(StorageDateVo vo){
+        if(storageDateService.deleteStorageDate(vo)==1){
+
+        }
+        else {
+            return "false";
+        }
+        return "ok";
+    }
 }

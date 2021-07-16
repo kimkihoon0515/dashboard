@@ -40,4 +40,15 @@ public class StorageTableController {
         }
         return "ok";
     }
+
+    @PutMapping("/deleteStorageTable")
+    public String deleteStorageTable(StorageTableVo vo){
+        if(storageTableService.deleteStorageTable(vo)==1){
+
+        }
+        else {
+            return "false";
+        }
+        return "ok";
+    }
 }
