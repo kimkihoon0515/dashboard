@@ -9,6 +9,6 @@ import java.util.Scanner;
 
 @Mapper
 public interface ScannerSlideListDao {
-    public void insertScanner(ScannerSlideVo vo);
-    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
+    void insertScanner(ScannerSlideVo vo);
+    List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
 }

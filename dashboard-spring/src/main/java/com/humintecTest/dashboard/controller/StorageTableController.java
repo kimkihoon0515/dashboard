@@ -17,7 +17,7 @@ public class StorageTableController {
     @Autowired
     StorageTableService storageTableService;
 
-    @GetMapping("/storageTableSelect")
+    @GetMapping("/selectStorageTable")
     public List<storageTableResponseFormat> selectStorageTable(StorageTableVo vo){
         StorageTableVo vo1 = new StorageTableVo();
         List<StorageTableVo> vList = storageTableService.selectStorageTable(vo1);
@@ -28,7 +28,7 @@ public class StorageTableController {
         return res;
     }
 
-    @PutMapping("/storageTableInsert")
+    @PutMapping("/insertStorageTable")
     public String insertStorageTable(StorageTableVo vo){
         List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
 
