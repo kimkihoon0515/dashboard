@@ -14,8 +14,12 @@
             type: Object, 
             default: {}
         }
-    }
-,
+    },
+    watch:{
+      datacollection: function(){
+        this.renderChart(this.datacollection, this.options)
+      }
+    },
     mounted () {
       //renderChart function renders the chart with the datacollection and options object.
       this.renderChart(this.datacollection, this.options)

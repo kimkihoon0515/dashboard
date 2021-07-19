@@ -52,6 +52,7 @@
   import slideDate from '@/data/slideDate.json'
   import storageList from '@/data/storagelist.json'
   import storageTrend from '@/data/storage.json'
+  import _ from 'lodash'
 
   function makePieData(name,data){
     var storage_name_list=data.map(function(elem){ return elem.storage_name}) ;
@@ -231,9 +232,13 @@
     },
     methods: {
       nameset: function (name){
-        console.log(name);
-        this.storagedetaildataset.datasets[0].data= makePieData(name,storageList);
-        this.update();
+        console.log(this.storagedetaildataset);
+        this.storagedetaildataset.datasets[0].data=makePieData(name,storageList);
+        let tmp = _.cloneDeep(this.storagedetaildataset);
+        console.log(tmp);
+        tmp.datasets[0].data= makePieData(name,storageList);
+        this.storagedetaildataset=tmp;
+        console.log(this.storagedetaildataset);
       }
     }
   }
