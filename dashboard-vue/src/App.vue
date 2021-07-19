@@ -1,11 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/chartjs">vue-chartjs</router-link></li>
-      </ul>
+      <form> 
+        <input type="checkbox"><label class="check">Y</label>
+        <input type="checkbox"><label class="check">M</label>
+        <input type="checkbox"><label class="check">D</label>
+        <input type="date" name='start_Date' value=''/>
+        <input type="date" name='end_Date' value=''/>
+        <input type="submit"/>
+      </form>
     </div>
+    <div class="margindiv"></div>
     <router-view />
   </div>
 </template>
@@ -15,13 +20,28 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: right;
   color: #2c3e50;
 }
 
 #nav {
+  position: fixed;
   padding: 30px;
-  height: 90px;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(53, 196, 231);
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
+}
+
+.check {
+  margin-right: 10px;
+}
+
+.margindiv {
+  height: 60px;
 }
 
 #nav a {
@@ -33,16 +53,6 @@
 #nav a.router-link-exact-active {
   color: #42b983;
   text-decoration: none;
-}
-
-#nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-#nav ul li {
-  display: inline-block;
-  margin: 0 10px;
 }
 
 h1 {
