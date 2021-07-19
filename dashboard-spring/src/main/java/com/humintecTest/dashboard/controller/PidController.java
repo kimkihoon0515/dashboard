@@ -4,12 +4,9 @@ import com.humintecTest.dashboard.response.pidResponseFormat;
 import com.humintecTest.dashboard.service.PidService;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -54,9 +51,9 @@ public class PidController {
     }
 
     @GetMapping("/searchPid")
-    public List<PidVo> searchPid(PidVo vo){
-        vo.setStart_date("2014-09-23");
-        vo.setEnd_date("2020-12-02");
+    public List<PidVo> searchPid (PidVo vo){
+        vo.setStart_date("2014-09-02");
+        vo.setEnd_date("2020-12-09");
         List<PidVo> vList = pidService.searchPid(vo);
         return vList;
     }

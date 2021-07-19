@@ -21,4 +21,9 @@
         truncate
             storage_free
     </delete>
+    <select id="searchStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo">
+        select *
+        from storage_free
+        where date between #{start_date} and #{end_date}
+    </select>
 </mapper>

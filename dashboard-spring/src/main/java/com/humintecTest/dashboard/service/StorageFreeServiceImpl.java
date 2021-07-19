@@ -36,4 +36,9 @@ public class StorageFreeServiceImpl implements StorageFreeService{
             return 0;
         }
     }
+
+    @Override
+    public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo) {
+        return storageFreeDao.searchStorageFree(vo);
+    }
 }

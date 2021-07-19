@@ -49,4 +49,12 @@ public class StorageFreeController {
         }
         return "ok";
     }
+
+    @GetMapping("/searchStorageFree")
+    public List<StorageFreeVo> searchStorageFree (StorageFreeVo vo) {
+        vo.setStart_date("2014-09-02");
+        vo.setEnd_date("2020-12-02");
+        List<StorageFreeVo> vList = storageFreeService.searchStorageFree(vo);
+        return vList;
+    }
 }
