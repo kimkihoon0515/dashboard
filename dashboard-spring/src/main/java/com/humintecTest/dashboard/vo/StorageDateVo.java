@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 public class StorageDateVo {
-    private Date last_scan_date;
+    private Date date;
     private BigInteger daily_sum;
     private String storage_name;
     private BigInteger total;

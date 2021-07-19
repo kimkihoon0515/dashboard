@@ -4,7 +4,6 @@ import com.humintecTest.dashboard.response.pidResponseFormat;
 import com.humintecTest.dashboard.service.PidService;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class PidController {
     @Autowired
     PidService pidService;
 
+    @ResponseBody
     @GetMapping("/selectPid")
     public List<pidResponseFormat> selectPid(PidVo vo) {
         PidVo vo1 = new PidVo();
@@ -27,7 +27,7 @@ public class PidController {
         return res;
     }
 
-    @PutMapping("insertPid")
+    @PutMapping("/insertPid")
     public String insertPid(PidVo vo) {
         List<PidVo> vList = pidService.selectPid(vo);
 
@@ -41,12 +41,20 @@ public class PidController {
         return "ok";
     }
 
-    @PutMapping("deletePid")
+    @PutMapping("/deletePid")
     public String deletePid(PidVo vo) {
         if(pidService.deletePid(vo) == 1) {
             return "false";
         }
         else
             return "ok";
+    }
+
+    @GetMapping("/searchPid")
+    public List<PidVo> searchPid (PidVo vo){
+        vo.setStart_date("2014-09-02");
+        vo.setEnd_date("2020-12-09");
+        List<PidVo> vList = pidService.searchPid(vo);
+        return vList;
     }
 }

@@ -1,7 +1,6 @@
 package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
-import com.humintecTest.dashboard.vo.SlideListVo;
 
 import java.util.List;
 

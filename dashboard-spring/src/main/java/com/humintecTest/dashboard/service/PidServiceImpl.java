@@ -40,4 +40,14 @@ public class PidServiceImpl implements PidService{
             return 0;
         }
     }
+
+    @Override
+    public List<PidVo> searchPid(PidVo vo) {
+        try {
+            return pidDao.searchPid(vo);
+        }catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
 }

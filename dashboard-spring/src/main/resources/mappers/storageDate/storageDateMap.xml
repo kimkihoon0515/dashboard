@@ -10,18 +10,18 @@
             storage_list.total
         from storage_table,
             storage_list
-        group by date,storage_name
+        group by date
         order by date asc
     </select>
     <insert id = "insertStorageDate" parameterType="StorageDateVo">
         insert into
-            storage_per_date(last_scan_date, daily_sum, storage_name, total)
+            storage_per_date(date, daily_sum, storage_name, total)
             values
-            (${last_scan_date},${daily_sum},${storage_name},${total})
+            (#{date},#{daily_sum},#{storage_name},#{total})
     </insert>
     <delete id = "deleteStorageDate">
         truncate
-            sotrage_per_date
+            storage_per_date
     </delete>
 </mapper>
 
