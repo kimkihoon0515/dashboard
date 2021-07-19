@@ -233,7 +233,6 @@
     methods: {
       nameset: function (name){
         console.log(this.storagedetaildataset);
-        this.storagedetaildataset.datasets[0].data=makePieData(name,storageList);
         let tmp = _.cloneDeep(this.storagedetaildataset);
         console.log(tmp);
         tmp.datasets[0].data= makePieData(name,storageList);
