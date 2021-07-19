@@ -39,7 +39,7 @@ export default {
 	methods:{
 		getList() {
       var vm = this;
-			this.$axios.get("/storageList")
+			this.$axios.get("/selectSlideDate")
 			.then((res)=>{
 				console.log(res);
         this.storageList = res.data;
