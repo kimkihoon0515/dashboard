@@ -4,13 +4,13 @@
 
 <mapper namespace="com.humintecTest.dashboard.dao.StorageDateDao">
     <select id = "selectStorageDate" parameterType="StorageDateVo" resultType="StorageDateVo">
-        select storage_table.date,
+        select date,
             sum(storage_table.used) over (partition by storage_table.storage_name order by date) as daily_sum,
             storage_table.storage_name as storage_name,
             storage_list.total
         from storage_table,
             storage_list
-        group by storage_table.date
+        group by date
         order by date asc
     </select>
     <insert id = "insertStorageDate" parameterType="StorageDateVo">

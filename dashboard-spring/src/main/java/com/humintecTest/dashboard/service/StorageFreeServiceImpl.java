@@ -22,6 +22,7 @@ public class StorageFreeServiceImpl implements StorageFreeService{
             storageFreeDao.insertStorageFree(vo);
             return 0;
         }catch (Exception e){
+            System.out.println(e);
             return -1;
         }
     }
