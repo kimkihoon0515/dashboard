@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.StorageDateDao">
+    <select id = "selectStorageDate" parameterType="StorageDateVo" resultType="StorageDateVo">
+        select date,
+            sum(storage_table.used) over (partition by storage_table.storage_name order by date) as daily_sum,
+            storage_table.storage_name as storage_name,
+            storage_list.total
+        from storage_table,
+            storage_list
+        group by date
+        order by date asc
+    </select>
+    <insert id = "insertStorageDate" parameterType="StorageDateVo">
+        insert into
+            storage_per_date(date, daily_sum, storage_name, total)
+            values
+            (#{date},#{daily_sum},#{storage_name},#{total})
+    </insert>
+    <delete id = "deleteStorageDate">
+        truncate
+            storage_per_date
+    </delete>
+</mapper>
+

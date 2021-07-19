@@ -1,10 +1,15 @@
 package com.humintecTest.dashboard.dao;
 
-import org.apache.ibatis.session.SqlSession;
+import com.humintecTest.dashboard.vo.ScannerSlideVo;
+import org.apache.ibatis.annotations.Mapper;
 
-public class ScannerSlideListDao {
-    public int insertScannerSlideList(SqlSession session) {
-        int result  = session.insert("com.humintecTest.dashboard.dao.ScannerSlideListDao.insertScannerSlideList");
-        return result;
-    }
+import java.util.List;
+import java.util.Scanner;
+
+
+@Mapper
+public interface ScannerSlideListDao {
+    void insertScanner(ScannerSlideVo vo);
+    List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
+    int deleteScanner(ScannerSlideVo vo);
 }
