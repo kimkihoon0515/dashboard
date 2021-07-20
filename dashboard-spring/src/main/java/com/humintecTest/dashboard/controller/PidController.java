@@ -14,7 +14,9 @@ import java.util.List;
 public class PidController {
     @Autowired
     PidService pidService;
-
+  
+    @ResponseBody
+    @GetMapping("/selectPid")
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/selectPid",method = RequestMethod.GET)
     public List<pidResponseFormat> selectPid(PidVo vo) {
