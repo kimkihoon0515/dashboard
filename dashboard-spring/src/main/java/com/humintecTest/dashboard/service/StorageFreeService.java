@@ -1,5 +1,6 @@
 package com.humintecTest.dashboard.service;
 
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface StorageFreeService {
     public int insertStorageFree(StorageFreeVo vo);
     public int deleteStorageFree();
     public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo);
+    public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req);
 }
