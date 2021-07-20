@@ -9,7 +9,7 @@
 export default {
 	methods:{
 		getList() {
-			this.$axios.get("/selectPid",{
+			this.$axios.get("/selectStorageDate",{
 				headers: {
 					
 				}

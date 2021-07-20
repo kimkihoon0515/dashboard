@@ -4,6 +4,7 @@ import com.humintecTest.dashboard.response.slideDateResponseFormat;
 import com.humintecTest.dashboard.service.SlideDateService;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class SlideDateController {
     @Autowired

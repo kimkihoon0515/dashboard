@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 public class PidController {
     @Autowired
     PidService pidService;
 
-    @CrossOrigin(origins = "*")
+
     @RequestMapping(value = "/selectPid",method = RequestMethod.GET)
     public List<pidResponseFormat> selectPid(PidVo vo) {
         PidVo vo1 = new PidVo();
