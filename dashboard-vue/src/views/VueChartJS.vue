@@ -27,8 +27,7 @@
       </div>
       <div class="column">
         <h3>storage detail</h3>
-        <button v-for="name in storage_name_list" v-on:click="nameset(name)">{{name}}</button>
-
+      
         <h2>storage piechart</h2>
         <pie-chart class="storagePie" :datacollection="storagedetaildataset" :options="stackchartoptions"></pie-chart>
       </div>
