@@ -22,6 +22,7 @@ public class StorageFreeServiceImpl implements StorageFreeService{
             storageFreeDao.insertStorageFree(vo);
             return 0;
         }catch (Exception e){
+            System.out.println(e);
             return -1;
         }
     }
@@ -34,5 +35,10 @@ public class StorageFreeServiceImpl implements StorageFreeService{
         }catch (Exception e){
             return 0;
         }
+    }
+
+    @Override
+    public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo) {
+        return storageFreeDao.searchStorageFree(vo);
     }
 }

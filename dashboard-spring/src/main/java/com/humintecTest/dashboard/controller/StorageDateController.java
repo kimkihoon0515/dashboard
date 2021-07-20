@@ -6,6 +6,7 @@ import com.humintecTest.dashboard.vo.SlideDateVo;
 import com.humintecTest.dashboard.vo.StorageDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,9 @@ public class StorageDateController {
     StorageDateService storageDateService;
 
     @GetMapping("/selectStorageDate")
-    public List<storageDateResponseFormat> selectStorageDate(StorageDateVo vo){
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
+    public List<storageDateResponseFormat> selectStorageDate(){
         StorageDateVo vo1 = new StorageDateVo();
         List<StorageDateVo> vList = storageDateService.selectStorageDate(vo1);
         ArrayList<storageDateResponseFormat> res = new ArrayList<storageDateResponseFormat>();
@@ -32,6 +35,7 @@ public class StorageDateController {
     
     @PutMapping("/updateStoragePerDate")
     @Transactional(readOnly = false)
+	@CrossOrigin(origins = "*")
     public String updateStoragePerDate() {
     	if(storageDateService.deleteStorageDate()== 0){
     		StorageDateVo vo = new StorageDateVo();
@@ -45,10 +49,9 @@ public class StorageDateController {
     				return "false";
     			}
     		}
-        }
-        else{
-            return "false";
-        }
-        return "ok";
+    	}
+    	
+    	return "ok";
     }
+
 }

@@ -4,21 +4,26 @@
 
 <mapper namespace="com.humintecTest.dashboard.dao.StorageFreeDao">
     <select id = "selectStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo">
-        select last_scan_date,
+        select date,
                storage_name,
-               daily_sum,
+               daily_sum as daily_used,
                abs(total-daily_sum) as free,
                total
         from storage_per_date
     </select>
     <insert id = "insertStorageFree" parameterType="StorageFreeVo">
         insert into
-            storage_free(last_scan_date, storage_name,daily_used, free, total)
+            storage_free(date, storage_name,daily_used, free, total)
         values
-            (${last_scan_date},${storage_name},${daily_used},${free},${total})
+            (#{date},#{storage_name},#{daily_used},#{free},#{total})
     </insert>
     <delete id = "deleteStorageFree">
         truncate
             storage_free
     </delete>
+    <select id="searchStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo">
+        select *
+        from storage_free
+        where date between #{start_date} and #{end_date}
+    </select>
 </mapper>

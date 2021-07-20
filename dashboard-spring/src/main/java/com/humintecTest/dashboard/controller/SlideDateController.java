@@ -6,6 +6,7 @@ import com.humintecTest.dashboard.service.SlideDateService;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ public class SlideDateController {
 
     @GetMapping("/selectSlidePerDate")
     @Transactional(readOnly = true)
+	@CrossOrigin(origins = "*")
     public List<slideDateResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
     	List<SlideDateVo> vList = slideDateService.selectDateToDate(req);
     	
@@ -35,6 +37,7 @@ public class SlideDateController {
     
     @PutMapping("/updateSlidePerDate")
     @Transactional(readOnly = false)
+    @CrossOrigin(origins = "*")
     public String updateSlidePerDate() {
     	if(slideDateService.deleteSlideDate()== 0){
     		SlideDateVo vo = new SlideDateVo();
@@ -48,10 +51,9 @@ public class SlideDateController {
     				return "false";
     			}
     		}
-        }
-        else{
-            return "false";
-        }
-        return "ok";
+    		
+    	}
+    	
+    	return "ok";
     }
 }

@@ -1,27 +1,27 @@
 <template>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1>Creating Beautiful Charts Using Vue.js Wrappers For Chart.js</h1>
-        <h2>
-          Read the article on SitePoint:
-          <a href="https://www.sitepoint.com/creating-beautiful-charts-vue-chart-js/">
-            Creating Beautiful Charts Using Vue.js Wrappers for Chart.js
-          </a>
-        </h2>
-        <h3>
-          Download the repo from GitHub:
-          <a href="https://github.com/sitepoint-editors/vue-charts">
-            https://github.com/sitepoint-editors/vue-charts
-          </a>
-        </h3>
-      </div>
-    </div>
-  </section>
+  <div class='grid'>
+    <dashboard-block id="countSlide"></dashboard-block>
+    <dashboard-block id="countScaner"></dashboard-block>
+    <dashboard-block id="countPathId"></dashboard-block>
+    <dashboard-block id="size"></dashboard-block>
+    <dashboard-block id="storage"></dashboard-block>
+    <dashboard-block id="storageFull"></dashboard-block>
+  </div>
 </template>
 
 <script>
+import DashboardBlock from '../components/DashboardBlock.vue'
+
 export default {
+  components: { DashboardBlock },
   name: 'home'
 }
 </script>
+
+<style>
+  .grid {
+  display: block;
+  width: 1100px;
+  margin: 20px auto;
+  }
+</style>
