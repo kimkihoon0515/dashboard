@@ -62,4 +62,9 @@ public class PidController {
         List<PidVo> vList = pidService.searchPid(vo);
         return vList;
     }
+    @GetMapping("/showPid")
+    public List<PidVo> showPid (PidVo vo) {
+        List<PidVo> vList = pidService.showPid(vo);
+        return vList;
+    }
 }

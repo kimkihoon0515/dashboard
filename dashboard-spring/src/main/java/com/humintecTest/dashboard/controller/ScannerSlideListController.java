@@ -50,4 +50,11 @@ public class ScannerSlideListController {
         }
         return "ok";
     }
+
+    @GetMapping("/showScanner")
+    public List<ScannerSlideVo> showScanner(ScannerSlideVo vo)
+    {
+        List<ScannerSlideVo> vList = scannerSlideListService.showScanner(vo);
+        return vList;
+    }
 }

@@ -22,5 +22,9 @@
         truncate
             slide_per_date
     </delete>
+    <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo">
+        select *
+        from slide_per_date
+    </select>
 </mapper>
 

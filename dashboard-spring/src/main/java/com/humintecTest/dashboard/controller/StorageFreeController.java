@@ -59,4 +59,9 @@ public class StorageFreeController {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFree(vo);
         return vList;
     }
+    @GetMapping("/showStorageFree")
+    public List<StorageFreeVo> showStorageFree (StorageFreeVo vo){
+        List<StorageFreeVo> vList = storageFreeService.showStorageFree(vo);
+        return vList;
+    }
 }

@@ -52,4 +52,10 @@ public class SlideDateController {
         }
         return "ok";
     }
+    @GetMapping("/showSlideDate")
+    public List<SlideDateVo> showSlideDate(SlideDateVo vo)
+    {
+        List<SlideDateVo> vList = slideDateService.showSlideDate(vo);
+        return vList;
+    }
 }
