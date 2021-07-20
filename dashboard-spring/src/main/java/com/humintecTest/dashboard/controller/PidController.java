@@ -15,15 +15,11 @@ import java.util.List;
 public class PidController {
     @Autowired
     PidService pidService;
-<<<<<<< HEAD
 
-
-=======
-  
     @ResponseBody
     @GetMapping("/selectPid")
     @CrossOrigin(origins = "*")
->>>>>>> 7c71d3a363aa4b35d3e6d9c82cecfef6393ed60b
+
     @RequestMapping(value = "/selectPid",method = RequestMethod.GET)
     public List<pidResponseFormat> selectPid(PidVo vo) {
         PidVo vo1 = new PidVo();
