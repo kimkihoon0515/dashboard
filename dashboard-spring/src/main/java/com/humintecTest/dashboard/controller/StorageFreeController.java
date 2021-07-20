@@ -4,6 +4,7 @@ import com.humintecTest.dashboard.response.storageFreeResponseFormat;
 import com.humintecTest.dashboard.service.StorageFreeService;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class StorageFreeController {
     @Autowired
@@ -55,6 +57,11 @@ public class StorageFreeController {
         vo.setStart_date("2014-09-02");
         vo.setEnd_date("2020-12-02");
         List<StorageFreeVo> vList = storageFreeService.searchStorageFree(vo);
+        return vList;
+    }
+    @GetMapping("/showStorageFree")
+    public List<StorageFreeVo> showStorageFree (StorageFreeVo vo){
+        List<StorageFreeVo> vList = storageFreeService.showStorageFree(vo);
         return vList;
     }
 }

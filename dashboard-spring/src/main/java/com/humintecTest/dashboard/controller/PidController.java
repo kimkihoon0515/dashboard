@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 public class PidController {
     @Autowired
     PidService pidService;
-  
+
     @ResponseBody
     @GetMapping("/selectPid")
     @CrossOrigin(origins = "*")
+
     @RequestMapping(value = "/selectPid",method = RequestMethod.GET)
     public List<pidResponseFormat> selectPid(PidVo vo) {
         PidVo vo1 = new PidVo();
@@ -58,6 +60,11 @@ public class PidController {
         vo.setStart_date("2014-09-02");
         vo.setEnd_date("2020-12-09");
         List<PidVo> vList = pidService.searchPid(vo);
+        return vList;
+    }
+    @GetMapping("/showPid")
+    public List<PidVo> showPid (PidVo vo) {
+        List<PidVo> vList = pidService.showPid(vo);
         return vList;
     }
 }

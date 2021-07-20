@@ -38,4 +38,9 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
             return 0;
         }
     }
+
+    @Override
+    public List<ScannerSlideVo> showScanner(ScannerSlideVo vo) {
+        return scannerSlideListDao.showScanner(vo);
+    }
 }
