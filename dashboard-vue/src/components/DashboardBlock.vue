@@ -6,7 +6,29 @@
 
 <script>
 export default {
+  data() {
+    return {
+      chartType: '',
+      query: '',
+      labels: '',
+      chartData: ''
+    }
+  },
+  props: {
 
+  },
+  methods: {
+    getList(query) {
+      var vm = this;
+			this.$axios.get(query)
+			.then((res)=>{
+				console.log(res);
+			})
+			.then((err)=>{
+				console.log(err);
+			})
+		}
+  }
 }
 </script>
 

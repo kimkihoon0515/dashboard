@@ -14,7 +14,11 @@ import DashboardBlock from '../components/DashboardBlock.vue'
 
 export default {
   components: { DashboardBlock },
-  name: 'home'
+  name: 'home',
+  props: {
+    start: '',
+    end: ''
+  }
 }
 </script>
 
