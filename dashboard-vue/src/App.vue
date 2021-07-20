@@ -2,12 +2,12 @@
   <div id="app">
     <div id="nav">
       <form> 
-        <input type="checkbox"><label class="check">Y</label>
-        <input type="checkbox"><label class="check">M</label>
-        <input type="checkbox"><label class="check">D</label>
-        <input type="date" name='start_Date' value=''/>
-        <input type="date" name='end_Date' value=''/>
-        <input type="submit"/>
+        <label class="check"><input type="checkbox">Y</label>
+        <label class="check"><input type="checkbox">M</label>
+        <label class="check"><input type="checkbox">D</label>
+        <input v-model="startDate" type="date" name='start_Date' value=''/>
+        <input v-model="endDate" type="date" name='end_Date' value=''/>
+        <button>submit</button>
       </form>
     </div>
     <div class="margindiv"></div>
@@ -18,7 +18,10 @@
 <script>
 export default {
   data () {
-    
+    return {
+      startDate: '',
+      endDate: ''
+    }
   }
 }
 </script>
