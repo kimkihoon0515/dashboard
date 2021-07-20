@@ -1,5 +1,6 @@
 <template>
   <div class="chartbox">
+    <div></div>
     <pie-chart></pie-chart>
   </div>
 </template>
