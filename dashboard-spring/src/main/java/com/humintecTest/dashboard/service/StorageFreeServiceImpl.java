@@ -28,12 +28,12 @@ public class StorageFreeServiceImpl implements StorageFreeService{
     }
 
     @Override
-    public int deleteStorageFree(StorageFreeVo vo) {
+    public int deleteStorageFree() {
         try{
-            storageFreeDao.deleteStorageFree(vo);
-            return 1;
-        }catch (Exception e){
+            storageFreeDao.deleteStorageFree();
             return 0;
+        }catch (Exception e){
+            return 1;
         }
     }
 
