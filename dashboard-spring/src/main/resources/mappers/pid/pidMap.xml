@@ -18,4 +18,12 @@
         values
             (#{last_scan_date},#{pathID_ch},#{amount})
     </insert>
+    <delete id = "deletePid">
+        truncate pathid_table
+    </delete>
+    <select id = "searchPid" parameterType="PidVo" resultType="PidVo">
+        select *
+        from pathid_table
+        where last_scan_date between #{start_date} and #{end_date}
+    </select>
 </mapper>

@@ -28,4 +28,14 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) {
         return scannerSlideListDao.selectScanner(vo);
     }
+
+    @Override
+    public int deleteScanner(ScannerSlideVo vo) {
+        try{
+            scannerSlideListDao.deleteScanner(vo);
+            return 1;
+        } catch (Exception e){
+            return 0;
+        }
+    }
 }

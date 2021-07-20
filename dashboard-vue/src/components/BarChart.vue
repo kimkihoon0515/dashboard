@@ -7,7 +7,11 @@
     props: {
         datacollection: {
           type: Object, 
-          default: null 
+          default: {}
+        },
+        options:{
+          type: Object, 
+          default: {}
         }
     },
     mounted () {

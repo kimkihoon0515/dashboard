@@ -29,4 +29,25 @@ public class PidServiceImpl implements PidService{
             return -1;
         }
     }
+
+    @Override
+    public int deletePid(PidVo vo) {
+        try {
+            pidDao.deletePid(vo);
+            return 1;
+        }
+        catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<PidVo> searchPid(PidVo vo) {
+        try {
+            return pidDao.searchPid(vo);
+        }catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
 }
