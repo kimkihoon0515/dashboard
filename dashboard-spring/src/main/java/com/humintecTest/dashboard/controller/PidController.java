@@ -18,8 +18,7 @@ public class PidController {
     @ResponseBody
     @GetMapping("/selectPid")
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/selectPid",method = RequestMethod.GET)
-    public List<pidResponseFormat> selectPid(PidVo vo) {
+    public List<pidResponseFormat> selectPid() {
         PidVo vo1 = new PidVo();
         List<PidVo> vList = pidService.selectPid(vo1);
         ArrayList<pidResponseFormat> res = new ArrayList<pidResponseFormat>();
@@ -31,6 +30,7 @@ public class PidController {
     }
 
     @PutMapping("/insertPid")
+    @CrossOrigin(origins = "*")
     public String insertPid(PidVo vo) {
         List<PidVo> vList = pidService.selectPid(vo);
 
@@ -45,6 +45,7 @@ public class PidController {
     }
 
     @PutMapping("/deletePid")
+    @CrossOrigin(origins = "*")
     public String deletePid(PidVo vo) {
         if(pidService.deletePid(vo) == 1) {
             return "false";
@@ -54,6 +55,7 @@ public class PidController {
     }
 
     @GetMapping("/searchPid")
+    @CrossOrigin(origins = "*")
     public List<PidVo> searchPid (PidVo vo){
         vo.setStart_date("2014-09-02");
         vo.setEnd_date("2020-12-09");
