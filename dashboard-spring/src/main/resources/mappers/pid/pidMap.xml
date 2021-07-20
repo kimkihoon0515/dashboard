@@ -26,4 +26,8 @@
         from pathid_table
         where last_scan_date between #{start_date} and #{end_date}
     </select>
+    <select id = "showPid" parameterType="PidVo" resultType="PidVo">
+        select *
+        from pathid_table
+    </select>
 </mapper>

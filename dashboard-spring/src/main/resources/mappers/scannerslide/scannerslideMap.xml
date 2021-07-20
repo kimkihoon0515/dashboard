@@ -22,4 +22,8 @@
         truncate
             scanner_per_slide
     </delete>
+    <select id = "showScanner" resultType="ScannerSlideVo" parameterType="ScannerSlideVo">
+        select *
+        from scanner_per_slide
+    </select>
 </mapper>
