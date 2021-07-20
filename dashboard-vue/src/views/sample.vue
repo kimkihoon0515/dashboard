@@ -9,7 +9,11 @@
 export default {
 	methods:{
 		getList() {
-			this.$axios.get("/storageList")
+			this.$axios.get("/selectPid",{
+				headers: {
+					
+				}
+			})
 			.then((res)=>{
 				console.log(res);
 			})
