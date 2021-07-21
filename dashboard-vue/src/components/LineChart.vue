@@ -7,11 +7,11 @@
     props: {
         datacollection: {
           type: Object, 
-          default: {}
+
         },
         options:{
           type: Object, 
-          default: {}
+
         }
     },
     watch:{

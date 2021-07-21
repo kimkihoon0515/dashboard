@@ -10,17 +10,23 @@
         <button @click="setDate">submit</button>
       </form>
     </div>
+    <home :start="startDate" :end="startDate"></home>
     <div class="margindiv"></div>
     <router-view :start="startDate" :end="endDate"></router-view>
   </div>
 </template>
 
 <script>
+import home from "./views/Home.vue"
+
 export default {
+  components: {
+    home
+  },
   data () {
     return {
-      startDate: '',
-      endDate: ''
+      startDate: "2021-07-21",
+      endDate: "2021-07-21"
     }
   },
   methods: {
