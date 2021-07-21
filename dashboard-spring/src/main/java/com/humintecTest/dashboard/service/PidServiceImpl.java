@@ -49,11 +49,6 @@ public class PidServiceImpl implements PidService {
 
     @Override
     public List<PidVo> showPid(PidVo vo) {
-        try {
-            return pidDao.showPid(vo);
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
+        return pidDao.showPid(vo);
     }
 }

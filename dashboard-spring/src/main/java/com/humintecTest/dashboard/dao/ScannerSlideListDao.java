@@ -14,3 +14,5 @@ public interface ScannerSlideListDao {
     int deleteScanner(ScannerSlideVo vo);
     List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
 }
+
+

@@ -16,6 +16,7 @@ public class ScannerSlideListController {
     ScannerSlideListService scannerSlideListService;
 
     @PutMapping("/insertScanner")
+    @CrossOrigin(origins = "*")
     public String insertScanner(ScannerSlideVo vo) {
         List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
 
@@ -30,7 +31,8 @@ public class ScannerSlideListController {
     }
 
     @GetMapping("/selectScanner")
-    public List<scannerResponseFormat> selectScanner(ScannerSlideVo vo) {
+    @CrossOrigin(origins = "*")
+    public List<scannerResponseFormat> selectScanner() {
         ScannerSlideVo vo1 = new ScannerSlideVo();
         List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo1);
         ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
@@ -42,6 +44,7 @@ public class ScannerSlideListController {
     }
 
     @PutMapping("/deleteScanner")
+    @CrossOrigin(origins = "*")
     public String deleteScanner(ScannerSlideVo vo){
         if(scannerSlideListService.deleteScanner(vo) == 1){
         }
@@ -52,6 +55,7 @@ public class ScannerSlideListController {
     }
 
     @GetMapping("/showScanner")
+
     public List<scannerResponseFormat> showScanner(ScannerSlideVo vo)
     {
         ScannerSlideVo vo1 = new ScannerSlideVo();
@@ -63,3 +67,4 @@ public class ScannerSlideListController {
         return res;
     }
 }
+

@@ -1,27 +1,49 @@
 <template>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1>Creating Beautiful Charts Using Vue.js Wrappers For Chart.js</h1>
-        <h2>
-          Read the article on SitePoint:
-          <a href="https://www.sitepoint.com/creating-beautiful-charts-vue-chart-js/">
-            Creating Beautiful Charts Using Vue.js Wrappers for Chart.js
-          </a>
-        </h2>
-        <h3>
-          Download the repo from GitHub:
-          <a href="https://github.com/sitepoint-editors/vue-charts">
-            https://github.com/sitepoint-editors/vue-charts
-          </a>
-        </h3>
-      </div>
-    </div>
-  </section>
+  <div class='grid'>
+    <bar-type-com id="slide-date"></bar-type-com>
+    <bar-type-com id="scanner"></bar-type-com>
+    <bar-type-com id="pathID"></bar-type-com>
+    <bar-type-com id="size"></bar-type-com>
+    <pie-type-com id="storage"></pie-type-com>
+    <line-type-com id="storage-full"></line-type-com>
+  </div>
 </template>
 
 <script>
+import BarTypeCom from '../components/BarTypeCom.vue'
+// import DashboardBlock from '../components/DashboardBlock.vue'
+import LineTypeCom from '../components/LineTypeCom.vue'
+import PieTypeCom from '../components/PieTypeCom.vue'
+
 export default {
-  name: 'home'
+  components: { BarTypeCom, PieTypeCom, LineTypeCom },
+  name: 'home',
+  data() {
+    return {
+      
+    }
+  },
+  props: {
+    start: '',
+    end: ''
+  }
 }
 </script>
+
+<style>
+  .grid {
+  display: block;
+  width: 1100px;
+  margin: 20px auto;
+  }
+  .chartbox {
+  width: 500px;
+  height: 400px;
+  display: block;
+  margin: 0 15px 50px 15px;
+  overflow: hidden;
+  border: 1px solid rgb(53, 196, 231);
+  border-radius: 10px;
+  float: left;
+}
+</style>
