@@ -1,11 +1,11 @@
 <template>
   <div class='grid'>
-    <bar-type-com id="slide-date"></bar-type-com>
-    <bar-type-com id="scanner"></bar-type-com>
-    <bar-type-com id="pathID"></bar-type-com>
-    <bar-type-com id="size"></bar-type-com>
-    <pie-type-com id="storage"></pie-type-com>
-    <line-type-com id="storage-full"></line-type-com>
+    <bar-type-com id="slide-date" :query="slide-date"></bar-type-com>
+    <bar-type-com id="scanner" query=""></bar-type-com>
+    <bar-type-com id="pathID" query=""></bar-type-com>
+    <bar-type-com id="size" query=""></bar-type-com>
+    <pie-type-com id="storage" query=""></pie-type-com>
+    <line-type-com id="storage-full" query=""></line-type-com>
   </div>
 </template>
 
@@ -20,7 +20,25 @@ export default {
   name: 'home',
   data() {
     return {
-      
+      slide_date:{
+        url:"/selectSlideDate",
+        start_date: start,
+        end_date: end,
+        YMD: 3
+      },
+      scanner:{
+        url:"/selectScanner",
+        start_date: start,
+        end_date: end,
+        YMD: 3
+      },
+      pathID:{
+        url:"/selectPid",
+        start_date: start,
+        end_date: end,
+        YMD: 3
+      },
+
     }
   },
   props: {
