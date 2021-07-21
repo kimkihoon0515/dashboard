@@ -36,4 +36,9 @@ public class SlideDateServiceImpl implements SlideDateService{
             return 0;
         }
     }
+
+    @Override
+    public List<SlideDateVo> showSlideDate(SlideDateVo vo) {
+        return slideDateDao.showSlideDate(vo);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class ScannerSlideListController {
 
@@ -15,6 +16,7 @@ public class ScannerSlideListController {
     ScannerSlideListService scannerSlideListService;
 
     @PutMapping("/insertScanner")
+    @CrossOrigin(origins = "*")
     public String insertScanner(ScannerSlideVo vo) {
         List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
 
@@ -29,7 +31,8 @@ public class ScannerSlideListController {
     }
 
     @GetMapping("/selectScanner")
-    public List<scannerResponseFormat> selectScanner(ScannerSlideVo vo) {
+    @CrossOrigin(origins = "*")
+    public List<scannerResponseFormat> selectScanner() {
         ScannerSlideVo vo1 = new ScannerSlideVo();
         List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo1);
         ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
@@ -41,6 +44,7 @@ public class ScannerSlideListController {
     }
 
     @PutMapping("/deleteScanner")
+    @CrossOrigin(origins = "*")
     public String deleteScanner(ScannerSlideVo vo){
         if(scannerSlideListService.deleteScanner(vo) == 1){
         }
@@ -48,5 +52,12 @@ public class ScannerSlideListController {
             return "false";
         }
         return "ok";
+    }
+
+    @GetMapping("/showScanner")
+    public List<ScannerSlideVo> showScanner(ScannerSlideVo vo)
+    {
+        List<ScannerSlideVo> vList = scannerSlideListService.showScanner(vo);
+        return vList;
     }
 }

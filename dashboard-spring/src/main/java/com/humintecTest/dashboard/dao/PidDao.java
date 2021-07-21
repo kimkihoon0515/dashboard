@@ -12,4 +12,5 @@ public interface PidDao {
     public int insertPid(PidVo vo);
     public int deletePid(PidVo vo);
     public List<PidVo> searchPid (PidVo vo);
+    public List<PidVo> showPid (PidVo vo);
 }
