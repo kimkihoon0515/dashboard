@@ -1,6 +1,7 @@
 package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.response.pidResponseFormat;
+import com.humintecTest.dashboard.response.pidShowResponseFormat;
 import com.humintecTest.dashboard.service.PidService;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,12 +64,12 @@ public class PidController {
         return vList;
     }
     @GetMapping("/showPid")
-    public List<pidResponseFormat> showPid (PidVo vo) {
+    public List<pidShowResponseFormat> showPid (PidVo vo) {
         PidVo vo1 = new PidVo();
         List<PidVo> vList = pidService.showPid(vo1);
-        ArrayList<pidResponseFormat> res = new ArrayList<pidResponseFormat>();
-        for(PidVo target : vList){
-            res.add(new pidResponseFormat(target));
+        ArrayList<pidShowResponseFormat> res = new ArrayList<pidShowResponseFormat>();
+        for (PidVo target : vList) {
+            res.add(new pidShowResponseFormat(target));
         }
         return res;
     }
