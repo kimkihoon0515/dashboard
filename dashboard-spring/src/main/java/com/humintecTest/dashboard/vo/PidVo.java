@@ -2,7 +2,7 @@ package com.humintecTest.dashboard.vo;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 public class PidVo {
