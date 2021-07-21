@@ -63,8 +63,13 @@ public class PidController {
         return vList;
     }
     @GetMapping("/showPid")
-    public List<PidVo> showPid (PidVo vo) {
-        List<PidVo> vList = pidService.showPid(vo);
-        return vList;
+    public List<pidResponseFormat> showPid (PidVo vo) {
+        PidVo vo1 = new PidVo();
+        List<PidVo> vList = pidService.showPid(vo1);
+        ArrayList<pidResponseFormat> res = new ArrayList<pidResponseFormat>();
+        for(PidVo target : vList){
+            res.add(new pidResponseFormat(target));
+        }
+        return res;
     }
 }
