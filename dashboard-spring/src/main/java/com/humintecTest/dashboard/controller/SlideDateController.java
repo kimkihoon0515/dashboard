@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class SlideDateController {
     @Autowired
@@ -53,5 +54,11 @@ public class SlideDateController {
             return "false";
         }
         return "ok";
+    }
+    @GetMapping("/showSlideDate")
+    public List<SlideDateVo> showSlideDate(SlideDateVo vo)
+    {
+        List<SlideDateVo> vList = slideDateService.showSlideDate(vo);
+        return vList;
     }
 }
