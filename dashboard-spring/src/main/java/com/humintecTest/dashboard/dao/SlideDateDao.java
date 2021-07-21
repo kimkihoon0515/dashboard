@@ -12,3 +12,5 @@ public interface SlideDateDao {
     public int deleteSlideDate(SlideDateVo vo);
     public List<SlideDateVo> showSlideDate(SlideDateVo vo);
 }
+
+

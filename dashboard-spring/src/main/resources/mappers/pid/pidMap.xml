@@ -27,7 +27,8 @@
         where last_scan_date between #{start_date} and #{end_date}
     </select>
     <select id = "showPid" parameterType="PidVo" resultType="PidVo">
-        select *
+        select pathID_ch, sum(amount) as amount
         from pathid_table
+        group by pathID_ch
     </select>
 </mapper>

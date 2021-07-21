@@ -55,10 +55,17 @@ public class SlideDateController {
         }
         return "ok";
     }
+  
     @GetMapping("/showSlideDate")
-    public List<SlideDateVo> showSlideDate(SlideDateVo vo)
+    public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)
     {
-        List<SlideDateVo> vList = slideDateService.showSlideDate(vo);
-        return vList;
+       SlideDateVo vo1 = new SlideDateVo();
+       List<SlideDateVo> vList = slideDateService.showSlideDate(vo1);
+       ArrayList<slideDateResponseFormat> res = new ArrayList<slideDateResponseFormat>();
+       for (SlideDateVo target : vList){
+           res.add(new slideDateResponseFormat(target));
+       }
+       return res;
     }
 }
+
