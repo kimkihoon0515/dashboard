@@ -12,11 +12,16 @@
         options:{
           type: Object, 
 
+        },
+        change:{
+          default:0
         }
     },
     watch:{
-      datacollection: function(){
+      change: function(){
         this.renderChart(this.datacollection, this.options)
+
+        this.$emit("rerendered")
       }
     },
     mounted () {

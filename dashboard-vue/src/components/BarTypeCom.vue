@@ -1,13 +1,12 @@
 <template>
   <div class="chartbox">
-    <bar-chart :datacollection="datacollection" :options="chartoptions"></bar-chart>
+    <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
 </template>
 
 <script>
 import BarChart from './BarChart.vue'
-import _ from "lodash"
-
+import _ from 'lodash'
 export default {
   name : "BarTypeCom",
   components: { BarChart },
@@ -21,16 +20,20 @@ export default {
 
   data () {
     return {
+      dataform:{
+        label: null,
+        data: null,
+        backgroundColor: null,
+        pointBackgroundColor: 'white',
+        borderWidth: 1,
+        pointBorderColor: '#249EBF'
+        },
+      change:0,
+      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
         labels: null,
-        datasets: [{
-                    label: null,
-                    data: null,
-                    backgroundColor: '#f87979',
-                    pointBackgroundColor: 'white',
-                    borderWidth: 1,
-                    pointBorderColor: '#249EBF'
-        }]
+        datasets: [
+        ]
       },
       chartoptions:{
           scales: {
@@ -41,12 +44,14 @@ export default {
                   gridLines: {
                       display: true
                   },
+                  stacked: true
               }],
               xAxes: [ {
               
                   gridLines: {
                       display: false
                   },
+                  stacked: true
               }]
           },
           legend: {
@@ -58,33 +63,30 @@ export default {
     }
   },
   methods: {
-    getList() {
-			this.$axios.get(this.query.url)
-			.then((res)=>{
-        console.log(res.data);
-			})
-			.then((err)=>{
-				console.log(err);
-			})
-		}
+    reset() {
+      this.change=0;
+      console.log(this.change);
+    }
   },
   mounted() {
     this.$axios.get(this.query.url)
     .then((res)=>{
       //console.log(this.query.name);
-      //console.log(this.query.url);
+      //console.log(this.query.xKey);
+      var x= this.query.xKey;
+      var y= this.query.yKey;
+      //console.log(this.query.yKey);
       var keys= Object.keys(res.data[0]);
-      //console.log(res.data[0]);
-      //console.log(keys[0]);
-      var tmp= _.cloneDeep(this.datacollection);
-      tmp.labels=res.data.map(function(elem){return elem[keys[0]]});
-      //console.log(this.datacollection.labels);
-      tmp.datasets[0].label=this.query.name;
-      tmp.datasets[0].data=res.data.map(function(elem){return elem[keys[1]]});
-      //console.log(this.datacollection.datasets[0].data);
-      //console.log(this.datacollection);
-      this.datacollection= _.cloneDeep(tmp);
-
+      this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
+      for(let i=0; i<y.length ; i++){
+        let tmp= _.cloneDeep(this.dataform);
+        tmp.label=keys[y[i]];
+        tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        tmp.backgroundColor=this.colorset[i];
+        console.log(tmp);
+        this.datacollection.datasets.push(tmp);
+      }
+      this.change=1;
     })
     .then((err)=>{
       console.log(err);

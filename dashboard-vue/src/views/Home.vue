@@ -1,10 +1,10 @@
 <template>
   <div class='grid'>
-    <bar-type-com id="slide-date"  :query="slide_date"></bar-type-com>
-    <!--<bar-type-com id="scanner" ></bar-type-com>
-    <bar-type-com id="pathID" ></bar-type-com>
-    <bar-type-com id="size" ></bar-type-com>
-    <pie-type-com id="storage" ></pie-type-com>
+    <line-type-com id="slide-date"  :query="slide_date"></line-type-com>
+    <bar-type-com id="scanner" :query="scanner"></bar-type-com>
+    <bar-type-com id="pathID" :query="pathID"></bar-type-com>
+    <bar-type-com id="size" :query="size"></bar-type-com>
+    <!--<pie-type-com id="storage" ></pie-type-com>
     <line-type-com id="storage-full" ></line-type-com>-->
   </div>
 </template>
@@ -25,21 +25,37 @@ export default {
         url:"/selectSlideDate",
         start_date: this.start,
         end_date: this.end,
-        YMD: 3
+        YMD: 3,
+        xKey: 0,
+        yKey: [1]
       },
       scanner:{
+        name:"scanner",
         url:"/selectScanner",
         start_date: this.start,
         end_date: this.end,
-        YMD: 3
+        YMD: 3,
+        xKey:0,
+        yKey:[1]
       },
       pathID:{
-        url:"/selectPid",
+        name:"pathID",
+        url:"/showPid",
         start_date: this.start,
         end_date: this.end,
-        YMD: 3
+        YMD: 3,
+        xKey: 0,
+        yKey: [1]
       },
-
+      size:{
+        name:"size",
+        url:"/storageList",
+        start_date: this.start,
+        end_date: this.end,
+        YMD: 3,
+        xKey: 1,
+        yKey: [3,4]
+      },
     }
   },
   props: {

@@ -10,9 +10,9 @@
         <button @click="setDate">submit</button>
       </form>
     </div>
-    <home :start="startDate" :end="startDate"></home>
     <div class="margindiv"></div>
-    <router-view :start="startDate" :end="endDate"></router-view>
+    <home :start="startDate" :end="startDate"></home>
+    <!--<router-view :start="startDate" :end="endDate"></router-view>-->
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   },
   data () {
     return {
-      startDate: "2021-07-21",
+      startDate: "2021-07-18",
       endDate: "2021-07-21"
     }
   },
