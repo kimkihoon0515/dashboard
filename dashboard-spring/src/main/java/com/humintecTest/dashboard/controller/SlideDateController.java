@@ -19,8 +19,7 @@ public class SlideDateController {
     SlideDateService slideDateService;
 
     @GetMapping("/selectSlideDate")
-    @CrossOrigin(origins = "*")
-    public List<slideDateResponseFormat> selectSlideDate(){
+    public List<slideDateResponseFormat> selectSlideDate(SlideDateVo vo){
         SlideDateVo vo1 = new SlideDateVo();
         List<SlideDateVo> vList = slideDateService.selectSlideDate(vo1);
         ArrayList<slideDateResponseFormat> res = new ArrayList<slideDateResponseFormat>();
@@ -32,7 +31,6 @@ public class SlideDateController {
     }
 
     @PutMapping("/insertSlideDate")
-    @CrossOrigin(origins = "*")
     public String insertSlideDate(SlideDateVo vo) {
         List<SlideDateVo> vList = slideDateService.selectSlideDate(vo);
         for (SlideDateVo target : vList) {
@@ -45,7 +43,6 @@ public class SlideDateController {
     }
 
     @PutMapping("/deleteSlideDate")
-    @CrossOrigin(origins = "*")
     public String deleteSlideDate(SlideDateVo vo){
         if(slideDateService.deleteSlideDate(vo)== 1){
 
@@ -56,9 +53,14 @@ public class SlideDateController {
         return "ok";
     }
     @GetMapping("/showSlideDate")
-    public List<SlideDateVo> showSlideDate(SlideDateVo vo)
+    public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)
     {
-        List<SlideDateVo> vList = slideDateService.showSlideDate(vo);
-        return vList;
+       SlideDateVo vo1 = new SlideDateVo();
+       List<SlideDateVo> vList = slideDateService.showSlideDate(vo1);
+       ArrayList<slideDateResponseFormat> res = new ArrayList<slideDateResponseFormat>();
+       for (SlideDateVo target : vList){
+           res.add(new slideDateResponseFormat(target));
+       }
+       return res;
     }
 }
