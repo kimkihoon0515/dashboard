@@ -3,7 +3,7 @@ package com.humintecTest.dashboard.response;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 public class slideDateResponseFormat {
