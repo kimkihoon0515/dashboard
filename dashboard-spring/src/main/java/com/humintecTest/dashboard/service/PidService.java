@@ -12,3 +12,4 @@ public interface PidService {
     public List<PidVo> searchPid (PidVo vo);
     public List<PidVo> showPid (PidVo vo);
 }
+

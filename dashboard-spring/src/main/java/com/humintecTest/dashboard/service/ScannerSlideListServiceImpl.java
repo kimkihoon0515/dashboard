@@ -44,3 +44,4 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
         return scannerSlideListDao.showScanner(vo);
     }
 }
+

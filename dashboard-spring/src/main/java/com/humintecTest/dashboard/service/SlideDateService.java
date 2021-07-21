@@ -10,3 +10,5 @@ public interface SlideDateService {
     public int deleteSlideDate(SlideDateVo vo);
     public List<SlideDateVo> showSlideDate(SlideDateVo vo);
 }
+
+

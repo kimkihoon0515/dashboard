@@ -19,7 +19,8 @@ public class StorageFreeController {
     StorageFreeService storageFreeService;
 
     @GetMapping("/selectStorageFree")
-    public List<storageFreeResponseFormat> selectFreeStorage(StorageFreeVo vo) {
+    @CrossOrigin(origins = "*")
+    public List<storageFreeResponseFormat> selectFreeStorage() {
         StorageFreeVo vo1 = new StorageFreeVo();
         List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo1);
         ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
@@ -31,6 +32,7 @@ public class StorageFreeController {
     }
 
     @PutMapping("/insertStorageFree")
+    @CrossOrigin(origins = "*")
     public String insertStorageFree(StorageFreeVo vo) {
         List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo);
 
@@ -44,6 +46,7 @@ public class StorageFreeController {
     }
 
     @PutMapping("/deleteStorageFree")
+    @CrossOrigin(origins = "*")
     public String deleteStorageFree(StorageFreeVo vo) {
         if (storageFreeService.deleteStorageFree(vo) == 1) {
         } else {
@@ -60,6 +63,7 @@ public class StorageFreeController {
         return vList;
     }
     @GetMapping("/showStorageFree")
+
     public List<storageFreeResponseFormat> showStorageFree (StorageFreeVo vo){
         StorageFreeVo vo1 = new StorageFreeVo();
         List<StorageFreeVo> vList = storageFreeService.showStorageFree(vo1);
@@ -70,3 +74,4 @@ public class StorageFreeController {
         return res;
     }
 }
+

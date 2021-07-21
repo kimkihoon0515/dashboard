@@ -20,7 +20,8 @@ public class StorageTableController {
     StorageTableService storageTableService;
 
     @GetMapping("/selectStorageTable")
-    public List<storageTableResponseFormat> selectStorageTable(StorageTableVo vo){
+    @CrossOrigin(origins = "*")
+    public List<storageTableResponseFormat> selectStorageTable(){
         StorageTableVo vo1 = new StorageTableVo();
         List<StorageTableVo> vList = storageTableService.selectStorageTable(vo1);
         ArrayList<storageTableResponseFormat> res = new ArrayList<storageTableResponseFormat>();
@@ -31,6 +32,7 @@ public class StorageTableController {
     }
 
     @PutMapping("/insertStorageTable")
+    @CrossOrigin(origins = "*")
     public String insertStorageTable(StorageTableVo vo){
         List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
 
@@ -44,6 +46,7 @@ public class StorageTableController {
     }
 
     @PutMapping("/deleteStorageTable")
+    @CrossOrigin(origins = "*")
     public String deleteStorageTable(StorageTableVo vo){
         if(storageTableService.deleteStorageTable(vo)==1){
 
