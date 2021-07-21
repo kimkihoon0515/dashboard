@@ -13,3 +13,5 @@ public interface StorageFreeDao {
     public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo);
     public List<StorageFreeVo> showStorageFree(StorageFreeVo vo);
 }
+
+

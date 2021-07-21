@@ -14,3 +14,4 @@ public interface PidDao {
     public List<PidVo> searchPid (PidVo vo);
     public List<PidVo> showPid (PidVo vo);
 }
+

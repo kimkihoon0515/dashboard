@@ -11,3 +11,4 @@ public interface ScannerSlideListService {
     public int deleteScanner(ScannerSlideVo vo);
     public List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
 }
+
