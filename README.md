@@ -6,7 +6,7 @@
 
 ===========================================================================
 
-#데이터 갱신 과정  
+# 데이터 갱신 과정  
 
 ### 기존 테이블 데이터 삭제 (delete 호출) -> 새로운 데이터 가져오기(select 호출) -> 가져온 데이터 삽입(insert 호출)
 
@@ -45,7 +45,12 @@
 ##### 날짜 선택해서 storage 사용량 가져오기 (딱히 안쓸듯)
 ### /showStorageFree
 ##### storage별 사용량 추이(현재는 93E에 대한 데이터밖에없음, 추후 storage별로 묶는것 고려예정)  
-
+### /showStorageUse  
+##### 일별 총 사용량 (저장소 상관없이 합한 값) 
+### /selStorageMonth  
+##### 월별 총 사용량 (저장소 상관없이 합한 값)  
+### /selStorageYear  
+##### 연도별 총 사용량 (저장소 상관없이 합한 값)  
 
 ## * Scanner 기준
 ### /showScanner    
@@ -70,9 +75,11 @@
 ### /deleteStorageFree  
 ##### storageFree 테이블 삭제  
 ### /deleteStorageDate  
-##### storageDate 테이블 삭제  
+##### storage_Date 테이블 삭제  
 ### /deleteStorageTable  
 ##### storageTable 테이블 삭제  
+### /deleteStorageUse  
+###### storage_use 테이블 삭제  
 
 ===========================================================================  
 
@@ -108,6 +115,10 @@
 ##### storage_date 테이블에서 일별 사용량 누적합을 가져오고 그것이 어떤 스토리지인지 storage_name과 남은 사용량과 전체 사용량 데이터를 가져와서 저장  
 ### /insertStorageFree  
 ##### select로 가져온 데이터를 storage_free에 insert  
+### /selectStorageUse  
+##### 일별로 사용한 데이터용량의 총 합(저장소별 구분 x)한 데이터를 가져오기  
+### /insertStorageUse  
+##### select로 가져온 데이터를 storage_use에 insert  
 
 ===========================================================================  
 

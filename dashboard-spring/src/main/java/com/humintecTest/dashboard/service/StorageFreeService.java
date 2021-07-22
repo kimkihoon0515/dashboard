@@ -9,7 +9,6 @@ public interface StorageFreeService {
     public List<StorageFreeVo> selectStorageFree(StorageFreeVo vo);
     public int insertStorageFree(StorageFreeVo vo);
     public int deleteStorageFree();
-    public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo);
     public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req);
     public List<StorageFreeVo> showStorageFree(StorageFreeVo vo);
 }

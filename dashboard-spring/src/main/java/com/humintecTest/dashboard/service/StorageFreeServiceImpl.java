@@ -38,11 +38,6 @@ public class StorageFreeServiceImpl implements StorageFreeService{
         }
     }
 
-    @Override
-    public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo) {
-        return storageFreeDao.searchStorageFree(vo);
-    }
-
 	@Override
 	public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req) {
 		return storageFreeDao.selectStorageFreeByDate(req);
