@@ -34,7 +34,7 @@ public class StorageFreeServiceImpl implements StorageFreeService{
             storageFreeDao.deleteStorageFree();
             return 0;
         }catch (Exception e){
-            return 1;
+            return -1;
         }
     }
 

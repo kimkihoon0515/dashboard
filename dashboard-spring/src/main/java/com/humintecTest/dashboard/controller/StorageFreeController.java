@@ -57,8 +57,11 @@ public class StorageFreeController {
     	
     	return "ok";
     }
+    
+    
     @GetMapping("/showStorageFree")
-
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> showStorageFree (StorageFreeVo vo){
         StorageFreeVo vo1 = new StorageFreeVo();
         List<StorageFreeVo> vList = storageFreeService.showStorageFree(vo1);
