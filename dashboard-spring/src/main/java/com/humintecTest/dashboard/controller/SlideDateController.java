@@ -2,10 +2,13 @@ package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.slideDateResponseFormat;
-import com.humintecTest.dashboard.response.slideMonthResponseFormat;
+import com.humintecTest.dashboard.response.slideTypeResponseFormat;
 import com.humintecTest.dashboard.response.slideYearResponseFormat;
 import com.humintecTest.dashboard.service.SlideDateService;
 import com.humintecTest.dashboard.vo.SlideDateVo;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,17 +30,25 @@ public class SlideDateController {
     @GetMapping("/selectSlidePerDate")
     @Transactional(readOnly = true)
     @CrossOrigin("*")
-    public List<slideDateResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
-    	
-    	List<SlideDateVo> vList = slideDateService.selectDateToDate(req);
-    	
-    	ArrayList<slideDateResponseFormat> res = new ArrayList<slideDateResponseFormat>();
-    	
-    	for(SlideDateVo target : vList) {
-    		res.add(new slideDateResponseFormat(target));
+    public List<slideTypeResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
+    	List<slideTypeResponseFormat> vList;
+    	//연
+    	if(req.getType() == 1) {
+    		vList = slideDateService.selectSlidePerDateByYear(req);
+        	
     	}
-    	
-    	return res;
+    	//월
+    	else if(req.getType() == 2) {
+    		vList = slideDateService.selectSlidePerDateByMonth(req);
+        	
+    	}
+    	//일
+    	else {
+    		vList = slideDateService.selectSlidePerDateByDate(req);
+        	
+    	}
+    		
+    	return vList;
     }
     
     @PutMapping("/updateSlidePerDate")
@@ -77,28 +88,6 @@ public class SlideDateController {
        return res;
     }
 
-    @GetMapping("/selMonth")
-    public List<slideMonthResponseFormat> selMonth(SlideDateVo vo)
-    {
-        SlideDateVo vo1 = new SlideDateVo();
-        List<SlideDateVo> vList = slideDateService.selMonth(vo1);
-        ArrayList<slideMonthResponseFormat> res = new ArrayList<slideMonthResponseFormat>();
-        for (SlideDateVo target : vList) {
-            res.add(new slideMonthResponseFormat(target));
-        }
-        return res;
-    }
 
-    @GetMapping("/selYear")
-    public List<slideYearResponseFormat> selYear(SlideDateVo vo)
-    {
-        SlideDateVo vo1 = new SlideDateVo();
-        List<SlideDateVo> vList = slideDateService.selYear(vo1);
-        ArrayList<slideYearResponseFormat> res = new ArrayList<slideYearResponseFormat>();
-        for (SlideDateVo target : vList) {
-            res.add(new slideYearResponseFormat(target));
-        }
-        return res;
-    }
 }
 
