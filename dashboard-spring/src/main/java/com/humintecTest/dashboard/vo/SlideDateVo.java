@@ -8,4 +8,6 @@ import java.sql.Date;
 public class SlideDateVo {
     private Date date;
     private int slide_sum;
+    private String month;
+    private String year;
 }
