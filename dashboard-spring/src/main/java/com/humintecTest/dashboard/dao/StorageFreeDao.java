@@ -13,4 +13,7 @@ public interface StorageFreeDao {
     public int deleteStorageFree();
     public List<StorageFreeVo> searchStorageFree(StorageFreeVo vo);
     public List<StorageFreeVo> selectStorageFreeByDate(DateRequestFormat req);
+    public List<StorageFreeVo> showStorageFree(StorageFreeVo vo);
 }
+
+

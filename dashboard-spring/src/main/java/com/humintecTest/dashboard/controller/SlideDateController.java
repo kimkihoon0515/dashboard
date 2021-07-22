@@ -2,6 +2,8 @@ package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.slideDateResponseFormat;
+import com.humintecTest.dashboard.response.slideMonthResponseFormat;
+import com.humintecTest.dashboard.response.slideYearResponseFormat;
 import com.humintecTest.dashboard.service.SlideDateService;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class SlideDateController {
     @Autowired
@@ -56,4 +59,41 @@ public class SlideDateController {
     	
     	return "ok";
     }
+  
+    @GetMapping("/showSlideDate")
+    public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)
+    {
+       SlideDateVo vo1 = new SlideDateVo();
+       List<SlideDateVo> vList = slideDateService.showSlideDate(vo1);
+       ArrayList<slideDateResponseFormat> res = new ArrayList<slideDateResponseFormat>();
+       for (SlideDateVo target : vList){
+           res.add(new slideDateResponseFormat(target));
+       }
+       return res;
+    }
+
+    @GetMapping("/selMonth")
+    public List<slideMonthResponseFormat> selMonth(SlideDateVo vo)
+    {
+        SlideDateVo vo1 = new SlideDateVo();
+        List<SlideDateVo> vList = slideDateService.selMonth(vo1);
+        ArrayList<slideMonthResponseFormat> res = new ArrayList<slideMonthResponseFormat>();
+        for (SlideDateVo target : vList) {
+            res.add(new slideMonthResponseFormat(target));
+        }
+        return res;
+    }
+
+    @GetMapping("/selYear")
+    public List<slideYearResponseFormat> selYear(SlideDateVo vo)
+    {
+        SlideDateVo vo1 = new SlideDateVo();
+        List<SlideDateVo> vList = slideDateService.selYear(vo1);
+        ArrayList<slideYearResponseFormat> res = new ArrayList<slideYearResponseFormat>();
+        for (SlideDateVo target : vList) {
+            res.add(new slideYearResponseFormat(target));
+        }
+        return res;
+    }
 }
+
