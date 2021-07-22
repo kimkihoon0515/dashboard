@@ -1,7 +1,6 @@
 package com.humintecTest.dashboard.dao;
 
 import com.humintecTest.dashboard.request.DateRequestFormat;
-import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,4 +13,6 @@ public interface StorageUseDao {
     public int deleteStorageUse (StorageUseVo vo);
     public List<StorageUseVo> showStorageUse (StorageUseVo vo);
     public List<StorageUseVo> searchStorageUse (DateRequestFormat req);
+    public List<StorageUseVo> selStorageMonth (StorageUseVo vo);
+    public List<StorageUseVo> selStorageYear (StorageUseVo vo);
 }

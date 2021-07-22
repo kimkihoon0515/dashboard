@@ -48,4 +48,14 @@ public class StorageUseServiceImpl implements StorageUseService {
     public List<StorageUseVo> searchStorageUse(DateRequestFormat req) {
         return storageUseDao.searchStorageUse(req);
     }
+
+    @Override
+    public List<StorageUseVo> selStorageMonth(StorageUseVo vo) {
+        return storageUseDao.selStorageMonth(vo);
+    }
+
+    @Override
+    public List<StorageUseVo> selStorageYear(StorageUseVo vo) {
+        return storageUseDao.selStorageYear(vo);
+    }
 }
