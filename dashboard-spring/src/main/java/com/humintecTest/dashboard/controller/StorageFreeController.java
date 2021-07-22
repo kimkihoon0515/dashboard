@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class StorageFreeController {
     @Autowired
@@ -61,4 +62,16 @@ public class StorageFreeController {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFree(vo);
         return vList;
     }
+    @GetMapping("/showStorageFree")
+
+    public List<storageFreeResponseFormat> showStorageFree (StorageFreeVo vo){
+        StorageFreeVo vo1 = new StorageFreeVo();
+        List<StorageFreeVo> vList = storageFreeService.showStorageFree(vo1);
+        ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
+        for(StorageFreeVo target : vList){
+            res.add(new storageFreeResponseFormat(target));
+        }
+        return res;
+    }
 }
+

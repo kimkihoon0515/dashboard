@@ -4,7 +4,7 @@ import com.humintecTest.dashboard.vo.StorageDateVo;
 import lombok.Data;
 
 import java.math.BigInteger;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 public class storageDateResponseFormat {
