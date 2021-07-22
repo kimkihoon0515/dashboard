@@ -4,8 +4,8 @@
     <bar-type-com id="scanner" :query="scanner"></bar-type-com>
     <bar-type-com id="pathID" :query="pathID"></bar-type-com>
     <bar-type-com id="size" :query="size"></bar-type-com>
-    <!--<pie-type-com id="storage" ></pie-type-com>
-    <line-type-com id="storage-full" ></line-type-com>-->
+    <pie-type-com id="storage" :query="storage"></pie-type-com>
+    <line-type-com id="storage-full" :query="storage_full"></line-type-com>
   </div>
 </template>
 
@@ -49,6 +49,24 @@ export default {
       },
       size:{
         name:"size",
+        url:"/storageList",
+        start_date: this.start,
+        end_date: this.end,
+        YMD: 3,
+        xKey: 1,
+        yKey: [3,4]
+      },
+      storage:{
+        name:"storgae",
+        url:"/storageList",
+        start_date: this.start,
+        end_date: this.end,
+        YMD: 3,
+        xKey: null,
+        yKey: null
+      },
+      storage_full:{
+        name:"storage-full",
         url:"/storageList",
         start_date: this.start,
         end_date: this.end,
