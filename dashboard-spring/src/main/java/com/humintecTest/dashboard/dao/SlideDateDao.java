@@ -11,7 +11,11 @@ import java.util.List;
 public interface SlideDateDao {
     public List<SlideDateVo> selectSlideDate(SlideDateVo vo);
     public int insertSlideDate(SlideDateVo vo);
-    public int deleteSlideDate();
-    
+    public int deleteSlideDate();  
     public List<SlideDateVo> selectSlidePerDateList(DateRequestFormat req);
+    public List<SlideDateVo> showSlideDate(SlideDateVo vo);
+    public List<SlideDateVo> selMonth (SlideDateVo vo);
+    public List<SlideDateVo> selYear (SlideDateVo vo);
 }
+
+

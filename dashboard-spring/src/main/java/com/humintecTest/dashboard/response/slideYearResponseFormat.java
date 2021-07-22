@@ -6,11 +6,12 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class slideDateResponseFormat {
-    private Date date;
+public class slideYearResponseFormat {
+    private String year;
     private int slide_sum;
-    public slideDateResponseFormat(SlideDateVo vo){
-        date = vo.getDate();
+
+    public slideYearResponseFormat (SlideDateVo vo){
+        year = vo.getYear();
         slide_sum = vo.getSlide_sum();
     }
 }

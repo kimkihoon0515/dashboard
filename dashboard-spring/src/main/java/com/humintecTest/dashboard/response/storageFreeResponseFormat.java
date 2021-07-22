@@ -4,17 +4,17 @@ import com.humintecTest.dashboard.vo.StorageFreeVo;
 import lombok.Data;
 
 import java.math.BigInteger;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 public class storageFreeResponseFormat {
-    private Date last_scan_date;
+    private Date date;
     private String storage_name;
     private BigInteger daily_used;
     private BigInteger free;
     private BigInteger total;
     public storageFreeResponseFormat(StorageFreeVo vo){
-        last_scan_date = vo.getLast_scan_date();
+        date = vo.getDate();
         storage_name = vo.getStorage_name();
         daily_used = vo.getDaily_used();
         free = vo.getFree();

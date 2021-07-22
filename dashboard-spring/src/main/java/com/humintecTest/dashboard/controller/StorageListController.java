@@ -23,28 +23,28 @@ import com.humintecTest.dashboard.vo.StorageListVo;
 @RestController
 @CrossOrigin(origins = "*")
 public class StorageListController {
-	@Autowired
-	StorageListService storageListService;
+    @Autowired
+    StorageListService storageListService;
 
-	@GetMapping("/storageList")
-	@Transactional(readOnly = true)
-	public List<storageListResponseFormat> selectStorageList(){
-		StorageListVo vo = new StorageListVo();
-		List<StorageListVo> vList = storageListService.selectStorageList(vo);
+    @GetMapping("/storageList")
+    @Transactional(readOnly = true)
+    public List<storageListResponseFormat> selectStorageList(){
+        StorageListVo vo = new StorageListVo();
+        List<StorageListVo> vList = storageListService.selectStorageList(vo);
 
-		ArrayList<storageListResponseFormat> resList = new ArrayList<storageListResponseFormat>();
+        ArrayList<storageListResponseFormat> resList = new ArrayList<storageListResponseFormat>();
 
-		for(StorageListVo selectVo : vList) {
-			resList.add(new storageListResponseFormat(selectVo));
-		}
+        for(StorageListVo selectVo : vList) {
+            resList.add(new storageListResponseFormat(selectVo));
+        }
 
-		return resList;
-	}
+        return resList;
+    }
 
-	@GetMapping("/requestCheck")
-	@Transactional(readOnly = true)
-	public int requestCheck(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
+    @GetMapping("/requestCheck")
+    @Transactional(readOnly = true)
+    public int requestCheck(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
 
-		return req.getCheck();
-	}
+        return req.getCheck();
+    }
 }

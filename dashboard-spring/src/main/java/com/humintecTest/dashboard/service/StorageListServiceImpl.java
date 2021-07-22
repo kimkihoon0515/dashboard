@@ -10,11 +10,11 @@ import com.humintecTest.dashboard.dao.StorageListDao;
 
 @Service
 public class StorageListServiceImpl implements StorageListService{
-	@Autowired
-	StorageListDao storageListDao;
-	
-	@Override
-	public List<StorageListVo> selectStorageList(StorageListVo vo){
-		return storageListDao.selectStorageList(vo);
-	}
+    @Autowired
+    StorageListDao storageListDao;
+
+    @Override
+    public List<StorageListVo> selectStorageList(StorageListVo vo){
+        return storageListDao.selectStorageList(vo);
+    }
 }

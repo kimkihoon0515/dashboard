@@ -8,5 +8,5 @@ import com.humintecTest.dashboard.vo.StorageListVo;
 
 @Mapper
 public interface StorageListDao {
-	public List<StorageListVo> selectStorageList(StorageListVo vo);
+    public List<StorageListVo> selectStorageList(StorageListVo vo);
 }
