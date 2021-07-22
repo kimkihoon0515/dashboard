@@ -11,6 +11,8 @@ public interface SlideDateDao {
     public int insertSlideDate(SlideDateVo vo);
     public int deleteSlideDate(SlideDateVo vo);
     public List<SlideDateVo> showSlideDate(SlideDateVo vo);
+    public List<SlideDateVo> selMonth (SlideDateVo vo);
+    public List<SlideDateVo> selYear (SlideDateVo vo);
 }
 
 

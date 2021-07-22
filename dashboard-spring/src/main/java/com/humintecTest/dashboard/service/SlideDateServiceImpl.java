@@ -41,4 +41,14 @@ public class SlideDateServiceImpl implements SlideDateService{
     public List<SlideDateVo> showSlideDate(SlideDateVo vo) {
         return slideDateDao.showSlideDate(vo);
     }
+
+    @Override
+    public List<SlideDateVo> selMonth(SlideDateVo vo) {
+        return slideDateDao.selMonth(vo);
+    }
+
+    @Override
+    public List<SlideDateVo> selYear(SlideDateVo vo) {
+        return slideDateDao.selYear(vo);
+    }
 }
