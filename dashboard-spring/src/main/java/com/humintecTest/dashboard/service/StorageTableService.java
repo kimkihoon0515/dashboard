@@ -1,6 +1,5 @@
 package com.humintecTest.dashboard.service;
 
-import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageTableVo;
 
 import java.util.List;
