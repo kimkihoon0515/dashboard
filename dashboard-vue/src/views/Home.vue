@@ -1,6 +1,6 @@
 <template>
   <div class='grid'>
-    <line-type-com id="slide-date"  :query="slide_date"></line-type-com>
+    <bar-type-com id="slide-date"  :query="slide_date"></bar-type-com>
     <bar-type-com id="scanner" :query="scanner"></bar-type-com>
     <bar-type-com id="pathID" :query="pathID"></bar-type-com>
     <bar-type-com id="size" :query="size"></bar-type-com>
@@ -22,7 +22,7 @@ export default {
     return {
       slide_date:{
         name:"slide-date",
-        url:"/selectSlideDate",
+        url:"/showSlideDate",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
@@ -49,12 +49,12 @@ export default {
       },
       size:{
         name:"size",
-        url:"/storageList",
+        url:"/selectStorageUse",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
-        xKey: 1,
-        yKey: [3,4]
+        xKey: 0,
+        yKey: [1]
       },
       storage:{
         name:"storgae",
@@ -67,12 +67,12 @@ export default {
       },
       storage_full:{
         name:"storage-full",
-        url:"/storageList",
+        url:"/showStorageFree",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
-        xKey: 1,
-        yKey: [3,4]
+        xKey: 0,
+        yKey: [2]
       },
     }
   },

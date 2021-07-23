@@ -62,8 +62,12 @@ export default {
     }
   },
   mounted() {
+    console.log(this.query.start_date);
+    console.log(this.query.end_date);
+    //this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
     this.$axios.get(this.query.url)
     .then((res)=>{
+      console.log(res.data);
       var x= this.query.xKey;
       var y= this.query.yKey;
       var keys= Object.keys(res.data[0]);

@@ -44,14 +44,14 @@ export default {
                   gridLines: {
                       display: true
                   },
-                  stacked: true
+                  stacked: false
               }],
               xAxes: [ {
               
                   gridLines: {
                       display: false
                   },
-                  stacked: true
+                  stacked: false
               }]
           },
           legend: {
@@ -65,7 +65,7 @@ export default {
   methods: {
     reset() {
       this.change=0;
-      console.log(this.change);
+      //console.log(this.change);
     }
   },
   mounted() {
@@ -83,7 +83,7 @@ export default {
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
-        console.log(tmp);
+        //console.log(tmp);
         this.datacollection.datasets.push(tmp);
       }
       this.change=1;
