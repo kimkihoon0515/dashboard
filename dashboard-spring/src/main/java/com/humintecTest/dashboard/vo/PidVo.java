@@ -2,7 +2,7 @@ package com.humintecTest.dashboard.vo;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 public class PidVo {
@@ -11,4 +11,6 @@ public class PidVo {
     private int amount;
     private String start_date;
     private String end_date;
+    private String year;
+    private String month;
 }

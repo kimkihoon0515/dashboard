@@ -9,5 +9,5 @@ import java.util.List;
 public interface StorageDateDao {
     public List<StorageDateVo> selectStorageDate(StorageDateVo vo);
     public int insertStorageDate(StorageDateVo vo);
-    public int deleteStorageDate(StorageDateVo vo);
+    public int deleteStorageDate();
 }

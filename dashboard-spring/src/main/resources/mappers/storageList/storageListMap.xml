@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.StorageListDao">
+    <select id="selectStorageList" parameterType="storageListVo" resultType="storageListVo">
+        SELECT
+            id as id,
+            storage_name as storageName,
+            total as total,
+            used as used,
+            free as free,
+            server_ip as server_ip
+        FROM
+            storage_list
+    </select>
+</mapper>
