@@ -75,7 +75,7 @@ export default {
       },
       storage_full:{
         name:"storage-full",
-        url:"/showStorageFree",
+        url:"/searchStorageFreeByDate",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
