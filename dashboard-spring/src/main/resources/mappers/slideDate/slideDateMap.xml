@@ -5,22 +5,52 @@
 <mapper namespace="com.humintecTest.dashboard.dao.SlideDateDao">
     <select id = "selectSlideDate" parameterType="SlideDateVo" resultType="SlideDateVo">
         select
-               date_format(last_scan_date, '%Y-%m-%d')as date,
+            date_format(last_scan_date, '%Y-%m-%d')as date,
                count(*) as slide_sum
         from
-               slide_list
+            slide_list
         group by date
         order by date asc;
     </select>
     <insert id = "insertSlideDate" parameterType="SlideDateVo">
         insert into
-                slide_per_date
+            slide_per_date
         values
-                (#{date},#{slide_sum})
+            (#{date},#{slide_sum})
     </insert>
     <delete id = "deleteSlideDate">
         truncate
             slide_per_date
     </delete>
-</mapper>
+    
+    <select id = "selectSlidePerDateList" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "SlideDateVo">
+    	select
+    		date as date,
+    		slide_sum as slide_sum
+    	from
+    		slide_per_date
+    	where
+    		date between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+    </select>
 
+    <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo">
+        select *
+        from slide_per_date
+    </select>
+    <select id = "selMonth" resultType="SlideDateVo" parameterType="SlideDateVo">
+        select
+            date_format(date,'%Y-%m') as month,
+        sum(slide_sum) as slide_sum
+        from slide_per_date
+        group by
+        month
+    </select>
+    <select id = "selYear" resultType="SlideDateVo" parameterType="SlideDateVo">
+        select
+            date_format(date,'%Y') as year,
+        sum(slide_sum) as slide_sum
+        from slide_per_date
+        group by
+        year
+    </select>
+</mapper>
