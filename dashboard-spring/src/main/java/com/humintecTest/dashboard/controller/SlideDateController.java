@@ -26,7 +26,6 @@ public class SlideDateController {
     @Autowired
     SlideDateService slideDateService;
 
-
     @GetMapping("/selectSlidePerDate")
     @Transactional(readOnly = true)
     @CrossOrigin("*")
@@ -34,8 +33,8 @@ public class SlideDateController {
     	List<slideTypeResponseFormat> vList;
     	//연
     	if(req.getType() == 1) {
-    		vList = slideDateService.selectSlidePerDateByYear(req);
-        	
+    		vList = slideDateService.selectSlidePerDateByYear(req);    	
+
     	}
     	//월
     	else if(req.getType() == 2) {
@@ -53,7 +52,7 @@ public class SlideDateController {
     
     @PutMapping("/updateSlidePerDate")
     @Transactional(readOnly = false)
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "*")
     public String updateSlidePerDate() {
     	if(slideDateService.deleteSlideDate()== 0){
     		SlideDateVo vo = new SlideDateVo();
@@ -67,14 +66,15 @@ public class SlideDateController {
     				return "false";
     			}
     		}
+
     	}
     	else {
     		return "false";
+
     	}
     	
     	return "ok";
     }
-
   
     @GetMapping("/showSlideDate")
     public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)

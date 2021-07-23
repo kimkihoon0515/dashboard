@@ -16,6 +16,7 @@ public interface SlideDateDao {
     public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req);
     public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req);
     public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req);
+
     public List<SlideDateVo> showSlideDate(SlideDateVo vo);
     public List<SlideDateVo> selMonth (SlideDateVo vo);
     public List<SlideDateVo> selYear (SlideDateVo vo);

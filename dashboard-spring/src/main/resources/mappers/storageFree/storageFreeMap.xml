@@ -26,6 +26,16 @@
         from storage_free
         where date between #{start_date} and #{end_date}
     </select>
+    
+    <select id = "selectStorageFreeByDate" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "StorageFreeVo">
+    	select
+    		*
+    	from
+    		storage_free
+    	where
+    		date between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+    </select>
+    
     <select id = "showStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo">
         select *
         from storage_free

@@ -55,8 +55,7 @@ public class SlideDateServiceImpl implements SlideDateService{
 	public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req) {
 		return slideDateDao.selectSlidePerDateByYear(req);
 	}
-    
-    
+
     @Override
     public List<SlideDateVo> showSlideDate(SlideDateVo vo) {
         return slideDateDao.showSlideDate(vo);

@@ -32,6 +32,7 @@
     	where
     		date between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
     </select>
+
     
     <select id = "selectSlidePerDateByMonth" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
     	select
@@ -56,6 +57,7 @@
     	group by
         	type
     </select>
+
 
     <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo">
         select *
