@@ -11,7 +11,6 @@
 
 <script>
 import BarTypeCom from '../components/BarTypeCom.vue'
-// import DashboardBlock from '../components/DashboardBlock.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
 
