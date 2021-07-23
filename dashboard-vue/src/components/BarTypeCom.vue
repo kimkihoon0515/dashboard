@@ -1,9 +1,9 @@
 <template>
   <div class="chartbox">
     <span v-if="needCheck==true" id="check-box-group">
-      <label class="check"><input type="checkbox">Y</label>
-      <label class="check"><input type="checkbox">M</label>
-      <label class="check"><input type="checkbox" checked="checked">D</label>
+      <input :name=query.name type="radio"><label class="check">Y</label>
+      <input :name=query.name type="radio"><label class="check">M</label>
+      <input :name=query.name type="radio" checked="checked"><label class="check">D</label>
     </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
