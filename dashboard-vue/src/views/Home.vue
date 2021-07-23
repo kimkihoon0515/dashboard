@@ -1,19 +1,27 @@
 <template>
-  <div class='grid'>
-    <line-type-com id="slide-date"  :query="slide_date"></line-type-com>
-    <bar-type-com id="scanner" :query="scanner"></bar-type-com>
-    <bar-type-com id="pathID" :query="pathID"></bar-type-com>
-    <bar-type-com id="size" :query="size"></bar-type-com>
-    <!--<pie-type-com id="storage" ></pie-type-com>
-    <line-type-com id="storage-full" ></line-type-com>-->
+  <div id="container">
+    <div id="static-chart" class="grid">
+      <pie-type-com id="storage" :query="storage"></pie-type-com>
+      <line-type-com id="storage-full" :query="storage_full"></line-type-com>
+    </div>
+    <div id="dynamic-chart" class="grid">
+      <!-- <menubar></menubar> -->
+      <bar-type-com id="slide-date"  :query="slide_date" :needCheck=true></bar-type-com>
+      <bar-type-com id="size" :query="size" :needCheck=true></bar-type-com>
+      <bar-type-com id="scanner" :query="scanner"></bar-type-com>
+      <bar-type-com id="pathID" :query="pathID"></bar-type-com>
+      <!--<pie-type-com id="storage" ></pie-type-com>
+      <line-type-com id="storage-full" ></line-type-com>-->
+    </div>
   </div>
 </template>
 
 <script>
 import BarTypeCom from '../components/BarTypeCom.vue'
-// import DashboardBlock from '../components/DashboardBlock.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
+// import Menubar from '../components/Menubar.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
+
 
 export default {
   components: { BarTypeCom, PieTypeCom, LineTypeCom },
@@ -22,7 +30,7 @@ export default {
     return {
       slide_date:{
         name:"slide-date",
-        url:"/selectSlideDate",
+        url:"/showSlideDate",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
@@ -49,13 +57,31 @@ export default {
       },
       size:{
         name:"size",
+        url:"/selectStorageDate",
+        start_date: this.start,
+        end_date: this.end,
+        YMD: 3,
+        xKey: 0,
+        yKey: [1]
+      },
+       storage:{
+        name:"storgae",
+        url:"/storageList",
+        start_date: this.start,
+        end_date: this.end,
+        YMD: 3,
+        xKey: null,
+        yKey: null
+      },
+      storage_full:{
+        name:"storage-full",
         url:"/storageList",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
         xKey: 1,
         yKey: [3,4]
-      },
+      }
     }
   },
   props: {
@@ -73,18 +99,53 @@ export default {
 
 <style>
   .grid {
-  display: block;
-  width: 1100px;
-  margin: 20px auto;
+    display: block;
+    float: left;
+    padding: 20px;
+    text-align: center;
   }
-  .chartbox {
-  width: 500px;
-  height: 400px;
-  display: block;
+
+  #static-chart {
+    width: 28%;
+    background-color: rgb(230, 249, 252);
+  }
+
+  #dynamic-chart {
+    width: 72%;
+  }
+
+  #dynamic-chart .chartbox {
+  width: 350px;
+  height: 300px;
+  display: inline-block;
+  margin: 0 30px 50px 30px;
+  overflow: hidden;
+  border: 1px solid rgb(53, 196, 231);
+  border-radius: 10px;
+  /* float: left; */
+  }
+
+  #static-chart .chartbox {
+  width: 300px;
+  height: 300px;
+  display: inline-block;
   margin: 0 15px 50px 15px;
   overflow: hidden;
   border: 1px solid rgb(53, 196, 231);
   border-radius: 10px;
-  float: left;
-}
+  /* float: left; */
+  }
+
+  button {
+  border: 1px solid skyblue;
+  border-radius: 5px;
+  background-color: white;
+  color: skyblue;
+  padding: 5px;
+  }
+
+  button:hover {
+    color: white;
+    background-color: skyblue;
+  }
 </style>

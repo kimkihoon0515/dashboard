@@ -1,5 +1,10 @@
 <template>
   <div class="chartbox">
+    <div v-if="needCheck==true" id="check-box-group">
+      <label class="check"><input type="checkbox">Y</label>
+      <label class="check"><input type="checkbox">M</label>
+      <label class="check"><input type="checkbox" checked="checked">D</label>
+    </div>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
 </template>
@@ -11,7 +16,7 @@ export default {
   name : "BarTypeCom",
   components: { BarChart },
   props: {
-    
+    needCheck: false,
     query: {
        type: Object,
        default: null

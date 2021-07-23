@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <form> 
-        <label class="check"><input type="checkbox">Y</label>
-        <label class="check"><input type="checkbox">M</label>
-        <label class="check"><input type="checkbox">D</label>
+      <form>
         <input type="date" id='start-date' value=''/>
         <input type="date" id='end-date' value=''/>
         <button @click="setDate">submit</button>
@@ -59,31 +56,11 @@ export default {
   overflow: hidden;
 }
 
-.check {
+/* .check {
   margin-right: 10px;
-}
+} */
 
 .margindiv {
   height: 60px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: underline;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 1.75em;
-}
-
-h2 {
-  line-height: 2.5em;
-  font-size: 1.25em;
 }
 </style>

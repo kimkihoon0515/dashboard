@@ -1,7 +1,9 @@
 <template>
   <div class="chartbox">
-    <div></div>
-    <pie-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></pie-chart>
+    <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameset(name)">{{name}}</button>
+    <div id="for-size">
+      <pie-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></pie-chart>
+    </div>
   </div>
 </template>
 
@@ -19,13 +21,15 @@ export default {
   },
   data () {
     return {
+      storage_list:null,
+      storage_name_list: null,
       change:0,
       datacollection: {
-        labels: null,
+        labels: ["Free","Used"],
         datasets: [{
                     label: null,
                     data: null,
-                    backgroundColor: '#f87979',
+                    backgroundColor: ['#ffd950', '#02bc77', '#28c3d7', '#FF6384','#f87979'],
                     pointBackgroundColor: 'white',
                     borderWidth: 1,
                     pointBorderColor: '#249EBF'
@@ -61,23 +65,25 @@ export default {
     reset() {
       this.change=0;
       console.log(this.change);
+    },
+    nameset: function (name) {
+      this.datacollection.datasets[0].label=name;
+      for(let i=0; i<this.storage_list.length; i++){
+        if(this.storage_list[i].storageName==name){
+          this.datacollection.datasets[0].data=[this.storage_list[i].free,this.storage_list[i].used];
+        }
+      }
+      this.change=1;
     }    
   },
   mounted() {
     this.$axios.get(this.query.url)
     .then((res)=>{
-      //console.log(this.query.name);
-      //console.log(this.query.xKey);
-      var x= this.query.xKey;
-      var y= this.query.yKey;
-      //console.log(this.query.yKey);
-      var keys= Object.keys(res.data[0]);
-      this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-      this.datacollection.datasets[0].label=this.query.name;
-      for(let i=0; i<y.len() ; i++){
-        this.datacollection.datasets[i].data=res.data.map(function(elem){return elem[keys[y]]});
-      }
-      //this.datacollection.datasets[0].data=res.data.map(function(elem){return elem[keys[y]]});
+      this.storage_list = res.data
+      console.log(this.storage_list);
+      this.storage_name_list=res.data.map(function(elem){ return elem.storageName})
+      this.datacollection.datasets[0].data=[res.data[0].free,res.data[0].used];
+      this.datacollection.datasets[0].label= this.storage_list[0];
       this.change=1;
     })
     .then((err)=>{
@@ -88,5 +94,4 @@ export default {
 </script>
 
 <style>
-
 </style>
