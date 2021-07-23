@@ -6,9 +6,9 @@ import java.math.BigInteger;
 import java.sql.Date;
 
 @Data
-public class StorageDateVo {
+public class StorageUseVo {
     private Date date;
     private BigInteger daily_sum;
-    private String storage_name;
-    private BigInteger total;
+    private String month;
+    private String year;
 }

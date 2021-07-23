@@ -1,10 +1,13 @@
 package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.SlideDateDao;
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -28,17 +31,32 @@ public class SlideDateServiceImpl implements SlideDateService{
     }
 
     @Override
-    public int deleteSlideDate(SlideDateVo vo) {
+    public int deleteSlideDate() {
         try {
-            slideDateDao.deleteSlideDate(vo);
-            return 1;
-        }catch (Exception e){
+            slideDateDao.deleteSlideDate();
             return 0;
+        }catch (Exception e){
+            return -1;
         }
     }
+
+	@Override
+	public List<SlideDateVo> selectDateToDate(DateRequestFormat req) {
+		return slideDateDao.selectSlidePerDateList(req);
+	}
 
     @Override
     public List<SlideDateVo> showSlideDate(SlideDateVo vo) {
         return slideDateDao.showSlideDate(vo);
+    }
+
+    @Override
+    public List<SlideDateVo> selMonth(SlideDateVo vo) {
+        return slideDateDao.selMonth(vo);
+    }
+
+    @Override
+    public List<SlideDateVo> selYear(SlideDateVo vo) {
+        return slideDateDao.selYear(vo);
     }
 }
