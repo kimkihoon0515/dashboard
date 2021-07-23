@@ -22,8 +22,35 @@
         truncate
             slide_per_date
     </delete>
+    
+    <select id = "selectSlidePerDateList" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "SlideDateVo">
+    	select
+    		date as date,
+    		slide_sum as slide_sum
+    	from
+    		slide_per_date
+    	where
+    		date between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+    </select>
+
     <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo">
         select *
         from slide_per_date
+    </select>
+    <select id = "selMonth" resultType="SlideDateVo" parameterType="SlideDateVo">
+        select
+            date_format(date,'%Y-%m') as month,
+        sum(slide_sum) as slide_sum
+        from slide_per_date
+        group by
+        month
+    </select>
+    <select id = "selYear" resultType="SlideDateVo" parameterType="SlideDateVo">
+        select
+            date_format(date,'%Y') as year,
+        sum(slide_sum) as slide_sum
+        from slide_per_date
+        group by
+        year
     </select>
 </mapper>

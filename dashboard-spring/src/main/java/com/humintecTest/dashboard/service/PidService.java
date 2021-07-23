@@ -12,4 +12,7 @@ public interface PidService {
     public int deletePid ();
     public List<PidVo> searchPidByDate (DateRequestFormat req);
     public List<PidVo> showPid (PidVo vo);
+    public List<PidVo> selPidMonth(PidVo vo);
+    public List<PidVo> selPidYear(PidVo vo);
 }
+

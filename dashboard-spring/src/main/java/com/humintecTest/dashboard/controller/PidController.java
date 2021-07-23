@@ -2,6 +2,8 @@ package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.pidResponseFormat;
+import com.humintecTest.dashboard.response.pidShowResponseFormat;
+import com.humintecTest.dashboard.response.pidYearResponseFormat;
 import com.humintecTest.dashboard.service.PidService;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,9 @@ public class PidController {
     @Autowired
     PidService pidService;
 
-    @ResponseBody
     @GetMapping("/selectPid")
-    @CrossOrigin(origins = "*")
-    public List<pidResponseFormat> selectPid() {
+    public List<pidResponseFormat> selectPid(PidVo vo) {
+
         PidVo vo1 = new PidVo();
         List<PidVo> vList = pidService.selectPid(vo1);
         ArrayList<pidResponseFormat> res = new ArrayList<pidResponseFormat>();
@@ -31,6 +32,7 @@ public class PidController {
 
         return res;
     }
+
     
     @GetMapping("/searchPidByDate")
     @Transactional(readOnly = true)
@@ -41,6 +43,7 @@ public class PidController {
         
         for(PidVo target : vList) {
         	res.add(new pidResponseFormat(target));
+
         }
         return res;
     }
@@ -66,5 +69,20 @@ public class PidController {
          }
     	 
     	 return "ok";
+
+    }
+
+    @GetMapping("/selPidYear")
+    public List<pidYearResponseFormat> selYear (PidVo vo)
+    {
+        PidVo vo1 = new PidVo();
+        List<PidVo> vList = pidService.selPidYear(vo1);
+        ArrayList<pidYearResponseFormat> res = new ArrayList<pidYearResponseFormat>();
+        for (PidVo target : vList)
+        {
+            res.add(new pidYearResponseFormat(target));
+        }
+        return res;
     }
 }
+

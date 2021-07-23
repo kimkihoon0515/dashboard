@@ -3,17 +3,16 @@ package com.humintecTest.dashboard.response;
 import com.humintecTest.dashboard.vo.PidVo;
 import lombok.Data;
 
-import java.sql.Date;
-
 @Data
-public class pidResponseFormat {
-    private Date last_scan_date;
+public class pidYearResponseFormat {
     private String pathID_ch;
+    private String year;
     private int amount;
 
-    public pidResponseFormat(PidVo vo) {
-        last_scan_date = vo.getLast_scan_date();
+    public pidYearResponseFormat(PidVo vo)
+    {
         pathID_ch = vo.getPathID_ch();
+        year = vo.getYear();
         amount = vo.getAmount();
     }
 }

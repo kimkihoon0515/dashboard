@@ -52,4 +52,14 @@ public class PidServiceImpl implements PidService {
     public List<PidVo> showPid(PidVo vo) {
         return pidDao.showPid(vo);
     }
+
+    @Override
+    public List<PidVo> selPidMonth(PidVo vo) {
+        return pidDao.selPidMonth(vo);
+    }
+
+    @Override
+    public List<PidVo> selPidYear(PidVo vo) {
+        return pidDao.selPidYear(vo);
+    }
 }
