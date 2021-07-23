@@ -8,4 +8,5 @@ import lombok.Data;
 public class DateRequestFormat {
 	private Date startDate;
 	private Date finishDate;
+	private int type;   //1: 연 2: 월 3: 일
 }

@@ -1,14 +1,17 @@
 package com.humintecTest.dashboard.controller;
 
-import com.humintecTest.dashboard.response.storageUseMonthResponseFormat;
+import com.humintecTest.dashboard.response.storageUseTypeResponseFormat;
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
-import com.humintecTest.dashboard.response.storageUseYearResponseFormat;
 import com.humintecTest.dashboard.service.StorageUseService;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Array;
@@ -67,7 +70,7 @@ public class StorageUseController {
     @PutMapping("deleteStorageUse")
     public String deleteStorageUse(StorageUseVo vo)
     {
-        if(storageUseService.deleteStorageUse(vo)==1)
+        if(storageUseService.deleteStorageUse()==1)
         {
 
         }
@@ -76,36 +79,48 @@ public class StorageUseController {
         }
         return "ok";
     }
+    
+    @PostMapping("/searchStorageUseByDate")
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
+    public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
+    	List<storageUseResponseFormat> vList;
+    	
+    	if(req.getType() == 1) {
+    		vList = storageUseService.selectStorageUseByYear(req);
+    	}
+    	else if(req.getType() == 2) {
+    		vList = storageUseService.selectStorageUseByMonth(req);
+    	}
+    	else {
+    		vList = storageUseService.selectStorageUseByDate(req);
+    	}
+    	
+    	return vList;
+    }
+    
+    @PutMapping("/updateStorageUse")
+    @Transactional(readOnly = false)
+    @CrossOrigin(origins = "*")
+    public String updateStorageUse() {
+    	if(storageUseService.deleteStorageUse() == 0) {
+    		StorageUseVo vo = new StorageUseVo();
+    		List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
+    		
+    		for(StorageUseVo target : vList) {
+                if(storageUseService.insertStorageUse(target)==0) {
 
-    @GetMapping("/selStorageMonth")
-    public List<storageUseMonthResponseFormat> selStorageMonth (StorageUseVo vo)
-    {
-        StorageUseVo vo1 = new StorageUseVo();
-        List<StorageUseVo> vList = storageUseService.selStorageMonth(vo1);
-        ArrayList<storageUseMonthResponseFormat> res = new ArrayList<storageUseMonthResponseFormat>();
-
-        for(StorageUseVo target : vList)
-        {
-            res.add(new storageUseMonthResponseFormat(target));
-        }
-        return res;
+                }
+                else {
+                    return "insert fail";
+                }
+            }
+    	}
+    	else {
+    		return "delete fail";
+    	}
+    	
+    	return "ok";
     }
 
-    @GetMapping("/selStorageYear")
-    public List<storageUseYearResponseFormat> selStorageYear(StorageUseVo vo)
-    {
-        StorageUseVo vo1 = new StorageUseVo();
-        List<StorageUseVo> vList = storageUseService.selStorageYear(vo1);
-        ArrayList<storageUseYearResponseFormat> res = new ArrayList<storageUseYearResponseFormat>();
-        for (StorageUseVo target : vList){
-            res.add(new storageUseYearResponseFormat(target));
-        }
-        return res;
-    }
-
-   /* @GetMapping("searchStorageUse")
-    public List<storageUseResponseFormat> searchStorageUse (StorageUseVo vo)
-    {
-
-    }*/
 }

@@ -1,6 +1,7 @@
 package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.PidDao;
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,19 +29,19 @@ public class PidServiceImpl implements PidService {
     }
 
     @Override
-    public int deletePid(PidVo vo) {
+    public int deletePid() {
         try {
-            pidDao.deletePid(vo);
-            return 1;
-        } catch (Exception e) {
+            pidDao.deletePid();
             return 0;
+        } catch (Exception e) {
+            return -1;
         }
     }
 
     @Override
-    public List<PidVo> searchPid(PidVo vo) {
+    public List<PidVo> searchPidByDate(DateRequestFormat req) {
         try {
-            return pidDao.searchPid(vo);
+            return pidDao.searchPidByDate(req);
         } catch (Exception e) {
             System.out.println(e);
             return null;

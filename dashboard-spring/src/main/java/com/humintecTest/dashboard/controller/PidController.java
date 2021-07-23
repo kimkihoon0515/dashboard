@@ -1,12 +1,13 @@
 package com.humintecTest.dashboard.controller;
 
-import com.humintecTest.dashboard.response.pidMonthResponseFormat;
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.pidResponseFormat;
 import com.humintecTest.dashboard.response.pidShowResponseFormat;
 import com.humintecTest.dashboard.response.pidYearResponseFormat;
 import com.humintecTest.dashboard.service.PidService;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,58 +33,43 @@ public class PidController {
         return res;
     }
 
-    @PutMapping("/insertPid")
-    public String insertPid(PidVo vo) {
-        List<PidVo> vList = pidService.selectPid(vo);
+    
+    @PostMapping("/searchPidByDate")
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
+    public List<pidResponseFormat> searchPid (@RequestBody DateRequestFormat req){
+        List<PidVo> vList = pidService.searchPidByDate(req);
+        ArrayList<pidResponseFormat> res = new ArrayList<pidResponseFormat>();
+        
+        for(PidVo target : vList) {
+        	res.add(new pidResponseFormat(target));
 
-        for (PidVo target : vList){
-            if(pidService.insertPid(target) == 0){
-
-            }
-            else
-                return "false";
-        }
-        return "ok";
-    }
-
-    @PutMapping("/deletePid")
-    public String deletePid(PidVo vo) {
-        if(pidService.deletePid(vo) == 1) {
-            return "false";
-        }
-        else
-            return "ok";
-    }
-
-    @GetMapping("/searchPid")
-    public List<PidVo> searchPid (PidVo vo){
-        vo.setStart_date("2014-09-02");
-        vo.setEnd_date("2020-12-09");
-        List<PidVo> vList = pidService.searchPid(vo);
-        return vList;
-    }
-
-    @GetMapping("/showPid")
-    public List<pidShowResponseFormat> showPid (PidVo vo) {
-        PidVo vo1 = new PidVo();
-        List<PidVo> vList = pidService.showPid(vo1);
-        ArrayList<pidShowResponseFormat> res = new ArrayList<pidShowResponseFormat>();
-        for (PidVo target : vList) {
-            res.add(new pidShowResponseFormat(target));
         }
         return res;
     }
+    
+    @PutMapping("/updatePid")
+    @Transactional(readOnly = false)
+    @CrossOrigin("*")
+    public String updatePid() {
+    	 if(pidService.deletePid() == 0) {
+    		 PidVo vo = new PidVo();
+    		 List<PidVo> vList = pidService.selectPid(vo);
 
-    @GetMapping("/selPidMonth")
-    public List<pidMonthResponseFormat> selMonth (PidVo vo)
-    {
-        PidVo vo1 = new PidVo();
-        List<PidVo> vList = pidService.selPidMonth(vo1);
-        ArrayList<pidMonthResponseFormat> res = new ArrayList<pidMonthResponseFormat>();
-        for (PidVo target : vList){
-            res.add(new pidMonthResponseFormat(target));
-        }
-        return res;
+    	        for (PidVo target : vList){
+    	            if(pidService.insertPid(target) == 0){
+
+    	            }
+    	            else
+    	                return "false";
+    	        }
+         }
+         else {
+        	 return "false";
+         }
+    	 
+    	 return "ok";
+
     }
 
     @GetMapping("/selPidYear")
