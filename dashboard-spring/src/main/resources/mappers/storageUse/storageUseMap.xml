@@ -11,6 +11,43 @@
         group by date
         order by date asc
     </select>
+    
+    <select id = "selectStorageUseByDate" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
+        select
+               date_format(last_scan_date, '%Y-%m-%d')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        where
+        	date_format(last_scan_date, '%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+        group by
+        	type
+    </select>
+    
+    <select id = "selectStorageUseByMonth" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
+        select
+               date_format(last_scan_date, '%Y-%m')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        where
+        	date_format(last_scan_date, '%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
+        group by
+        	type
+    </select>
+    
+    <select id = "selectStorageUseByYear" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
+        select
+               date_format(last_scan_date, '%Y')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        where
+        	date_format(last_scan_date, '%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
+        group by
+        	type
+    </select>
+    
     <insert id = "insertStorageUse" parameterType="StorageUseVo">
         insert into
             storage_use(date,daily_sum)
