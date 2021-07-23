@@ -34,7 +34,7 @@ public class PidController {
     }
 
     
-    @GetMapping("/searchPidByDate")
+    @PostMapping("/searchPidByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<pidResponseFormat> searchPid (@RequestBody DateRequestFormat req){

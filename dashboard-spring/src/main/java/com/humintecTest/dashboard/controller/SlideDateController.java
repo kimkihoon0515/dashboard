@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class SlideDateController {
     @Autowired
     SlideDateService slideDateService;
 
-    @GetMapping("/selectSlidePerDate")
+    @PostMapping("/selectSlidePerDate")
     @Transactional(readOnly = true)
     @CrossOrigin("*")
     public List<slideTypeResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
