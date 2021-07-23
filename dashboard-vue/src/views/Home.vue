@@ -98,6 +98,11 @@ export default {
 </script>
 
 <style>
+  div {
+    width: 100%;
+    height: 100%;
+  }
+
   .grid {
     display: block;
     float: left;
@@ -126,7 +131,7 @@ export default {
   }
 
   #static-chart .chartbox {
-  width: 300px;
+  width: 360px;
   height: 300px;
   display: inline-block;
   margin: 0 15px 50px 15px;
@@ -134,6 +139,11 @@ export default {
   border: 1px solid rgb(53, 196, 231);
   border-radius: 10px;
   /* float: left; */
+  }
+
+  #static-chart .for-size {
+    width: 300px;
+    height: 280px;
   }
 
   button {

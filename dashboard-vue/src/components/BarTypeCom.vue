@@ -1,10 +1,10 @@
 <template>
   <div class="chartbox">
-    <div v-if="needCheck==true" id="check-box-group">
+    <span v-if="needCheck==true" id="check-box-group">
       <label class="check"><input type="checkbox">Y</label>
       <label class="check"><input type="checkbox">M</label>
       <label class="check"><input type="checkbox" checked="checked">D</label>
-    </div>
+    </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
 </template>
