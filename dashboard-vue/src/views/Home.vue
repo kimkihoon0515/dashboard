@@ -57,14 +57,14 @@ export default {
       },
       size:{
         name:"size",
-        url:"/selectStorageDate",
+        url:"/selectStorageUse",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
         xKey: 0,
         yKey: [1]
       },
-       storage:{
+      storage:{
         name:"storgae",
         url:"/storageList",
         start_date: this.start,
@@ -75,13 +75,13 @@ export default {
       },
       storage_full:{
         name:"storage-full",
-        url:"/storageList",
+        url:"/showStorageFree",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
-        xKey: 1,
-        yKey: [3,4]
-      }
+        xKey: 0,
+        yKey: [2]
+      },
     }
   },
   props: {
