@@ -4,8 +4,9 @@ import lombok.Data;
 
 
 @Data
-public class slideYearResponseFormat {
-    private String year;
+public class slideTypeResponseFormat {
+    private String type;
     private int slide_sum;
+
 
 }
