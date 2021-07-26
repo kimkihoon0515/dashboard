@@ -13,11 +13,6 @@
 </template>
 
 <script>
-
-
-
-
-
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
 export default {
@@ -28,7 +23,9 @@ export default {
     query: {
        type: Object,
        default: null
-    }
+    },
+    start_date: '',
+    end_date: ''
   },
 
   data () {
@@ -98,7 +95,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
+    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date})
     .then((res)=>{
       this.parseBarData(res);
     })
@@ -107,13 +104,9 @@ export default {
     })
   },
   watch: {
-    query:{
-      deep: true,
-      
+    start_date:{
       handler(){
-        console.log(this.query.start_date);
-        console.log(this.query.end_date)
-        this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
+        this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date})
         .then((res)=>{
           console.log(res.data)
           this.parseBarData(res);

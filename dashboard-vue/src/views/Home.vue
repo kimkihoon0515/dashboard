@@ -6,7 +6,7 @@
     </div>
     <div id="dynamic-chart" class="grid">
       <!-- <menubar></menubar> -->
-      <bar-type-com id="slide-date"  :query="slide_date" :needCheck=true></bar-type-com>
+      <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
       <bar-type-com id="size" :query="size" :needCheck=true></bar-type-com>
       <bar-type-com id="scanner" :query="scanner"></bar-type-com>
       <bar-type-com id="pathID" :query="pathID"></bar-type-com>
@@ -31,8 +31,8 @@ export default {
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
-        start_date: this.start,
-        end_date: this.end,
+        // start_date: this.start,
+        // end_date: this.end,
         YMD: 3,
         xKey: 0,
         yKey: [1]
