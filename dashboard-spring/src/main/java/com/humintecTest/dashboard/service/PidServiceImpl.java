@@ -2,6 +2,7 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.PidDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
+import com.humintecTest.dashboard.response.pidchResponseFormat;
 import com.humintecTest.dashboard.vo.PidVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class PidServiceImpl implements PidService {
     }
 
     @Override
-    public List<PidVo> searchPidByDate(DateRequestFormat req) {
+    public List<pidchResponseFormat> searchPidByDate(DateRequestFormat req) {
         try {
             return pidDao.searchPidByDate(req);
         } catch (Exception e) {
