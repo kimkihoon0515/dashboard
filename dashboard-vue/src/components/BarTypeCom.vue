@@ -90,6 +90,7 @@ export default {
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
         console.log(tmp);
+        this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
       }
       this.change=1;
