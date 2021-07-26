@@ -66,7 +66,7 @@ export default {
         yKey: [1]
       },
       storage:{
-        name:"storgae",
+        name:"storage",
         url:"/storageList",
         start_date: this.start,
         end_date: this.end,
