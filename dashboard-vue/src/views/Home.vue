@@ -31,7 +31,6 @@ export default {
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
-        YMD: 3,
         xKey: 0,
         yKey: [1]
         
@@ -39,21 +38,18 @@ export default {
       scanner:{
         name:"scanner",
         url:"/selectScanner",
-        YMD: 3,
         xKey:0,
         yKey:[1]
       },
       pathID:{
         name:"pathID",
         url:"/searchPidByDate",
-        YMD: 3,
         xKey: 0,
         yKey: [1]
       },
       size:{
         name:"size",
         url:"/searchStorageUseByDate",
-        YMD: 3,
         xKey: 0,
         yKey: [1]
       },

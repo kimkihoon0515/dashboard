@@ -1,9 +1,9 @@
 <template>
   <div class="chartbox">
     <span v-if="needCheck==true" id="check-box-group">
-      <input :name=query.name type="radio"><label>Y</label>
-      <input :name=query.name type="radio"><label>M</label>
-      <input :name=query.name type="radio" checked="checked"><label>D</label>
+      <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
+      <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
+      <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
     <span v-if="needCheck==false" id="filter">
       <label v-for="(name, index) in this.datacollection.labels" :key="index"><input type="checkbox" checked="checked">{{name}}</label>
@@ -30,6 +30,7 @@ export default {
 
   data () {
     return {
+      YMD: 3,
       dataform:{
         label: null,
         data: null,
@@ -95,7 +96,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date})
+    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
     .then((res)=>{
       this.parseBarData(res);
     })
@@ -105,13 +106,13 @@ export default {
   },
   computed:{
     changeDate() {
-      return `${this.start_date}|${this.end_date}`;
+      return `${this.start_date}|${this.end_date}|${this.YMD}`;
     }
   },
   watch: {
     changeDate:{
       handler(){
-        this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date})
+        this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
           console.log(res.data)
           this.parseBarData(res);
