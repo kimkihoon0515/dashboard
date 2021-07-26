@@ -8,7 +8,7 @@ import java.util.Scanner;
 public interface ScannerSlideListService {
     public int insertScanner(ScannerSlideVo vo);
     public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
-    public int deleteScanner(ScannerSlideVo vo);
+    public int deleteScanner();
     public List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
 }
 

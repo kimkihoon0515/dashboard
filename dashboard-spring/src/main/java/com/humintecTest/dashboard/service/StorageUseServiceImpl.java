@@ -2,6 +2,7 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageUseDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
+import com.humintecTest.dashboard.response.storageUseResponseFormat;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,12 @@ public class StorageUseServiceImpl implements StorageUseService {
     }
 
     @Override
-    public int deleteStorageUse(StorageUseVo vo) {
+    public int deleteStorageUse() {
         try {
-            storageUseDao.deleteStorageUse(vo);
-            return 1;
-        }catch (Exception e){
+            storageUseDao.deleteStorageUse();
             return 0;
+        }catch (Exception e){
+            return -1;
         }
     }
 
@@ -58,4 +59,19 @@ public class StorageUseServiceImpl implements StorageUseService {
     public List<StorageUseVo> selStorageYear(StorageUseVo vo) {
         return storageUseDao.selStorageYear(vo);
     }
+
+	@Override
+	public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) {
+		return storageUseDao.selectStorageUseByDate(req);
+	}
+
+	@Override
+	public List<storageUseResponseFormat> selectStorageUseByMonth(DateRequestFormat req) {
+		return storageUseDao.selectStorageUseByMonth(req);
+	}
+
+	@Override
+	public List<storageUseResponseFormat> selectStorageUseByYear(DateRequestFormat req) {
+		return storageUseDao.selectStorageUseByYear(req);
+	}
 }

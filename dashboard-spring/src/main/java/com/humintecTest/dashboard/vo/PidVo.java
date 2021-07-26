@@ -11,6 +11,4 @@ public class PidVo {
     private int amount;
     private String start_date;
     private String end_date;
-    private String year;
-    private String month;
 }

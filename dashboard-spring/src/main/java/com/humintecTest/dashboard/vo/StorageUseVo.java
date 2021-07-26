@@ -9,6 +9,4 @@ import java.sql.Date;
 public class StorageUseVo {
     private Date date;
     private BigInteger daily_sum;
-    private String month;
-    private String year;
 }
