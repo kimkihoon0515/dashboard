@@ -2,6 +2,7 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.SlideDateDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
+import com.humintecTest.dashboard.response.slideTypeResponseFormat;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,18 @@ public class SlideDateServiceImpl implements SlideDateService{
     }
 
 	@Override
-	public List<SlideDateVo> selectDateToDate(DateRequestFormat req) {
-		return slideDateDao.selectSlidePerDateList(req);
+	public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req) {
+		return slideDateDao.selectSlidePerDateByDate(req);
+	}
+	
+	@Override
+	public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req) {
+		return slideDateDao.selectSlidePerDateByMonth(req);
+	}
+	
+	@Override
+	public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req) {
+		return slideDateDao.selectSlidePerDateByYear(req);
 	}
 
     @Override
