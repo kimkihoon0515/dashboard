@@ -13,6 +13,11 @@
 </template>
 
 <script>
+
+
+
+
+
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
 export default {
@@ -74,13 +79,8 @@ export default {
     reset() {
       this.change=0;
       //console.log(this.change);
-    }
-  },
-  mounted() {
-    this.$axios.get(this.query.url)
-    .then((res)=>{
-      //console.log(this.query.name);
-      //console.log(this.query.xKey);
+    },
+    parseBarData(res){
       var x= this.query.xKey;
       var y= this.query.yKey;
       //console.log(this.query.yKey);
@@ -91,20 +91,50 @@ export default {
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
-        //console.log(tmp);
+        console.log(tmp);
         this.datacollection.datasets.push(tmp);
       }
       this.change=1;
+    }
+  },
+  mounted() {
+    this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
+    .then((res)=>{
+      this.parseBarData(res);
     })
     .then((err)=>{
       console.log(err);
     })
+  },
+  watch: {
+    query:{
+      deep: true,
+      
+      handler(){
+        console.log(this.query.start_date);
+        console.log(this.query.end_date)
+        this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
+        .then((res)=>{
+          console.log(res.data)
+          this.parseBarData(res);
+        })
+        .then((err)=>{
+          console.log(err);
+        })
+      }
+    }
   }
 }
+
 </script>
 
 <style>
   #filter {
     font-size: 10pt;
+  }
+
+  div{
+    width: 100%;
+    height:90%
   }
 </style>

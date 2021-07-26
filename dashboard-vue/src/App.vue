@@ -22,14 +22,15 @@ export default {
   },
   data () {
     return {
-      startDate: "2021-03-01",
-      endDate: "2021-04-23"
+      startDate: "2014-09-22",
+      endDate: "2021-07-23"
     }
   },
   methods: {
     setDate() {
       this.startDate = document.querySelector("#start-date").value;
       this.endDate = document.querySelector("#end-date").value;
+      console.log(this.startDate);
     }
   }
 }
