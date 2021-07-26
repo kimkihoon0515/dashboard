@@ -30,12 +30,13 @@ export default {
     return {
       slide_date:{
         name:"slide-date",
-        url:"/showSlideDate",
+        url:"/selectSlidePerDate",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
         xKey: 0,
         yKey: [1]
+        
       },
       scanner:{
         name:"scanner",
@@ -92,6 +93,17 @@ export default {
     end: {
       type: String, 
       default: null
+    },
+    submit: {
+      default:0
+    }
+  },
+  watch:{
+    start: function () {
+      console.log(this.slide_date.start_date);
+    },
+    end: function () {
+
     }
   }
 }

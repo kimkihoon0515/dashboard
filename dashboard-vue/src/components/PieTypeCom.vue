@@ -77,7 +77,7 @@ export default {
     }    
   },
   mounted() {
-    this.$axios.get(this.query.url)
+    this.$axios(this.query.url)
     .then((res)=>{
       this.storage_list = res.data
       //console.log(this.storage_list);
