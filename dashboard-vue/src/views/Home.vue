@@ -7,9 +7,9 @@
     <div id="dynamic-chart" class="grid">
       <!-- <menubar></menubar> -->
       <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
-      <bar-type-com id="size" :query="size" :needCheck=true></bar-type-com>
-      <bar-type-com id="scanner" :query="scanner"></bar-type-com>
-      <bar-type-com id="pathID" :query="pathID"></bar-type-com>
+      <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
+      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner"></bar-type-com>
+      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID"></bar-type-com>
       <!--<pie-type-com id="storage" ></pie-type-com>
       <line-type-com id="storage-full" ></line-type-com>-->
     </div>
@@ -31,8 +31,6 @@ export default {
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
-        // start_date: this.start,
-        // end_date: this.end,
         YMD: 3,
         xKey: 0,
         yKey: [1]
@@ -41,26 +39,20 @@ export default {
       scanner:{
         name:"scanner",
         url:"/selectScanner",
-        start_date: this.start,
-        end_date: this.end,
         YMD: 3,
         xKey:0,
         yKey:[1]
       },
       pathID:{
         name:"pathID",
-        url:"/showPid",
-        start_date: this.start,
-        end_date: this.end,
+        url:"/searchPidByDate",
         YMD: 3,
         xKey: 0,
         yKey: [1]
       },
       size:{
         name:"size",
-        url:"/selectStorageUse",
-        start_date: this.start,
-        end_date: this.end,
+        url:"/searchStorageUseByDate",
         YMD: 3,
         xKey: 0,
         yKey: [1]

@@ -103,8 +103,13 @@ export default {
       console.log(err);
     })
   },
+  computed:{
+    changeDate() {
+      return `${this.start_date}|${this.end_date}`;
+    }
+  },
   watch: {
-    start_date:{
+    changeDate:{
       handler(){
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date})
         .then((res)=>{
