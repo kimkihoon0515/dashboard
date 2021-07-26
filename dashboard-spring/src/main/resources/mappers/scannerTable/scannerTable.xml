@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.ScannerTableDao">
+    <select id = "selectScannerTable" parameterType="ScannerTableVo" resultType="ScannerTableVo">
+        select
+               date_format(slide_list.last_scan_date, '%Y-%m-%d') as date,
+                scanner_type as scanner_type,
+                 count(*) as amount
+        from
+                slide_list
+        group by date, scanner_type
+        order by date asc
+    </select>
+    <insert id ="insertScannerTable" parameterType="ScannerTableVo">
+        insert into
+                scanner_table
+                (date,scanner_type,amount)
+        values
+                (#{date},#{scannerType},#{amount})
+    </insert>
+    <delete id="deleteScannerTable">
+        truncate
+            scanner_table
+    </delete>
+    
+    <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
+        select
+        	date as date,
+        	sum(amount) as amount
+        from 
+        	scanner_table
+        where 
+        	date between #{startDate} and #{finishDate}
+        group by
+        	scanner_type
+    </select>
+    
+    //todo : scanner이름 선택해서 기간 쿼리할수 있게 설정
+    <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
+        select
+        	date as date,
+        	sum(amount) as amount
+        from 
+        	scanner_table
+        where 
+        	date between #{startDate} and #{finishDate}
+        group by
+        	scanner_type
+    </select>
+</mapper>
+
+
