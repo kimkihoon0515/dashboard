@@ -1,9 +1,12 @@
 <template>
   <div class="chartbox">
     <span v-if="needCheck==true" id="check-box-group">
-      <input :name=query.name type="radio"><label class="check">Y</label>
-      <input :name=query.name type="radio"><label class="check">M</label>
-      <input :name=query.name type="radio" checked="checked"><label class="check">D</label>
+      <input :name=query.name type="radio"><label>Y</label>
+      <input :name=query.name type="radio"><label>M</label>
+      <input :name=query.name type="radio" checked="checked"><label>D</label>
+    </span>
+    <span v-if="needCheck==false" id="filter">
+      <label v-for="(name, index) in this.datacollection.labels" :key="index"><input type="checkbox" checked="checked">{{name}}</label>
     </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
@@ -101,5 +104,7 @@ export default {
 </script>
 
 <style>
-  
+  #filter {
+    font-size: 10pt;
+  }
 </style>
