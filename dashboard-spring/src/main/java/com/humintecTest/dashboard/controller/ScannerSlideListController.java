@@ -4,6 +4,7 @@ import com.humintecTest.dashboard.response.scannerResponseFormat;
 import com.humintecTest.dashboard.service.ScannerSlideListService;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +46,8 @@ public class ScannerSlideListController {
 
     @PutMapping("/deleteScanner")
     @CrossOrigin(origins = "*")
-    public String deleteScanner(ScannerSlideVo vo){
-        if(scannerSlideListService.deleteScanner(vo) == 1){
+    public String deleteScanner(){
+        if(scannerSlideListService.deleteScanner() == 0){
         }
         else {
             return "false";
@@ -55,7 +56,6 @@ public class ScannerSlideListController {
     }
 
     @GetMapping("/showScanner")
-
     public List<scannerResponseFormat> showScanner(ScannerSlideVo vo)
     {
         ScannerSlideVo vo1 = new ScannerSlideVo();
@@ -65,6 +65,25 @@ public class ScannerSlideListController {
             res.add(new scannerResponseFormat(target));
         }
         return res;
+    }
+    
+    @PutMapping("/updateScanner")
+    @Transactional(readOnly = false)
+    @CrossOrigin(origins = "*")
+    public String updateScanner() {    	
+    	if(scannerSlideListService.deleteScanner() == 0) {
+    		ScannerSlideVo vo = new ScannerSlideVo();
+    		List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
+
+            for(ScannerSlideVo target : vList) {
+                if(scannerSlideListService.insertScanner(target) == 0){
+
+                }
+                else
+                    return "false";
+            }
+    	}
+    	return "ok";
     }
 }
 

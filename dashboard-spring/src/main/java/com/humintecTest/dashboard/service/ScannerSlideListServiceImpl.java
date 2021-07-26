@@ -30,12 +30,12 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     }
 
     @Override
-    public int deleteScanner(ScannerSlideVo vo) {
+    public int deleteScanner() {
         try{
-            scannerSlideListDao.deleteScanner(vo);
-            return 1;
-        } catch (Exception e){
+            scannerSlideListDao.deleteScanner();
             return 0;
+        } catch (Exception e){
+            return -1;
         }
     }
 
