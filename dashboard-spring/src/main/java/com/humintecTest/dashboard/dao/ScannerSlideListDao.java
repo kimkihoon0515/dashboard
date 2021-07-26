@@ -11,7 +11,7 @@ import java.util.Scanner;
 public interface ScannerSlideListDao {
     void insertScanner(ScannerSlideVo vo);
     List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
-    int deleteScanner(ScannerSlideVo vo);
+    int deleteScanner();
     List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
 }
 
