@@ -11,7 +11,7 @@ public class storageFreeResponseFormat {
     private Date date;
     private String storage_name;
     private BigInteger daily_used;
-    private BigInteger free;
+    private float free;
     private BigInteger total;
     public storageFreeResponseFormat(StorageFreeVo vo){
         date = vo.getDate();
