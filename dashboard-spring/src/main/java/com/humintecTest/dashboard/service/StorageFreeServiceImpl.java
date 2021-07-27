@@ -2,6 +2,7 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageFreeDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
+import com.humintecTest.dashboard.request.StorageFreeRequestFormat;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class StorageFreeServiceImpl implements StorageFreeService{
 	public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req) {
 		return storageFreeDao.selectStorageFreeByDate(req);
 	}
+	
+	@Override
+	public List<StorageFreeVo> searchStorageFreeById(StorageFreeRequestFormat req) {
+		return storageFreeDao.selectStorageFreeById(req);
+	}
+	
     @Override
     public List<StorageFreeVo> showStorageFree(StorageFreeVo vo) {
         return storageFreeDao.showStorageFree(vo);
