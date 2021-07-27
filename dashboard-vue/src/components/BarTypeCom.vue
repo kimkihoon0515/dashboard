@@ -36,7 +36,7 @@ export default {
       YMD: 3,
       dataform:{
         label: null,
-        data: null,
+        data: [],
         backgroundColor: null,
         pointBackgroundColor: 'white',
         borderWidth: 1,
@@ -97,18 +97,20 @@ export default {
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
         for(let i=0; i<originLabel.length; i++){
-        this.origin[originLabel[i]]=tmp.data[i];
-        this.checkBind.push(originLabel[i]);
-        this.labelList.push(originLabel[i]);
+          this.origin[originLabel[i]]=tmp.data[i];
+          if(this.needCheck == false){
+            this.checkBind.push(originLabel[i]);
+            this.labelList.push(originLabel[i]);
+          }
         }
       }
       this.change=1;
     },
     parseBarData_check(){
       let tmp= _.cloneDeep(this.dataform);
-      console.log(tmp);
+      this.datacollection.labels=[]
       for (var i=0; i<this.labelList.length; i++){
-        if(this.labelList[i] in this.checkBind){
+        if(this.checkBind.includes(this.labelList[i])){
           tmp.data.push(this.origin[this.labelList[i]]);
           this.datacollection.labels.push(this.labelList[i]);
         }
@@ -117,6 +119,7 @@ export default {
       tmp.label=this.query.name;
       this.datacollection.datasets.pop();
       this.datacollection.datasets.push(tmp);
+      console.log(tmp);
       this.change=1;
     }
   },
