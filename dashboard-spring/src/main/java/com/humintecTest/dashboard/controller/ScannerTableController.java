@@ -23,21 +23,6 @@ public class ScannerTableController {
 	@Autowired
 	ScannerTableService scannerTableService;
 	
-	@GetMapping("/selectScannerTable") //사용안함
-	@Transactional(readOnly = true)
-	@CrossOrigin(origins = "*")
-	public List<ScannerTableResponseFormat> selectScannerTable(){
-		ScannerTableVo vo = new ScannerTableVo();
-		List<ScannerTableVo> vList = scannerTableService.selectScannerTable(vo);
-		
-		ArrayList<ScannerTableResponseFormat> res = new ArrayList<ScannerTableResponseFormat>();
-		for(ScannerTableVo target : vList) {
-			res.add(new ScannerTableResponseFormat(target));
-		}
-		
-		return res;
-	}
-	
 	@PutMapping("/updateScannerTable")
 	@Transactional(readOnly = false)
 	@CrossOrigin(origins = "*")

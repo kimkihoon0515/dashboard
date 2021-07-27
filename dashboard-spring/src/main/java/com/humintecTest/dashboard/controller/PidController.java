@@ -20,20 +20,6 @@ public class PidController {
     @Autowired
     PidService pidService;
 
-    @GetMapping("/selectPid") //사용안함
-    public List<pidResponseFormat> selectPid(PidVo vo) {
-
-        PidVo vo1 = new PidVo();
-        List<PidVo> vList = pidService.selectPid(vo1);
-        ArrayList<pidResponseFormat> res = new ArrayList<pidResponseFormat>();
-        for (PidVo target : vList){
-            res.add(new pidResponseFormat(target));
-        }
-
-        return res;
-    }
-
-    
     @PostMapping("/searchPidByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")

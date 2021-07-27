@@ -19,20 +19,6 @@ import java.util.List;
 public class StorageDateController {
     @Autowired
     StorageDateService storageDateService;
-
-    @GetMapping("/selectStorageDate") //사용안함
-    @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
-    public List<storageDateResponseFormat> selectStorageDate(){
-        StorageDateVo vo1 = new StorageDateVo();
-        List<StorageDateVo> vList = storageDateService.selectStorageDate(vo1);
-        ArrayList<storageDateResponseFormat> res = new ArrayList<storageDateResponseFormat>();
-
-        for(StorageDateVo target : vList){
-            res.add(new storageDateResponseFormat(target));
-        }
-        return res;
-    }
     
     @PutMapping("/updateStoragePerDate")
     @Transactional(readOnly = false)

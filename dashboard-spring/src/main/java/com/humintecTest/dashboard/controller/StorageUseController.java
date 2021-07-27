@@ -1,6 +1,5 @@
 package com.humintecTest.dashboard.controller;
 
-import com.humintecTest.dashboard.response.storageUseTypeResponseFormat;
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
 import com.humintecTest.dashboard.service.StorageUseService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,22 +22,11 @@ public class StorageUseController {
     @Autowired
     StorageUseService storageUseService;
 
-    @GetMapping("/selectStorageUse") //사용안함
-    public List<storageUseResponseFormat> selectStorageUse (StorageUseVo vo){
-        StorageUseVo vo1 = new StorageUseVo();
-        List<StorageUseVo> vList = storageUseService.selectStorageUse(vo1);
-        ArrayList<storageUseResponseFormat> res = new ArrayList<storageUseResponseFormat>();
-        for (StorageUseVo target : vList)
-        {
-            res.add(new storageUseResponseFormat(target));
-        }
-        return res;
-    }
-
     @GetMapping("/showStorageUse") //전체 데이터
-    public List<storageUseResponseFormat> showStorageUse (StorageUseVo vo) {
-        StorageUseVo vo1 = new StorageUseVo();
-        List<StorageUseVo> vList = storageUseService.showStorageUse(vo1);
+    @Transactional(readOnly = true)
+    public List<storageUseResponseFormat> showStorageUse () {
+        StorageUseVo vo = new StorageUseVo();
+        List<StorageUseVo> vList = storageUseService.showStorageUse(vo);
         ArrayList<storageUseResponseFormat> res = new ArrayList<storageUseResponseFormat>();
         for (StorageUseVo target : vList)
         {
@@ -48,38 +35,7 @@ public class StorageUseController {
         return res;
     }
 
-    @PutMapping("/insertStorageUse") //사용안함
-    public String insertStorageUse (StorageUseVo vo)
-    {
-        List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
 
-        for(StorageUseVo target : vList)
-        {
-            if(storageUseService.insertStorageUse(target)==0)
-            {
-
-            }
-            else
-            {
-                return "false";
-            }
-        }
-        return "ok";
-    }
-
-    @PutMapping("deleteStorageUse") //사용안함
-    public String deleteStorageUse(StorageUseVo vo)
-    {
-        if(storageUseService.deleteStorageUse()==1)
-        {
-
-        }
-        else {
-            return "false";
-        }
-        return "ok";
-    }
-    
     @PostMapping("/searchStorageUseByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
