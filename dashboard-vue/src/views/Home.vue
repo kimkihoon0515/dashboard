@@ -37,7 +37,7 @@ export default {
       },
       scanner:{
         name:"scanner",
-        url:"/selectScanner",
+        url:"/searchScannerTable",
         xKey:0,
         yKey:[1]
       },
