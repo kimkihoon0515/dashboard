@@ -6,7 +6,7 @@
     <select id = "selectScannerTable" parameterType="ScannerTableVo" resultType="ScannerTableVo">
         select
                date_format(slide_list.last_scan_date, '%Y-%m-%d') as date,
-                scanner_type as scanner_type,
+                scanner_type as scannerType,
                  count(*) as amount
         from
                 slide_list
@@ -25,29 +25,40 @@
             scanner_table
     </delete>
     
-    <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
-        select
-        	date as date,
-        	sum(amount) as amount
-        from 
-        	scanner_table
-        where 
-        	date between #{startDate} and #{finishDate}
-        group by
-        	scanner_type
+    <select id = "searchScannerTable" resultType="ScannerTableVo">
+    	select *
+    	from
+    		scanner_table
+    	order by date asc
     </select>
     
-    //todo : scanner이름 선택해서 기간 쿼리할수 있게 설정
-    <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
+    <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerTableVo">
         select
         	date as date,
+        	scanner_type as scannerType,
         	sum(amount) as amount
         from 
         	scanner_table
         where 
         	date between #{startDate} and #{finishDate}
         group by
-        	scanner_type
+        	scanner_type, date
+        order by date asc
+    </select>
+    
+    
+    <select id = "searchScannerTableById" parameterType="com.humintecTest.dashboard.request.ScannerTableRequestFormat" resultType="ScannerTableVo">
+        select
+        	date as date,
+        	scanner_type as scannerType,
+        	sum(amount) as amount
+        from 
+        	scanner_table
+        where 
+        	(date between #{startDate} and #{finishDate}) and scanner_type = #{scannerType}
+        group by
+        	scanner_type, date
+        order by date asc
     </select>
 </mapper>
 
