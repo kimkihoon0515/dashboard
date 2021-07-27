@@ -6,7 +6,7 @@
       <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
     <span v-if="needCheck==false" id="filter">
-      <label v-for="(name, index) in this.datacollection.labels" :key="index"><input type="checkbox" checked="checked">{{name}}</label>
+      <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
     </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
@@ -30,6 +30,8 @@ export default {
 
   data () {
     return {
+      origin: {},
+      checkBind: [],
       YMD: 3,
       dataform:{
         label: null,
@@ -84,6 +86,7 @@ export default {
       //console.log(this.query.yKey);
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
+      var originLabel=res.data.map(function(elem){return elem[keys[x]]});
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
@@ -92,7 +95,24 @@ export default {
         console.log(tmp);
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
+        for(let i=0; i<originLabel.length; i++){
+        this.origin[originLabel[i]]=tmp.data[i];
+        this.checkBind.push(originLabel[i]);
+        }
       }
+      this.change=1;
+    },
+    parseBarData_check(){
+      var y= this.query.yKey;
+      var keys;
+      this.datacollection.labels=this.checkBind;
+        let tmp= _.cloneDeep(this.dataform);
+        tmp.label=keys[y[i]];
+        tmp.data=Object.values(this.origin);
+        tmp.backgroundColor=this.colorset[i];
+        console.log(tmp);
+        this.datacollection.datasets.pop();
+        this.datacollection.datasets.push(tmp);
       this.change=1;
     }
   },
@@ -122,7 +142,11 @@ export default {
           console.log(err);
         })
       }
-    }
+    },
+    // checkBind:{
+    //   handler(){
+    //     this.parseBarData_check();
+    //   }
   }
 }
 

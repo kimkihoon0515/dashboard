@@ -8,8 +8,8 @@
       <!-- <menubar></menubar> -->
       <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
       <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
-      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner"></bar-type-com>
-      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID"></bar-type-com>
+      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false></bar-type-com>
+      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false></bar-type-com>
       <!--<pie-type-com id="storage" ></pie-type-com>
       <line-type-com id="storage-full" ></line-type-com>-->
     </div>
