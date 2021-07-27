@@ -21,28 +21,23 @@
     <delete id = "deletePid">
         truncate pathid_table
     </delete>
-    <select id = "searchPid" parameterType="PidVo" resultType="PidVo">
-        select *
-        from pathid_table
-        where last_scan_date between #{start_date} and #{end_date}
+    <select id = "searchPidByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
+        select
+        	pathID_ch as pathID_ch,
+        	sum(amount) as amount
+        from 
+        	pathid_table
+        where 
+        	last_scan_date between #{startDate} and #{finishDate}
+        group by
+        	pathID_ch
+        order by last_scan_date asc
+        
     </select>
     <select id = "showPid" parameterType="PidVo" resultType="PidVo">
         select pathID_ch, sum(amount) as amount
         from pathid_table
         group by pathID_ch
     </select>
-    <select id = "selPidMonth" parameterType="PidVo" resultType="PidVo">
-        select date_format(last_scan_date, '%Y-%m') as month,
-                pathID_ch,
-                sum(amount) as amount
-        from pathid_table
-        group by month
-    </select>
-    <select id = "selPidYear" parameterType="PidVo" resultType="PidVo">
-        select date_format(last_scan_date, '%Y') as year,
-                pathID_ch,
-                sum(amount) as amount
-        from pathid_table
-        group by year
-    </select>
+
 </mapper>

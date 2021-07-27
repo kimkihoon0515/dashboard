@@ -19,8 +19,8 @@
     },
     watch:{
       change: function(){
+        //this.update();
         this.renderChart(this.datacollection, this.options)
-
         this.$emit("rerendered")
       }
     },

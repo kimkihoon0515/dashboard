@@ -20,7 +20,7 @@ public class StorageDateController {
     @Autowired
     StorageDateService storageDateService;
 
-    @GetMapping("/selectStorageDate")
+    @GetMapping("/selectStorageDate") //사용안함
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<storageDateResponseFormat> selectStorageDate(){

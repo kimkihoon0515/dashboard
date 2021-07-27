@@ -6,10 +6,10 @@
     </div>
     <div id="dynamic-chart" class="grid">
       <!-- <menubar></menubar> -->
-      <bar-type-com id="slide-date"  :query="slide_date" :needCheck=true></bar-type-com>
-      <bar-type-com id="size" :query="size" :needCheck=true></bar-type-com>
-      <bar-type-com id="scanner" :query="scanner"></bar-type-com>
-      <bar-type-com id="pathID" :query="pathID"></bar-type-com>
+      <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
+      <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
+      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false></bar-type-com>
+      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false></bar-type-com>
       <!--<pie-type-com id="storage" ></pie-type-com>
       <line-type-com id="storage-full" ></line-type-com>-->
     </div>
@@ -30,42 +30,31 @@ export default {
     return {
       slide_date:{
         name:"slide-date",
-        url:"/showSlideDate",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
+        url:"/selectSlidePerDate",
         xKey: 0,
         yKey: [1]
+        
       },
       scanner:{
         name:"scanner",
-        url:"/selectScanner",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
+        url:"/searchScannerTable",
         xKey:0,
         yKey:[1]
       },
       pathID:{
         name:"pathID",
-        url:"/showPid",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
+        url:"/searchPidByDate",
         xKey: 0,
         yKey: [1]
       },
       size:{
         name:"size",
-        url:"/selectStorageUse",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
+        url:"/searchStorageUseByDate",
         xKey: 0,
         yKey: [1]
       },
       storage:{
-        name:"storgae",
+        name:"storage",
         url:"/storageList",
         start_date: this.start,
         end_date: this.end,
@@ -75,7 +64,7 @@ export default {
       },
       storage_full:{
         name:"storage-full",
-        url:"/showStorageFree",
+        url:"/searchStorageFreeByDate",
         start_date: this.start,
         end_date: this.end,
         YMD: 3,
@@ -92,6 +81,17 @@ export default {
     end: {
       type: String, 
       default: null
+    },
+    submit: {
+      default:0
+    }
+  },
+  watch:{
+    start: function () {
+      console.log(this.slide_date.start_date);
+    },
+    end: function () {
+
     }
   }
 }
