@@ -10,7 +10,10 @@ export default {
   name : "LineTypeCom",
   components: { LineChart },
   props: {
-    
+    storageName: {
+      type: String,
+      default: null
+    },
     query: {
        type: Object,
        default: null

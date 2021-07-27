@@ -1,7 +1,8 @@
 <template>
   <div id="container">
     <div id="static-chart" class="grid">
-      <pie-type-com id="storage" :query="storage"></pie-type-com>
+      <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameChange(name)">{{name}}</button>
+      <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
       <line-type-com id="storage-full" :query="storage_full"></line-type-com>
     </div>
     <div id="dynamic-chart" class="grid">
@@ -59,6 +60,8 @@ export default {
         xKey: null,
         yKey: null
       },
+      storageName:null,
+      storage_name_list: [],
       storage_full:{
         name:"storage-full",
         url:"/searchStorageFreeByDate",
@@ -87,6 +90,22 @@ export default {
     end: function () {
 
     }
+  },
+  methods:{
+    nameChange(name){
+      this.storageName=name;
+      
+    }
+  },
+  mounted() {
+    this.$axios(this.storage.url)
+    .then((res)=>{
+      this.storage_name_list=res.data.map(function(elem){ return elem.storageName})
+      this.storageName=this.storage_name_list[0];
+    })
+    .then((err)=>{
+      console.log(err);
+    })
   }
 }
 </script>
