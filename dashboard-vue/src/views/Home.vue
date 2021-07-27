@@ -3,7 +3,7 @@
     <div id="static-chart" class="grid">
       <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameChange(name)">{{name}}</button>
       <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
-      <line-type-com id="storage-full" :query="storage_full"></line-type-com>
+      <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
     </div>
     <div id="dynamic-chart" class="grid">
       <!-- <menubar></menubar> -->
@@ -94,7 +94,7 @@ export default {
   methods:{
     nameChange(name){
       this.storageName=name;
-      
+
     }
   },
   mounted() {
