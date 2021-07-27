@@ -1,6 +1,7 @@
 package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.request.DateRequestFormat;
+import com.humintecTest.dashboard.request.StorageFreeRequestFormat;
 import com.humintecTest.dashboard.response.storageFreeResponseFormat;
 import com.humintecTest.dashboard.service.StorageFreeService;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
@@ -27,6 +28,21 @@ public class StorageFreeController {
     @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> searchStorageFree (@RequestBody DateRequestFormat req) {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFreeByDate(req);
+        
+        ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
+
+        for (StorageFreeVo target : vList) {
+            res.add(new storageFreeResponseFormat(target));
+        }
+        
+        return res;
+    }
+    
+    @PostMapping("/searchStorageFreeById")
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
+    public List<storageFreeResponseFormat> searchStorageFreeById (@RequestBody StorageFreeRequestFormat req) {
+        List<StorageFreeVo> vList = storageFreeService.searchStorageFreeById(req);
         
         ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
 
