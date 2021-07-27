@@ -24,7 +24,7 @@ public class StorageUseController {
     @Autowired
     StorageUseService storageUseService;
 
-    @GetMapping("/selectStorageUse")
+    @GetMapping("/selectStorageUse") //사용안함
     public List<storageUseResponseFormat> selectStorageUse (StorageUseVo vo){
         StorageUseVo vo1 = new StorageUseVo();
         List<StorageUseVo> vList = storageUseService.selectStorageUse(vo1);
@@ -36,7 +36,7 @@ public class StorageUseController {
         return res;
     }
 
-    @GetMapping("/showStorageUse")
+    @GetMapping("/showStorageUse") //전체 데이터
     public List<storageUseResponseFormat> showStorageUse (StorageUseVo vo) {
         StorageUseVo vo1 = new StorageUseVo();
         List<StorageUseVo> vList = storageUseService.showStorageUse(vo1);
@@ -48,7 +48,7 @@ public class StorageUseController {
         return res;
     }
 
-    @PutMapping("/insertStorageUse")
+    @PutMapping("/insertStorageUse") //사용안함
     public String insertStorageUse (StorageUseVo vo)
     {
         List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
@@ -67,7 +67,7 @@ public class StorageUseController {
         return "ok";
     }
 
-    @PutMapping("deleteStorageUse")
+    @PutMapping("deleteStorageUse") //사용안함
     public String deleteStorageUse(StorageUseVo vo)
     {
         if(storageUseService.deleteStorageUse()==1)

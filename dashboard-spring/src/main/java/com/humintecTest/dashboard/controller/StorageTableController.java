@@ -4,6 +4,7 @@ import com.humintecTest.dashboard.dao.StorageTableDao;
 import com.humintecTest.dashboard.response.storageTableResponseFormat;
 import com.humintecTest.dashboard.service.StorageTableService;
 import com.humintecTest.dashboard.vo.StorageTableVo;
+import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class StorageTableController {
     @Autowired
     StorageTableService storageTableService;
 
-    @GetMapping("/selectStorageTable")
+    @GetMapping("/selectStorageTable") //사용안함
     @CrossOrigin(origins = "*")
     public List<storageTableResponseFormat> selectStorageTable(){
         StorageTableVo vo1 = new StorageTableVo();
@@ -31,7 +32,7 @@ public class StorageTableController {
         return res;
     }
 
-    @PutMapping("/insertStorageTable")
+    @PutMapping("/insertStorageTable")  //사용안함
     @CrossOrigin(origins = "*")
     public String insertStorageTable(StorageTableVo vo){
         List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
@@ -48,11 +49,35 @@ public class StorageTableController {
     @PutMapping("/deleteStorageTable")
     @CrossOrigin(origins = "*")
     public String deleteStorageTable(StorageTableVo vo){
-        if(storageTableService.deleteStorageTable(vo)==1){
+        if(storageTableService.deleteStorageTable()==1){
 
         }
         else {
             return "false";
+        }
+        return "ok";
+    }
+
+    @PutMapping("/updateStorageTable")
+    @CrossOrigin("*")
+    public String updateStorageTable()
+    {
+        if(storageTableService.deleteStorageTable() == 0)
+        {
+            StorageTableVo vo = new StorageTableVo();
+            List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
+
+            for(StorageTableVo target : vList){
+                if(storageTableService.insertStorageTable(target)==0){
+
+                }
+                else {
+                    return  "fail";
+                }
+            }
+        }
+        else {
+            return "delete fail";
         }
         return "ok";
     }
