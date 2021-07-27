@@ -64,9 +64,9 @@ export default {
       storage_name_list: [],
       storage_full:{
         name:"storage-full",
-        url:"/searchStorageFreeByDate",
+        url:"/searchStorageFreeById",
         xKey: 0,
-        yKey: [2]
+        yKey: [3]
       },
     }
   },
@@ -97,7 +97,7 @@ export default {
 
     }
   },
-  mounted() {
+  created() {
     this.$axios(this.storage.url)
     .then((res)=>{
       this.storage_name_list=res.data.map(function(elem){ return elem.storageName})

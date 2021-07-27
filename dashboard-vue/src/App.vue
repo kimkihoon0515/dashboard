@@ -30,7 +30,6 @@ export default {
     setDate() {
       this.startDate = document.querySelector("#start-date").value;
       this.endDate = document.querySelector("#end-date").value;
-      console.log(this.startDate);
     }
   },
   mounted(){
@@ -38,8 +37,6 @@ export default {
     .then((res)=>{
       this.startDate=res.data.map(function(elem){return elem.date})[1];
       this.endDate=res.data.map(function(elem){return elem.date})[res.data.map(function(elem){return elem.date}).length-1];
-      console.log(this.startDate);
-      console.log(this.endDate);
     })
     .then((err)=>{
       console.log(err);

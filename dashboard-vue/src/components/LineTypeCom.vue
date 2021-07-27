@@ -22,15 +22,18 @@ export default {
   data () {
     return {
       change:0,
+     dataform:{
+        label: null,
+        data: null,
+        backgroundColor: null,
+        pointBackgroundColor: 'white',
+        borderWidth: 1,
+        pointBorderColor: '#249EBF'
+        },
+      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
         labels: null,
         datasets: [{
-                    label: null,
-                    data: null,
-                    backgroundColor: '#f87979',
-                    pointBackgroundColor: 'white',
-                    borderWidth: 1,
-                    pointBorderColor: '#249EBF'
         }]
       },
       chartoptions:{
@@ -67,14 +70,16 @@ export default {
     parseLineData(res){
       var x= this.query.xKey;
       var y= this.query.yKey;
-      console.log(res);
+      console.log(res.data[0]);
       var keys= Object.keys(res.data[0]);
+      console.log(keys);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
-        tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        tmp.data=res.data.map(function(elem){return 100-elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
+        console.log("hello")
         console.log(tmp);
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
@@ -82,9 +87,20 @@ export default {
       this.change=1;
     }
   },
+  watch:{
+    storageName: function(){
+      this.$axios.post(this.query.url, {'storageName':this.storageName})
+      .then((res)=>{
+      this.parseLineData(res);
+      })
+      .then((err)=>{
+        console.log(err);
+      })
+    }
+  },
   mounted() {
-    console.log(this.query.startDate)
-    this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
+    console.log(this.storageName)
+    this.$axios.post(this.query.url, {'storageName':this.storageName})
     .then((res)=>{
       console.log(res.data);
       this.parseLineData(res);

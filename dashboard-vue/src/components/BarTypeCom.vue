@@ -89,7 +89,7 @@ export default {
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
-        console.log(tmp);
+        //console.log(tmp);
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
       }
@@ -115,7 +115,7 @@ export default {
       handler(){
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
-          console.log(res.data)
+          //console.log(res.data)
           this.parseBarData(res);
         })
         .then((err)=>{
