@@ -31,8 +31,7 @@ public class ScannerSlideListController {
         return "ok";
     }
 
-
-    @GetMapping("/selectScanner") //사용안함
+    @GetMapping("/selectScanner")
     @CrossOrigin(origins = "*")
     public List<scannerResponseFormat> selectScanner() {
         ScannerSlideVo vo1 = new ScannerSlideVo();
@@ -57,6 +56,7 @@ public class ScannerSlideListController {
     }
 
     @GetMapping("/showScanner") //전체 값 불러오기
+    @CrossOrigin("*")
     public List<scannerResponseFormat> showScanner(ScannerSlideVo vo)
     {
         ScannerSlideVo vo1 = new ScannerSlideVo();
