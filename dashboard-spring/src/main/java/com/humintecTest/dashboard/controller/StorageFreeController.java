@@ -76,7 +76,7 @@ public class StorageFreeController {
     }
     
     
-    @GetMapping("/showStorageFree")
+    @GetMapping("/showStorageFree") //전체 데이터
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> showStorageFree (StorageFreeVo vo){

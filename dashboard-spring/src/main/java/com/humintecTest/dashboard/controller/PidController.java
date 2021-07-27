@@ -20,7 +20,7 @@ public class PidController {
     @Autowired
     PidService pidService;
 
-    @GetMapping("/selectPid")
+    @GetMapping("/selectPid") //사용안함
     public List<pidResponseFormat> selectPid(PidVo vo) {
 
         PidVo vo1 = new PidVo();

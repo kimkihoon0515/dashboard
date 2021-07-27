@@ -16,7 +16,7 @@ public class ScannerSlideListController {
     @Autowired
     ScannerSlideListService scannerSlideListService;
 
-    @PutMapping("/insertScanner")
+    @PutMapping("/insertScanner") //사용안함
     @CrossOrigin(origins = "*")
     public String insertScanner(ScannerSlideVo vo) {
         List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
@@ -44,7 +44,7 @@ public class ScannerSlideListController {
         return res;
     }
 
-    @PutMapping("/deleteScanner")
+    @PutMapping("/deleteScanner") //사용안함
     @CrossOrigin(origins = "*")
     public String deleteScanner(){
         if(scannerSlideListService.deleteScanner() == 0){
@@ -55,7 +55,8 @@ public class ScannerSlideListController {
         return "ok";
     }
 
-    @GetMapping("/showScanner")
+    @GetMapping("/showScanner") //전체 값 불러오기
+    @CrossOrigin("*")
     public List<scannerResponseFormat> showScanner(ScannerSlideVo vo)
     {
         ScannerSlideVo vo1 = new ScannerSlideVo();
