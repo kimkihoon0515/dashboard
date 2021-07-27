@@ -56,18 +56,12 @@ export default {
       storage:{
         name:"storage",
         url:"/storageList",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
         xKey: null,
         yKey: null
       },
       storage_full:{
         name:"storage-full",
         url:"/searchStorageFreeByDate",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
         xKey: 0,
         yKey: [2]
       },

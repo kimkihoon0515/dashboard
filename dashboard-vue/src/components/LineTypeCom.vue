@@ -34,7 +34,8 @@ export default {
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      max: 100
                   },
                   gridLines: {
                       display: true
@@ -59,22 +60,31 @@ export default {
     reset() {
       this.change=0;
       //console.log(this.change);
+    },
+    parseLineData(res){
+      var x= this.query.xKey;
+      var y= this.query.yKey;
+      console.log(res);
+      var keys= Object.keys(res.data[0]);
+      this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
+      for(let i=0; i<y.length ; i++){
+        let tmp= _.cloneDeep(this.dataform);
+        tmp.label=keys[y[i]];
+        tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        tmp.backgroundColor=this.colorset[i];
+        console.log(tmp);
+        this.datacollection.datasets.pop();
+        this.datacollection.datasets.push(tmp);
+      }
+      this.change=1;
     }
   },
   mounted() {
-    //console.log(this.query.start_date);
-    //console.log(this.query.end_date);
-    this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date,'type':3})
-    //this.$axios.get(this.query.url)
+    console.log(this.query.startDate)
+    this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date})
     .then((res)=>{
-      //console.log(res.data);
-      var x= this.query.xKey;
-      var y= this.query.yKey;
-      var keys= Object.keys(res.data[0]);
-      this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-      this.datacollection.datasets[0].label=this.query.name;
-      this.datacollection.datasets[0].data=res.data.map(function(elem){return elem[keys[y]]});
-      this.change=1;
+      console.log(res.data);
+      this.parseLineData(res);
     })
     .then((err)=>{
       console.log(err);
