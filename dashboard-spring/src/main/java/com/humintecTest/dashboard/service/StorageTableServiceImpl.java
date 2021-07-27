@@ -30,12 +30,12 @@ public class StorageTableServiceImpl implements StorageTableService{
     }
 
     @Override
-    public int deleteStorageTable(StorageTableVo vo) {
+    public int deleteStorageTable() {
         try{
-            storageTableDao.deleteStorageTable(vo);
-            return 1;
-        }catch (Exception e){
+            storageTableDao.deleteStorageTable();
             return 0;
+        }catch (Exception e){
+            return -1;
         }
     }
 }

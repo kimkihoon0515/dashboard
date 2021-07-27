@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.humintecTest.dashboard.service.PidService;
 import com.humintecTest.dashboard.service.ScannerSlideListService;
+import com.humintecTest.dashboard.service.ScannerTableService;
 import com.humintecTest.dashboard.service.SlideDateService;
 import com.humintecTest.dashboard.service.StorageDateService;
 import com.humintecTest.dashboard.service.StorageFreeService;
 import com.humintecTest.dashboard.service.StorageTableService;
 import com.humintecTest.dashboard.service.StorageUseService;
+import com.humintecTest.dashboard.vo.PidVo;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
+import com.humintecTest.dashboard.vo.ScannerTableVo;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import com.humintecTest.dashboard.vo.StorageDateVo;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
+import com.humintecTest.dashboard.vo.StorageTableVo;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 
 @RestController
@@ -38,12 +42,47 @@ public class ScheduleController {
 	StorageTableService storageTableService;
 	@Autowired
 	StorageUseService storageUseService;
+	@Autowired
+	ScannerTableService scannerTableService;
 	
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
 	@CrossOrigin(origins = "*")
 	@Scheduled(fixedRate = 86400000)
 	public String uadateAll() {
+    	if(storageTableService.deleteStorageTable()==0){
+    		StorageTableVo vo = new StorageTableVo();
+    		List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
+
+            for(StorageTableVo target : vList){
+                if(storageTableService.insertStorageTable(target)== 0){
+                }
+                else {
+                    return "false";
+                }
+            }
+    	}
+        else {
+            return "false";
+        }
+    	
+    	if(scannerTableService.deleteScannerTable() == 0) {
+			ScannerTableVo vo = new ScannerTableVo();
+			List<ScannerTableVo> vList = scannerTableService.selectScannerTable(vo);
+			
+			for(ScannerTableVo target : vList) {
+				if(scannerTableService.insertScannerTable(target) == 0) {
+					
+				}
+				else {
+					return "false";
+				}
+			}
+		}
+		else {
+			return "false";
+		}
+    	
 		if(scannerSlideListService.deleteScanner() == 0) {
     		ScannerSlideVo vo = new ScannerSlideVo();
     		List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
@@ -75,6 +114,22 @@ public class ScheduleController {
     		return "false";
 
     	}
+		
+		if(pidService.deletePid() == 0) {
+   		 PidVo vo = new PidVo();
+   		 List<PidVo> vList = pidService.selectPid(vo);
+
+   	        for (PidVo target : vList){
+   	            if(pidService.insertPid(target) == 0){
+
+   	            }
+   	            else
+   	                return "false";
+   	        }
+        }
+        else {
+       	 return "false";
+        }
 		
 		if(storageDateService.deleteStorageDate()== 0){
     		StorageDateVo vo = new StorageDateVo();
