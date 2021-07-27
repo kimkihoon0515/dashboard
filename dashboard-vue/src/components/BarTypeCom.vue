@@ -81,7 +81,7 @@ export default {
       this.change=0;
       //console.log(this.change);
     },
-    parseBarData(res){
+    parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
       //console.log(this.query.yKey);
@@ -98,13 +98,16 @@ export default {
         this.datacollection.datasets.push(tmp);
         for(let i=0; i<originLabel.length; i++){
           this.origin[originLabel[i]]=tmp.data[i];
-          if(this.needCheck == false){
+          if(this.needCheck == false & protect_check == 0){
             this.checkBind.push(originLabel[i]);
             this.labelList.push(originLabel[i]);
           }
         }
       }
       this.change=1;
+      if(this.checkBind.length != 0){
+        this.parseBarData_check();
+      }
     },
     parseBarData_check(){
       let tmp= _.cloneDeep(this.dataform);
@@ -126,7 +129,7 @@ export default {
   mounted() {
     this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
     .then((res)=>{
-      this.parseBarData(res);
+      this.parseBarData(res, 0);
     })
     .then((err)=>{
       console.log(err);
@@ -143,7 +146,7 @@ export default {
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
           console.log(res.data)
-          this.parseBarData(res);
+          this.parseBarData(res, 1);
         })
         .then((err)=>{
           console.log(err);
