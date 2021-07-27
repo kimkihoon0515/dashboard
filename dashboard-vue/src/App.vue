@@ -22,8 +22,8 @@ export default {
   },
   data () {
     return {
-      startDate: "2014-09-22",
-      endDate: "2021-07-23"
+      startDate: null,
+      endDate: null
     }
   },
   methods: {
@@ -32,6 +32,18 @@ export default {
       this.endDate = document.querySelector("#end-date").value;
       console.log(this.startDate);
     }
+  },
+  mounted(){
+    this.$axios("/showSlideDate")
+    .then((res)=>{
+      this.startDate=res.data.map(function(elem){return elem.date})[1];
+      this.endDate=res.data.map(function(elem){return elem.date})[res.data.map(function(elem){return elem.date}).length-1];
+      console.log(this.startDate);
+      console.log(this.endDate);
+    })
+    .then((err)=>{
+      console.log(err);
+    })
   }
 }
 </script>
