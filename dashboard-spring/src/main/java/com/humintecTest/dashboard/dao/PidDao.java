@@ -15,7 +15,5 @@ public interface PidDao {
     public int deletePid();
     public List<pidchResponseFormat> searchPidByDate (DateRequestFormat req);
     public List<PidVo> showPid (PidVo vo);
-    public List<PidVo> selPidMonth(PidVo vo);
-    public List<PidVo> selPidYear(PidVo vo);
 }
 
