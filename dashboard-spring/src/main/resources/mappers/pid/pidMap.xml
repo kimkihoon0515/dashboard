@@ -31,6 +31,7 @@
         	last_scan_date between #{startDate} and #{finishDate}
         group by
         	pathID_ch
+        order by last_scan_date asc
         
     </select>
     <select id = "showPid" parameterType="PidVo" resultType="PidVo">
