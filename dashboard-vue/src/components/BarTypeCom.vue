@@ -32,6 +32,7 @@ export default {
     return {
       origin: {},
       checkBind: [],
+      labelList: [],
       YMD: 3,
       dataform:{
         label: null,
@@ -98,21 +99,24 @@ export default {
         for(let i=0; i<originLabel.length; i++){
         this.origin[originLabel[i]]=tmp.data[i];
         this.checkBind.push(originLabel[i]);
+        this.labelList.push(originLabel[i]);
         }
       }
       this.change=1;
     },
     parseBarData_check(){
-      var y= this.query.yKey;
-      var keys;
-      this.datacollection.labels=this.checkBind;
-        let tmp= _.cloneDeep(this.dataform);
-        tmp.label=keys[y[i]];
-        tmp.data=Object.values(this.origin);
-        tmp.backgroundColor=this.colorset[i];
-        console.log(tmp);
-        this.datacollection.datasets.pop();
-        this.datacollection.datasets.push(tmp);
+      let tmp= _.cloneDeep(this.dataform);
+      console.log(tmp);
+      for (var i=0; i<this.labelList.length; i++){
+        if(this.labelList[i] in this.checkBind){
+          tmp.data.push(this.origin[this.labelList[i]]);
+          this.datacollection.labels.push(this.labelList[i]);
+        }
+      }
+      tmp.backgroundColor=this.colorset[0];
+      tmp.label=this.query.name;
+      this.datacollection.datasets.pop();
+      this.datacollection.datasets.push(tmp);
       this.change=1;
     }
   },
@@ -143,10 +147,11 @@ export default {
         })
       }
     },
-    // checkBind:{
-    //   handler(){
-    //     this.parseBarData_check();
-    //   }
+    checkBind:{
+      handler(){
+        this.parseBarData_check();
+      }
+    }
   }
 }
 
