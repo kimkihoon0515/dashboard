@@ -13,8 +13,6 @@ public interface StorageUseService {
     public int deleteStorageUse ();
     public List<StorageUseVo> showStorageUse (StorageUseVo vo);
     public List<StorageUseVo> searchStorageUse (DateRequestFormat req);
-    public List<StorageUseVo> selStorageMonth (StorageUseVo vo);
-    public List<StorageUseVo> selStorageYear (StorageUseVo vo);
     
     public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req);
     public List<storageUseResponseFormat> selectStorageUseByMonth(DateRequestFormat req);

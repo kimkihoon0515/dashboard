@@ -31,6 +31,7 @@
     		slide_per_date
     	where
     		date between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+    	order by date asc
     </select>
 
     
@@ -44,6 +45,7 @@
     		date_format(date,'%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
     	group by
         	type
+        order by date asc
     </select>
     
     <select id = "selectSlidePerDateByYear" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
@@ -56,6 +58,7 @@
     		date_format(date,'%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
     	group by
         	type
+        order by date asc
     </select>
 
 
