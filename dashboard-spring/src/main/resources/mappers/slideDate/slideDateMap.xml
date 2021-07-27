@@ -10,7 +10,7 @@
         from
             slide_list
         group by date
-        order by date asc;
+        order by date asc
     </select>
     <insert id = "insertSlideDate" parameterType="SlideDateVo">
         insert into
