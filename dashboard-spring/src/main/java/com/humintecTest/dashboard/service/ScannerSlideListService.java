@@ -1,5 +1,6 @@
 package com.humintecTest.dashboard.service;
 
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
 
 import java.util.List;
@@ -10,5 +11,6 @@ public interface ScannerSlideListService {
     public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
     public int deleteScanner();
     public List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
+    List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req);
 }
 
