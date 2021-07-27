@@ -7,5 +7,5 @@ import java.util.List;
 public interface StorageTableService {
     List<StorageTableVo> selectStorageTable(StorageTableVo vo);
     int insertStorageTable(StorageTableVo vo);
-    int deleteStorageTable(StorageTableVo vo);
+    int deleteStorageTable();
 }

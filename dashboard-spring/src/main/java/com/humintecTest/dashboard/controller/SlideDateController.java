@@ -77,7 +77,7 @@ public class SlideDateController {
     	return "ok";
     }
   
-    @GetMapping("/showSlideDate")
+    @GetMapping("/showSlideDate") //전체 데이터
     public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)
     {
        SlideDateVo vo1 = new SlideDateVo();
