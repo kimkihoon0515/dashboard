@@ -4,6 +4,7 @@ import com.humintecTest.dashboard.dao.StorageTableDao;
 import com.humintecTest.dashboard.response.storageTableResponseFormat;
 import com.humintecTest.dashboard.service.StorageTableService;
 import com.humintecTest.dashboard.vo.StorageTableVo;
+import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,7 +21,7 @@ public class StorageTableController {
     @Autowired
     StorageTableService storageTableService;
 
-    @GetMapping("/selectStorageTable")
+    @GetMapping("/selectStorageTable") //사용안함
     @CrossOrigin(origins = "*")
     public List<storageTableResponseFormat> selectStorageTable(){
         StorageTableVo vo1 = new StorageTableVo();
@@ -32,7 +33,7 @@ public class StorageTableController {
         return res;
     }
 
-    @PutMapping("/insertStorageTable")
+    @PutMapping("/insertStorageTable")  //사용안함
     @CrossOrigin(origins = "*")
     public String insertStorageTable(StorageTableVo vo){
         List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
@@ -49,8 +50,7 @@ public class StorageTableController {
     @PutMapping("/deleteStorageTable")
     @CrossOrigin(origins = "*")
     public String deleteStorageTable(StorageTableVo vo){
-        if(storageTableService.deleteStorageTable()==0){
-
+        if(storageTableService.deleteStorageTable()==0) {
         }
         else {
             return "false";

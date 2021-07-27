@@ -23,7 +23,7 @@ public class ScannerTableController {
 	@Autowired
 	ScannerTableService scannerTableService;
 	
-	@GetMapping("/selectScannerTable")
+	@GetMapping("/selectScannerTable") //사용안함
 	@Transactional(readOnly = true)
 	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> selectScannerTable(){
@@ -62,7 +62,7 @@ public class ScannerTableController {
 		return "ok";
 	}
 	
-	@GetMapping("/searchScannerTable")
+	@GetMapping("/searchScannerTable") //전체 데이터
 	@Transactional(readOnly = true)
 	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> searchScannerTable(){
