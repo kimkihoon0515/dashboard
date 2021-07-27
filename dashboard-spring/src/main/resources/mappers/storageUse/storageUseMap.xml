@@ -22,7 +22,7 @@
         	date_format(last_scan_date, '%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
         group by
         	type
-        order by date asc
+        order by type asc
     </select>
     
     <select id = "selectStorageUseByMonth" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
@@ -35,7 +35,7 @@
         	date_format(last_scan_date, '%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
         group by
         	type
-        order by date asc
+        order by type asc
     </select>
     
     <select id = "selectStorageUseByYear" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
@@ -48,7 +48,7 @@
         	date_format(last_scan_date, '%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
         group by
         	type
-        order by date asc
+        order by type asc
     </select>
     
     <insert id = "insertStorageUse" parameterType="StorageUseVo">
