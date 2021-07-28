@@ -5,10 +5,10 @@
 <mapper namespace="com.humintecTest.dashboard.dao.StorageFreeDao">
     <select id = "selectStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo">
         select date,
-            storage_name,
-            daily_sum as daily_used,
-            abs(total-daily_sum) as free,
-            total
+               storage_name,
+               daily_sum as daily_used,
+               truncate((total-daily_sum)/total * 100,2) as free,
+               total
         from storage_per_date
     </select>
     <insert id = "insertStorageFree" parameterType="StorageFreeVo">

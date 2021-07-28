@@ -1,5 +1,6 @@
 package com.humintecTest.dashboard.controller;
 
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.scannerResponseFormat;
 import com.humintecTest.dashboard.service.ScannerSlideListService;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
@@ -47,6 +48,23 @@ public class ScannerSlideListController {
             }
     	}
     	return "ok";
+    }
+    
+    @PostMapping("/searchScannerListByDate")
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
+    public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){
+    	ScannerSlideVo vo = new ScannerSlideVo();
+    	
+    	List<ScannerSlideVo> vList = scannerSlideListService.searchScannerListByDate(req);
+    	
+    	ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
+    	
+    	for(ScannerSlideVo target : vList) {
+    		res.add(new scannerResponseFormat(target));
+    	}
+    	
+    	return res;
     }
 }
 
