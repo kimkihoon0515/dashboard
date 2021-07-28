@@ -3,16 +3,15 @@ package com.humintecTest.dashboard.response;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 @Data
 public class storageFreeResponseFormat {
     private Date date;
     private String storage_name;
-    private BigInteger daily_used;
-    private float free;
-    private BigInteger total;
+    private long daily_used;
+    private double free;
+    private long total;
     public storageFreeResponseFormat(StorageFreeVo vo){
         date = vo.getDate();
         storage_name = vo.getStorage_name();
