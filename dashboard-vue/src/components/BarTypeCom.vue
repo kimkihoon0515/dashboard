@@ -6,7 +6,7 @@
       <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
     <span v-if="needCheck==false" id="filter">
-      <label v-for="(name, index) in this.datacollection.labels" :key="index"><input type="checkbox" checked="checked">{{name}}</label>
+      <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
     </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
   </div>
@@ -30,10 +30,13 @@ export default {
 
   data () {
     return {
+      origin: {},
+      checkBind: [],
+      labelList: [],
       YMD: 3,
       dataform:{
         label: null,
-        data: null,
+        data: [],
         backgroundColor: null,
         pointBackgroundColor: 'white',
         borderWidth: 1,
@@ -78,12 +81,13 @@ export default {
       this.change=0;
       //console.log(this.change);
     },
-    parseBarData(res){
+    parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
       //console.log(this.query.yKey);
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
+      var originLabel=res.data.map(function(elem){return elem[keys[x]]});
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
@@ -92,14 +96,40 @@ export default {
         console.log(tmp);
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
+        for(let i=0; i<originLabel.length; i++){
+          this.origin[originLabel[i]]=tmp.data[i];
+          if(this.needCheck == false & protect_check == 0){
+            this.checkBind.push(originLabel[i]);
+            this.labelList.push(originLabel[i]);
+          }
+        }
       }
+      this.change=1;
+      if(this.checkBind.length != 0){
+        this.parseBarData_check();
+      }
+    },
+    parseBarData_check(){
+      let tmp= _.cloneDeep(this.dataform);
+      this.datacollection.labels=[]
+      for (var i=0; i<this.labelList.length; i++){
+        if(this.checkBind.includes(this.labelList[i])){
+          tmp.data.push(this.origin[this.labelList[i]]);
+          this.datacollection.labels.push(this.labelList[i]);
+        }
+      }
+      tmp.backgroundColor=this.colorset[0];
+      tmp.label=this.query.name;
+      this.datacollection.datasets.pop();
+      this.datacollection.datasets.push(tmp);
+      console.log(tmp);
       this.change=1;
     }
   },
   mounted() {
     this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
     .then((res)=>{
-      this.parseBarData(res);
+      this.parseBarData(res, 0);
     })
     .then((err)=>{
       console.log(err);
@@ -116,11 +146,16 @@ export default {
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
           console.log(res.data)
-          this.parseBarData(res);
+          this.parseBarData(res, 1);
         })
         .then((err)=>{
           console.log(err);
         })
+      }
+    },
+    checkBind:{
+      handler(){
+        this.parseBarData_check();
       }
     }
   }

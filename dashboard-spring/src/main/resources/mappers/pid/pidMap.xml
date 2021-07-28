@@ -31,6 +31,7 @@
         	last_scan_date between #{startDate} and #{finishDate}
         group by
         	pathID_ch
+        order by last_scan_date asc
         
     </select>
     <select id = "showPid" parameterType="PidVo" resultType="PidVo">
@@ -38,18 +39,5 @@
         from pathid_table
         group by pathID_ch
     </select>
-    <select id = "selPidMonth" parameterType="PidVo" resultType="PidVo">
-        select date_format(last_scan_date, '%Y-%m') as month,
-                pathID_ch,
-                sum(amount) as amount
-        from pathid_table
-        group by month
-    </select>
-    <select id = "selPidYear" parameterType="PidVo" resultType="PidVo">
-        select date_format(last_scan_date, '%Y') as year,
-                pathID_ch,
-                sum(amount) as amount
-        from pathid_table
-        group by year
-    </select>
+
 </mapper>

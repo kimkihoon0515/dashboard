@@ -26,7 +26,7 @@ public class StorageListController {
     @Autowired
     StorageListService storageListService;
 
-    @GetMapping("/storageList")
+    @GetMapping("/storageList") //전체 데이터
     @Transactional(readOnly = true)
     public List<storageListResponseFormat> selectStorageList(){
         StorageListVo vo = new StorageListVo();

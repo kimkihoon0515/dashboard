@@ -1,5 +1,6 @@
 package com.humintecTest.dashboard.controller;
 
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.scannerResponseFormat;
 import com.humintecTest.dashboard.service.ScannerSlideListService;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
@@ -16,7 +17,7 @@ public class ScannerSlideListController {
     @Autowired
     ScannerSlideListService scannerSlideListService;
 
-    @PutMapping("/insertScanner")
+    @PutMapping("/insertScanner") //사용안함
     @CrossOrigin(origins = "*")
     public String insertScanner(ScannerSlideVo vo) {
         List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
@@ -44,7 +45,7 @@ public class ScannerSlideListController {
         return res;
     }
 
-    @PutMapping("/deleteScanner")
+    @PutMapping("/deleteScanner") //사용안함
     @CrossOrigin(origins = "*")
     public String deleteScanner(){
         if(scannerSlideListService.deleteScanner() == 0){
@@ -55,7 +56,8 @@ public class ScannerSlideListController {
         return "ok";
     }
 
-    @GetMapping("/showScanner")
+    @GetMapping("/showScanner") //전체 값 불러오기
+    @CrossOrigin("*")
     public List<scannerResponseFormat> showScanner(ScannerSlideVo vo)
     {
         ScannerSlideVo vo1 = new ScannerSlideVo();
@@ -84,6 +86,23 @@ public class ScannerSlideListController {
             }
     	}
     	return "ok";
+    }
+    
+    @PostMapping("/searchScannerListByDate")
+    @Transactional(readOnly = true)
+    @CrossOrigin(origins = "*")
+    public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){
+    	ScannerSlideVo vo = new ScannerSlideVo();
+    	
+    	List<ScannerSlideVo> vList = scannerSlideListService.searchScannerListByDate(req);
+    	
+    	ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
+    	
+    	for(ScannerSlideVo target : vList) {
+    		res.add(new scannerResponseFormat(target));
+    	}
+    	
+    	return res;
     }
 }
 

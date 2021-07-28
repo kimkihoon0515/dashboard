@@ -38,7 +38,7 @@ export default {
       },
       scanner:{
         name:"scanner",
-        url:"/selectScanner",
+        url:"/searchScannerListByDate",
         xKey:0,
         yKey:[1]
       },
