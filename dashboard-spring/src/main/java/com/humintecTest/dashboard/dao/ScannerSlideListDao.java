@@ -1,5 +1,6 @@
 package com.humintecTest.dashboard.dao;
 
+import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.vo.ScannerSlideVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +14,7 @@ public interface ScannerSlideListDao {
     List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
     int deleteScanner();
     List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
+    List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req);
 }
 
 
