@@ -65,22 +65,17 @@ export default {
   methods: {
     reset() {
       this.change=0;
-      //console.log(this.change);
     },
     parseLineData(res){
       var x= this.query.xKey;
       var y= this.query.yKey;
-      console.log(res.data[0]);
       var keys= Object.keys(res.data[0]);
-      console.log(keys);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return 100-elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
-        console.log("hello")
-        console.log(tmp);
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
       }
@@ -99,10 +94,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.storageName)
     this.$axios.post(this.query.url, {'storageName':this.storageName})
     .then((res)=>{
-      console.log(res.data);
       this.parseLineData(res);
     })
     .then((err)=>{

@@ -51,7 +51,6 @@ export default {
   methods: {
     reset() {
       this.change=0;
-      //console.log(this.change);
     },
     nameset: function (name) {
       this.datacollection.datasets[0].label=name;
@@ -72,8 +71,6 @@ export default {
     this.$axios(this.query.url)
     .then((res)=>{
       this.storage_list = res.data
-      //console.log(this.storage_list);
-      //this.storage_name_list=res.data.map(function(elem){ return elem.storageName})
       this.datacollection.datasets[0].data=[res.data[0].free,res.data[0].used];
       this.datacollection.datasets[0].label= this.storage_list[0];
       this.change=1;

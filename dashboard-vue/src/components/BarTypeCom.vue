@@ -19,7 +19,10 @@ export default {
   name : "BarTypeCom",
   components: { BarChart },
   props: {
-    needCheck: false,
+    needCheck: {
+      type: Boolean,
+      default: false
+    },
     query: {
        type: Object,
        default: null
@@ -79,12 +82,10 @@ export default {
   methods: {
     reset() {
       this.change=0;
-      //console.log(this.change);
     },
     parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
-      //console.log(this.query.yKey);
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
@@ -93,7 +94,6 @@ export default {
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
-        //console.log(tmp);
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
         for(let i=0; i<originLabel.length; i++){
@@ -122,7 +122,6 @@ export default {
       tmp.label=this.query.name;
       this.datacollection.datasets.pop();
       this.datacollection.datasets.push(tmp);
-      console.log(tmp);
       this.change=1;
     }
   },
@@ -145,7 +144,6 @@ export default {
       handler(){
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
-          console.log(res.data)
           this.parseBarData(res, 1);
         })
         .then((err)=>{

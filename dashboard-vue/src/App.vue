@@ -22,8 +22,8 @@ export default {
   },
   data () {
     return {
-      startDate: null,
-      endDate: null
+      startDate: "2000-01-01",
+      endDate: "2021-12-31",
     }
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted(){
-    this.$axios("/showSlideDate")
+    this.$axios.get("/showSlideDate")
     .then((res)=>{
       this.startDate=res.data.map(function(elem){return elem.date})[1];
       this.endDate=res.data.map(function(elem){return elem.date})[res.data.map(function(elem){return elem.date}).length-1];
