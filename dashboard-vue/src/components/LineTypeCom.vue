@@ -10,7 +10,10 @@ export default {
   name : "LineTypeCom",
   components: { LineChart },
   props: {
-    
+    storageName: {
+      type: String,
+      default: null
+    },
     query: {
        type: Object,
        default: null
@@ -19,22 +22,26 @@ export default {
   data () {
     return {
       change:0,
+     dataform:{
+        label: null,
+        data: null,
+        backgroundColor: null,
+        pointBackgroundColor: 'white',
+        borderWidth: 1,
+        pointBorderColor: '#249EBF'
+        },
+      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
         labels: null,
         datasets: [{
-                    label: null,
-                    data: null,
-                    backgroundColor: '#f87979',
-                    pointBackgroundColor: 'white',
-                    borderWidth: 1,
-                    pointBorderColor: '#249EBF'
         }]
       },
       chartoptions:{
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      max: 100
                   },
                   gridLines: {
                       display: true
@@ -58,23 +65,38 @@ export default {
   methods: {
     reset() {
       this.change=0;
-      //console.log(this.change);
-    }
-  },
-  mounted() {
-    //console.log(this.query.start_date);
-    //console.log(this.query.end_date);
-    this.$axios.post(this.query.url, {'startDate':this.query.start_date,'finishDate':this.query.end_date,'type':3})
-    //this.$axios.get(this.query.url)
-    .then((res)=>{
-      //console.log(res.data);
+    },
+    parseLineData(res){
       var x= this.query.xKey;
       var y= this.query.yKey;
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-      this.datacollection.datasets[0].label=this.query.name;
-      this.datacollection.datasets[0].data=res.data.map(function(elem){return elem[keys[y]]});
+      for(let i=0; i<y.length ; i++){
+        let tmp= _.cloneDeep(this.dataform);
+        tmp.label=keys[y[i]];
+        tmp.data=res.data.map(function(elem){return 100-elem[keys[y[i]]]});
+        tmp.backgroundColor=this.colorset[i];
+        this.datacollection.datasets.pop();
+        this.datacollection.datasets.push(tmp);
+      }
       this.change=1;
+    }
+  },
+  watch:{
+    storageName: function(){
+      this.$axios.post(this.query.url, {'storageName':this.storageName})
+      .then((res)=>{
+      this.parseLineData(res);
+      })
+      .then((err)=>{
+        console.log(err);
+      })
+    }
+  },
+  mounted() {
+    this.$axios.post(this.query.url, {'storageName':this.storageName})
+    .then((res)=>{
+      this.parseLineData(res);
     })
     .then((err)=>{
       console.log(err);

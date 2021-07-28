@@ -1,6 +1,5 @@
 <template>
   <div class="chartbox">
-    <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameset(name)">{{name}}</button>
     <div id="for-size">
       <pie-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></pie-chart>
     </div>
@@ -13,7 +12,10 @@ export default {
   name : "PieTypeCom",
   components: { PieChart },
     props: {
-    
+    storageName: {
+      type: String,
+      default: null
+    },
     query: {
        type: Object,
        default: null
@@ -22,7 +24,6 @@ export default {
   data () {
     return {
       storage_list:null,
-      storage_name_list: null,
       change:0,
       datacollection: {
         labels: ["Free","Used"],
@@ -38,20 +39,6 @@ export default {
       },
       chartoptions:{
           scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  },
-                  gridLines: {
-                      display: true
-                  },
-              }],
-              xAxes: [ {
-              
-                  gridLines: {
-                      display: false
-                  },
-              }]
           },
           legend: {
               display: true
@@ -64,7 +51,6 @@ export default {
   methods: {
     reset() {
       this.change=0;
-      //console.log(this.change);
     },
     nameset: function (name) {
       this.datacollection.datasets[0].label=name;
@@ -76,12 +62,15 @@ export default {
       this.change=1;
     }    
   },
+  watch:{
+      storageName: function(){
+        this.nameset(this.storageName);
+      }
+    },
   mounted() {
     this.$axios(this.query.url)
     .then((res)=>{
       this.storage_list = res.data
-      //console.log(this.storage_list);
-      this.storage_name_list=res.data.map(function(elem){ return elem.storageName})
       this.datacollection.datasets[0].data=[res.data[0].free,res.data[0].used];
       this.datacollection.datasets[0].label= this.storage_list[0];
       this.change=1;

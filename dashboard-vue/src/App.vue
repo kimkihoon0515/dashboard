@@ -22,16 +22,25 @@ export default {
   },
   data () {
     return {
-      startDate: "2014-09-22",
-      endDate: "2021-07-23"
+      startDate: "2000-01-01",
+      endDate: "2021-12-31",
     }
   },
   methods: {
     setDate() {
       this.startDate = document.querySelector("#start-date").value;
       this.endDate = document.querySelector("#end-date").value;
-      console.log(this.startDate);
     }
+  },
+  mounted(){
+    this.$axios.get("/showSlideDate")
+    .then((res)=>{
+      this.startDate=res.data.map(function(elem){return elem.date})[1];
+      this.endDate=res.data.map(function(elem){return elem.date})[res.data.map(function(elem){return elem.date}).length-1];
+    })
+    .then((err)=>{
+      console.log(err);
+    })
   }
 }
 </script>

@@ -1,8 +1,9 @@
 <template>
   <div id="container">
     <div id="static-chart" class="grid">
-      <pie-type-com id="storage" :query="storage"></pie-type-com>
-      <line-type-com id="storage-full" :query="storage_full"></line-type-com>
+      <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameChange(name)">{{name}}</button>
+      <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
+      <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
     </div>
     <div id="dynamic-chart" class="grid">
       <!-- <menubar></menubar> -->
@@ -10,8 +11,6 @@
       <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
       <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false></bar-type-com>
       <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false></bar-type-com>
-      <!--<pie-type-com id="storage" ></pie-type-com>
-      <line-type-com id="storage-full" ></line-type-com>-->
     </div>
   </div>
 </template>
@@ -19,7 +18,6 @@
 <script>
 import BarTypeCom from '../components/BarTypeCom.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
-// import Menubar from '../components/Menubar.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
 
 
@@ -37,7 +35,7 @@ export default {
       },
       scanner:{
         name:"scanner",
-        url:"/searchScannerTable",
+        url:"/searchScannerListByDate",
         xKey:0,
         yKey:[1]
       },
@@ -56,20 +54,16 @@ export default {
       storage:{
         name:"storage",
         url:"/storageList",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
         xKey: null,
         yKey: null
       },
+      storageName:null,
+      storage_name_list: [],
       storage_full:{
         name:"storage-full",
-        url:"/searchStorageFreeByDate",
-        start_date: this.start,
-        end_date: this.end,
-        YMD: 3,
+        url:"/searchStorageFreeById",
         xKey: 0,
-        yKey: [2]
+        yKey: [3]
       },
     }
   },
@@ -88,11 +82,26 @@ export default {
   },
   watch:{
     start: function () {
-      console.log(this.slide_date.start_date);
     },
     end: function () {
 
     }
+  },
+  methods:{
+    nameChange(name){
+      this.storageName=name;
+
+    }
+  },
+  mounted() {
+    this.$axios.get(this.storage.url)
+    .then((res)=>{
+      this.storage_name_list=res.data.map(function(elem){ return elem.storageName})
+      this.storageName=this.storage_name_list[0];
+    })
+    .then((err)=>{
+      console.log(err);
+    })
   }
 }
 </script>
