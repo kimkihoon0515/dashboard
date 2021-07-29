@@ -33,6 +33,7 @@ export default {
 
   data () {
     return {
+      setcolor: 0,
       origin: {},
       checkBind: [],
       labelList: [],
@@ -82,21 +83,23 @@ export default {
   },
   methods: {
     handleChartClick(evt, elements) {
-      var chart = this.$children[0]._data._chart;
-              console.log(chart)
-      const chartIndex = chart.getElementAtEvent(evt);
-      if (chartIndex.length !== 0) {
-        const datasetIndex = chartIndex[0]._datasetIndex;
-        const position = chartIndex[0]._index;
-        const info = {
-          datasetIndex: datasetIndex,
-          valueIndex: position,
-          label: chart.tooltip._data.labels[position],
-          value: chart.tooltip._data.datasets[datasetIndex].data[position]
-        };
-        console.log(info);
-      } else {
-        console.log("Background clicked");
+      if(this.needCheck==false){
+        var chart = this.$children[0]._data._chart;
+        const chartIndex = chart.getElementAtEvent(evt);
+        if (chartIndex.length !== 0) {
+          const datasetIndex = chartIndex[0]._datasetIndex;
+          const position = chartIndex[0]._index;
+          const info = {
+            datasetIndex: datasetIndex,
+            valueIndex: position,
+            label: chart.tooltip._data.labels[position],
+            value: chart.tooltip._data.datasets[datasetIndex].data[position]
+          };
+          this.origin[info.label][1]='#02bc77';
+          this.setcolor=1;
+        } else {
+          console.log("Background clicked");
+        }
       }
     },
     reset() {
@@ -116,7 +119,7 @@ export default {
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
         for(let i=0; i<originLabel.length; i++){
-          this.origin[originLabel[i]]=tmp.data[i];
+          this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
           if(this.needCheck == false & protect_check == 0){
             this.checkBind.push(originLabel[i]);
             this.labelList.push(originLabel[i]);
@@ -133,11 +136,11 @@ export default {
       this.datacollection.labels=[]
       for (var i=0; i<this.labelList.length; i++){
         if(this.checkBind.includes(this.labelList[i])){
-          tmp.data.push(this.origin[this.labelList[i]]);
+          tmp.data.push(this.origin[this.labelList[i]][0]);
+          tmp.backgroundColor.push(this.origin[this.labelList[i]][1]);
           this.datacollection.labels.push(this.labelList[i]);
         }
       }
-      tmp.backgroundColor=this.colorset[0];
       tmp.label=this.query.name;
       this.datacollection.datasets.pop();
       this.datacollection.datasets.push(tmp);
@@ -173,6 +176,12 @@ export default {
     checkBind:{
       handler(){
         this.parseBarData_check();
+      }
+    },
+    setcolor:{
+      handler(){
+        this.parseBarData_check();
+        this.setcolor=0;
       }
     }
   }
