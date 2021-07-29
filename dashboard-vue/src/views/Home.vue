@@ -11,14 +11,11 @@
         <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
         <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
       </div>
-      <div class="form__input">
-        <v-swatches
-          v-model="color"
-
-          show-fallback
-
-          popover-x="left"
-        ></v-swatches>
+      <div class="form__field">
+        <div class="form__label">
+          <strong>Please choose a color:</strong>
+          <v-swatches v-model="color" inline></v-swatches>
+        </div>
       </div>
       <div id="type-chart">
       <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
@@ -124,7 +121,7 @@ export default {
 <style>
   div {
     width: 100%;
-    height: 90%;
+    height: 600px;
   }
 
   .grid {
