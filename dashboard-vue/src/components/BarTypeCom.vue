@@ -19,6 +19,10 @@ export default {
   name : "BarTypeCom",
   components: { BarChart },
   props: {
+    color:{
+      type: String,
+      default:'#f87979'
+    },
     needCheck: {
       type: Boolean,
       default: false
@@ -95,7 +99,7 @@ export default {
             label: chart.tooltip._data.labels[position],
             value: chart.tooltip._data.datasets[datasetIndex].data[position]
           };
-          this.origin[info.label][1]='#02bc77';
+          this.origin[info.label][1]=this.color;
           this.setcolor=1;
         } else {
           console.log("Background clicked");
@@ -162,6 +166,11 @@ export default {
     }
   },
   watch: {
+    color:{
+      handler(){
+        console.log(this.color)
+      }
+    },
     changeDate:{
       handler(){
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})

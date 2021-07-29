@@ -7,10 +7,23 @@
     </div>
     <div id="dynamic-chart" class="grid">
       <!-- <menubar></menubar> -->
-      <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
-      <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
-      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false></bar-type-com>
-      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false></bar-type-com>
+      <div id="daily-chart">
+        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
+        <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
+      </div>
+      <div class="form__input">
+        <v-swatches
+          v-model="color"
+
+          show-fallback
+
+          popover-x="left"
+        ></v-swatches>
+      </div>
+      <div id="type-chart">
+      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
+      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
+      </div>
     </div>
   </div>
 </template>
@@ -19,13 +32,15 @@
 import BarTypeCom from '../components/BarTypeCom.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
-
+import VSwatches from 'vue-swatches'
+import 'vue-swatches/dist/vue-swatches.css'
 
 export default {
-  components: { BarTypeCom, PieTypeCom, LineTypeCom },
+  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches },
   name: 'home',
   data() {
     return {
+      color: '#f87979',
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
@@ -81,10 +96,10 @@ export default {
     }
   },
   watch:{
-    start: function () {
-    },
-    end: function () {
-
+    color:{
+      handler(){
+        console.log(this.color)
+      }
     }
   },
   methods:{
