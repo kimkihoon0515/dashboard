@@ -40,7 +40,7 @@ export default {
       dataform:{
         label: null,
         data: [],
-        backgroundColor: null,
+        backgroundColor: [],
         pointBackgroundColor: 'white',
         borderWidth: 1,
         pointBorderColor: '#249EBF'
@@ -53,6 +53,7 @@ export default {
         ]
       },
       chartoptions:{
+          onClick: this.handleChartClick,
           scales: {
               yAxes: [{
                   ticks: {
@@ -80,6 +81,24 @@ export default {
     }
   },
   methods: {
+    handleChartClick(evt, elements) {
+      var chart = this.$children[0]._data._chart;
+              console.log(chart)
+      const chartIndex = chart.getElementAtEvent(evt);
+      if (chartIndex.length !== 0) {
+        const datasetIndex = chartIndex[0]._datasetIndex;
+        const position = chartIndex[0]._index;
+        const info = {
+          datasetIndex: datasetIndex,
+          valueIndex: position,
+          label: chart.tooltip._data.labels[position],
+          value: chart.tooltip._data.datasets[datasetIndex].data[position]
+        };
+        console.log(info);
+      } else {
+        console.log("Background clicked");
+      }
+    },
     reset() {
       this.change=0;
     },
