@@ -129,7 +129,7 @@ export default {
   }
 
   #dynamic-chart .chartbox {
-  width: 350px;
+  width: 490px;
   height: 300px;
   display: inline-block;
   margin: 0 30px 50px 30px;

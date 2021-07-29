@@ -74,7 +74,7 @@ export default {
               }]
           },
           legend: {
-              display: true
+              display: false
           },
           responsive: true,
           maintainAspectRatio: false
@@ -196,6 +196,6 @@ export default {
 
   div{
     width: 100%;
-    height:90%
+    height:80%
   }
 </style>
