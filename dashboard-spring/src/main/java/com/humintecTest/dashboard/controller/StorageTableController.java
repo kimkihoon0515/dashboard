@@ -1,16 +1,14 @@
 package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.dao.StorageTableDao;
+import com.humintecTest.dashboard.request.StorageTableRequestFormat;
 import com.humintecTest.dashboard.response.storageTableResponseFormat;
 import com.humintecTest.dashboard.service.StorageTableService;
 import com.humintecTest.dashboard.vo.StorageTableVo;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +21,9 @@ public class StorageTableController {
 
     @GetMapping("/selectStorageTable") //사용안함
     @CrossOrigin(origins = "*")
-    public List<storageTableResponseFormat> selectStorageTable(){
-        StorageTableVo vo1 = new StorageTableVo();
-        List<StorageTableVo> vList = storageTableService.selectStorageTable(vo1);
-        ArrayList<storageTableResponseFormat> res = new ArrayList<storageTableResponseFormat>();
-        for(StorageTableVo target : vList){
-            res.add(new storageTableResponseFormat(target));
-        }
-        return res;
+    public List<StorageTableVo> selectStorageTable(StorageTableVo vo){
+        List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
+        return vList;
     }
 
     @PutMapping("/insertStorageTable")  //사용안함
@@ -56,6 +49,28 @@ public class StorageTableController {
             return "false";
         }
         return "ok";
+    }
+
+    @PostMapping("/selectStorageTableById")
+    @Transactional(readOnly = true)
+    @CrossOrigin("*")
+    public List<storageTableResponseFormat> selectStorageTableById (@RequestBody StorageTableRequestFormat req )
+    {
+        List<StorageTableVo> vList = storageTableService.selectStorageTableById(req);
+
+        System.out.println(vList);
+
+        long sum=0;
+        long avg=0;
+
+
+        ArrayList<storageTableResponseFormat> res = new ArrayList<storageTableResponseFormat>();
+
+        for(StorageTableVo target : vList)
+        {
+            res.add(new storageTableResponseFormat(target));
+        }
+        return res;
     }
     
     @PutMapping("/updateStorageTable")

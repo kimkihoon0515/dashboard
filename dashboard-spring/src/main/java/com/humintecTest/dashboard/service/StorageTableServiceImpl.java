@@ -1,6 +1,7 @@
 package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageTableDao;
+import com.humintecTest.dashboard.request.StorageTableRequestFormat;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageTableVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class StorageTableServiceImpl implements StorageTableService{
         }catch (Exception e){
             return -1;
         }
+    }
+
+    @Override
+    public List<StorageTableVo> selectStorageTableById(StorageTableRequestFormat req) {
+        return storageTableDao.selectStorageTableById(req);
     }
 }

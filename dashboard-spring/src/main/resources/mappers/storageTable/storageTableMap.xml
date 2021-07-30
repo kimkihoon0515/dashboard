@@ -26,6 +26,15 @@
         truncate
             storage_table
     </delete>
+    <select id = "selectStorageTableById" resultType="StorageTableVo" parameterType="com.humintecTest.dashboard.request.StorageTableRequestFormat">
+        select
+               *
+        from
+             storage_table
+        where
+              storage_name = #{storageName}
+        order by date asc
+    </select>
 </mapper>
 
 
