@@ -1,26 +1,29 @@
 <template>
   <div id="app">
     <div id="nav">
-      <form> 
-        <label class="check"><input type="checkbox">Y</label>
-        <label class="check"><input type="checkbox">M</label>
-        <label class="check"><input type="checkbox">D</label>
+      <form>
         <input type="date" id='start-date' value=''/>
         <input type="date" id='end-date' value=''/>
         <button @click="setDate">submit</button>
       </form>
     </div>
     <div class="margindiv"></div>
-    <router-view :start="startDate" :end="endDate"></router-view>
+    <home :start="startDate" :end="endDate"></home>
+    <!--<router-view :start="startDate" :end="endDate"></router-view>-->
   </div>
 </template>
 
 <script>
+import home from "./views/Home.vue"
+
 export default {
+  components: {
+    home
+  },
   data () {
     return {
-      startDate: '',
-      endDate: ''
+      startDate: "2000-01-01",
+      endDate: "2021-12-31",
     }
   },
   methods: {
@@ -28,6 +31,16 @@ export default {
       this.startDate = document.querySelector("#start-date").value;
       this.endDate = document.querySelector("#end-date").value;
     }
+  },
+  mounted(){
+    this.$axios.get("/showSlideDate")
+    .then((res)=>{
+      this.startDate=res.data.map(function(elem){return elem.date})[1];
+      this.endDate=res.data.map(function(elem){return elem.date})[res.data.map(function(elem){return elem.date}).length-1];
+    })
+    .then((err)=>{
+      console.log(err);
+    })
   }
 }
 </script>
@@ -53,31 +66,11 @@ export default {
   overflow: hidden;
 }
 
-.check {
+/* .check {
   margin-right: 10px;
-}
+} */
 
 .margindiv {
   height: 60px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  text-decoration: underline;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 1.75em;
-}
-
-h2 {
-  line-height: 2.5em;
-  font-size: 1.25em;
 }
 </style>
