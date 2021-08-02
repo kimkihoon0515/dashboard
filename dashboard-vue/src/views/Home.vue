@@ -6,7 +6,6 @@
       <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
     </div>
     <div id="dynamic-chart" class="grid">
-      <!-- <menubar></menubar> -->
       <div id="daily-chart">
         <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
         <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
@@ -121,7 +120,7 @@ export default {
 <style>
   div {
     width: 100%;
-    height: 600px;
+    height: 90%;
   }
 
   .grid {
@@ -136,15 +135,19 @@ export default {
     background-color: rgb(230, 249, 252);
   }
 
+  #static-chart div {
+    height: 98%;
+  }
+
   #dynamic-chart {
     width: 72%;
   }
 
   #dynamic-chart .chartbox {
-  width: 490px;
-  height: 300px;
+  width: 460px;
+  height: 280px;
   display: inline-block;
-  margin: 0 30px 50px 30px;
+  margin: 0 30px 10px 30px;
   overflow: hidden;
   border: 1px solid rgb(53, 196, 231);
   border-radius: 10px;
@@ -153,7 +156,7 @@ export default {
 
   #static-chart .chartbox {
   width: 360px;
-  height: 300px;
+  height: 280px;
   display: inline-block;
   margin: 0 15px 50px 15px;
   overflow: hidden;
@@ -178,5 +181,16 @@ export default {
   button:hover {
     color: white;
     background-color: skyblue;
+  }
+
+  @media screen and (max-width: 1530px) {
+    #dynamic-chart .chartbox {
+      width: 410px;
+      height: 250px;
+    }
+    #static-chart .chartbox {
+      width: 310px;
+      height: 260px
+    }
   }
 </style>
