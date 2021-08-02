@@ -74,7 +74,7 @@ export default {
         name:"storage-full",
         url:"/searchStorageFreeById",
         xKey: 0,
-        yKey: [3]
+        yKey: [2]
       },
     }
   },
