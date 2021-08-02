@@ -10,7 +10,7 @@ import lombok.Data;
 public class ScannerTableResponseFormat {
 	private Date date;
 	private String scannerType;
-	private int amount;
+	private long amount;
 	
 	public ScannerTableResponseFormat(ScannerTableVo vo) {
 		this.date = vo.getDate();

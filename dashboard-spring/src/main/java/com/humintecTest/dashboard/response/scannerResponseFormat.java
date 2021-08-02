@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class scannerResponseFormat {
     private String scanner_type;
-    private int slide_sum;
+    private long slide_sum;
 
     public scannerResponseFormat(ScannerSlideVo vo){
         scanner_type = vo.getScanner_type();
