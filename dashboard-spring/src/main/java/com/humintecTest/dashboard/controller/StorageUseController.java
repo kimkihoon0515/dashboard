@@ -1,5 +1,6 @@
 package com.humintecTest.dashboard.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.humintecTest.dashboard.response.storageUseTypeResponseFormat;
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
@@ -51,13 +52,15 @@ public class StorageUseController {
     @PutMapping("/insertStorageUse") //사용안함
     public String insertStorageUse (StorageUseVo vo)
     {
-        List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
+        List<StorageUseVo> vList = storageUseService.selectStorageUse(vo); //Json
+        System.out.println(vList);
+
 
         for(StorageUseVo target : vList)
         {
             if(storageUseService.insertStorageUse(target)==0)
             {
-
+                System.out.println(target);
             }
             else
             {
@@ -67,7 +70,7 @@ public class StorageUseController {
         return "ok";
     }
 
-    @PutMapping("deleteStorageUse") //사용안함
+    @PutMapping("/deleteStorageUse") //사용안함
     public String deleteStorageUse(StorageUseVo vo)
     {
         if(storageUseService.deleteStorageUse()==1)

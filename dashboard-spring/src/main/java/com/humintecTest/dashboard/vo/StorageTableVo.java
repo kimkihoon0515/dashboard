@@ -8,6 +8,6 @@ import java.sql.Date;
 @Data
 public class StorageTableVo {
     private Date date;
-    private BigInteger used;
+    private Double used;
     private String storage_name;
 }
