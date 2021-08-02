@@ -202,9 +202,4 @@ export default {
   #filter {
     font-size: 10pt;
   }
-
-  div{
-    width: 100%;
-    height:80%
-  }
 </style>
