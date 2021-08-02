@@ -9,7 +9,7 @@ import java.sql.Date;
 @Data
 public class storageTableResponseFormat {
     private Date date;
-    private BigInteger used;
+    private double used;
     private String storage_name;
     public storageTableResponseFormat(StorageTableVo vo){
         date = vo.getDate();
