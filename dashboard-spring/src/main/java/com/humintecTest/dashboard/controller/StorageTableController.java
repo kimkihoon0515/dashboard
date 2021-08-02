@@ -65,7 +65,7 @@ public class StorageTableController {
         //System.out.println(vList);
 
         String today;
-        double sum=0,avg,total=0,newSum=0;
+        double sum=0,avg,total=0;
 
         SimpleDateFormat sdformat = new SimpleDateFormat("YYYY-MM-dd");
 
@@ -75,16 +75,15 @@ public class StorageTableController {
 
         while(true) {
             StorageTableVo vo1 = new StorageTableVo();
-            for (int i = 1; i < 5; i++) {
+            for (int i = 1; i < 7; i++) {
                 sum += vList.get(vList.size() - i).getUsed();
-                //System.out.println(sum);
             }
-            avg = Math.round((sum / 4) * 100) * 0.01;
+            avg = Math.round((sum / 6) * 100) * 0.01;
             cal.setTime(vList.get(vList.size() - 1).getDate());
             cal.add(Calendar.DATE, 1);
             today = sdformat.format(cal.getTime());
             System.out.println();
-            //System.out.println(vList);
+
             try {
                 parsed = format.parse(today);
             } catch (ParseException e) {
@@ -95,8 +94,8 @@ public class StorageTableController {
             vo1.setUsed(avg);
             vo1.setStorage_name(req.getStorageName());
             vList.add(vo1);
-            System.out.println(vList);
-            System.out.println(sqlDate);
+            //System.out.println(vList);
+            //System.out.println(sqlDate);
 
             for (int i = 0; i < vList.size(); i++) {
                 total += vList.get(i).getUsed();
@@ -110,39 +109,6 @@ public class StorageTableController {
                 total = 0;
             }
         }
-
-        //System.out.println(vList);
-
-       /* while(total<100)
-        {
-            if(total > 100)
-                break;
-            else{
-                for (int i=0; i<vList.size();i++)
-                {
-                    for(int j=1;j<4;j++) {
-                        sum += vList.get(vList.size() - j).getUsed();
-                    }
-                    avg = Math.round((sum/3)*100)*0.01;
-                    cal.setTime(vList.get(vList.size()-1).getDate());
-                    cal.add(Calendar.DATE,1);
-                    today = sdformat.format(cal.getTime());
-                    try {
-                        parsed = format.parse(today);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
-                    vo1.setDate(sqlDate);
-                    vo1.setUsed(avg);
-                    vo1.setStorage_name(req.getStorageName());
-                    vList.add(vo1);
-                    total +=vList.get(i).getUsed();
-                }
-            }*/
-
-       // System.out.println(total);
-        //System.out.println(vList.get(1).getDate()+1);
 
         ArrayList<storageTableResponseFormat> res = new ArrayList<storageTableResponseFormat>();
 

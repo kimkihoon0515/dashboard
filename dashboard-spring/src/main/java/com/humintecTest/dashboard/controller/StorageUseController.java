@@ -41,31 +41,11 @@ public class StorageUseController {
     public List<storageUseResponseFormat> showStorageUse (StorageUseVo vo) {
         StorageUseVo vo1 = new StorageUseVo();
         List<StorageUseVo> vList = storageUseService.showStorageUse(vo1);
-        long sum=0;
-        System.out.println(vList);
-        for (int i =0; i < 4;i++){
-            //System.out.println(vList.indexOf("daily_sum"));
-            //System.out.println(vList.get(i).getDate());
-            //System.out.println(vList.get(i).getDaily_sum());
-            sum +=vList.get(i).getDaily_sum();
-        }
-        System.out.println(sum);
-        vo1.setDaily_sum(sum);
-        vo1.setDate("2021-07-30");
-        vList.add(vo1);
-        System.out.println(vList);
         ArrayList<storageUseResponseFormat> res = new ArrayList<storageUseResponseFormat>();
-        int k= 4;
         for (StorageUseVo target : vList)
         {
             res.add(new storageUseResponseFormat(target));
-            //System.out.println(target.getDate());
-            //System.out.println(target.getDaily_sum());
-            sum = sum + target.getDaily_sum();
-            //System.out.println(target);
         }
-
-        //System.out.println(res);
         return res;
     }
 
