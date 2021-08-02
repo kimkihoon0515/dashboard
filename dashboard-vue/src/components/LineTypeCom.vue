@@ -74,7 +74,7 @@ export default {
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
-        tmp.data=res.data.map(function(elem){return 100-elem[keys[y[i]]]});
+        tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.backgroundColor=this.colorset[i];
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
@@ -86,6 +86,7 @@ export default {
     storageName: function(){
       this.$axios.post(this.query.url, {'storageName':this.storageName})
       .then((res)=>{
+      console.log(res)
       this.parseLineData(res);
       })
       .then((err)=>{
