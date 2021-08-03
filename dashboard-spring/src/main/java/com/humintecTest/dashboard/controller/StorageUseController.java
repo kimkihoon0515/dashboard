@@ -53,7 +53,6 @@ public class StorageUseController {
     public String insertStorageUse (StorageUseVo vo)
     {
         List<StorageUseVo> vList = storageUseService.selectStorageUse(vo); //Json
-        System.out.println(vList);
 
 
         for(StorageUseVo target : vList)

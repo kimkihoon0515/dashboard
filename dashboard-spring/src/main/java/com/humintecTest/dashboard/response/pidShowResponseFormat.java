@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class pidShowResponseFormat {
     private String pathID_ch;
-    private int amount;
+    private long amount;
 
     public pidShowResponseFormat (PidVo vo){
         pathID_ch = vo.getPathID_ch();

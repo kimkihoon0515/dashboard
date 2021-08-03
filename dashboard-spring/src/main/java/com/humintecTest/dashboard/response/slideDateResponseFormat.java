@@ -8,7 +8,7 @@ import java.sql.Date;
 @Data
 public class slideDateResponseFormat {
     private Date date;
-    private int slide_sum;
+    private long slide_sum;
     public slideDateResponseFormat(SlideDateVo vo){
         date = vo.getDate();
         slide_sum = vo.getSlide_sum();

@@ -7,7 +7,8 @@
         select
             date_format(slide_list.last_scan_date, '%Y-%m-%d') as date,
                 truncate(sum(slide_list.file_size/storage_list.total * 100),2)as used,
-                 basefolder_list.storage_name as storage_name
+                 basefolder_list.storage_name as storage_name,
+                 sum(truncate(sum(slide_list.file_size/storage_list.total * 100),2)) over (partition by storage_list.storage_name order by slide_list.last_scan_date) as daily_used
         from
             slide_list, basefolder_list,storage_list
         where
@@ -19,9 +20,9 @@
     <insert id ="insertStorageTable" parameterType="StorageTableVo">
         insert into
                 storage_table
-                (date,used,storage_name)
+                (date,used,storage_name,daily_used)
         values
-                (#{date},#{used},#{storage_name})
+                (#{date},#{used},#{storage_name},#{daily_used})
     </insert>
     <delete id="deleteStorageTable">
         truncate

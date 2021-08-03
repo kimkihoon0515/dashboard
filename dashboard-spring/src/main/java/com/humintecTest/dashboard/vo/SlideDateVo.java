@@ -7,5 +7,5 @@ import java.sql.Date;
 @Data
 public class SlideDateVo {
     private Date date;
-    private int slide_sum;
+    private long slide_sum;
 }
