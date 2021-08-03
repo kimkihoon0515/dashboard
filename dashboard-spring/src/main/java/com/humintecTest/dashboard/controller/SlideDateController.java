@@ -31,6 +31,8 @@ public class SlideDateController {
     	List<slideTypeResponseFormat> vList;
     	if(req.getStartDate() == null || req.getFinishDate() == null){
     		vList = slideDateService.selectSlidePerDateNP(req);
+    		
+    		return vList;
     	}
     	//연
     	if(req.getType() == 1) {
