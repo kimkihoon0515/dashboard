@@ -26,10 +26,15 @@
     </delete>
     
     <select id = "searchScannerTable" resultType="ScannerTableVo">
-    	select *
-    	from
-    		scanner_table
-    	order by date asc
+    	select
+        	date as date,
+        	scanner_type as scannerType,
+        	sum(amount) as amount
+        from 
+        	scanner_table
+        group by
+        	scanner_type, date
+        order by date asc
     </select>
     
     <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerTableVo">

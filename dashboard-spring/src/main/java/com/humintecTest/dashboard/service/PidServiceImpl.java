@@ -38,7 +38,12 @@ public class PidServiceImpl implements PidService {
             return -1;
         }
     }
-
+    
+	@Override
+	public List<pidchResponseFormat> searchPid() {
+		return pidDao.searchPid();
+	}
+	
     @Override
     public List<pidchResponseFormat> searchPidByDate(DateRequestFormat req) {
         try {
@@ -53,5 +58,4 @@ public class PidServiceImpl implements PidService {
     public List<PidVo> showPid(PidVo vo) {
         return pidDao.showPid(vo);
     }
-
 }
