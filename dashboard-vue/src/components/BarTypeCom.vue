@@ -6,6 +6,7 @@
       <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
     <span v-if="needCheck==false" id="filter">
+      <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
       <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
     </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
@@ -15,6 +16,7 @@
 <script>
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
+import moment from 'moment'
 export default {
   name : "BarTypeCom",
   components: { BarChart },
@@ -31,12 +33,19 @@ export default {
        type: Object,
        default: null
     },
-    start_date: '',
-    end_date: ''
+    start_date: {
+      type: String,
+      default : null//moment().format('YYYY-MM-DD').toString,
+    },
+    end_date: {
+      type: String,
+      default : null//moment().format('YYYY-MM-DD').toString,
+    }
   },
 
   data () {
     return {
+      checked:true,
       setcolor: 0,
       origin: {},
       checkBind: [],
@@ -124,11 +133,10 @@ export default {
         this.datacollection.datasets.push(tmp);
         for(let i=0; i<originLabel.length; i++){
           this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
-          if(this.needCheck == false & protect_check == 0){
-            this.checkBind.push(originLabel[i]);
-            this.labelList.push(originLabel[i]);
-          }
         }
+        this.checkBind=_.cloneDeep(originLabel)
+        console.log(this.checkBind);
+        this.labelList=_.cloneDeep(originLabel)
       }
       this.change=1;
       if(this.checkBind.length != 0){
@@ -152,7 +160,8 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
+
+    this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
     .then((res)=>{
       this.parseBarData(res, 0);
     })
@@ -166,6 +175,18 @@ export default {
     }
   },
   watch: {
+    checked:{
+      handler(){
+        if(this.checked==true){
+          console.log(this.labelList)
+          this.checkBind=_.cloneDeep(this.labelList);
+
+        }
+        else{
+          this.checkBind=[] 
+        }
+      }
+    },
     color:{
       handler(){
         console.log(this.color)
@@ -173,6 +194,7 @@ export default {
     },
     changeDate:{
       handler(){
+        console.log(this.start_date)
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
           this.parseBarData(res, 1);
