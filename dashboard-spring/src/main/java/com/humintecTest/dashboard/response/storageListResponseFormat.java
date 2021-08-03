@@ -3,7 +3,7 @@ package com.humintecTest.dashboard.response;
 import com.humintecTest.dashboard.vo.StorageListVo;
 
 public class storageListResponseFormat {
-    private int id;
+    private long id;
     private String storageName;
     private Long total;
     private Long used;
@@ -19,7 +19,7 @@ public class storageListResponseFormat {
         server_ip = vo.getServerIp();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
     public String getStorageName() {

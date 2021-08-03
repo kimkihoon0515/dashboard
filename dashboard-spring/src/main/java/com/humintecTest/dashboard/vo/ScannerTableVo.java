@@ -8,5 +8,5 @@ import lombok.Data;
 public class ScannerTableVo {
 	private Date date;
 	private String scannerType;
-	private int amount;
+	private long amount;
 }
