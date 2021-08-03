@@ -6,6 +6,7 @@
       <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
     <span v-if="needCheck==false" id="filter">
+      <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
       <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
     </span>
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
@@ -44,6 +45,7 @@ export default {
 
   data () {
     return {
+      checked:true,
       setcolor: 0,
       origin: {},
       checkBind: [],
@@ -161,8 +163,6 @@ export default {
 
     this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
     .then((res)=>{
-      console.log("처음 데이터")
-      console.log(res)
       this.parseBarData(res, 0);
     })
     .then((err)=>{
@@ -175,6 +175,18 @@ export default {
     }
   },
   watch: {
+    checked:{
+      handler(){
+        if(this.checked==true){
+          console.log(this.labelList)
+          this.checkBind=_.cloneDeep(this.labelList);
+
+        }
+        else{
+          this.checkBind=[] 
+        }
+      }
+    },
     color:{
       handler(){
         console.log(this.color)
