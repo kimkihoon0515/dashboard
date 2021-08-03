@@ -2,6 +2,9 @@
   <div id="app">
     <div id="nav">
       <form>
+        <button @click="aYearAgo">일 년</button>
+        <button @click="aMonthAgo">한 달</button>
+        <button @click="setToday">오늘</button>
         <input type="date" id='start-date' value=''/>
         <input type="date" id='end-date' value=''/>
         <button @click="setDate">submit</button>
@@ -30,6 +33,19 @@ export default {
     setDate() {
       this.startDate = document.querySelector("#start-date").value;
       this.endDate = document.querySelector("#end-date").value;
+    },
+    aYearAgo() {
+      this.endDate = moment().format('YYYY-MM-DD')
+      this.startDate = moment().subtract(1,'years').format('YYYY-MM-DD')
+
+    },
+    aMonthAgo(){
+      this.endDate = moment().format('YYYY-MM-DD')
+      this.startDate = moment().subtract(1,'months').format('YYYY-MM-DD')
+    },
+    setToday(){
+      this.startDate = moment().format('YYYY-MM-DD')
+      this.endDate = moment().format('YYYY-MM-DD')
     }
   },
   mounted(){
