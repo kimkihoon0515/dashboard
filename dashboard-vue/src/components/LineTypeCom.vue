@@ -26,9 +26,10 @@ export default {
         label: null,
         data: null,
         backgroundColor: null,
-        pointBackgroundColor: 'white',
+        //pointBackgroundColor: 'white',
         borderWidth: 1,
-        pointBorderColor: '#249EBF'
+        //pointBorderColor: '#249EBF'
+        pointRadious: 0,
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
@@ -37,6 +38,25 @@ export default {
         }]
       },
       chartoptions:{
+        elements: {
+          point: {
+            radious: 0
+          }
+        },
+        title: {
+          display: true,
+          text: this.query.chartName,
+          fontSize: 16
+        },
+        tooltips: {
+    callbacks: {
+      label: function(tooltipItem, data) {
+        var dataset = data.datasets[tooltipItem.datasetIndex];
+        var currentValue = dataset.data[tooltipItem.index];
+        return currentValue +'%';
+      }, 
+    }
+  },
           scales: {
               yAxes: [{
                   ticks: {
