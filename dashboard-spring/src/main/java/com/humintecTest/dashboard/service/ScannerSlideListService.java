@@ -11,6 +11,7 @@ public interface ScannerSlideListService {
     public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
     public int deleteScanner();
     public List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
+    List<ScannerSlideVo> searchScannerList();
     List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req);
 }
 
