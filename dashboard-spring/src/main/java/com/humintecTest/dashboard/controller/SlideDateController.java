@@ -3,11 +3,8 @@ package com.humintecTest.dashboard.controller;
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.slideDateResponseFormat;
 import com.humintecTest.dashboard.response.slideTypeResponseFormat;
-import com.humintecTest.dashboard.response.slideYearResponseFormat;
 import com.humintecTest.dashboard.service.SlideDateService;
 import com.humintecTest.dashboard.vo.SlideDateVo;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +29,9 @@ public class SlideDateController {
     @CrossOrigin("*")
     public List<slideTypeResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
     	List<slideTypeResponseFormat> vList;
+    	if(req.getStartDate() == null || req.getFinishDate() == null){
+    		vList = slideDateService.selectSlidePerDateNP(req);
+    	}
     	//연
     	if(req.getType() == 1) {
     		vList = slideDateService.selectSlidePerDateByYear(req);    	
