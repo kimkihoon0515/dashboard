@@ -44,7 +44,12 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     public List<ScannerSlideVo> showScanner(ScannerSlideVo vo) {
         return scannerSlideListDao.showScanner(vo);
     }
-
+    
+    @Override
+	public List<ScannerSlideVo> searchScannerList() {
+		return scannerSlideListDao.searchScannerList();
+	}
+    
 	@Override
 	public List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req) {
 		return scannerSlideListDao.searchScannerListByDate(req);
