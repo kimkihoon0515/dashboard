@@ -9,7 +9,7 @@ import java.sql.Date;
 public class pidResponseFormat {
     private Date last_scan_date;
     private String pathID_ch;
-    private int amount;
+    private long amount;
 
     public pidResponseFormat(PidVo vo) {
         last_scan_date = vo.getLast_scan_date();
