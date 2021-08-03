@@ -34,11 +34,11 @@ export default {
     },
     start_date: {
       type: String,
-      default : moment().format('YYYY-MM-DD').toString,
+      default : null//moment().format('YYYY-MM-DD').toString,
     },
     end_date: {
       type: String,
-      default : moment().format('YYYY-MM-DD').toString,
+      default : null//moment().format('YYYY-MM-DD').toString,
     }
   },
 
@@ -131,11 +131,10 @@ export default {
         this.datacollection.datasets.push(tmp);
         for(let i=0; i<originLabel.length; i++){
           this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
-          if(this.needCheck == false & protect_check == 0){
-            this.checkBind.push(originLabel[i]);
-            this.labelList.push(originLabel[i]);
-          }
         }
+        this.checkBind=_.cloneDeep(originLabel)
+        console.log(this.checkBind);
+        this.labelList=_.cloneDeep(originLabel)
       }
       this.change=1;
       if(this.checkBind.length != 0){
@@ -159,9 +158,10 @@ export default {
     }
   },
   mounted() {
-    console.log("시작날: "+this.start_date)
-    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate': this.end_date, 'type':this.YMD})
+
+    this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
     .then((res)=>{
+      console.log("처음 데이터")
       console.log(res)
       this.parseBarData(res, 0);
     })
