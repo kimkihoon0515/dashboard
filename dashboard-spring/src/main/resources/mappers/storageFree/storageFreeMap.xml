@@ -7,15 +7,14 @@
         select date,
                storage_name,
                daily_sum as daily_used,
-               truncate((total-daily_sum)/total * 100,2) as free,
                total
         from storage_per_date
     </select>
     <insert id = "insertStorageFree" parameterType="StorageFreeVo">
         insert into
-            storage_free(date, storage_name,daily_used, free, total)
+            storage_free(date, storage_name,daily_used, total)
         values
-            (#{date},#{storage_name},#{daily_used},#{free},#{total})
+            (#{date},#{storage_name},#{daily_used},#{total})
     </insert>
     <delete id = "deleteStorageFree">
         truncate
@@ -37,7 +36,7 @@
     </select>
     
     
-    <select id = "selectStorageFreeById" parameterType = "com.humintecTest.dashboard.request.StorageFreeRequestFormat" resultType = "StorageFreeVo">
+    <select id = "selectStorageFreeById" parameterType = "com.humintecTest.dashboard.request.StorageTableRequestFormat" resultType = "StorageFreeVo">
     	select
     		*
     	from

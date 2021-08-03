@@ -65,7 +65,7 @@ public class StorageTableController {
         //System.out.println(vList);
 
         String today;
-        double sum=0,avg,total=0;
+        double sum=0,avg,total;
 
         SimpleDateFormat sdformat = new SimpleDateFormat("YYYY-MM-dd");
 
@@ -78,7 +78,7 @@ public class StorageTableController {
             for (int i = 1; i < req.getN()+1; i++) {
                 sum += vList.get(vList.size() - i).getUsed();
             }
-            avg = Math.round((sum / req.getN()) * 100) * 0.01;
+            avg = Math.round((sum / req.getN()) * 100) /100.0;
             cal.setTime(vList.get(vList.size() - 1).getDate());
             cal.add(Calendar.DATE, 1);
             today = sdformat.format(cal.getTime());
@@ -92,20 +92,19 @@ public class StorageTableController {
             vo1.setDate(sqlDate);
             vo1.setUsed(avg);
             vo1.setStorage_name(req.getStorageName());
+            total = Math.round((vList.get(vList.size()-1).getDaily_used()+avg)*100)/100.0;
+            //System.out.println(total);
+            vo1.setDaily_used(total);
             vList.add(vo1);
-            System.out.println(vList);
-            System.out.println(sqlDate);
+            //System.out.println(vList);
+            //System.out.println(sqlDate);
 
-            for (int i = 0; i < vList.size(); i++) {
-                total += vList.get(i).getUsed();
-            }
             if (total > 100) {
-                System.out.println(total);
+                //System.out.println(total);
                 break;
             }
             else {
                 sum = 0;
-                total = 0;
             }
         }
 
