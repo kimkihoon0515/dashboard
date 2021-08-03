@@ -33,14 +33,14 @@ export default {
     }
   },
   mounted(){
-    this.$axios.get("/showSlideDate")
+    /*this.$axios.get("/showSlideDate")
     .then((res)=>{
       this.startDate=res.data.map(function(elem){return elem.date})[1];
       this.endDate=res.data.map(function(elem){return elem.date})[res.data.map(function(elem){return elem.date}).length-1];
     })
     .then((err)=>{
       console.log(err);
-    })
+    })*/
   }
 }
 </script>

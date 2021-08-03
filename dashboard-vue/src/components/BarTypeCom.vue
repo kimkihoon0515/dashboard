@@ -15,6 +15,7 @@
 <script>
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
+import moment from 'moment'
 export default {
   name : "BarTypeCom",
   components: { BarChart },
@@ -152,8 +153,10 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
+    let today = moment().format('YYYY-MM-DD');
+    this.$axios.post(this.query.url, {'startDate':today,'finishDate': today, 'type':this.YMD})
     .then((res)=>{
+      console.log(res)
       this.parseBarData(res, 0);
     })
     .then((err)=>{
