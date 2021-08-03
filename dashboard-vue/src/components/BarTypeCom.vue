@@ -32,8 +32,14 @@ export default {
        type: Object,
        default: null
     },
-    start_date: '',
-    end_date: ''
+    start_date: {
+      type: String,
+      default : moment().format('YYYY-MM-DD').toString,
+    },
+    end_date: {
+      type: String,
+      default : moment().format('YYYY-MM-DD').toString,
+    }
   },
 
   data () {
@@ -153,8 +159,8 @@ export default {
     }
   },
   mounted() {
-    let today = moment().format('YYYY-MM-DD');
-    this.$axios.post(this.query.url, {'startDate':today,'finishDate': today, 'type':this.YMD})
+    console.log("시작날: "+this.start_date)
+    this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate': this.end_date, 'type':this.YMD})
     .then((res)=>{
       console.log(res)
       this.parseBarData(res, 0);
@@ -176,6 +182,7 @@ export default {
     },
     changeDate:{
       handler(){
+        console.log(this.start_date)
         this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate':this.end_date, 'type':this.YMD})
         .then((res)=>{
           this.parseBarData(res, 1);

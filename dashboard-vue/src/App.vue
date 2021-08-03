@@ -15,15 +15,15 @@
 
 <script>
 import home from "./views/Home.vue"
-
+import moment from 'moment'
 export default {
   components: {
     home
   },
   data () {
     return {
-      startDate: "2000-01-01",
-      endDate: "2021-12-31",
+      startDate: moment().format('YYYY-MM-DD'),
+      endDate: moment().format('YYYY-MM-DD'),
     }
   },
   methods: {
