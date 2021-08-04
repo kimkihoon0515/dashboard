@@ -1,7 +1,8 @@
 <template>
   <div class="chartbox">
     <div id="filter">
-    <input type="Number" v-model="maN"/>
+    <input id="param" type="Number" min=1 v-model="maN"/>
+    <span id="predict">용량 초과 예정일: {{predictDate}}</span>
     </div>
     <div id="chart">
     <line-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
@@ -29,6 +30,7 @@ export default {
   },
   data () {
     return {
+      predictDate:null,
       maN:7,
       change:0,
      dataform:{
@@ -107,7 +109,7 @@ export default {
       var y= this.query.yKey;
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-
+      this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
       let currentIndex=this.getIndex(this.datacollection.labels,moment().format('YYYY-MM-DD'))
       console.log(res.data)
       console.log(currentIndex)
@@ -179,5 +181,13 @@ export default {
   }
   #chart{
     height:50%
+  }
+  #param{
+    float: left;
+    width: 20%;
+  }
+  #predictDate{
+    float: right;
+    font-size: 18pt;
   }
 </style>
