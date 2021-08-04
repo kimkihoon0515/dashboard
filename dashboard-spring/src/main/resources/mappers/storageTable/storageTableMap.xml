@@ -19,10 +19,10 @@
     </select>
     <insert id ="insertStorageTable" parameterType="StorageTableVo">
         insert into
-                storage_table
-                (date,used,storage_name,daily_used)
+            storage_table
+            (date,used,storage_name,daily_used)
         values
-                (#{date},#{used},#{storage_name},#{daily_used})
+            (#{date},#{used},#{storage_name},#{daily_used})
     </insert>
     <delete id="deleteStorageTable">
         truncate
@@ -30,13 +30,11 @@
     </delete>
     <select id = "selectStorageTableById" resultType="StorageTableVo" parameterType="com.humintecTest.dashboard.request.StorageTableRequestFormat">
         select
-               *
+            *
         from
-             storage_table
+            storage_table
         where
-              storage_name = #{storageName}
+            storage_name = #{storageName}
         order by date asc
     </select>
 </mapper>
-
-

@@ -5,11 +5,13 @@
       <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
       <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
-    <span v-if="needCheck==false" id="filter">
+    <div v-if="needCheck==false" id="filter">
       <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
       <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
-    </span>
+    </div>
+    <div id="chart">
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
+    </div>
   </div>
 </template>
 
@@ -170,6 +172,13 @@ export default {
     parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
+      if(res.data.length==0){
+        this.datacollection.datasets.pop();
+        this.change=1;
+        this.labelList=null
+        this.checkBind=null
+        return
+      }
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
@@ -184,7 +193,6 @@ export default {
           this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
         }
         this.checkBind=_.cloneDeep(originLabel)
-        console.log(this.checkBind);
         this.labelList=_.cloneDeep(originLabel)
       }
       this.change=1;
@@ -272,5 +280,9 @@ export default {
 <style>
   #filter {
     font-size: 10pt;
+     height:10%
+  }
+  #chart{
+    height:100%
   }
 </style>
