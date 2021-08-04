@@ -12,6 +12,39 @@
         order by date asc
     </select>
     
+    <select id = "selectStorageUseByDateNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat">
+        select
+               date_format(last_scan_date, '%Y-%m-%d')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        group by
+        	type
+        order by type asc
+    </select>
+    
+    <select id = "selectStorageUseByMonthNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat">
+        select
+               date_format(last_scan_date, '%Y-%m')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        group by
+        	type
+        order by type asc
+    </select>
+    
+    <select id = "selectStorageUseByYearNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat">
+        select
+               date_format(last_scan_date, '%Y')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        group by
+        	type
+        order by type asc
+    </select>
+    
     <select id = "selectStorageUseByDate" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
         select
                date_format(last_scan_date, '%Y-%m-%d')as type,

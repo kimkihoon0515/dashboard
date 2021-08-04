@@ -88,6 +88,12 @@ public class StorageUseController {
     public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
     	List<storageUseResponseFormat> vList;
     	
+    	if(req.getStartDate() == null || req.getFinishDate() == null) {
+    		vList = storageUseService.selectStorageUseNP(req);
+    		
+    		return vList;
+    	}
+    	
     	if(req.getType() == 1) {
     		vList = storageUseService.selectStorageUseByYear(req);
     	}
