@@ -121,6 +121,11 @@ export default {
     parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
+      if(res.data.length==0){
+        this.datacollection.datasets.pop();
+        this.change=1;
+        return
+      }
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});

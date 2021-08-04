@@ -49,8 +49,8 @@ export default {
     }
   },
   mounted(){
+    setTimeout(this.setToday(),1000)
 
-    this.setToday();
   }
 }
 </script>

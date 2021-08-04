@@ -25,10 +25,15 @@ export default {
      dataform:{
         label: null,
         data: null,
-        backgroundColor: null,
+        //backgroundColor: null,
+        fill:false,
+        interaction:{
+            intersect:false
+          },
+        pointRadius:0.7,
         pointBackgroundColor: 'white',
-        borderWidth: 1,
-        pointBorderColor: '#249EBF'
+        borderWidth: 3,
+        borderColor: '#f87979'
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
@@ -37,6 +42,11 @@ export default {
         }]
       },
       chartoptions:{
+          fill:false,
+          interaction:{
+            intersect:false
+          },
+          radius:0,
           scales: {
               yAxes: [{
                   ticks: {
@@ -75,7 +85,7 @@ export default {
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
-        tmp.backgroundColor=this.colorset[i];
+        //tmp.backgroundColor=this.colorset[i];
         this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
       }
@@ -84,7 +94,7 @@ export default {
   },
   watch:{
     storageName: function(){
-      this.$axios.post(this.query.url, {'storageName':this.storageName})
+      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':11})
       .then((res)=>{
       console.log(res)
       this.parseLineData(res);
@@ -95,7 +105,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'storageName':this.storageName})
+    this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':11})
     .then((res)=>{
       this.parseLineData(res);
     })

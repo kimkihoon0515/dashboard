@@ -72,9 +72,9 @@ export default {
       storage_name_list: [],
       storage_full:{
         name:"storage-full",
-        url:"/searchStorageFreeById",
+        url:"/selectStorageTableById",
         xKey: 0,
-        yKey: [2]
+        yKey: [3]
       },
     }
   },
