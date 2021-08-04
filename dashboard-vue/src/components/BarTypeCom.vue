@@ -124,6 +124,8 @@ export default {
       if(res.data.length==0){
         this.datacollection.datasets.pop();
         this.change=1;
+        this.labelList=null
+        this.checkBind=null
         return
       }
       var keys= Object.keys(res.data[0]);
@@ -140,7 +142,6 @@ export default {
           this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
         }
         this.checkBind=_.cloneDeep(originLabel)
-        console.log(this.checkBind);
         this.labelList=_.cloneDeep(originLabel)
       }
       this.change=1;

@@ -49,7 +49,7 @@ export default {
     }
   },
   mounted(){
-    setTimeout(this.setToday(),1000)
+    //setTimeout(this.setToday,30);
 
   }
 }
