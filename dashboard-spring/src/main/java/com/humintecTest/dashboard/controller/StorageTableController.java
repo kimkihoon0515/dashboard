@@ -73,6 +73,10 @@ public class StorageTableController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
 
+        if (vList.size() < 1 || req.getN()<1){
+            return null;
+        }
+
         while(true) {
             StorageTableVo vo1 = new StorageTableVo();
             for (int i = 1; i < req.getN()+1; i++) {
