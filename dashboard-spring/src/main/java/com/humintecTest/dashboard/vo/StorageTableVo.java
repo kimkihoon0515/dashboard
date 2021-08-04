@@ -11,4 +11,5 @@ public class StorageTableVo {
     private double used;
     private String storage_name;
     private double daily_used;
+    private long total;
 }
