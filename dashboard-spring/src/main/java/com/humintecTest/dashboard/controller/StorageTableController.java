@@ -97,8 +97,8 @@ public class StorageTableController {
 
         while(true) {
             StorageTableVo vo1 = new StorageTableVo();
-            for (int i = 1; i < req.getN()+1; i++) {
-                sum += vList.get(vList.size() - i).getUsed();
+            for (int i = 1; i < req.getN()+1; i++) { // ex) n = 4인경우 4번 loop 돌아감.
+                sum += vList.get(vList.size() - i).getUsed(); // 당일 사용량의 합
             }
             avg = Math.round((sum / req.getN()) * 100) /100.0;
 
