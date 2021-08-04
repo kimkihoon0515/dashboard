@@ -66,9 +66,7 @@ public class StorageTableController {
 
         String today,yesterday;
         double sum=0,avg,total;
-
         SimpleDateFormat sdformat = new SimpleDateFormat("YYYY-MM-dd");
-
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
@@ -95,10 +93,31 @@ public class StorageTableController {
             return null;
         }
 
+        today = sdformat.format(cal.getTime());
+        try {
+            parsed = format.parse(today);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
+            int i=vList.size()-1
+            for(int j=0; j<req.getN(); i++){
+                if(today-j==vList.get((vList.size()-1)-i).getDate){
+                    sum+=vList.get(i).getUsed
+                    i-=1
+                }
+            }
+        }
+
+
+
         while(true) {
             StorageTableVo vo1 = new StorageTableVo();
             for (int i = 1; i < req.getN()+1; i++) {
+                if
                 sum += vList.get(vList.size() - i).getUsed();
+                else
+
             }
             avg = Math.round((sum / req.getN()) * 100) /100.0;
 
