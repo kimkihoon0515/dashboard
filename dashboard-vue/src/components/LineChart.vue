@@ -6,12 +6,10 @@
     extends: Line,
     props: {
         datacollection: {
-          type: Object, 
-
+          type: Object,
         },
         options:{
-          type: Object, 
-
+          type: Object,
         },
         change:{
           default:0

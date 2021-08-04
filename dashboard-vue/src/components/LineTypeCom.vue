@@ -11,7 +11,9 @@
 
 <script>
 import LineChart from './LineChart.vue'
+
 import moment from 'moment'
+
 export default {
   name : "LineTypeCom",
   components: { LineChart },
@@ -32,6 +34,8 @@ export default {
      dataform:{
         label: null,
         data: null,
+
+
         //backgroundColor: null,
         fill:false,
         interaction:{
@@ -49,11 +53,26 @@ export default {
         }]
       },
       chartoptions:{
-          fill:false,
-          interaction:{
-            intersect:false
-          },
-          radius:0,
+        elements:{
+          point: {
+            backgroundColor: 'white'
+          }
+        },
+        title: {
+          display: true,
+          text: this.query.chartName,
+          fontSize: 16
+        },
+        tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var currentValue = dataset.data[tooltipItem.index];
+            return currentValue +'%';
+          }, 
+        }
+      },
+
           scales: {
               yAxes: [{
                   ticks: {

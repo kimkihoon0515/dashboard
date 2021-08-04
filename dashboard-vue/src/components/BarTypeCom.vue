@@ -70,10 +70,59 @@ export default {
       },
       chartoptions:{
           onClick: this.handleChartClick,
+          title: {
+            display: true,
+            text: this.query.chartName,
+            fontSize: 16
+          },
+          plugins: {
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              },
+              zoom: {
+                enabled: true,
+                mode: 'xy'
+              }
+            }
+          },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var dataset = data.datasets[tooltipItem.datasetIndex];
+                var currentValue = dataset.data[tooltipItem.index];
+                if (currentValue >= 1000000000000) {
+                  return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+                }
+                else if (currentValue>=1000000000 && currentValue < 1000000000000) {
+                  return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+                }
+                else if (currentValue>=1000000 && currentValue < 1000000000) {
+                  return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+                }
+                else 
+                return currentValue;
+              }
+            }
+          }, 
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      callback: function(value, index, values){
+                        if (value >=1000000000000){
+                          return value = (value / 1000000000000).toFixed(1) + "TB";
+                        }
+                        else if (value>=1000000000 && value <1000000000000){
+                          return value = (value / 1000000000).toFixed(1) + "GB";
+                        }
+                        else if (value >=1000000 && value < 1000000000) {
+                          return value = (value / 1000000).toFixed(1) + "MB";
+                        }
+                        else 
+                        return value;
+                      }
                   },
                   gridLines: {
                       display: true
