@@ -19,6 +19,7 @@
     "axios": "^0.21.1",
     "axios-jsonp-pro": "^1.1.8",
     "chart.js": "^2.9.4",
+    "chartjs-plugin-zoom": "^1.1.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "path": "^0.12.7",

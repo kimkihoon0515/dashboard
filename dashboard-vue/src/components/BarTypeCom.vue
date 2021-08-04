@@ -73,6 +73,18 @@ export default {
             text: this.query.chartName,
             fontSize: 16
           },
+          plugins: {
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              },
+              zoom: {
+                enabled: true,
+                mode: 'xy'
+              }
+            }
+          },
           tooltips: {
             callbacks: {
               label: function(tooltipItem, data) {

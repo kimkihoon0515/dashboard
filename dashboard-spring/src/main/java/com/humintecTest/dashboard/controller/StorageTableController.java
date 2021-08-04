@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,6 +73,8 @@ public class StorageTableController {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
+        long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
 
         while(true) {
             StorageTableVo vo1 = new StorageTableVo();
@@ -79,7 +82,7 @@ public class StorageTableController {
                 sum += vList.get(vList.size() - i).getUsed();
             }
             avg = Math.round((sum / req.getN()) * 100) /100.0;
-            cal.setTime(vList.get(vList.size() - 1).getDate());
+            cal.setTime(date);
             cal.add(Calendar.DATE, 1);
             today = sdformat.format(cal.getTime());
 
