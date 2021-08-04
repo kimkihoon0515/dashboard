@@ -101,7 +101,7 @@ export default {
             tmp.borderColor.push('#f87979')
           }
           else{
-            tmp.borderColor.push('#ffd950')
+            tmp.borderColor.push('#2ECC70')
           }
         }
         this.datacollection.datasets.pop();
