@@ -57,7 +57,19 @@ public class StorageUseServiceImpl implements StorageUseService {
 
         return null;
     }
-
+    
+    @Override
+	public List<storageUseResponseFormat> selectStorageUseNP(DateRequestFormat req) {
+		if(req.getType() == 1) {
+			return storageUseDao.selectStorageUseByYearNP();
+		}
+		else if(req.getType() == 2) {
+			return storageUseDao.selectStorageUseByMonthNP();
+		}
+		else {
+			return storageUseDao.selectStorageUseByDateNP();
+		}
+	}
 
     @Override
 	public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) {

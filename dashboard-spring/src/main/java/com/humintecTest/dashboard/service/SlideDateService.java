@@ -11,6 +11,7 @@ public interface SlideDateService {
     public List<SlideDateVo> selectSlideDate(SlideDateVo vo);
     public int insertSlideDate(SlideDateVo vo);
     public int deleteSlideDate();
+    public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req);
     public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req);
     public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req);
     public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req);

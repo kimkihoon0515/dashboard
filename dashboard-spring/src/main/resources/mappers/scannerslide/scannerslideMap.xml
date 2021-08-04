@@ -27,6 +27,16 @@
         from scanner_per_slide
     </select>
     
+    <select id = "searchScannerList" resultType="ScannerSlideVo">
+        select
+        	scanner_type as scanner_type,
+        	sum(amount) as slide_sum
+        from 
+        	scanner_table
+        group by
+        	scanner_type
+        order by scanner_type asc
+    </select>
     <select id = "searchScannerListByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerSlideVo">
         select
         	scanner_type as scanner_type,
