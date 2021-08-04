@@ -134,11 +134,6 @@ export default {
     width: 28%;
     background-color: rgb(230, 249, 252);
   }
-
-  #static-chart div {
-    height: 98%;
-  }
-
   #dynamic-chart {
     width: 72%;
   }
@@ -169,7 +164,6 @@ export default {
     width: 300px;
     height: 280px;
   }
-
   button {
   border: 1px solid skyblue;
   border-radius: 5px;

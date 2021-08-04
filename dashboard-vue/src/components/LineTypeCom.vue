@@ -1,7 +1,11 @@
 <template>
   <div class="chartbox">
+    <div id="filter">
     <input type="Number" v-model="maN"/>
+    </div>
+    <div id="chart">
     <line-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
+    </div>
   </div>
 </template>
 
@@ -68,7 +72,7 @@ export default {
               }]
           },
           legend: {
-              display: true
+              display: false
           },
           responsive: true,
           maintainAspectRatio: false
@@ -150,5 +154,11 @@ export default {
 </script>
 
 <style>
-
+  #filter {
+    font-size: 10pt;
+     height:10%
+  }
+  #chart{
+    height:50%
+  }
 </style>
