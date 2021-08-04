@@ -78,11 +78,14 @@ export default {
               label: function(tooltipItem, data) {
                 var dataset = data.datasets[tooltipItem.datasetIndex];
                 var currentValue = dataset.data[tooltipItem.index];
-                if (currentValue > 1000000000000) {
+                if (currentValue >= 1000000000000) {
                   return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
                 }
-                else if (currentValue>1000000000 && currentValue < 1000000000000) {
+                else if (currentValue>=1000000000 && currentValue < 1000000000000) {
                   return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+                }
+                else if (currentValue>=1000000 && currentValue < 1000000000) {
+                  return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
                 }
                 else 
                 return currentValue;
@@ -97,8 +100,11 @@ export default {
                         if (value >=1000000000000){
                           return value = (value / 1000000000000).toFixed(1) + "TB";
                         }
-                        else if (value>1000000000 && value <1000000000000){
+                        else if (value>=1000000000 && value <1000000000000){
                           return value = (value / 1000000000).toFixed(1) + "GB";
+                        }
+                        else if (value >=1000000 && value < 1000000000) {
+                          return value = (value / 1000000).toFixed(1) + "MB";
                         }
                         else 
                         return value;

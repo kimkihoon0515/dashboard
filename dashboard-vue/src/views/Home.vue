@@ -148,12 +148,12 @@ export default {
   #dynamic-chart {
     width: 72%;
   }
-
+  
   #dynamic-chart .chartbox {
   width: 460px;
-  height: 280px;
+  height: 460px;
   display: inline-block;
-  margin: 0 30px 10px 30px;
+  margin: 0 30px 30px 30px;
   overflow: hidden;
   border: 1px solid rgb(53, 196, 231);
   border-radius: 10px;

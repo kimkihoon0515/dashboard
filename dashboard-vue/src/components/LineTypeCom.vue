@@ -6,6 +6,8 @@
 
 <script>
 import LineChart from './LineChart.vue'
+
+var gradientStroke
 export default {
   name : "LineTypeCom",
   components: { LineChart },
@@ -26,10 +28,11 @@ export default {
         label: null,
         data: null,
         backgroundColor: null,
+        pointRadius : 0,
         //pointBackgroundColor: 'white',
         borderWidth: 1,
         //pointBorderColor: '#249EBF'
-        pointRadious: 0,
+
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
@@ -38,9 +41,9 @@ export default {
         }]
       },
       chartoptions:{
-        elements: {
+        elements:{
           point: {
-            radious: 0
+            backgroundColor: 'white'
           }
         },
         title: {
