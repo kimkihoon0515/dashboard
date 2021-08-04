@@ -64,7 +64,7 @@ public class StorageTableController {
         List<StorageTableVo> vList = storageTableService.selectStorageTableById(req);
         //System.out.println(vList);
 
-        String today;
+        String today,yesterday;
         double sum=0,avg,total;
 
         SimpleDateFormat sdformat = new SimpleDateFormat("YYYY-MM-dd");
@@ -72,6 +72,24 @@ public class StorageTableController {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsed = null;
+        Date parse = null;
+
+
+        Date date = new Date(); // 오늘날짜
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, -1);
+        yesterday = sdformat.format(calendar.getTime());
+        try {
+            parse = format.parse(yesterday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } //parse가 어제날짜 date형식으로바꾼것
+        java.util.Date yesDate = new java.util.Date(parse.getTime());
+
+        if (vList.get(vList.size()-1).getDate()!=date){
+            date = yesDate;
+        } //DB 마지막 데이터 날짜와 오늘 날짜를 비교해서 같지않으면 예측 데이터를 오늘부터 나오게끔 설정하는 조건문
 
         if (vList.size() < 1 || req.getN()<1){
             return null;
@@ -83,7 +101,8 @@ public class StorageTableController {
                 sum += vList.get(vList.size() - i).getUsed();
             }
             avg = Math.round((sum / req.getN()) * 100) /100.0;
-            cal.setTime(vList.get(vList.size() - 1).getDate());
+
+            cal.setTime(date);
             cal.add(Calendar.DATE, 1);
             today = sdformat.format(cal.getTime());
 
@@ -94,6 +113,8 @@ public class StorageTableController {
             }
             java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
             vo1.setDate(sqlDate);
+            date = sqlDate;
+
             vo1.setUsed(avg);
             vo1.setStorage_name(req.getStorageName());
             total = Math.round((vList.get(vList.size()-1).getDaily_used()+avg)*100)/100.0;
@@ -120,14 +141,14 @@ public class StorageTableController {
         }
         return res;
     }
-    
+
     @PutMapping("/updateStorageTable")
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateStorageTable() {
-    	StorageTableVo vo = new StorageTableVo();
-    	if(storageTableService.deleteStorageTable()==0){
-    		List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
+        StorageTableVo vo = new StorageTableVo();
+        if(storageTableService.deleteStorageTable()==0){
+            List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
 
             for(StorageTableVo target : vList){
                 if(storageTableService.insertStorageTable(target)== 0){
@@ -136,7 +157,7 @@ public class StorageTableController {
                     return "false";
                 }
             }
-    	}
+        }
         else {
             return "false";
         }

@@ -8,7 +8,7 @@ import java.sql.Date;
 @Data
 public class StorageTableVo {
     private Date date;
-    private Double used;
+    private double used;
     private String storage_name;
     private double daily_used;
 }

@@ -12,10 +12,12 @@ public class storageTableResponseFormat {
     private double used;
     private String storage_name;
     private double daily_used;
+
     public storageTableResponseFormat(StorageTableVo vo){
         date = vo.getDate();
         used = vo.getUsed();
         storage_name = vo.getStorage_name();
         daily_used = vo.getDaily_used();
+
     }
 }
