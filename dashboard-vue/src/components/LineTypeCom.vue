@@ -85,7 +85,7 @@ export default {
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
 
-      let currentIndex=this.getIndex(this.datacollection.labels,"2021-05-28")
+      let currentIndex=this.getIndex(this.datacollection.labels,moment().format('YYYY-MM-DD'))
       console.log(res.data)
       console.log(currentIndex)
       for(let i=0; i<y.length ; i++){
