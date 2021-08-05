@@ -8,7 +8,7 @@ import com.humintecTest.dashboard.vo.PidVo;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+@Service
 public interface PidService {
     public List<PidVo> selectPid (PidVo vo);
     public int insertPid (PidVo vo);

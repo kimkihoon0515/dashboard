@@ -96,7 +96,7 @@
     <select id = "showStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo">
         select date,
         case when daily_sum > 1099511627776 then truncate(daily_sum/1099511627776,2)
-        when daily_sum>1073741824 and daily_sum<1099511627776 then truncate(daily_sum/1073741824,2)
+        when daily_sum>1073741824 and 1099511627776 then truncate(daily_sum/1073741824,2) > daily_sum
         end as daily_sum
         from storage_use
     </select>
