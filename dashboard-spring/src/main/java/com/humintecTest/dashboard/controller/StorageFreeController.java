@@ -28,54 +28,54 @@ public class StorageFreeController {
     @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> searchStorageFree (@RequestBody DateRequestFormat req) {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFreeByDate(req);
-        
+
         ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
 
         for (StorageFreeVo target : vList) {
             res.add(new storageFreeResponseFormat(target));
         }
-        
+
         return res;
     }
-    
+
     @PostMapping("/searchStorageFreeById")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> searchStorageFreeById (@RequestBody StorageTableRequestFormat req) {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFreeById(req);
-        
+
         ArrayList<storageFreeResponseFormat> res = new ArrayList<storageFreeResponseFormat>();
 
         for (StorageFreeVo target : vList) {
             res.add(new storageFreeResponseFormat(target));
         }
-        
+
         return res;
     }
-    
+
     @PutMapping("/updateStorageFree")
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateStorageFree() {
-    	if (storageFreeService.deleteStorageFree() == 0) {
-    		StorageFreeVo vo = new StorageFreeVo();
-    		List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo);
-    		
-    		for (StorageFreeVo target : vList) {
+        if (storageFreeService.deleteStorageFree() == 0) {
+            StorageFreeVo vo = new StorageFreeVo();
+            List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo);
+
+            for (StorageFreeVo target : vList) {
                 if (storageFreeService.insertStorageFree(target) == 0) {
 
                 } else
                     return "false";
             }
-    	}
-    	else{
-    		return "false";
-    	}
-    	
-    	return "ok";
+        }
+        else{
+            return "false";
+        }
+
+        return "ok";
     }
-    
-    
+
+
     @GetMapping("/showStorageFree") //전체 데이터
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
@@ -89,4 +89,3 @@ public class StorageFreeController {
         return res;
     }
 }
-

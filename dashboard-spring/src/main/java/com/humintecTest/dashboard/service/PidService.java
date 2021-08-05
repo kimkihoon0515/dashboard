@@ -17,4 +17,3 @@ public interface PidService {
     public List<pidchResponseFormat> searchPidByDate (DateRequestFormat req);
     public List<PidVo> showPid (PidVo vo);
 }
-
