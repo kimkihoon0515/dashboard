@@ -23,24 +23,24 @@
     </delete>
     <select id = "searchPid" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
         select
-        	pathID_ch as pathID_ch,
-        	sum(amount) as amount
-        from 
-        	pathid_table
+            pathID_ch as pathID_ch,
+            sum(amount) as amount
+        from
+            pathid_table
         group by
-        	pathID_ch
+            pathID_ch
         order by last_scan_date asc
     </select>
     <select id = "searchPidByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat">
         select
-        	pathID_ch as pathID_ch,
-        	sum(amount) as amount
-        from 
-        	pathid_table
-        where 
-        	last_scan_date between #{startDate} and #{finishDate}
+            pathID_ch as pathID_ch,
+            sum(amount) as amount
+        from
+            pathid_table
+        where
+            last_scan_date between #{startDate} and #{finishDate}
         group by
-        	pathID_ch
+            pathID_ch
         order by last_scan_date asc
     </select>
     <select id = "showPid" parameterType="PidVo" resultType="PidVo">

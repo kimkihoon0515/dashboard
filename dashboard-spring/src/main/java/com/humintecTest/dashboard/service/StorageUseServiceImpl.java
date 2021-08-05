@@ -57,32 +57,32 @@ public class StorageUseServiceImpl implements StorageUseService {
 
         return null;
     }
-    
-    @Override
-	public List<storageUseResponseFormat> selectStorageUseNP(DateRequestFormat req) {
-		if(req.getType() == 1) {
-			return storageUseDao.selectStorageUseByYearNP();
-		}
-		else if(req.getType() == 2) {
-			return storageUseDao.selectStorageUseByMonthNP();
-		}
-		else {
-			return storageUseDao.selectStorageUseByDateNP();
-		}
-	}
 
     @Override
-	public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) {
-		return storageUseDao.selectStorageUseByDate(req);
-	}
+    public List<storageUseResponseFormat> selectStorageUseNP(DateRequestFormat req) {
+        if(req.getType() == 1) {
+            return storageUseDao.selectStorageUseByYearNP();
+        }
+        else if(req.getType() == 2) {
+            return storageUseDao.selectStorageUseByMonthNP();
+        }
+        else {
+            return storageUseDao.selectStorageUseByDateNP();
+        }
+    }
 
-	@Override
-	public List<storageUseResponseFormat> selectStorageUseByMonth(DateRequestFormat req) {
-		return storageUseDao.selectStorageUseByMonth(req);
-	}
+    @Override
+    public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) {
+        return storageUseDao.selectStorageUseByDate(req);
+    }
 
-	@Override
-	public List<storageUseResponseFormat> selectStorageUseByYear(DateRequestFormat req) {
-		return storageUseDao.selectStorageUseByYear(req);
-	}
+    @Override
+    public List<storageUseResponseFormat> selectStorageUseByMonth(DateRequestFormat req) {
+        return storageUseDao.selectStorageUseByMonth(req);
+    }
+
+    @Override
+    public List<storageUseResponseFormat> selectStorageUseByYear(DateRequestFormat req) {
+        return storageUseDao.selectStorageUseByYear(req);
+    }
 }

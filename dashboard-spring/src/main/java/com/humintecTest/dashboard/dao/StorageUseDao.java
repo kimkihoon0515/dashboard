@@ -16,7 +16,7 @@ public interface StorageUseDao {
     public List<StorageUseVo> showStorageUse (StorageUseVo vo);
     public List<StorageUseVo> searchStorageUse (DateRequestFormat req);
     public List<storageUseMoveAvgResponseFormat> moveAvgStorageUse (StorageUseVo vo);
-    
+
     public List<storageUseResponseFormat> selectStorageUseByDateNP();
     public List<storageUseResponseFormat> selectStorageUseByMonthNP();
     public List<storageUseResponseFormat> selectStorageUseByYearNP();

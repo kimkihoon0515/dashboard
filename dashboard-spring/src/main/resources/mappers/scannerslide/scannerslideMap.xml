@@ -26,27 +26,27 @@
         select *
         from scanner_per_slide
     </select>
-    
+
     <select id = "searchScannerList" resultType="ScannerSlideVo">
         select
-        	scanner_type as scanner_type,
-        	sum(amount) as slide_sum
-        from 
-        	scanner_table
+            scanner_type as scanner_type,
+            sum(amount) as slide_sum
+        from
+            scanner_table
         group by
-        	scanner_type
+            scanner_type
         order by scanner_type asc
     </select>
     <select id = "searchScannerListByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerSlideVo">
         select
-        	scanner_type as scanner_type,
-        	sum(amount) as slide_sum
-        from 
-        	scanner_table
-        where 
-        	date between #{startDate} and #{finishDate}
+            scanner_type as scanner_type,
+            sum(amount) as slide_sum
+        from
+            scanner_table
+        where
+            date between #{startDate} and #{finishDate}
         group by
-        	scanner_type
+            scanner_type
         order by scanner_type asc
     </select>
 </mapper>
