@@ -36,15 +36,17 @@ export default {
      dataform:{
         label: null,
         data: null,
+
+
+        //backgroundColor: null,
         fill:false,
         interaction:{
             intersect:true
           },
-        pointRadius:0,
-        pointBackgroundColor: "transparent",
-        borderWidth: 2,
-        borderColor: '#f87979',
-        borderDash:null
+        pointRadius:0.7,
+        pointBackgroundColor: 'white',
+        borderWidth: 3,
+        borderColor: []
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
@@ -58,10 +60,6 @@ export default {
             backgroundColor: 'white'
           }
         },
-        interaction:{
-          mode:'dataset'
-        }
-        ,
         title: {
           display: true,
           text: this.query.chartName,
@@ -119,22 +117,16 @@ export default {
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
-        let tmpPredict= _.cloneDeep(tmp);
-        tmpPredict.label=keys[y[i]]+"예측값";
-        tmpPredict.borderDash=[5,5]
-        for (let j=currentIndex+1; j<tmpPredict.data.length;j++){
-          tmp.data.pop();
-        }
-        for (let k=0; k<=currentIndex;k++){
-          tmpPredict.data[k]=null;
-          if(k==currentIndex){
-            tmpPredict.data[k]=""
+        for (let j=0; j<tmp.data.length;j++){
+          if(j<=currentIndex){
+            tmp.borderColor.push('#f87979')
+          }
+          else{
+            tmp.borderColor.push('#2ECC70')
           }
         }
-        
-        this.datacollection.datasets=[];
+        this.datacollection.datasets.pop();
         this.datacollection.datasets.push(tmp);
-        this.datacollection.datasets.push(tmpPredict);
       }
       console.log(this.datacollection.datasets)
       this.change=1;
@@ -197,9 +189,5 @@ export default {
   #predictDate{
     float: right;
     font-size: 18pt;
-  }
-  #predict{
-    float: right;
-    width: 60%;
   }
 </style>
