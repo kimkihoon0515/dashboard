@@ -5,11 +5,13 @@
       <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
       <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
     </span>
-    <span v-if="needCheck==false" id="filter">
+    <div v-if="needCheck==false" id="filter">
       <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
       <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
-    </span>
+    </div>
+    <div id="chart">
     <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
+    </div>
   </div>
 </template>
 
@@ -68,10 +70,59 @@ export default {
       },
       chartoptions:{
           onClick: this.handleChartClick,
+          title: {
+            display: true,
+            text: this.query.chartName,
+            fontSize: 16
+          },
+          plugins: {
+            zoom: {
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              },
+              zoom: {
+                enabled: true,
+                mode: 'xy'
+              }
+            }
+          },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var dataset = data.datasets[tooltipItem.datasetIndex];
+                var currentValue = dataset.data[tooltipItem.index];
+                if (currentValue >= 1000000000000) {
+                  return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+                }
+                else if (currentValue>=1000000000 && currentValue < 1000000000000) {
+                  return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+                }
+                else if (currentValue>=1000000 && currentValue < 1000000000) {
+                  return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+                }
+                else 
+                return currentValue;
+              }
+            }
+          }, 
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      callback: function(value, index, values){
+                        if (value >=1000000000000){
+                          return value = (value / 1000000000000).toFixed(1) + "TB";
+                        }
+                        else if (value>=1000000000 && value <1000000000000){
+                          return value = (value / 1000000000).toFixed(1) + "GB";
+                        }
+                        else if (value >=1000000 && value < 1000000000) {
+                          return value = (value / 1000000).toFixed(1) + "MB";
+                        }
+                        else 
+                        return value;
+                      }
                   },
                   gridLines: {
                       display: true
@@ -121,6 +172,13 @@ export default {
     parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
+      if(res.data.length==0){
+        this.datacollection.datasets.pop();
+        this.change=1;
+        this.labelList=null
+        this.checkBind=null
+        return
+      }
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
@@ -135,7 +193,6 @@ export default {
           this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
         }
         this.checkBind=_.cloneDeep(originLabel)
-        console.log(this.checkBind);
         this.labelList=_.cloneDeep(originLabel)
       }
       this.change=1;
@@ -223,5 +280,9 @@ export default {
 <style>
   #filter {
     font-size: 10pt;
+     height:10%
+  }
+  #chart{
+    height:100%
   }
 </style>

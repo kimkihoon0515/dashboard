@@ -40,6 +40,7 @@ export default {
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
+        chartName: "날짜 별 스캔 횟수",
         xKey: 0,
         yKey: [1]
         
@@ -47,24 +48,28 @@ export default {
       scanner:{
         name:"scanner",
         url:"/searchScannerListByDate",
+        chartName: "스캐너 별 스캔 횟수",
         xKey:0,
         yKey:[1]
       },
       pathID:{
         name:"pathID",
         url:"/searchPidByDate",
+        chartName: "진단종류 별 스캔 횟수",
         xKey: 0,
         yKey: [1]
       },
       size:{
         name:"size",
         url:"/searchStorageUseByDate",
+        chartName: "일별 사용량",
         xKey: 0,
         yKey: [1]
       },
       storage:{
         name:"storage",
         url:"/storageList",
+        chartName: "스토리지별 총/잔여 용량",
         xKey: null,
         yKey: null
       },
@@ -72,9 +77,10 @@ export default {
       storage_name_list: [],
       storage_full:{
         name:"storage-full",
-        url:"/searchStorageFreeById",
+        url:"/selectStorageTableById",
+        chartName:"스토리지별 사용량 추이",
         xKey: 0,
-        yKey: [2]
+        yKey: [3]
       },
     }
   },
@@ -134,20 +140,15 @@ export default {
     width: 28%;
     background-color: rgb(230, 249, 252);
   }
-
-  #static-chart div {
-    height: 98%;
-  }
-
   #dynamic-chart {
     width: 72%;
   }
-
+  
   #dynamic-chart .chartbox {
   width: 460px;
-  height: 280px;
+  height: 460px;
   display: inline-block;
-  margin: 0 30px 10px 30px;
+  margin: 0 30px 30px 30px;
   overflow: hidden;
   border: 1px solid rgb(53, 196, 231);
   border-radius: 10px;
@@ -159,7 +160,7 @@ export default {
   height: 280px;
   display: inline-block;
   margin: 0 15px 50px 15px;
-  overflow: hidden;
+  overflow: hidden; 
   border: 1px solid rgb(53, 196, 231);
   border-radius: 10px;
   /* float: left; */
@@ -169,7 +170,6 @@ export default {
     width: 300px;
     height: 280px;
   }
-
   button {
   border: 1px solid skyblue;
   border-radius: 5px;
