@@ -81,41 +81,41 @@ public class StorageUseController {
         }
         return "ok";
     }
-    
+
     @PostMapping("/searchStorageUseByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
-    	List<storageUseResponseFormat> vList;
-    	
-    	if(req.getStartDate() == null || req.getFinishDate() == null) {
-    		vList = storageUseService.selectStorageUseNP(req);
-    		
-    		return vList;
-    	}
-    	
-    	if(req.getType() == 1) {
-    		vList = storageUseService.selectStorageUseByYear(req);
-    	}
-    	else if(req.getType() == 2) {
-    		vList = storageUseService.selectStorageUseByMonth(req);
-    	}
-    	else {
-    		vList = storageUseService.selectStorageUseByDate(req);
-    	}
-    	
-    	return vList;
+        List<storageUseResponseFormat> vList;
+
+        if(req.getStartDate() == null || req.getFinishDate() == null) {
+            vList = storageUseService.selectStorageUseNP(req);
+
+            return vList;
+        }
+
+        if(req.getType() == 1) {
+            vList = storageUseService.selectStorageUseByYear(req);
+        }
+        else if(req.getType() == 2) {
+            vList = storageUseService.selectStorageUseByMonth(req);
+        }
+        else {
+            vList = storageUseService.selectStorageUseByDate(req);
+        }
+
+        return vList;
     }
-    
+
     @PutMapping("/updateStorageUse")
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateStorageUse() {
-    	if(storageUseService.deleteStorageUse() == 0) {
-    		StorageUseVo vo = new StorageUseVo();
-    		List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
-    		
-    		for(StorageUseVo target : vList) {
+        if(storageUseService.deleteStorageUse() == 0) {
+            StorageUseVo vo = new StorageUseVo();
+            List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
+
+            for(StorageUseVo target : vList) {
                 if(storageUseService.insertStorageUse(target)==0) {
 
                 }
@@ -123,12 +123,12 @@ public class StorageUseController {
                     return "insert fail";
                 }
             }
-    	}
-    	else {
-    		return "delete fail";
-    	}
-    	
-    	return "ok";
+        }
+        else {
+            return "delete fail";
+        }
+
+        return "ok";
     }
 
 }

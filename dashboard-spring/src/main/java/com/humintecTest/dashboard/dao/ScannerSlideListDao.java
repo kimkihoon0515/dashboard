@@ -17,5 +17,3 @@ public interface ScannerSlideListDao {
     List<ScannerSlideVo> searchScannerList();
     List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req);
 }
-
-

@@ -15,41 +15,41 @@ import com.humintecTest.dashboard.vo.ScannerTableVo;
 public class ScannerTableService {
 	@Autowired
 	ScannerTableDao scannerTableDao;
-	
+
 	public List<ScannerTableVo> selectScannerTable(ScannerTableVo vo){
 		return scannerTableDao.selectScannerTable(vo);
 	}
-	
+
 	public int insertScannerTable(ScannerTableVo vo) {
 		try {
 			scannerTableDao.insertScannerTable(vo);
-			
+
 			return 0;
 		}
 		catch (Exception e) {
 			return -1;
 		}
 	}
-	
+
 	public int deleteScannerTable() {
 		try {
 			scannerTableDao.deleteScannerTable();
-			
+
 			return 0;
 		}
 		catch (Exception e) {
 			return -1;
 		}
 	}
-	
+
 	public List<ScannerTableVo> searchScannerTable(){
 		return scannerTableDao.searchScannerTable();
 	}
-	
+
 	public List<ScannerTableVo> searchScannerTableBydate(DateRequestFormat req){
 		return scannerTableDao.searchScannerTableByDate(req);
 	}
-	
+
 	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req){
 		return scannerTableDao.searchScannerTableById(req);
 	}

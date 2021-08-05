@@ -24,5 +24,3 @@ public interface SlideDateDao {
     public List<SlideDateVo> selMonth (SlideDateVo vo);
     public List<SlideDateVo> selYear (SlideDateVo vo);
 }
-
-
