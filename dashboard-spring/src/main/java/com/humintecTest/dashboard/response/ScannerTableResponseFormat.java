@@ -11,7 +11,7 @@ public class ScannerTableResponseFormat {
 	private Date date;
 	private String scannerType;
 	private long amount;
-	
+
 	public ScannerTableResponseFormat(ScannerTableVo vo) {
 		this.date = vo.getDate();
 		this.scannerType = vo.getScannerType();

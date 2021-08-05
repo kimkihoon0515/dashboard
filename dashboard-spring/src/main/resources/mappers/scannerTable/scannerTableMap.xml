@@ -5,66 +5,64 @@
 <mapper namespace="com.humintecTest.dashboard.dao.ScannerTableDao">
     <select id = "selectScannerTable" parameterType="ScannerTableVo" resultType="ScannerTableVo">
         select
-               date_format(slide_list.last_scan_date, '%Y-%m-%d') as date,
+            date_format(slide_list.last_scan_date, '%Y-%m-%d') as date,
                 scanner_type as scannerType,
                  count(*) as amount
         from
-                slide_list
+            slide_list
         group by date, scanner_type
         order by date asc
     </select>
     <insert id ="insertScannerTable" parameterType="ScannerTableVo">
         insert into
-                scanner_table
-                (date,scanner_type,amount)
+            scanner_table
+            (date,scanner_type,amount)
         values
-                (#{date},#{scannerType},#{amount})
+            (#{date},#{scannerType},#{amount})
     </insert>
     <delete id="deleteScannerTable">
         truncate
             scanner_table
     </delete>
-    
+
     <select id = "searchScannerTable" resultType="ScannerTableVo">
-    	select
-        	date as date,
-        	scanner_type as scannerType,
-        	sum(amount) as amount
-        from 
-        	scanner_table
+        select
+            date as date,
+            scanner_type as scannerType,
+            sum(amount) as amount
+        from
+            scanner_table
         group by
-        	scanner_type, date
+            scanner_type, date
         order by date asc
     </select>
-    
+
     <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerTableVo">
         select
-        	date as date,
-        	scanner_type as scannerType,
-        	sum(amount) as amount
-        from 
-        	scanner_table
-        where 
-        	date between #{startDate} and #{finishDate}
+            date as date,
+            scanner_type as scannerType,
+            sum(amount) as amount
+        from
+            scanner_table
+        where
+            date between #{startDate} and #{finishDate}
         group by
-        	scanner_type, date
+            scanner_type, date
         order by date asc
     </select>
-    
-    
+
+
     <select id = "searchScannerTableById" parameterType="com.humintecTest.dashboard.request.ScannerTableRequestFormat" resultType="ScannerTableVo">
         select
-        	date as date,
-        	scanner_type as scannerType,
-        	sum(amount) as amount
-        from 
-        	scanner_table
-        where 
-        	(date between #{startDate} and #{finishDate}) and scanner_type = #{scannerType}
+            date as date,
+            scanner_type as scannerType,
+            sum(amount) as amount
+        from
+            scanner_table
+        where
+            (date between #{startDate} and #{finishDate}) and scanner_type = #{scannerType}
         group by
-        	scanner_type, date
+            scanner_type, date
         order by date asc
     </select>
 </mapper>
-
-

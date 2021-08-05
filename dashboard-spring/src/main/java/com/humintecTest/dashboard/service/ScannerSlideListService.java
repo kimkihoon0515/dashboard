@@ -14,4 +14,3 @@ public interface ScannerSlideListService {
     List<ScannerSlideVo> searchScannerList();
     List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req);
 }
-

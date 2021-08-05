@@ -33,26 +33,26 @@ public class StorageDateController {
         }
         return res;
     }
-    
+
     @PutMapping("/updateStoragePerDate")
     @Transactional(readOnly = false)
-	@CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*")
     public String updateStoragePerDate() {
-    	if(storageDateService.deleteStorageDate()== 0){
-    		StorageDateVo vo = new StorageDateVo();
-    		List<StorageDateVo> vList = storageDateService.selectStorageDate(vo);
-    		
-    		for(StorageDateVo target : vList) {
-    			if(storageDateService.insertStorageDate(target) == 0) {
-    				
-    			}
-    			else {
-    				return "false";
-    			}
-    		}
-    	}
-    	
-    	return "ok";
+        if(storageDateService.deleteStorageDate()== 0){
+            StorageDateVo vo = new StorageDateVo();
+            List<StorageDateVo> vList = storageDateService.selectStorageDate(vo);
+
+            for(StorageDateVo target : vList) {
+                if(storageDateService.insertStorageDate(target) == 0) {
+
+                }
+                else {
+                    return "false";
+                }
+            }
+        }
+
+        return "ok";
     }
 
 }
