@@ -105,7 +105,7 @@ public class StorageTableController {
                 // date -1을 하고 새롭게 나온 date를 date로 넣어줌.
                 // 그렇게 n번 loop 돌리면서 sum 값을 계산하고 그것을 used로 넣어줌.
                 // add를 통해서 vlist를 update한 후 date를 하나증가시킴. 그렇게되면 현재 date는 내일이 되고 vlist가 하나늘어남
-                // 이런식으로 while문을 돌아서 total > 총 용량이 되면 wihle문 종료
+                // 이런식으로 while문을 돌아서 total > 총 용량이 되면 while문 종료
                 sum += vList.get(vList.size() - i).getUsed(); // 당일 사용량의 합
             }
             avg = Math.round((sum / req.getN()) * 100) /100.0;
