@@ -2,11 +2,13 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageUseDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
+import com.humintecTest.dashboard.response.storageUseMoveAvgResponseFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
 import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,8 +52,26 @@ public class StorageUseServiceImpl implements StorageUseService {
         return storageUseDao.searchStorageUse(req);
     }
 
+    @Override
+    public List<storageUseMoveAvgResponseFormat> moveAvgStorageUse(StorageUseVo vo) {
 
-	@Override
+        return null;
+    }
+    
+    @Override
+	public List<storageUseResponseFormat> selectStorageUseNP(DateRequestFormat req) {
+		if(req.getType() == 1) {
+			return storageUseDao.selectStorageUseByYearNP();
+		}
+		else if(req.getType() == 2) {
+			return storageUseDao.selectStorageUseByMonthNP();
+		}
+		else {
+			return storageUseDao.selectStorageUseByDateNP();
+		}
+	}
+
+    @Override
 	public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) {
 		return storageUseDao.selectStorageUseByDate(req);
 	}

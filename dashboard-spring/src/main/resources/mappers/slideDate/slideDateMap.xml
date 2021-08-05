@@ -23,6 +23,38 @@
             slide_per_date
     </delete>
     
+    <select id = "selectSlidePerDateByDateNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    	select
+    		date_format(date,'%Y-%m-%d') as type,
+    		slide_sum as slide_sum
+    	from
+    		slide_per_date
+    	order by type asc
+    </select>
+
+    
+    <select id = "selectSlidePerDateByMonthNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    	select
+    		date_format(date,'%Y-%m') as type,
+        	sum(slide_sum) as slide_sum
+    	from
+    		slide_per_date
+    	group by
+        	type
+        order by type asc
+    </select>
+    
+    <select id = "selectSlidePerDateByYearNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    	select
+    		date_format(date,'%Y') as type,
+        	sum(slide_sum) as slide_sum
+    	from
+    		slide_per_date
+    	group by
+        	type
+        order by type asc
+    </select>
+    
     <select id = "selectSlidePerDateByDate" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
     	select
     		date_format(date,'%Y-%m-%d') as type,

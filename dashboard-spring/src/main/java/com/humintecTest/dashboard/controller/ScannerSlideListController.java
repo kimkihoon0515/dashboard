@@ -54,7 +54,17 @@ public class ScannerSlideListController {
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){
-    	ScannerSlideVo vo = new ScannerSlideVo();
+    	if(req.getStartDate() == null || req.getFinishDate() == null) {
+    		List<ScannerSlideVo> vList = scannerSlideListService.searchScannerList();
+        	
+        	ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
+        	
+        	for(ScannerSlideVo target : vList) {
+        		res.add(new scannerResponseFormat(target));
+        	}
+        	
+        	return res;
+    	}
     	
     	List<ScannerSlideVo> vList = scannerSlideListService.searchScannerListByDate(req);
     	

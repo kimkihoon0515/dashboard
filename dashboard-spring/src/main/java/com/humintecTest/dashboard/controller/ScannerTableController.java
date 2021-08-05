@@ -66,6 +66,17 @@ public class ScannerTableController {
 	@Transactional(readOnly = false)
 	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> searchScannerTableByDate(@RequestBody DateRequestFormat req){
+		if(req.getStartDate() == null || req.getFinishDate() == null) {
+			List<ScannerTableVo> vList = scannerTableService.searchScannerTable();
+			
+			ArrayList<ScannerTableResponseFormat> res = new ArrayList<ScannerTableResponseFormat>();
+			for(ScannerTableVo target : vList) {
+				res.add(new ScannerTableResponseFormat(target));
+			}
+			
+			return res;
+		}
+		
 		List<ScannerTableVo> vList = scannerTableService.searchScannerTableBydate(req);
 		
 		ArrayList<ScannerTableResponseFormat> res = new ArrayList<ScannerTableResponseFormat>();

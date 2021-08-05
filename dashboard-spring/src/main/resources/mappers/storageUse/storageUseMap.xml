@@ -12,6 +12,39 @@
         order by date asc
     </select>
     
+    <select id = "selectStorageUseByDateNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat">
+        select
+               date_format(last_scan_date, '%Y-%m-%d')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        group by
+        	type
+        order by type asc
+    </select>
+    
+    <select id = "selectStorageUseByMonthNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat">
+        select
+               date_format(last_scan_date, '%Y-%m')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        group by
+        	type
+        order by type asc
+    </select>
+    
+    <select id = "selectStorageUseByYearNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat">
+        select
+               date_format(last_scan_date, '%Y')as type,
+               sum(file_size) as daily_sum
+        from
+        	slide_list
+        group by
+        	type
+        order by type asc
+    </select>
+    
     <select id = "selectStorageUseByDate" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat">
         select
                date_format(last_scan_date, '%Y-%m-%d')as type,
@@ -61,7 +94,10 @@
             storage_use
     </delete>
     <select id = "showStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo">
-        select *
+        select date,
+        case when daily_sum > 1099511627776 then truncate(daily_sum/1099511627776,2)
+        when daily_sum>1073741824 and daily_sum<1099511627776 then truncate(daily_sum/1073741824,2)
+        end as daily_sum
         from storage_use
     </select>
     <select id = "searchStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo">

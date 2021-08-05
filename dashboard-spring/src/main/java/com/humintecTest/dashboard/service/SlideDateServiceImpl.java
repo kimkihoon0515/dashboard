@@ -40,6 +40,19 @@ public class SlideDateServiceImpl implements SlideDateService{
             return -1;
         }
     }
+    
+    @Override
+	public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req) {
+		if(req.getType() == 1) {
+			return slideDateDao.selectSlidePerDateByYearNP();
+		}
+		else if(req.getType() == 2) {
+			return slideDateDao.selectSlidePerDateByMonthNP();
+		}
+		else {
+			return slideDateDao.selectSlidePerDateByDateNP();
+		}
+	}
 
 	@Override
 	public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req) {

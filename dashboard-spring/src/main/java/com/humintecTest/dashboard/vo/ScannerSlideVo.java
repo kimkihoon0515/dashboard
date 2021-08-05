@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ScannerSlideVo {
     private String scanner_type;
-    private int slide_sum;
+    private long slide_sum;
 }

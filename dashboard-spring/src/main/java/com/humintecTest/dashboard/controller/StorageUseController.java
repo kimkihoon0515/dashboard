@@ -1,5 +1,8 @@
 package com.humintecTest.dashboard.controller;
 
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.humintecTest.dashboard.response.storageUseTypeResponseFormat;
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
 import com.humintecTest.dashboard.service.StorageUseService;
@@ -35,12 +38,17 @@ public class StorageUseController {
         return res;
     }
 
-
     @PostMapping("/searchStorageUseByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
     	List<storageUseResponseFormat> vList;
+    	
+    	if(req.getStartDate() == null || req.getFinishDate() == null) {
+    		vList = storageUseService.selectStorageUseNP(req);
+    		
+    		return vList;
+    	}
     	
     	if(req.getType() == 1) {
     		vList = storageUseService.selectStorageUseByYear(req);

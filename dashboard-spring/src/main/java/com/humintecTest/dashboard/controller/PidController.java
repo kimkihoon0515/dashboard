@@ -24,6 +24,12 @@ public class PidController {
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<pidchResponseFormat> searchPid (@RequestBody DateRequestFormat req){
+    	if(req.getFinishDate() == null || req.getStartDate() == null) {
+    		List<pidchResponseFormat> vList = pidService.searchPid();
+            
+            return vList;
+    	}
+    	
         List<pidchResponseFormat> vList = pidService.searchPidByDate(req);
         
         return vList;
