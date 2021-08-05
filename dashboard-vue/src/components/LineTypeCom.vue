@@ -1,7 +1,8 @@
 <template>
   <div class="chartbox">
     <div id="filter">
-    <input type="Number" v-model="maN"/>
+    <input id="param" type="Number" min=1 v-model="maN"/>
+    <span id="predict">용량 초과 예정일: {{predictDate}}</span>
     </div>
     <div id="chart">
     <line-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
@@ -29,22 +30,21 @@ export default {
   },
   data () {
     return {
+      predictDate:null,
       maN:7,
       change:0,
      dataform:{
         label: null,
         data: null,
-
-
-        //backgroundColor: null,
         fill:false,
         interaction:{
             intersect:true
           },
-        pointRadius:0.7,
-        pointBackgroundColor: 'white',
-        borderWidth: 3,
-        borderColor: []
+        pointRadius:0,
+        pointBackgroundColor: "transparent",
+        borderWidth: 2,
+        borderColor: '#f87979',
+        borderDash:null
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
@@ -58,6 +58,10 @@ export default {
             backgroundColor: 'white'
           }
         },
+        interaction:{
+          mode:'dataset'
+        }
+        ,
         title: {
           display: true,
           text: this.query.chartName,
@@ -107,7 +111,7 @@ export default {
       var y= this.query.yKey;
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-
+      this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
       let currentIndex=this.getIndex(this.datacollection.labels,moment().format('YYYY-MM-DD'))
       console.log(res.data)
       console.log(currentIndex)
@@ -115,16 +119,22 @@ export default {
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
-        for (let j=0; j<tmp.data.length;j++){
-          if(j<=currentIndex){
-            tmp.borderColor.push('#f87979')
-          }
-          else{
-            tmp.borderColor.push('#2ECC70')
+        let tmpPredict= _.cloneDeep(tmp);
+        tmpPredict.label=keys[y[i]]+"예측값";
+        tmpPredict.borderDash=[5,5]
+        for (let j=currentIndex+1; j<tmpPredict.data.length;j++){
+          tmp.data.pop();
+        }
+        for (let k=0; k<=currentIndex;k++){
+          tmpPredict.data[k]=null;
+          if(k==currentIndex){
+            tmpPredict.data[k]=""
           }
         }
-        this.datacollection.datasets.pop();
+        
+        this.datacollection.datasets=[];
         this.datacollection.datasets.push(tmp);
+        this.datacollection.datasets.push(tmpPredict);
       }
       console.log(this.datacollection.datasets)
       this.change=1;
@@ -179,5 +189,17 @@ export default {
   }
   #chart{
     height:50%
+  }
+  #param{
+    float: left;
+    width: 20%;
+  }
+  #predictDate{
+    float: right;
+    font-size: 18pt;
+  }
+  #predict{
+    float: right;
+    width: 60%;
   }
 </style>
