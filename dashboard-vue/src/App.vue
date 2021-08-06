@@ -66,7 +66,7 @@ export default {
 
 #nav {
   position: fixed;
-  padding: 30px;
+  padding: 15px;
   margin-bottom: 5px;
   width: 100%;
   height: 60px;
