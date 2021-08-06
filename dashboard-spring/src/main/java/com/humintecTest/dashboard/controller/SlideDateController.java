@@ -57,26 +57,13 @@ public class SlideDateController {
 	@Transactional(readOnly = false)
 	@CrossOrigin(origins = "*")
 	public String updateSlidePerDate() {
-		if(slideDateService.deleteSlideDate()== 0){
-			SlideDateVo vo = new SlideDateVo();
-			List<SlideDateVo> vList = slideDateService.selectSlideDate(vo);
-
-			for(SlideDateVo target : vList) {
-				if(slideDateService.insertSlideDate(target) == 0) {
-
-				}
-				else {
-					return "false";
-				}
-			}
-
+		if(slideDateService.updateSlideDate()== 0){
+			return "ok";
 		}
 		else {
 			return "false";
 
 		}
-
-		return "ok";
 	}
 
 	@GetMapping("/showSlideDate") //전체 데이터

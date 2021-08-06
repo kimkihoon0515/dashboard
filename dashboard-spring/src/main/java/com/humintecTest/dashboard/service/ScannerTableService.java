@@ -53,5 +53,26 @@ public class ScannerTableService {
 	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req){
 		return scannerTableDao.searchScannerTableById(req);
 	}
+	
+	public int updateScannerTable() {
+		if(this.deleteScannerTable() == 0) {
+			ScannerTableVo vo = new ScannerTableVo();
+			List<ScannerTableVo> vList = this.selectScannerTable(vo);
+
+			for(ScannerTableVo target : vList) {
+				if(this.insertScannerTable(target) == 0) {
+
+				}
+				else {
+					return -1;
+				}
+			}
+		}
+		else {
+			return -1;
+		}
+
+		return 0;
+	}
 
 }

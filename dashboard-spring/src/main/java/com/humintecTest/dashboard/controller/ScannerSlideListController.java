@@ -35,17 +35,8 @@ public class ScannerSlideListController {
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateScanner() {
-        if(scannerSlideListService.deleteScanner() == 0) {
-            ScannerSlideVo vo = new ScannerSlideVo();
-            List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
-
-            for(ScannerSlideVo target : vList) {
-                if(scannerSlideListService.insertScanner(target) == 0){
-
-                }
-                else
-                    return "false";
-            }
+        if(scannerSlideListService.updateScanner() == 0) {
+           return "false"; 
         }
         return "ok";
     }

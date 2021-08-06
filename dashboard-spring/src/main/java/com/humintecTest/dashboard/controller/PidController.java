@@ -36,23 +36,15 @@ public class PidController {
     @Transactional(readOnly = false)
     @CrossOrigin("*")
     public String updatePid() {
-        if(pidService.deletePid() == 0) {
-            PidVo vo = new PidVo();
-            List<PidVo> vList = pidService.selectPid(vo);
-
-            for (PidVo target : vList){
-                if(pidService.insertPid(target) == 0){
-
-                }
-                else
-                    return "false";
-            }
+        int check;
+        check = pidService.updatePid();
+        
+        if(check == 0) {
+        	return "ok";
         }
         else {
-            return "false";
+        	return "false";
         }
-
-        return "ok";
 
     }
 }

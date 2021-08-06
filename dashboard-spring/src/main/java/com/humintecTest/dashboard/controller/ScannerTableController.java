@@ -27,24 +27,12 @@ public class ScannerTableController {
 	@Transactional(readOnly = false)
 	@CrossOrigin(origins = "*")
 	public String updateScannerTable() {
-		if(scannerTableService.deleteScannerTable() == 0) {
-			ScannerTableVo vo = new ScannerTableVo();
-			List<ScannerTableVo> vList = scannerTableService.selectScannerTable(vo);
-
-			for(ScannerTableVo target : vList) {
-				if(scannerTableService.insertScannerTable(target) == 0) {
-
-				}
-				else {
-					return "false";
-				}
-			}
+		if(scannerTableService.updateScannerTable() == 0) {
+			return "ok";
 		}
 		else {
 			return "false";
 		}
-
-		return "ok";
 	}
 
 	@GetMapping("/searchScannerTable") //전체 데이터

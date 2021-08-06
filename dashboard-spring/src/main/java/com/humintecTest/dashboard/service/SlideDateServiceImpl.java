@@ -40,6 +40,26 @@ public class SlideDateServiceImpl implements SlideDateService{
             return -1;
         }
     }
+    
+    public int updateSlideDate() {
+    	if(this.deleteSlideDate()== 0){
+			SlideDateVo vo = new SlideDateVo();
+			List<SlideDateVo> vList = this.selectSlideDate(vo);
+
+			for(SlideDateVo target : vList) {
+				if(this.insertSlideDate(target) == 0) {
+				}
+				else {
+					return -1;
+				}
+			}
+		}
+		else {
+			return -1;
+		}
+
+		return 0;
+    }
 
     @Override
     public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req) {

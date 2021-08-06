@@ -1,7 +1,6 @@
 package com.humintecTest.dashboard.controller;
 
 
-import com.humintecTest.dashboard.dao.StorageTableDao;
 import com.humintecTest.dashboard.request.StorageTableRequestFormat;
 import com.humintecTest.dashboard.response.storageTableResponseFormat;
 import com.humintecTest.dashboard.service.StorageTableService;
@@ -25,28 +24,6 @@ import java.util.List;
 public class StorageTableController {
     @Autowired
     StorageTableService storageTableService;
-
-
-    @GetMapping("/selectStorageTable") //사용안함
-    @CrossOrigin(origins = "*")
-    public List<StorageTableVo> selectStorageTable(StorageTableVo vo){
-        List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
-        return vList;
-    }
-
-    @PutMapping("/insertStorageTable")  //사용안함
-    @CrossOrigin(origins = "*")
-    public String insertStorageTable(StorageTableVo vo){
-        List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
-
-        for(StorageTableVo target : vList){
-            if(storageTableService.insertStorageTable(target)== 0){
-            }
-            else
-                return "false";
-        }
-        return "ok";
-    }
 
     @PutMapping("/deleteStorageTable")
     @CrossOrigin(origins = "*")
