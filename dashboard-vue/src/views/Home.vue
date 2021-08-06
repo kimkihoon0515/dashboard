@@ -157,7 +157,7 @@ export default {
   
   #dynamic-chart .chartbox {
     width: 460px;
-    height: 460px;
+    height: 300px;
     display: inline-block;
     margin: 0 30px 30px 30px;
     overflow: hidden;
@@ -179,6 +179,11 @@ export default {
     width: 300px;
     height: 280px;
   }
+
+  input {
+    background-color: #fff;
+  }
+
   button {
   border: 1px solid skyblue;
   border-radius: 5px;
@@ -194,11 +199,11 @@ export default {
 
   @media screen and (max-width: 1530px) {
     #dynamic-chart .chartbox {
-      width: 410px;
-      height: 250px;
+      width: 430px;
+      height: 270px;
     }
     #static-chart .chartbox {
-      width: 310px;
+      width: 320px;
       height: 260px
     }
   }
