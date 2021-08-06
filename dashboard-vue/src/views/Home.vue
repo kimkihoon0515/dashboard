@@ -161,18 +161,20 @@ export default {
     display: inline-block;
     margin: 0 30px 30px 30px;
     overflow: hidden;
-    border: 1px solid rgb(53, 196, 231);
+    /* border: 1px solid rgb(53, 196, 231); */
     border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   #static-chart .chartbox {
     width: 360px;
     height: 280px;
     display: inline-block;
-    margin: 5px 15px 45px 15px;
+    margin: 5px 15px 25px 15px;
     overflow: hidden; 
-    border: 1px solid rgb(53, 196, 231);
+    /* border: 1px solid rgb(53, 196, 231); */
     border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   #static-chart .for-size {
