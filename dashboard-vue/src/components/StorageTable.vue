@@ -88,6 +88,6 @@
 </script>
 <style >
 .cyan {
-    background-color: #dcdee3;
+    background-color: #ededed;
   }
 </style>
