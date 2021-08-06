@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <div id="static-chart" class="grid">
-      <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameChange(name)">{{name}}</button>
+      <storage-table @rowclick="rowclick"></storage-table>
       <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
       <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
     </div>
@@ -30,9 +30,9 @@ import LineTypeCom from '../components/LineTypeCom.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
 import VSwatches from 'vue-swatches'
 import 'vue-swatches/dist/vue-swatches.css'
-
+import StorageTable from '../components/StorageTable.vue'
 export default {
-  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches },
+  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches,StorageTable, StorageTable },
   name: 'home',
   data() {
     return {
@@ -106,8 +106,11 @@ export default {
   },
   methods:{
     nameChange(name){
+      console.log(name)
       this.storageName=name;
-
+    },
+    rowclick(selectStorage){
+      this.nameChange(selectStorage)
     }
   },
   mounted() {
