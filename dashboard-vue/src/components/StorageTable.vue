@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card style="width: 360px; display: inline-block;">
     <v-simple-table dense fixed-header
       height="200px" @click:row="handleClick" v-model="selectedRow">
       <template v-slot:default>
