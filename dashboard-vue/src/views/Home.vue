@@ -12,8 +12,8 @@
       </div>
       <div class="form__field">
         <div class="form__label">
-          <strong>Please choose a color:</strong>
-          <v-swatches v-model="color" inline></v-swatches>
+          <strong @click="viewPalette">Color Palette</strong>
+          <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
         </div>
       </div>
       <div id="type-chart">
@@ -36,6 +36,7 @@ export default {
   name: 'home',
   data() {
     return {
+      palette: false,
       color: '#f87979',
       slide_date:{
         name:"slide-date",
@@ -111,6 +112,9 @@ export default {
     },
     rowclick(selectStorage){
       this.nameChange(selectStorage)
+    },
+    viewPalette(){
+      this.palette = !this.palette
     }
   },
   mounted() {
@@ -132,6 +136,10 @@ export default {
     height: 90%;
   }
 
+  strong {
+    cursor: pointer;
+  }
+
   .grid {
     display: block;
     float: left;
@@ -148,31 +156,36 @@ export default {
   }
   
   #dynamic-chart .chartbox {
-  width: 460px;
-  height: 460px;
-  display: inline-block;
-  margin: 0 30px 30px 30px;
-  overflow: hidden;
-  border: 1px solid rgb(53, 196, 231);
-  border-radius: 10px;
-  /* float: left; */
+    width: 460px;
+    height: 300px;
+    display: inline-block;
+    margin: 0 30px 30px 30px;
+    overflow: hidden;
+    /* border: 1px solid rgb(53, 196, 231); */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   #static-chart .chartbox {
-  width: 360px;
-  height: 280px;
-  display: inline-block;
-  margin: 0 15px 50px 15px;
-  overflow: hidden; 
-  border: 1px solid rgb(53, 196, 231);
-  border-radius: 10px;
-  /* float: left; */
+    width: 360px;
+    height: 280px;
+    display: inline-block;
+    margin: 5px 15px 25px 15px;
+    overflow: hidden; 
+    /* border: 1px solid rgb(53, 196, 231); */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   #static-chart .for-size {
     width: 300px;
     height: 280px;
   }
+
+  input {
+    background-color: #fff;
+  }
+
   button {
   border: 1px solid skyblue;
   border-radius: 5px;
@@ -188,11 +201,11 @@ export default {
 
   @media screen and (max-width: 1530px) {
     #dynamic-chart .chartbox {
-      width: 410px;
-      height: 250px;
+      width: 430px;
+      height: 270px;
     }
     #static-chart .chartbox {
-      width: 310px;
+      width: 320px;
       height: 260px
     }
   }
