@@ -87,10 +87,7 @@
   }
 </script>
 <style >
-.red {
-    background-color: blue;
-  }
 .cyan {
-    background-color: blue;
+    background-color: #dcdee3;
   }
 </style>
