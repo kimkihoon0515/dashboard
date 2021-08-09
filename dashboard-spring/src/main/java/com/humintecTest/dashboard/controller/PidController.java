@@ -18,7 +18,6 @@ public class PidController {
 
     @PostMapping("/searchPidByDate")
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<pidchResponseFormat> searchPid (@RequestBody DateRequestFormat req){
         if(req.getFinishDate() == null || req.getStartDate() == null) {
             List<pidchResponseFormat> vList = pidService.searchPid();
@@ -33,7 +32,6 @@ public class PidController {
 
     @PutMapping("/updatePid")
     @Transactional(readOnly = false)
-    @CrossOrigin("*")
     public String updatePid() {
         int check;
         check = pidService.updatePid();

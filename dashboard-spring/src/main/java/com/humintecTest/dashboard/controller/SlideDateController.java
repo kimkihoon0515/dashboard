@@ -26,7 +26,6 @@ public class SlideDateController {
 
 	@PostMapping("/selectSlidePerDate")
 	@Transactional(readOnly = true)
-	@CrossOrigin("*")
 	public List<slideTypeResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
 		List<slideTypeResponseFormat> vList;
 		if(req.getStartDate() == null || req.getFinishDate() == null){
@@ -55,7 +54,6 @@ public class SlideDateController {
 
 	@PutMapping("/updateSlidePerDate")
 	@Transactional(readOnly = false)
-	@CrossOrigin(origins = "*")
 	public String updateSlidePerDate() {
 		if(slideDateService.updateSlideDate()== 0){
 			return "ok";
@@ -67,6 +65,7 @@ public class SlideDateController {
 	}
 
 	@GetMapping("/showSlideDate") //전체 데이터
+	@Transactional(readOnly = true)
 	public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)
 	{
 		SlideDateVo vo1 = new SlideDateVo();

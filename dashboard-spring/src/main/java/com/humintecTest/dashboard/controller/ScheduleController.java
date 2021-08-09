@@ -16,6 +16,7 @@ import com.humintecTest.dashboard.service.StorageFreeService;
 import com.humintecTest.dashboard.service.StorageTableService;
 import com.humintecTest.dashboard.service.StorageUseService;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class ScheduleController {
 	@Autowired
@@ -37,7 +38,6 @@ public class ScheduleController {
 
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
-	@CrossOrigin(origins = "*")
 	@Scheduled(fixedRate = 86400000)
 	public String uadateAll() {
 		int check = 0;

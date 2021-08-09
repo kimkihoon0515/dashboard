@@ -16,7 +16,6 @@ public class StorageDateController {
 
     @PutMapping("/updateStoragePerDate")
     @Transactional(readOnly = false)
-    @CrossOrigin(origins = "*")
     public String updateStoragePerDate() {
         if(storageDateService.updateStorageDate()== 0){
             return "ok";

@@ -25,7 +25,6 @@ public class StorageFreeController {
 
     @PostMapping("/searchStorageFreeByDate")
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> searchStorageFree (@RequestBody DateRequestFormat req) {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFreeByDate(req);
 
@@ -40,7 +39,6 @@ public class StorageFreeController {
 
     @PostMapping("/searchStorageFreeById")
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> searchStorageFreeById (@RequestBody StorageTableRequestFormat req) {
         List<StorageFreeVo> vList = storageFreeService.searchStorageFreeById(req);
 
@@ -55,7 +53,6 @@ public class StorageFreeController {
 
     @PutMapping("/updateStorageFree")
     @Transactional(readOnly = false)
-    @CrossOrigin(origins = "*")
     public String updateStorageFree() {
         if (storageFreeService.updateStorageFree() == 0) {
         	return "ok";
@@ -68,7 +65,6 @@ public class StorageFreeController {
 
     @GetMapping("/showStorageFree") //전체 데이터
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<storageFreeResponseFormat> showStorageFree (StorageFreeVo vo){
         StorageFreeVo vo1 = new StorageFreeVo();
         List<StorageFreeVo> vList = storageFreeService.showStorageFree(vo1);

@@ -18,6 +18,7 @@ import com.humintecTest.dashboard.response.ScannerTableResponseFormat;
 import com.humintecTest.dashboard.service.ScannerTableService;
 import com.humintecTest.dashboard.vo.ScannerTableVo;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class ScannerTableController {
 	@Autowired
@@ -25,7 +26,6 @@ public class ScannerTableController {
 
 	@PutMapping("/updateScannerTable")
 	@Transactional(readOnly = false)
-	@CrossOrigin(origins = "*")
 	public String updateScannerTable() {
 		if(scannerTableService.updateScannerTable() == 0) {
 			return "ok";
@@ -37,7 +37,6 @@ public class ScannerTableController {
 
 	@GetMapping("/searchScannerTable") //전체 데이터
 	@Transactional(readOnly = true)
-	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> searchScannerTable(){
 		List<ScannerTableVo> vList = scannerTableService.searchScannerTable();
 
@@ -51,7 +50,6 @@ public class ScannerTableController {
 
 	@PostMapping("/searchScannerTableByDate")
 	@Transactional(readOnly = false)
-	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> searchScannerTableByDate(@RequestBody DateRequestFormat req){
 		if(req.getStartDate() == null || req.getFinishDate() == null) {
 			List<ScannerTableVo> vList = scannerTableService.searchScannerTable();
@@ -76,7 +74,6 @@ public class ScannerTableController {
 
 	@PostMapping("/searchScannerTableById")
 	@Transactional(readOnly = false)
-	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> searchScannerTableById(@RequestBody ScannerTableRequestFormat req){
 		List<ScannerTableVo> vList = scannerTableService.searchScannerTableById(req);
 

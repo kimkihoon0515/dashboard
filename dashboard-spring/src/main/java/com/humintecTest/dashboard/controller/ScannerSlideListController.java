@@ -19,7 +19,6 @@ public class ScannerSlideListController {
 
     @GetMapping("/showScanner") //전체 값 불러오기
     @Transactional(readOnly = true)
-    @CrossOrigin("*")
     public List<scannerResponseFormat> showScanner()
     {
         ScannerSlideVo vo = new ScannerSlideVo();
@@ -33,7 +32,6 @@ public class ScannerSlideListController {
 
     @PutMapping("/updateScanner")
     @Transactional(readOnly = false)
-    @CrossOrigin(origins = "*")
     public String updateScanner() {
         if(scannerSlideListService.updateScanner() == 0) {
            return "false"; 
@@ -43,7 +41,6 @@ public class ScannerSlideListController {
 
     @PostMapping("/searchScannerListByDate")
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){
         if(req.getStartDate() == null || req.getFinishDate() == null) {
             List<ScannerSlideVo> vList = scannerSlideListService.searchScannerList();

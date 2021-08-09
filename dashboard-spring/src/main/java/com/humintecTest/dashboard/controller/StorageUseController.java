@@ -38,7 +38,6 @@ public class StorageUseController {
 
     @PostMapping("/searchStorageUseByDate")
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
         List<storageUseResponseFormat> vList;
 
@@ -63,7 +62,6 @@ public class StorageUseController {
 
     @PutMapping("/updateStorageUse")
     @Transactional(readOnly = false)
-    @CrossOrigin(origins = "*")
     public String updateStorageUse() {
         if(storageUseService.updateStorageUse() == 0) {
             return "ok";
