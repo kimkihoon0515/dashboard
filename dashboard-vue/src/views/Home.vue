@@ -210,7 +210,7 @@ export default {
     background-color: skyblue;
   }
 
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1450px) {
     .container_A {
       width: 68%;
     }
@@ -244,6 +244,49 @@ export default {
 
     .container_B .chartbox {
       width: 330px;
+      height: 310px;
+      display: inline-block;
+      margin: 0 10px 10px 10px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+  }
+
+  @media screen and (max-width: 1324px) {
+    .container_A {
+      width: 68%;
+    }
+
+    .form__field {
+      width: 4%;
+    }
+
+    .container_B {
+      width: 28%;
+    }
+    .container_A #slide-date .chartbox {
+      width: 820px;
+      height: 320px;
+      display: inline-block;
+      margin: 0 0px 10px 0px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+
+    .container_A #under .chartbox {
+      width: 245px;
+      height: 300px;
+      display: inline-block;
+      margin: 0 5px 10px 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+
+    .container_B .chartbox {
+      width: 320px;
       height: 310px;
       display: inline-block;
       margin: 0 10px 10px 10px;

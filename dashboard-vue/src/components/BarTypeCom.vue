@@ -275,6 +275,6 @@ export default {
 <style>
   #filter {
     font-size: 10pt;
-     height:10%
+    height:10%
   }
 </style>
