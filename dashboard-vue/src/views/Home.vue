@@ -13,7 +13,7 @@
     <div class="form__field grid">
       <div class="form__label">
         <strong @click="viewPalette">Color Palette</strong>
-        <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
+        <v-swatches v-if="palette==true" v-model="color" :swatches="swatches" row-length="10" inline></v-swatches>
       </div>
     </div>
     <div class="container_B grid">
@@ -83,6 +83,7 @@ export default {
         xKey: 0,
         yKey: [3]
       },
+      swatches: ['#1FBC9C', '#1CA085', '#2ECC70', '#27AF60', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E', '#222F3D']
     }
   },
   props: {
@@ -148,7 +149,7 @@ export default {
   }
   
   .container_A {
-    width: 70%;
+    width: 68%;
   }
 
   .form__field {
@@ -156,7 +157,7 @@ export default {
   }
 
   .container_B {
-    width: 26%;
+    width: 28%;
   }
 
   #chart{
@@ -164,27 +165,27 @@ export default {
   }
   
   .container_A #slide-date .chartbox {
-    width: 960px;
+    width: 97%;
     height: 320px;
     display: inline-block;
-    margin: 0 10px 10px 10px;
+    margin: 0 5px 10px 5px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   .container_A #under .chartbox {
-    width: 305px;
+    width: 32%;
     height: 300px;
     display: inline-block;
-    margin: 0 10px 10px 10px;
+    margin: 0 5px 10px 5px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   .container_B .chartbox {
-    width: 360px;
+    width: 380px;
     height: 310px;
     display: inline-block;
     margin: 0 10px 10px 10px;
@@ -211,17 +212,6 @@ export default {
   }
 
   @media screen and (max-width: 1450px) {
-    .container_A {
-      width: 68%;
-    }
-
-    .form__field {
-      width: 4%;
-    }
-
-    .container_B {
-      width: 28%;
-    }
     .container_A #slide-date .chartbox {
       width: 860px;
       height: 320px;
