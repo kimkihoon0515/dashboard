@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <!-- <div id="container">
     <div id="static-chart" class="grid">
       <storage-table @rowclick="rowclick"></storage-table>
       <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
@@ -19,6 +19,30 @@
       <div id="type-chart">
       <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
       <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
+      </div>
+    </div>
+  </div> -->
+  <div>
+    <div class="container_A grid">
+      <div id="slide-date">
+        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
+      </div>
+      <div id="under">
+        <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
+        <div class="chartbox">스택바 자리</div>
+        <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
+      </div>
+    </div>
+    <div class="form__field grid">
+      <div class="form__label">
+        <strong @click="viewPalette">Color Palette</strong>
+        <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
+      </div>
+    </div>
+    <div class="container_B grid">
+      <div id="right">
+        <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
+        <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
       </div>
     </div>
   </div>
@@ -143,43 +167,50 @@ export default {
   .grid {
     display: block;
     float: left;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
   }
-
-  #static-chart {
-    width: 28%;
-    background-color: rgb(230, 249, 252);
+  
+  .container_A {
+    width: 70%;
   }
-  #dynamic-chart {
-    width: 72%;
+
+  .form__field {
+    width: 4%;
+  }
+
+  .container_B {
+    width: 26%;
   }
   
-  #dynamic-chart .chartbox {
-    width: 460px;
+  .container_A #slide-date .chartbox {
+    width: 960px;
+    height: 320px;
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+  }
+
+  .container_A #under .chartbox {
+    width: 305px;
     height: 300px;
     display: inline-block;
-    margin: 0 30px 30px 30px;
+    margin: 0 10px 10px 10px;
     overflow: hidden;
-    /* border: 1px solid rgb(53, 196, 231); */
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
-  #static-chart .chartbox {
+  .container_B .chartbox {
     width: 360px;
-    height: 280px;
+    height: 310px;
     display: inline-block;
-    margin: 5px 15px 25px 15px;
-    overflow: hidden; 
-    /* border: 1px solid rgb(53, 196, 231); */
+    margin: 0 10px 10px 10px;
+    overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
-  }
-
-  #static-chart .for-size {
-    width: 300px;
-    height: 280px;
   }
 
   input {
