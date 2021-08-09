@@ -37,4 +37,26 @@ public class StorageDateserviceImpl implements StorageDateService{
             return 1;
         }
     }
+
+	@Override
+	public int updateStorageDate() {
+		if(this.deleteStorageDate()== 0){
+            StorageDateVo vo = new StorageDateVo();
+            List<StorageDateVo> vList = this.selectStorageDate(vo);
+
+            for(StorageDateVo target : vList) {
+                if(this.insertStorageDate(target) == 0) {
+
+                }
+                else {
+                    return -1;
+                }
+            }
+        }
+		else {
+			return -1;
+		}
+
+        return 0;
+	}
 }

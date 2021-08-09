@@ -13,4 +13,5 @@ public interface StorageFreeService {
     public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req);
     public List<StorageFreeVo> searchStorageFreeById(StorageTableRequestFormat req);
     public List<StorageFreeVo> showStorageFree(StorageFreeVo vo);
+    public int updateStorageFree();
 }

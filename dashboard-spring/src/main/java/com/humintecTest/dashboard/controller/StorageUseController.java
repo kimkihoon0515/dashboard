@@ -65,24 +65,13 @@ public class StorageUseController {
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateStorageUse() {
-        if(storageUseService.deleteStorageUse() == 0) {
-            StorageUseVo vo = new StorageUseVo();
-            List<StorageUseVo> vList = storageUseService.selectStorageUse(vo);
-
-            for(StorageUseVo target : vList) {
-                if(storageUseService.insertStorageUse(target)==0) {
-
-                }
-                else {
-                    return "insert fail";
-                }
-            }
+        if(storageUseService.updateStorageUse() == 0) {
+            return "ok";
         }
         else {
             return "delete fail";
         }
 
-        return "ok";
     }
 
 }

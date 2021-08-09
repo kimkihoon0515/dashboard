@@ -39,7 +39,6 @@ public class ScannerTableController {
 	@Transactional(readOnly = true)
 	@CrossOrigin(origins = "*")
 	public List<ScannerTableResponseFormat> searchScannerTable(){
-		ScannerTableVo vo = new ScannerTableVo();
 		List<ScannerTableVo> vList = scannerTableService.searchScannerTable();
 
 		ArrayList<ScannerTableResponseFormat> res = new ArrayList<ScannerTableResponseFormat>();

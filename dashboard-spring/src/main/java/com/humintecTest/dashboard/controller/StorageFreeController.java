@@ -57,22 +57,12 @@ public class StorageFreeController {
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateStorageFree() {
-        if (storageFreeService.deleteStorageFree() == 0) {
-            StorageFreeVo vo = new StorageFreeVo();
-            List<StorageFreeVo> vList = storageFreeService.selectStorageFree(vo);
-
-            for (StorageFreeVo target : vList) {
-                if (storageFreeService.insertStorageFree(target) == 0) {
-
-                } else
-                    return "false";
-            }
+        if (storageFreeService.updateStorageFree() == 0) {
+        	return "ok";
         }
         else{
             return "false";
         }
-
-        return "ok";
     }
 
 

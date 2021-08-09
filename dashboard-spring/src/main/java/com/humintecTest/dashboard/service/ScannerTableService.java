@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.humintecTest.dashboard.dao.ScannerTableDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.request.ScannerTableRequestFormat;
-import com.humintecTest.dashboard.response.ScannerTableResponseFormat;
 import com.humintecTest.dashboard.vo.ScannerTableVo;
 
 @Service

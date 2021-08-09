@@ -4,7 +4,6 @@ import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.slideTypeResponseFormat;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 
-import java.util.Date;
 import java.util.List;
 
 public interface SlideDateService {

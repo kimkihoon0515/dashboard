@@ -53,4 +53,24 @@ public class StorageFreeServiceImpl implements StorageFreeService{
     public List<StorageFreeVo> showStorageFree(StorageFreeVo vo) {
         return storageFreeDao.showStorageFree(vo);
     }
+
+	@Override
+	public int updateStorageFree() {
+		if (this.deleteStorageFree() == 0) {
+            StorageFreeVo vo = new StorageFreeVo();
+            List<StorageFreeVo> vList = this.selectStorageFree(vo);
+
+            for (StorageFreeVo target : vList) {
+                if (this.insertStorageFree(target) == 0) {
+
+                } else
+                    return -1;
+            }
+        }
+        else{
+            return -1;
+        }
+
+        return 0;
+	}
 }

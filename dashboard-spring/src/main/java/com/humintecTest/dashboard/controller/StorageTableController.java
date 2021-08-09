@@ -134,21 +134,11 @@ public class StorageTableController {
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
     public String updateStorageTable() {
-        StorageTableVo vo = new StorageTableVo();
-        if(storageTableService.deleteStorageTable()==0){
-            List<StorageTableVo> vList = storageTableService.selectStorageTable(vo);
-
-            for(StorageTableVo target : vList){
-                if(storageTableService.insertStorageTable(target)== 0){
-                }
-                else {
-                    return "false";
-                }
-            }
+        if(storageTableService.updateStorageTable()==0){
+            return "ok";
         }
         else {
             return "false";
         }
-        return "ok";
     }
 }
