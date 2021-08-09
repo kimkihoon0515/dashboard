@@ -44,7 +44,6 @@ export default {
       default : null//moment().format('YYYY-MM-DD').toString,
     }
   },
-
   data () {
     return {
       checked:true,
@@ -69,79 +68,77 @@ export default {
         ]
       },
       chartoptions:{
-          onClick: this.handleChartClick,
-          title: {
-            display: true,
-            text: this.query.chartName,
-            fontSize: 16
-          },
-          plugins: {
+        onClick: this.handleChartClick,
+        title: {
+          display: true,
+          text: this.query.chartName,
+          fontSize: 16
+        },
+        plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'xy'
+            },
             zoom: {
-              pan: {
-                enabled: true,
-                mode: 'xy'
-              },
-              zoom: {
-                enabled: true,
-                mode: 'xy'
+              enabled: true,
+              mode: 'xy'
+            }
+          }
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var dataset = data.datasets[tooltipItem.datasetIndex];
+              var currentValue = dataset.data[tooltipItem.index];
+              if (currentValue >= 1000000000000) {
+                return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+              }
+              else if (currentValue>=1000000000 && currentValue < 1000000000000) {
+                return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+              }
+              else if (currentValue>=1000000 && currentValue < 1000000000) {
+                return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+              }
+              else {
+              return currentValue;
               }
             }
-          },
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                var dataset = data.datasets[tooltipItem.datasetIndex];
-                var currentValue = dataset.data[tooltipItem.index];
-                if (currentValue >= 1000000000000) {
-                  return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+          }
+        }, 
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              callback: function(value, index, values){
+                if (value >=1000000000000){
+                  return value = (value / 1000000000000).toFixed(1) + "TB";
                 }
-                else if (currentValue>=1000000000 && currentValue < 1000000000000) {
-                  return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+                else if (value>=1000000000 && value <1000000000000){
+                  return value = (value / 1000000000).toFixed(1) + "GB";
                 }
-                else if (currentValue>=1000000 && currentValue < 1000000000) {
-                  return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+                else if (value >=1000000 && value < 1000000000) {
+                  return value = (value / 1000000).toFixed(1) + "MB";
                 }
-                else 
-                return currentValue;
+                else {
+                  return value;
+                }
               }
-            }
-          }, 
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      callback: function(value, index, values){
-                        if (value >=1000000000000){
-                          return value = (value / 1000000000000).toFixed(1) + "TB";
-                        }
-                        else if (value>=1000000000 && value <1000000000000){
-                          return value = (value / 1000000000).toFixed(1) + "GB";
-                        }
-                        else if (value >=1000000 && value < 1000000000) {
-                          return value = (value / 1000000).toFixed(1) + "MB";
-                        }
-                        else 
-                        return value;
-                      }
-                  },
-                  gridLines: {
-                      display: true
-                  },
-                  stacked: false
-              }],
-              xAxes: [ {
-              
-                  gridLines: {
-                      display: false
-                  },
-                  stacked: false
-              }]
-          },
-          legend: {
+            },
+            gridLines: {
+              display: true
+            },
+            stacked: false
+          }],
+          xAxes: [{
+            gridLines: {
               display: false
-          },
-          responsive: true,
-          maintainAspectRatio: false
+            },
+            stacked: false
+          }]
+        },
+        responsive: true,
+        maintainAspectRatio: false
       }
     }
   },
@@ -217,7 +214,6 @@ export default {
     }
   },
   mounted() {
-
     this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
     .then((res)=>{
       this.parseBarData(res, 0);
@@ -237,7 +233,6 @@ export default {
         if(this.checked==true){
           console.log(this.labelList)
           this.checkBind=_.cloneDeep(this.labelList);
-
         }
         else{
           this.checkBind=[] 
@@ -281,8 +276,5 @@ export default {
   #filter {
     font-size: 10pt;
      height:10%
-  }
-  #chart{
-    height:100%
   }
 </style>
