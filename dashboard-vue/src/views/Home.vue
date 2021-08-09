@@ -29,7 +29,7 @@
       </div>
       <div id="under">
         <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
-        <div class="chartbox">스택바 자리</div>
+        <stack-bar-type-com class="chartbox" :query="storage"></stack-bar-type-com>
         <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
       </div>
     </div>
@@ -52,11 +52,12 @@
 import BarTypeCom from '../components/BarTypeCom.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
+import StackBarTypeCom from '../components/StackBarTypeCom.vue'
 import VSwatches from 'vue-swatches'
 import 'vue-swatches/dist/vue-swatches.css'
 import StorageTable from '../components/StorageTable.vue'
 export default {
-  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches,StorageTable, StorageTable },
+  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches,StorageTable, StorageTable,StackBarTypeCom },
   name: 'home',
   data() {
     return {
