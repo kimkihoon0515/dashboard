@@ -1,27 +1,4 @@
 <template>
-  <!-- <div id="container">
-    <div id="static-chart" class="grid">
-      <storage-table @rowclick="rowclick"></storage-table>
-      <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
-      <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
-    </div>
-    <div id="dynamic-chart" class="grid">
-      <div id="daily-chart">
-        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
-        <bar-type-com id="size" :start_date="start" :end_date="end" :query="size" :needCheck=true></bar-type-com>
-      </div>
-      <div class="form__field">
-        <div class="form__label">
-          <strong @click="viewPalette">Color Palette</strong>
-          <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
-        </div>
-      </div>
-      <div id="type-chart">
-      <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
-      <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
-      </div>
-    </div>
-  </div> -->
   <div>
     <div class="container_A grid">
       <div id="slide-date">
@@ -36,7 +13,7 @@
     <div class="form__field grid">
       <div class="form__label">
         <strong @click="viewPalette">Color Palette</strong>
-        <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
+        <v-swatches v-if="palette==true" v-model="color" :swatches="swatches" row-length="10" inline></v-swatches>
       </div>
     </div>
     <div class="container_B grid">
@@ -69,7 +46,6 @@ export default {
         chartName: "날짜 별 스캔 횟수",
         xKey: 0,
         yKey: [1]
-        
       },
       scanner:{
         name:"scanner",
@@ -108,6 +84,7 @@ export default {
         xKey: 0,
         yKey: [3]
       },
+      swatches: ['#1FBC9C', '#1CA085', '#2ECC70', '#27AF60', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E', '#222F3D']
     }
   },
   props: {
@@ -173,7 +150,7 @@ export default {
   }
   
   .container_A {
-    width: 70%;
+    width: 68%;
   }
 
   .form__field {
@@ -181,31 +158,35 @@ export default {
   }
 
   .container_B {
-    width: 26%;
+    width: 28%;
+  }
+
+  #chart{
+    height:100%
   }
   
   .container_A #slide-date .chartbox {
-    width: 960px;
+    width: 97%;
     height: 320px;
     display: inline-block;
-    margin: 0 10px 10px 10px;
+    margin: 0 5px 10px 5px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   .container_A #under .chartbox {
-    width: 305px;
+    width: 32%;
     height: 300px;
     display: inline-block;
-    margin: 0 10px 10px 10px;
+    margin: 0 5px 10px 5px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
   .container_B .chartbox {
-    width: 360px;
+    width: 380px;
     height: 310px;
     display: inline-block;
     margin: 0 10px 10px 10px;
@@ -231,14 +212,78 @@ export default {
     background-color: skyblue;
   }
 
-  @media screen and (max-width: 1530px) {
-    #dynamic-chart .chartbox {
-      width: 430px;
-      height: 270px;
+  @media screen and (max-width: 1450px) {
+    .container_A #slide-date .chartbox {
+      width: 860px;
+      height: 320px;
+      display: inline-block;
+      margin: 0 5px 10px 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
     }
-    #static-chart .chartbox {
+
+    .container_A #under .chartbox {
+      width: 265px;
+      height: 300px;
+      display: inline-block;
+      margin: 0 5px 10px 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+
+    .container_B .chartbox {
+      width: 330px;
+      height: 310px;
+      display: inline-block;
+      margin: 0 10px 10px 10px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+  }
+
+  @media screen and (max-width: 1324px) {
+    .container_A {
+      width: 68%;
+    }
+
+    .form__field {
+      width: 4%;
+    }
+
+    .container_B {
+      width: 28%;
+    }
+    .container_A #slide-date .chartbox {
+      width: 820px;
+      height: 320px;
+      display: inline-block;
+      margin: 0 0px 10px 0px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+
+    .container_A #under .chartbox {
+      width: 245px;
+      height: 300px;
+      display: inline-block;
+      margin: 0 5px 10px 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+
+    .container_B .chartbox {
       width: 320px;
-      height: 260px
+      height: 310px;
+      display: inline-block;
+      margin: 0 10px 10px 10px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
     }
   }
 </style>

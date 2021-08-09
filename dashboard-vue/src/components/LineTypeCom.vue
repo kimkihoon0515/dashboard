@@ -187,12 +187,9 @@ export default {
     font-size: 10pt;
      height:10%
   }
-  /* #chart{
-    height:50%
-  } */
   #param{
     float: left;
-    width: 20%;
+    width: 10%;
     margin: 5px;
   }
   #predictDate{
@@ -200,7 +197,7 @@ export default {
     font-size: 18pt;
   }
   #predict{
-    float: right;
-    width: 60%;
+    float: left;
+    width: 70%;
   }
 </style>
