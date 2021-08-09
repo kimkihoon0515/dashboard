@@ -1,7 +1,7 @@
 <template>
-  <v-card style="width: 360px; display: inline-block;">
+  <v-card style="width: 300px; display: inline-block;">
     <v-simple-table dense fixed-header
-      height="200px" @click:row="handleClick" v-model="selectedRow">
+      height="300px" @click:row="handleClick" v-model="selectedRow">
       <template v-slot:default>
         <thead>
           <tr >

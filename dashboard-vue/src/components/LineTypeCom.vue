@@ -187,9 +187,9 @@ export default {
     font-size: 10pt;
      height:10%
   }
-  #chart{
+  /* #chart{
     height:50%
-  }
+  } */
   #param{
     float: left;
     width: 20%;
