@@ -26,11 +26,6 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     }
 
     @Override
-    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) {
-        return scannerSlideListDao.selectScanner(vo);
-    }
-
-    @Override
     public int deleteScanner() {
         try{
             scannerSlideListDao.deleteScanner();
@@ -39,22 +34,7 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
             return -1;
         }
     }
-
-    @Override
-    public List<ScannerSlideVo> showScanner(ScannerSlideVo vo) {
-        return scannerSlideListDao.showScanner(vo);
-    }
-
-    @Override
-    public List<ScannerSlideVo> searchScannerList() {
-        return scannerSlideListDao.searchScannerList();
-    }
-
-    @Override
-    public List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req) {
-        return scannerSlideListDao.searchScannerListByDate(req);
-    }
-
+    
 	@Override
 	public int updateScanner() {
 		if(this.deleteScanner() == 0) {
@@ -74,4 +54,24 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
 		}
 		return 0;
 	}
+    
+    @Override
+    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) {
+        return scannerSlideListDao.selectScanner(vo);
+    }
+
+    @Override
+    public List<ScannerSlideVo> showScanner(ScannerSlideVo vo) {
+        return scannerSlideListDao.showScanner(vo);
+    }
+
+    @Override
+    public List<ScannerSlideVo> searchScannerList() {
+        return scannerSlideListDao.searchScannerList();
+    }
+
+    @Override
+    public List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req) {
+        return scannerSlideListDao.searchScannerListByDate(req);
+    }
 }

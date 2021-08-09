@@ -39,11 +39,6 @@ public class StorageTableServiceImpl implements StorageTableService{
         }
     }
 
-    @Override
-    public List<StorageTableVo> selectStorageTableById(StorageTableRequestFormat req) {
-        return storageTableDao.selectStorageTableById(req);
-    }
-
 	@Override
 	public int updateStorageTable() {
 		StorageTableVo vo = new StorageTableVo();
@@ -63,4 +58,9 @@ public class StorageTableServiceImpl implements StorageTableService{
         }
         return 0;
 	}
+
+    @Override
+    public List<StorageTableVo> selectStorageTableById(StorageTableRequestFormat req) {
+        return storageTableDao.selectStorageTableById(req);
+    }
 }

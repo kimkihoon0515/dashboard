@@ -13,9 +13,9 @@ public interface ScannerTableService {
 	public List<ScannerTableVo> selectScannerTable(ScannerTableVo vo);
 	public int insertScannerTable(ScannerTableVo vo);
 	public int deleteScannerTable();
+	public int updateScannerTable();
 	public List<ScannerTableVo> searchScannerTable();
 	public List<ScannerTableVo> searchScannerTableBydate(DateRequestFormat req);
 	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req);
-	public int updateScannerTable();
 
 }

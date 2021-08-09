@@ -40,18 +40,6 @@ public class ScannerTableServiceImpl implements ScannerTableService{
 			return -1;
 		}
 	}
-
-	public List<ScannerTableVo> searchScannerTable(){
-		return scannerTableDao.searchScannerTable();
-	}
-
-	public List<ScannerTableVo> searchScannerTableBydate(DateRequestFormat req){
-		return scannerTableDao.searchScannerTableByDate(req);
-	}
-
-	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req){
-		return scannerTableDao.searchScannerTableById(req);
-	}
 	
 	public int updateScannerTable() {
 		if(this.deleteScannerTable() == 0) {
@@ -73,4 +61,17 @@ public class ScannerTableServiceImpl implements ScannerTableService{
 
 		return 0;
 	}
+	
+	public List<ScannerTableVo> searchScannerTable(){
+		return scannerTableDao.searchScannerTable();
+	}
+
+	public List<ScannerTableVo> searchScannerTableBydate(DateRequestFormat req){
+		return scannerTableDao.searchScannerTableByDate(req);
+	}
+
+	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req){
+		return scannerTableDao.searchScannerTableById(req);
+	}
+
 }

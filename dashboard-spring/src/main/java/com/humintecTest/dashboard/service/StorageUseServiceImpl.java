@@ -40,6 +40,28 @@ public class StorageUseServiceImpl implements StorageUseService {
         }
     }
 
+	@Override
+	public int updateStorageUse() {
+		if(this.deleteStorageUse() == 0) {
+            StorageUseVo vo = new StorageUseVo();
+            List<StorageUseVo> vList = this.selectStorageUse(vo);
+
+            for(StorageUseVo target : vList) {
+                if(this.insertStorageUse(target)==0) {
+
+                }
+                else {
+                    return -1;
+                }
+            }
+        }
+        else {
+            return -1;
+        }
+
+        return 0;
+	}
+
     @Override
     public List<StorageUseVo> showStorageUse(StorageUseVo vo) {
         return storageUseDao.showStorageUse(vo);
@@ -83,26 +105,4 @@ public class StorageUseServiceImpl implements StorageUseService {
     public List<storageUseResponseFormat> selectStorageUseByYear(DateRequestFormat req) {
         return storageUseDao.selectStorageUseByYear(req);
     }
-
-	@Override
-	public int updateStorageUse() {
-		if(this.deleteStorageUse() == 0) {
-            StorageUseVo vo = new StorageUseVo();
-            List<StorageUseVo> vList = this.selectStorageUse(vo);
-
-            for(StorageUseVo target : vList) {
-                if(this.insertStorageUse(target)==0) {
-
-                }
-                else {
-                    return -1;
-                }
-            }
-        }
-        else {
-            return -1;
-        }
-
-        return 0;
-	}
 }

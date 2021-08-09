@@ -39,21 +39,6 @@ public class StorageFreeServiceImpl implements StorageFreeService{
         }
     }
 
-    @Override
-    public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req) {
-        return storageFreeDao.selectStorageFreeByDate(req);
-    }
-
-    @Override
-    public List<StorageFreeVo> searchStorageFreeById(StorageTableRequestFormat req) {
-        return storageFreeDao.selectStorageFreeById(req);
-    }
-
-    @Override
-    public List<StorageFreeVo> showStorageFree(StorageFreeVo vo) {
-        return storageFreeDao.showStorageFree(vo);
-    }
-
 	@Override
 	public int updateStorageFree() {
 		if (this.deleteStorageFree() == 0) {
@@ -73,4 +58,19 @@ public class StorageFreeServiceImpl implements StorageFreeService{
 
         return 0;
 	}
+
+    @Override
+    public List<StorageFreeVo> searchStorageFreeByDate(DateRequestFormat req) {
+        return storageFreeDao.selectStorageFreeByDate(req);
+    }
+
+    @Override
+    public List<StorageFreeVo> searchStorageFreeById(StorageTableRequestFormat req) {
+        return storageFreeDao.selectStorageFreeById(req);
+    }
+
+    @Override
+    public List<StorageFreeVo> showStorageFree(StorageFreeVo vo) {
+        return storageFreeDao.showStorageFree(vo);
+    }
 }
