@@ -1,18 +1,18 @@
 <template>
-  <div class="chartbox">
-    <span v-if="needCheck==true" id="check-box-group">
-      <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
-      <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
-      <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
-    </span>
-    <div v-if="needCheck==false" id="filter">
-      <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-      <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
+    <div class="chartbox">
+      <span v-if="needCheck==true" id="check-box-group">
+        <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
+        <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
+        <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
+      </span>
+      <div v-if="needCheck==false" id="filter">
+        <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
+        <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
+      </div>
+      <div id="chart">
+      <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
+      </div>
     </div>
-    <div id="chart">
-    <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
-    </div>
-  </div>
 </template>
 
 <script>

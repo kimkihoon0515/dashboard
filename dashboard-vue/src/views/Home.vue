@@ -1,7 +1,7 @@
 <template>
-  <div id="container">
+  <!-- <div id="container">
     <div id="static-chart" class="grid">
-      <button v-for="(name, index) in storage_name_list" :key="index" v-on:click="nameChange(name)">{{name}}</button>
+      <storage-table @rowclick="rowclick"></storage-table>
       <pie-type-com id="storage" :query="storage" :storageName="storageName"></pie-type-com>
       <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
     </div>
@@ -12,13 +12,37 @@
       </div>
       <div class="form__field">
         <div class="form__label">
-          <strong>Please choose a color:</strong>
-          <v-swatches v-model="color" inline></v-swatches>
+          <strong @click="viewPalette">Color Palette</strong>
+          <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
         </div>
       </div>
       <div id="type-chart">
       <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
       <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
+      </div>
+    </div>
+  </div> -->
+  <div>
+    <div class="container_A grid">
+      <div id="slide-date">
+        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
+      </div>
+      <div id="under">
+        <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
+        <div class="chartbox">스택바 자리</div>
+        <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
+      </div>
+    </div>
+    <div class="form__field grid">
+      <div class="form__label">
+        <strong @click="viewPalette">Color Palette</strong>
+        <v-swatches v-if="palette==true" v-model="color" inline></v-swatches>
+      </div>
+    </div>
+    <div class="container_B grid">
+      <div id="right">
+        <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
+        <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
       </div>
     </div>
   </div>
@@ -30,12 +54,13 @@ import LineTypeCom from '../components/LineTypeCom.vue'
 import PieTypeCom from '../components/PieTypeCom.vue'
 import VSwatches from 'vue-swatches'
 import 'vue-swatches/dist/vue-swatches.css'
-
+import StorageTable from '../components/StorageTable.vue'
 export default {
-  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches },
+  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches,StorageTable, StorageTable },
   name: 'home',
   data() {
     return {
+      palette: false,
       color: '#f87979',
       slide_date:{
         name:"slide-date",
@@ -106,8 +131,14 @@ export default {
   },
   methods:{
     nameChange(name){
+      console.log(name)
       this.storageName=name;
-
+    },
+    rowclick(selectStorage){
+      this.nameChange(selectStorage)
+    },
+    viewPalette(){
+      this.palette = !this.palette
     }
   },
   mounted() {
@@ -129,47 +160,63 @@ export default {
     height: 90%;
   }
 
+  strong {
+    cursor: pointer;
+  }
+
   .grid {
     display: block;
     float: left;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
   }
-
-  #static-chart {
-    width: 28%;
-    background-color: rgb(230, 249, 252);
+  
+  .container_A {
+    width: 70%;
   }
-  #dynamic-chart {
-    width: 72%;
+
+  .form__field {
+    width: 4%;
+  }
+
+  .container_B {
+    width: 26%;
   }
   
-  #dynamic-chart .chartbox {
-  width: 460px;
-  height: 460px;
-  display: inline-block;
-  margin: 0 30px 30px 30px;
-  overflow: hidden;
-  border: 1px solid rgb(53, 196, 231);
-  border-radius: 10px;
-  /* float: left; */
+  .container_A #slide-date .chartbox {
+    width: 960px;
+    height: 320px;
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
-  #static-chart .chartbox {
-  width: 360px;
-  height: 280px;
-  display: inline-block;
-  margin: 0 15px 50px 15px;
-  overflow: hidden; 
-  border: 1px solid rgb(53, 196, 231);
-  border-radius: 10px;
-  /* float: left; */
+  .container_A #under .chartbox {
+    width: 305px;
+    height: 300px;
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
 
-  #static-chart .for-size {
-    width: 300px;
-    height: 280px;
+  .container_B .chartbox {
+    width: 360px;
+    height: 310px;
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
+
+  input {
+    background-color: #fff;
+  }
+
   button {
   border: 1px solid skyblue;
   border-radius: 5px;
@@ -185,11 +232,11 @@ export default {
 
   @media screen and (max-width: 1530px) {
     #dynamic-chart .chartbox {
-      width: 410px;
-      height: 250px;
+      width: 430px;
+      height: 270px;
     }
     #static-chart .chartbox {
-      width: 310px;
+      width: 320px;
       height: 260px
     }
   }
