@@ -54,7 +54,7 @@ public class StorageTableController {
         }
         return "ok";
     }
-    
+
     @PutMapping("/updateStorageTable")
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")

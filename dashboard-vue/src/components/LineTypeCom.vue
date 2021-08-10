@@ -1,11 +1,20 @@
 <template>
   <div class="chartbox">
+    <div id="filter">
+    <input id="param" type="Number" min=1 v-model="maN"/>
+    <span id="predict">용량 초과 예정일: {{predictDate}}</span>
+    </div>
+    <div id="chart">
     <line-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
+    </div>
   </div>
 </template>
 
 <script>
 import LineChart from './LineChart.vue'
+
+import moment from 'moment'
+
 export default {
   name : "LineTypeCom",
   components: { LineChart },
@@ -21,14 +30,21 @@ export default {
   },
   data () {
     return {
+      predictDate:null,
+      maN:7,
       change:0,
      dataform:{
         label: null,
         data: null,
-        backgroundColor: null,
-        pointBackgroundColor: 'white',
-        borderWidth: 1,
-        pointBorderColor: '#249EBF'
+        fill:false,
+        interaction:{
+            intersect:true
+          },
+        pointRadius:0,
+        pointBackgroundColor: "transparent",
+        borderWidth: 2,
+        borderColor: '#f87979',
+        borderDash:null
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
       datacollection: {
@@ -37,6 +53,30 @@ export default {
         }]
       },
       chartoptions:{
+        elements:{
+          point: {
+            backgroundColor: 'white'
+          }
+        },
+        interaction:{
+          mode:'dataset'
+        }
+        ,
+        title: {
+          display: true,
+          text: this.query.chartName,
+          fontSize: 16
+        },
+        tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var currentValue = dataset.data[tooltipItem.index];
+            return currentValue +'%';
+          }, 
+        }
+      },
+
           scales: {
               yAxes: [{
                   ticks: {
@@ -55,7 +95,7 @@ export default {
               }]
           },
           legend: {
-              display: true
+              display: false
           },
           responsive: true,
           maintainAspectRatio: false
@@ -71,20 +111,55 @@ export default {
       var y= this.query.yKey;
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
+      this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
+      let currentIndex=this.getIndex(this.datacollection.labels,moment().format('YYYY-MM-DD'))
+      console.log(res.data)
+      console.log(currentIndex)
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
         tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
-        tmp.backgroundColor=this.colorset[i];
-        this.datacollection.datasets.pop();
+        let tmpPredict= _.cloneDeep(tmp);
+        tmpPredict.label=keys[y[i]]+"예측값";
+        tmpPredict.borderDash=[5,5]
+        for (let j=currentIndex+1; j<tmpPredict.data.length;j++){
+          tmp.data.pop();
+        }
+        for (let k=0; k<=currentIndex;k++){
+          tmpPredict.data[k]=null;
+          if(k==currentIndex){
+            tmpPredict.data[k]=""
+          }
+        }
+        
+        this.datacollection.datasets=[];
         this.datacollection.datasets.push(tmp);
+        this.datacollection.datasets.push(tmpPredict);
       }
+      console.log(this.datacollection.datasets)
       this.change=1;
+    },
+    getIndex(labels,date){
+      for(let i=0 ; i<labels.length; i++){
+        if(labels[i]==date){
+          return i
+        }
+      }
     }
   },
   watch:{
+    maN: function(){
+      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
+      .then((res)=>{
+      console.log(res)
+      this.parseLineData(res);
+      })
+      .then((err)=>{
+        console.log(err);
+      })
+    },
     storageName: function(){
-      this.$axios.post(this.query.url, {'storageName':this.storageName})
+      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
       .then((res)=>{
       console.log(res)
       this.parseLineData(res);
@@ -95,8 +170,9 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'storageName':this.storageName})
+    this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
     .then((res)=>{
+      console.log(res)
       this.parseLineData(res);
     })
     .then((err)=>{
@@ -107,5 +183,21 @@ export default {
 </script>
 
 <style>
-
+  #filter {
+    font-size: 10pt;
+     height:10%
+  }
+  #param{
+    float: left;
+    width: 10%;
+    margin: 5px;
+  }
+  #predictDate{
+    float: right;
+    font-size: 18pt;
+  }
+  #predict{
+    float: left;
+    width: 70%;
+  }
 </style>

@@ -40,34 +40,34 @@ public class SlideDateServiceImpl implements SlideDateService{
             return -1;
         }
     }
-    
-    @Override
-	public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req) {
-		if(req.getType() == 1) {
-			return slideDateDao.selectSlidePerDateByYearNP();
-		}
-		else if(req.getType() == 2) {
-			return slideDateDao.selectSlidePerDateByMonthNP();
-		}
-		else {
-			return slideDateDao.selectSlidePerDateByDateNP();
-		}
-	}
 
-	@Override
-	public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req) {
-		return slideDateDao.selectSlidePerDateByDate(req);
-	}
-	
-	@Override
-	public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req) {
-		return slideDateDao.selectSlidePerDateByMonth(req);
-	}
-	
-	@Override
-	public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req) {
-		return slideDateDao.selectSlidePerDateByYear(req);
-	}
+    @Override
+    public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req) {
+        if(req.getType() == 1) {
+            return slideDateDao.selectSlidePerDateByYearNP();
+        }
+        else if(req.getType() == 2) {
+            return slideDateDao.selectSlidePerDateByMonthNP();
+        }
+        else {
+            return slideDateDao.selectSlidePerDateByDateNP();
+        }
+    }
+
+    @Override
+    public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req) {
+        return slideDateDao.selectSlidePerDateByDate(req);
+    }
+
+    @Override
+    public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req) {
+        return slideDateDao.selectSlidePerDateByMonth(req);
+    }
+
+    @Override
+    public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req) {
+        return slideDateDao.selectSlidePerDateByYear(req);
+    }
 
     @Override
     public List<SlideDateVo> showSlideDate(SlideDateVo vo) {

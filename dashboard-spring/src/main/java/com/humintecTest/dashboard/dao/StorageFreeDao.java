@@ -17,5 +17,3 @@ public interface StorageFreeDao {
     public List<StorageFreeVo> selectStorageFreeById(StorageTableRequestFormat req);
     public List<StorageFreeVo> showStorageFree(StorageFreeVo vo);
 }
-
-
