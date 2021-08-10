@@ -2,7 +2,7 @@
   <div>
     <div class="container_A grid">
       <div id="slide-date">
-        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
+        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="tabs? size:slide_date" :needCheck=true @tabChange="tabChange"></bar-type-com>
       </div>
       <div id="under">
         <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
@@ -38,12 +38,13 @@ export default {
   name: 'home',
   data() {
     return {
+      tabs:0,
       palette: false,
       color: '#f87979',
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
-        chartName: "날짜 별 스캔 횟수",
+        chartName: "스캔 완료 횟수",
         xKey: 0,
         yKey: [1]
       },
@@ -64,7 +65,7 @@ export default {
       size:{
         name:"size",
         url:"/searchStorageUseByDate",
-        chartName: "일별 사용량",
+        chartName: "메모리 사용량",
         xKey: 0,
         yKey: [1]
       },
@@ -117,6 +118,10 @@ export default {
     },
     viewPalette(){
       this.palette = !this.palette
+    },
+    tabChange(tab){
+      this.tabs=tab
+      console.log(this.tabs)
     }
   },
   mounted() {

@@ -1,16 +1,24 @@
 <template>
     <div class="chartbox">
-      <span v-if="needCheck==true" id="check-box-group">
-        <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
-        <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
-        <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
-      </span>
+      <div v-if="needCheck==true" id="header">
+        <div class="radio">
+          <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
+          <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
+          <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
+        </div>
+        <div class="tab">
+          <v-tabs v-model="tab">
+            <v-tab >스캔 완료 횟수</v-tab>
+            <v-tab>메모리 사용량</v-tab>
+          </v-tabs>
+        </div>
+      </div>
       <div v-if="needCheck==false" id="filter">
         <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
         <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
       </div>
-      <div id="chart">
-      <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
+      <div id="bar">
+        <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
       </div>
     </div>
 </template>
@@ -19,9 +27,10 @@
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
 import moment from 'moment'
+
 export default {
   name : "BarTypeCom",
-  components: { BarChart },
+  components: { BarChart},
   props: {
     color:{
       type: String,
@@ -42,10 +51,11 @@ export default {
     end_date: {
       type: String,
       default : null//moment().format('YYYY-MM-DD').toString,
-    }
+    },
   },
   data () {
     return {
+      tab:null,
       checked:true,
       setcolor: 0,
       origin: {},
@@ -56,6 +66,7 @@ export default {
         label: null,
         data: [],
         backgroundColor: [],
+        maxBarThickness:50,
         pointBackgroundColor: 'white',
         borderWidth: 1,
         pointBorderColor: '#249EBF'
@@ -167,6 +178,7 @@ export default {
       this.change=0;
     },
     parseBarData(res, protect_check){
+
       var x= this.query.xKey;
       var y= this.query.yKey;
       if(res.data.length==0){
@@ -266,6 +278,24 @@ export default {
         this.parseBarData_check();
         this.setcolor=0;
       }
+    },
+    tab:{
+      handler(){
+        this.$emit("tabChange",this.tab)
+        setTimeout( changeQuery =>{
+          this.chartoptions.title.text=this.query.chartName
+          this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate': this.end_date, 'type':this.YMD})
+          .then((res)=>{
+            this.parseBarData(res, 0);
+          })
+          .then((err)=>{
+            console.log(err);
+          })
+          this.change=1;
+        }
+        ,10);
+
+      }
     }
   }
 }
@@ -273,8 +303,27 @@ export default {
 </script>
 
 <style>
+
   #filter {
     font-size: 10pt;
     height:10%
+  }
+  #header {
+    height: 10%;
+  }
+  #bar {
+    height: 90%;
+    margin: 1% 0 0 0;
+  }
+  div .tab {
+    width: 30%;
+    float: left;
+    box-sizing: border-box;
+  }
+  div .radio{
+    margin: 10px 10px 0 0px;
+    width: 10%;
+    float: right;
+    box-sizing: border-box;
   }
 </style>
