@@ -38,7 +38,7 @@ public class ScheduleController {
 
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
-	@Scheduled(fixedRate = 86400000)
+//	@Scheduled(fixedRate = 86400000)
 	public String uadateAll() {
 		int check = 0;
 		
