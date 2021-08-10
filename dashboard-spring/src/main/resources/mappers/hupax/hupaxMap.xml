@@ -8,7 +8,6 @@
             daily_sum as daily_used,
             sum(daily_sum) over (order by date) as daily_sum
         from storage_use
-        where not date is null
         order by date
     </select>
 
