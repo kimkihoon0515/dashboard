@@ -48,7 +48,7 @@ public class ScheduleController {
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
 	@CrossOrigin(origins = "*")
-	@Scheduled(fixedRate = 86400000)
+//	@Scheduled(fixedRate = 86400000)
 	public String uadateAll() {
 		if(storageTableService.deleteStorageTable()==0){
 			StorageTableVo vo = new StorageTableVo();
