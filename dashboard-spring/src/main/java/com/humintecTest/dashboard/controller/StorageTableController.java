@@ -1,7 +1,6 @@
 package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.dao.StorageTableDao;
-import com.humintecTest.dashboard.request.StorageTableRequestFormat;
 import com.humintecTest.dashboard.response.storageTableResponseFormat;
 import com.humintecTest.dashboard.service.StorageTableService;
 import com.humintecTest.dashboard.vo.StorageTableVo;

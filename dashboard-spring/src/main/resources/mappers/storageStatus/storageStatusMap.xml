@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.humintecTest.dashboard.dao.StorageStatusDao">
-    <select id="selectStorageStatus" parameterType="StorageStatusVo" resultType="StorageStatusVo">
+    <select id="selectStorageStatus" parameterType="StorageStatusVo" resultType="StorageStatusVo" fetchSize="1000">
         select distinct storage_list.storage_name,
                         storage_list.total,
                         storage_list.used,
@@ -13,6 +13,16 @@
              basefolder_list
         where storage_list.storage_name = basefolder_list.storage_name
     </select>
+    <insert id = "insertStorageStatus" parameterType="StorageStatusVo">
+        insert into
+            storage_type (storage_name,total,used,free,hupax_or_sectra)
+             values
+                    (#{storage_name},#{total},#{used},#{free},#{hupax_or_sectra})
+    </insert>
+    <delete id="deleteStorageStatus">
+        truncate
+            storage_type
+    </delete>
 </mapper>
 
 

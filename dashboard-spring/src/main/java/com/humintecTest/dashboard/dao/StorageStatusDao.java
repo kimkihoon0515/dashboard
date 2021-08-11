@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface StorageStatusDao {
     List<StorageStatusVo> selectStorageStatus (StorageStatusVo vo);
+    int insertStorageStatus(StorageStatusVo vo);
+    int deleteStorageStatus();
 }
