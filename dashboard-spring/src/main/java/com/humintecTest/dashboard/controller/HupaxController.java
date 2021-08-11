@@ -26,6 +26,7 @@ public class HupaxController {
     public List<hupaxResponseFormat> selectHupax(@RequestBody HupaxRequestFormat req){
 
         List<HupaxVo> vList = hupaxService.selectHupax(req);
+        List<HupaxVo> voList = hupaxService.selectHupax(req);
 
         long sum=0,avg,all;
 
@@ -35,7 +36,7 @@ public class HupaxController {
 
         Date date = Date.valueOf(today); //비교를 위해 today를 sqlDate형식으로 변환함
         Date vDate;
-      
+        System.out.println(date);
 
         if(vList.size()<1|| req.getN()<1){
             return null;
@@ -66,10 +67,14 @@ public class HupaxController {
             vo1.setDaily_sum(all);
             vo1.setTotal(vList.get(size).getTotal());
             vList.add(vo1);
-
+            System.out.println(vo1);
             date = vDate;
 
-            if(all>vList.get(size).getTotal()){
+            if(all>vList.get(size).getTotal() ){
+                break;
+            }
+            if (avg ==0 ){
+                vList = voList;
                 break;
             }
             else {

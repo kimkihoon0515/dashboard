@@ -29,8 +29,7 @@ public class ScheduleController {
 	StorageUseService storageUseService;
 	@Autowired
 	ScannerTableService scannerTableService;
-	@Autowired
-	StorageStatusService storageStatusService;
+
 	
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
@@ -82,22 +81,6 @@ public class ScheduleController {
                     return "false";
             }
     	}
-
-		if(storageStatusService.deleteStorageStatus()==0) {
-			StorageStatusVo vo = new StorageStatusVo();
-			List<StorageStatusVo> vList = storageStatusService.selectStorageStatus(vo);
-
-			for(StorageStatusVo target : vList) {
-				if (storageStatusService.insertStorageStatus(target) == 0) {
-
-				} else {
-					return "false";
-				}
-			}
-		}
-		else {
-			return "false";
-		}
 		
 		if(slideDateService.deleteSlideDate()== 0){
     		SlideDateVo vo = new SlideDateVo();
