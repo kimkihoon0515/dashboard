@@ -33,44 +33,43 @@ public class PidController {
         return res;
     }
 
-    
+
     @PostMapping("/searchPidByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<pidchResponseFormat> searchPid (@RequestBody DateRequestFormat req){
-    	if(req.getFinishDate() == null || req.getStartDate() == null) {
-    		List<pidchResponseFormat> vList = pidService.searchPid();
-            
+        if(req.getFinishDate() == null || req.getStartDate() == null) {
+            List<pidchResponseFormat> vList = pidService.searchPid();
+
             return vList;
-    	}
-    	
+        }
+
         List<pidchResponseFormat> vList = pidService.searchPidByDate(req);
-        
+
         return vList;
     }
-    
+
     @PutMapping("/updatePid")
     @Transactional(readOnly = false)
     @CrossOrigin("*")
     public String updatePid() {
-    	 if(pidService.deletePid() == 0) {
-    		 PidVo vo = new PidVo();
-    		 List<PidVo> vList = pidService.selectPid(vo);
+        if(pidService.deletePid() == 0) {
+            PidVo vo = new PidVo();
+            List<PidVo> vList = pidService.selectPid(vo);
 
-    	        for (PidVo target : vList){
-    	            if(pidService.insertPid(target) == 0){
+            for (PidVo target : vList){
+                if(pidService.insertPid(target) == 0){
 
-    	            }
-    	            else
-    	                return "false";
-    	        }
-         }
-         else {
-        	 return "false";
-         }
-    	 
-    	 return "ok";
+                }
+                else
+                    return "false";
+            }
+        }
+        else {
+            return "false";
+        }
+
+        return "ok";
 
     }
 }
-

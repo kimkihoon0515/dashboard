@@ -12,7 +12,6 @@
     </div>
     <div class="margindiv"></div>
     <home :start="startDate" :end="endDate"></home>
-    <!--<router-view :start="startDate" :end="endDate"></router-view>-->
   </div>
 </template>
 
@@ -37,7 +36,6 @@ export default {
     aYearAgo() {
       this.endDate = moment().format('YYYY-MM-DD')
       this.startDate = moment().subtract(1,'years').format('YYYY-MM-DD')
-
     },
     aMonthAgo(){
       this.endDate = moment().format('YYYY-MM-DD')
@@ -49,8 +47,7 @@ export default {
     }
   },
   mounted(){
-
-    this.setToday();
+    setTimeout(this.setToday,30);
   }
 }
 </script>
@@ -66,7 +63,7 @@ export default {
 
 #nav {
   position: fixed;
-  padding: 30px;
+  padding: 15px;
   margin-bottom: 5px;
   width: 100%;
   height: 60px;
@@ -75,10 +72,6 @@ export default {
   border-bottom: 1px solid #eee;
   overflow: hidden;
 }
-
-/* .check {
-  margin-right: 10px;
-} */
 
 .margindiv {
   height: 60px;
