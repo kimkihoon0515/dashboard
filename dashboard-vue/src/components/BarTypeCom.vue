@@ -1,16 +1,18 @@
 <template>
-  <div class="chartbox">
-    <span v-if="needCheck==true" id="check-box-group">
-      <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
-      <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
-      <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
-    </span>
-    <span v-if="needCheck==false" id="filter">
-      <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-      <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
-    </span>
-    <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
-  </div>
+    <div class="chartbox">
+      <span v-if="needCheck==true" id="check-box-group">
+        <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
+        <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
+        <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
+      </span>
+      <div v-if="needCheck==false" id="filter">
+        <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
+        <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
+      </div>
+      <div id="chart">
+      <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -42,7 +44,6 @@ export default {
       default : null//moment().format('YYYY-MM-DD').toString,
     }
   },
-
   data () {
     return {
       checked:true,
@@ -67,30 +68,77 @@ export default {
         ]
       },
       chartoptions:{
-          onClick: this.handleChartClick,
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  },
-                  gridLines: {
-                      display: true
-                  },
-                  stacked: false
-              }],
-              xAxes: [ {
-              
-                  gridLines: {
-                      display: false
-                  },
-                  stacked: false
-              }]
-          },
-          legend: {
+        onClick: this.handleChartClick,
+        title: {
+          display: true,
+          text: this.query.chartName,
+          fontSize: 16
+        },
+        plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'xy'
+            },
+            zoom: {
+              enabled: true,
+              mode: 'xy'
+            }
+          }
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var dataset = data.datasets[tooltipItem.datasetIndex];
+              var currentValue = dataset.data[tooltipItem.index];
+              if (currentValue >= 1000000000000) {
+                return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+              }
+              else if (currentValue>=1000000000 && currentValue < 1000000000000) {
+                return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+              }
+              else if (currentValue>=1000000 && currentValue < 1000000000) {
+                return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+              }
+              else {
+              return currentValue;
+              }
+            }
+          }
+        }, 
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              callback: function(value, index, values){
+                if (value >=1000000000000){
+                  return value = (value / 1000000000000).toFixed(1) + "TB";
+                }
+                else if (value>=1000000000 && value <1000000000000){
+                  return value = (value / 1000000000).toFixed(1) + "GB";
+                }
+                else if (value >=1000000 && value < 1000000000) {
+                  return value = (value / 1000000).toFixed(1) + "MB";
+                }
+                else {
+                  return value;
+                }
+              }
+            },
+            gridLines: {
+              display: true
+            },
+            stacked: false
+          }],
+          xAxes: [{
+            gridLines: {
               display: false
-          },
-          responsive: true,
-          maintainAspectRatio: false
+            },
+            stacked: false
+          }]
+        },
+        responsive: true,
+        maintainAspectRatio: false
       }
     }
   },
@@ -121,6 +169,13 @@ export default {
     parseBarData(res, protect_check){
       var x= this.query.xKey;
       var y= this.query.yKey;
+      if(res.data.length==0){
+        this.datacollection.datasets.pop();
+        this.change=1;
+        this.labelList=null
+        this.checkBind=null
+        return
+      }
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
@@ -135,7 +190,6 @@ export default {
           this.origin[originLabel[i]]=[tmp.data[i],tmp.backgroundColor];
         }
         this.checkBind=_.cloneDeep(originLabel)
-        console.log(this.checkBind);
         this.labelList=_.cloneDeep(originLabel)
       }
       this.change=1;
@@ -160,7 +214,6 @@ export default {
     }
   },
   mounted() {
-
     this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
     .then((res)=>{
       this.parseBarData(res, 0);
@@ -180,7 +233,6 @@ export default {
         if(this.checked==true){
           console.log(this.labelList)
           this.checkBind=_.cloneDeep(this.labelList);
-
         }
         else{
           this.checkBind=[] 
@@ -223,5 +275,6 @@ export default {
 <style>
   #filter {
     font-size: 10pt;
+    height:10%
   }
 </style>

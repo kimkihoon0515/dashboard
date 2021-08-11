@@ -68,14 +68,14 @@ public class ScannerSlideListController {
         }
         return res;
     }
-    
+
     @PutMapping("/updateScanner")
     @Transactional(readOnly = false)
     @CrossOrigin(origins = "*")
-    public String updateScanner() {    	
-    	if(scannerSlideListService.deleteScanner() == 0) {
-    		ScannerSlideVo vo = new ScannerSlideVo();
-    		List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
+    public String updateScanner() {
+        if(scannerSlideListService.deleteScanner() == 0) {
+            ScannerSlideVo vo = new ScannerSlideVo();
+            List<ScannerSlideVo> vList = scannerSlideListService.selectScanner(vo);
 
             for(ScannerSlideVo target : vList) {
                 if(scannerSlideListService.insertScanner(target) == 0){
@@ -84,35 +84,34 @@ public class ScannerSlideListController {
                 else
                     return "false";
             }
-    	}
-    	return "ok";
+        }
+        return "ok";
     }
-    
+
     @PostMapping("/searchScannerListByDate")
     @Transactional(readOnly = true)
     @CrossOrigin(origins = "*")
     public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){
-    	if(req.getStartDate() == null || req.getFinishDate() == null) {
-    		List<ScannerSlideVo> vList = scannerSlideListService.searchScannerList();
-        	
-        	ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
-        	
-        	for(ScannerSlideVo target : vList) {
-        		res.add(new scannerResponseFormat(target));
-        	}
-        	
-        	return res;
-    	}
-    	
-    	List<ScannerSlideVo> vList = scannerSlideListService.searchScannerListByDate(req);
-    	
-    	ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
-    	
-    	for(ScannerSlideVo target : vList) {
-    		res.add(new scannerResponseFormat(target));
-    	}
-    	
-    	return res;
+        if(req.getStartDate() == null || req.getFinishDate() == null) {
+            List<ScannerSlideVo> vList = scannerSlideListService.searchScannerList();
+
+            ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
+
+            for(ScannerSlideVo target : vList) {
+                res.add(new scannerResponseFormat(target));
+            }
+
+            return res;
+        }
+
+        List<ScannerSlideVo> vList = scannerSlideListService.searchScannerListByDate(req);
+
+        ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
+
+        for(ScannerSlideVo target : vList) {
+            res.add(new scannerResponseFormat(target));
+        }
+
+        return res;
     }
 }
-
