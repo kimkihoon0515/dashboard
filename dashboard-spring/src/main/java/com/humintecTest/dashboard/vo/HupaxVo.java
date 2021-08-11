@@ -9,4 +9,5 @@ public class HupaxVo {
     private Date date;
     private long daily_used;
     private long daily_sum;
+    private long total;
 }

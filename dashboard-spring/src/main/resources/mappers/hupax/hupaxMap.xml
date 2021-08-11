@@ -6,7 +6,8 @@
     <select id = "selectHupax" parameterType="HupaxVo" resultType="HupaxVo">
         select date ,
             daily_sum as daily_used,
-            sum(daily_sum) over (order by date) as daily_sum
+            sum(daily_sum) over (order by date) as daily_sum,
+            (SELECT sum(total) as total FROM storage_type where hupax_or_sectra = 'hupax') as total
         from storage_use
         order by date
     </select>
