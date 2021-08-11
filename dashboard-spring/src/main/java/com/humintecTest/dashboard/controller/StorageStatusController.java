@@ -26,7 +26,6 @@ public class StorageStatusController {
 
     @PutMapping("/updateStorageStatus")
     @Transactional(readOnly = false)
-    @CrossOrigin(origins = "*")
     public String updateStorageStatus() {
         StorageStatusVo vo = new StorageStatusVo();
         if (storageStatusService.deleteStorageStatus() == 0) {
