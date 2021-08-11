@@ -1,4 +1,5 @@
 <template>
+  <v-app>
   <div id="app">
     <div id="nav">
       <form>
@@ -13,6 +14,7 @@
     <div class="margindiv"></div>
     <home :start="startDate" :end="endDate"></home>
   </div>
+    </v-app>
 </template>
 
 <script>

@@ -178,7 +178,6 @@ export default {
       this.change=0;
     },
     parseBarData(res, protect_check){
-
       var x= this.query.xKey;
       var y= this.query.yKey;
       if(res.data.length==0){

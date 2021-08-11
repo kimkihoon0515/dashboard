@@ -1,4 +1,5 @@
 <template>
+  <v-app>
   <div>
     <div class="container_A grid">
       <div id="slide-date">
@@ -23,6 +24,7 @@
       </div>
     </div>
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -80,10 +82,10 @@ export default {
       storage_name_list: [],
       storage_full:{
         name:"storage-full",
-        url:"/selectStorageTableById",
-        chartName:"스토리지별 사용량 추이",
+        url:"/selectHupax",
+        chartName:"스토리지 사용량 추이",
         xKey: 0,
-        yKey: [3]
+        yKey: [2]
       },
       swatches: ['#1FBC9C', '#1CA085', '#2ECC70', '#27AF60', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E', '#222F3D']
     }

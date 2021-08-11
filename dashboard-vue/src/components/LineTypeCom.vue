@@ -109,6 +109,8 @@ export default {
     parseLineData(res){
       var x= this.query.xKey;
       var y= this.query.yKey;
+      let total=res.data[0].total
+      console.log(total)
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
@@ -118,7 +120,8 @@ export default {
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
-        tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        //tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        tmp.data=res.data.map(function(elem){return ((elem[keys[y[i]]])/ total *100).toFixed(1)});
         let tmpPredict= _.cloneDeep(tmp);
         tmpPredict.label=keys[y[i]]+"예측값";
         tmpPredict.borderDash=[5,5]
@@ -170,7 +173,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
+    this.$axios.get(this.query.url)
     .then((res)=>{
       console.log(res)
       this.parseLineData(res);
