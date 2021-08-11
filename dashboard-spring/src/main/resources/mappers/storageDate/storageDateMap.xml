@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.humintecTest.dashboard.dao.StorageDateDao">
-    <select id = "selectStorageDate" parameterType="StorageDateVo" resultType="StorageDateVo">
+    <select id = "selectStorageDate" parameterType="StorageDateVo" resultType="StorageDateVo" fetchSize="1000">
         select date,
           sum(storage_table.used) over (partition by storage_table.storage_name order by date) as daily_sum,
           storage_table.storage_name,
@@ -16,7 +16,7 @@
         group by date
         order by date asc;
     </select>
-    <insert id = "insertStorageDate" parameterType="StorageDateVo">
+    <insert id = "insertStorageDate" parameterType="StorageDateVo" >
         insert into
             storage_per_date(date, daily_sum, storage_name, total)
             values

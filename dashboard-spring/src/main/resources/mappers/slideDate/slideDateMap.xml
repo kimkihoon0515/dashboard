@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.humintecTest.dashboard.dao.SlideDateDao">
-    <select id = "selectSlideDate" parameterType="SlideDateVo" resultType="SlideDateVo">
+    <select id = "selectSlideDate" parameterType="SlideDateVo" resultType="SlideDateVo" fetchSize="1000">
         select
             date_format(last_scan_date, '%Y-%m-%d')as date,
                count(*) as slide_sum
@@ -23,7 +23,7 @@
             slide_per_date
     </delete>
     
-    <select id = "selectSlidePerDateByDateNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    <select id = "selectSlidePerDateByDateNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat" fetchSize="1000">
     	select
     		date_format(date,'%Y-%m-%d') as type,
     		slide_sum as slide_sum
@@ -33,7 +33,7 @@
     </select>
 
     
-    <select id = "selectSlidePerDateByMonthNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    <select id = "selectSlidePerDateByMonthNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat" fetchSize="1000">
     	select
     		date_format(date,'%Y-%m') as type,
         	sum(slide_sum) as slide_sum
@@ -44,7 +44,7 @@
         order by type asc
     </select>
     
-    <select id = "selectSlidePerDateByYearNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    <select id = "selectSlidePerDateByYearNP" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat" fetchSize="1000">
     	select
     		date_format(date,'%Y') as type,
         	sum(slide_sum) as slide_sum
@@ -55,7 +55,7 @@
         order by type asc
     </select>
     
-    <select id = "selectSlidePerDateByDate" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    <select id = "selectSlidePerDateByDate" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat" fetchSize="1000">
     	select
     		date_format(date,'%Y-%m-%d') as type,
     		slide_sum as slide_sum
@@ -67,7 +67,7 @@
     </select>
 
     
-    <select id = "selectSlidePerDateByMonth" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    <select id = "selectSlidePerDateByMonth" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat" fetchSize="1000">
     	select
     		date_format(date,'%Y-%m') as type,
         	sum(slide_sum) as slide_sum
@@ -80,7 +80,7 @@
         order by type asc
     </select>
     
-    <select id = "selectSlidePerDateByYear" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat">
+    <select id = "selectSlidePerDateByYear" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "com.humintecTest.dashboard.response.slideTypeResponseFormat" fetchSize="1000">
     	select
     		date_format(date,'%Y') as type,
         	sum(slide_sum) as slide_sum
@@ -94,11 +94,11 @@
     </select>
 
 
-    <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo">
+    <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo" fetchSize="1000">
         select *
         from slide_per_date
     </select>
-    <select id = "selMonth" resultType="SlideDateVo" parameterType="SlideDateVo">
+    <select id = "selMonth" resultType="SlideDateVo" parameterType="SlideDateVo" fetchSize="1000">
         select
             date_format(date,'%Y-%m') as month,
         sum(slide_sum) as slide_sum
@@ -106,7 +106,7 @@
         group by
         month
     </select>
-    <select id = "selYear" resultType="SlideDateVo" parameterType="SlideDateVo">
+    <select id = "selYear" resultType="SlideDateVo" parameterType="SlideDateVo" fetchSize="1000">
         select
             date_format(date,'%Y') as year,
         sum(slide_sum) as slide_sum

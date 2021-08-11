@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.StorageStatusDao">
+    <select id="selectStorageStatus" parameterType="StorageStatusVo" resultType="StorageStatusVo">
+        select distinct storage_list.storage_name,
+                        storage_list.total,
+                        storage_list.used,
+                        storage_list.free,
+                        basefolder_list.hupax_or_sectra
+        from storage_list,
+             basefolder_list
+        where storage_list.storage_name = basefolder_list.storage_name
+    </select>
+</mapper>
+
+
+
+
+
