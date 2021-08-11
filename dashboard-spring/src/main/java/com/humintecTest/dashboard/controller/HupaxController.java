@@ -2,6 +2,7 @@ package com.humintecTest.dashboard.controller;
 
 import com.humintecTest.dashboard.service.HupaxService;
 import com.humintecTest.dashboard.vo.HupaxVo;
+import com.humintecTest.dashboard.vo.StorageStatusVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ public class HupaxController {
     HupaxService hupaxService;
     @GetMapping("/selectHupax")
     public List<HupaxVo> selectHupax(HupaxVo vo){
+        HupaxVo vo1 = new HupaxVo();
         List<HupaxVo> vList = hupaxService.selectHupax(vo);
         return vList;
     }

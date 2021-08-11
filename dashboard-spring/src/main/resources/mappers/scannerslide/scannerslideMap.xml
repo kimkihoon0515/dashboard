@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.humintecTest.dashboard.dao.ScannerSlideListDao">
-    <select id = "selectScanner" parameterType="ScannerSlideVo" resultType="ScannerSlideVo">
+    <select id = "selectScanner" parameterType="ScannerSlideVo" resultType="ScannerSlideVo" fetchSize="1000">
         select
             scanner_type,
             count(*) as slide_sum
@@ -22,12 +22,12 @@
         truncate
             scanner_per_slide
     </delete>
-    <select id = "showScanner" resultType="ScannerSlideVo" parameterType="ScannerSlideVo">
+    <select id = "showScanner" resultType="ScannerSlideVo" parameterType="ScannerSlideVo" fetchSize="1000">
         select *
         from scanner_per_slide
     </select>
     
-    <select id = "searchScannerList" resultType="ScannerSlideVo">
+    <select id = "searchScannerList" resultType="ScannerSlideVo" fetchSize="1000">
         select
         	scanner_type as scanner_type,
         	sum(amount) as slide_sum
@@ -37,7 +37,7 @@
         	scanner_type
         order by scanner_type asc
     </select>
-    <select id = "searchScannerListByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerSlideVo">
+    <select id = "searchScannerListByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerSlideVo" fetchSize="1000">
         select
         	scanner_type as scanner_type,
         	sum(amount) as slide_sum

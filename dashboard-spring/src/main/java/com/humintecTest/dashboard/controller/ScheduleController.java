@@ -2,29 +2,14 @@ package com.humintecTest.dashboard.controller;
 
 import java.util.List;
 
+import com.humintecTest.dashboard.service.*;
+import com.humintecTest.dashboard.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.humintecTest.dashboard.service.PidService;
-import com.humintecTest.dashboard.service.ScannerSlideListService;
-import com.humintecTest.dashboard.service.ScannerTableService;
-import com.humintecTest.dashboard.service.SlideDateService;
-import com.humintecTest.dashboard.service.StorageDateService;
-import com.humintecTest.dashboard.service.StorageFreeService;
-import com.humintecTest.dashboard.service.StorageTableService;
-import com.humintecTest.dashboard.service.StorageUseService;
-import com.humintecTest.dashboard.vo.PidVo;
-import com.humintecTest.dashboard.vo.ScannerSlideVo;
-import com.humintecTest.dashboard.vo.ScannerTableVo;
-import com.humintecTest.dashboard.vo.SlideDateVo;
-import com.humintecTest.dashboard.vo.StorageDateVo;
-import com.humintecTest.dashboard.vo.StorageFreeVo;
-import com.humintecTest.dashboard.vo.StorageTableVo;
-import com.humintecTest.dashboard.vo.StorageUseVo;
 
 @RestController
 public class ScheduleController {
@@ -44,6 +29,8 @@ public class ScheduleController {
 	StorageUseService storageUseService;
 	@Autowired
 	ScannerTableService scannerTableService;
+	@Autowired
+	StorageStatusService storageStatusService;
 	
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
@@ -95,6 +82,22 @@ public class ScheduleController {
                     return "false";
             }
     	}
+
+		if(storageStatusService.deleteStorageStatus()==0) {
+			StorageStatusVo vo = new StorageStatusVo();
+			List<StorageStatusVo> vList = storageStatusService.selectStorageStatus(vo);
+
+			for(StorageStatusVo target : vList) {
+				if (storageStatusService.insertStorageStatus(target) == 0) {
+
+				} else {
+					return "false";
+				}
+			}
+		}
+		else {
+			return "false";
+		}
 		
 		if(slideDateService.deleteSlideDate()== 0){
     		SlideDateVo vo = new SlideDateVo();
