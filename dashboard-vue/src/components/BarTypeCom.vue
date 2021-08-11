@@ -14,8 +14,17 @@
         </div>
       </div>
       <div v-if="needCheck==false" id="filter">
-        <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-        <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
+        <v-expansion-panels class="mb-6">
+          <v-expansion-panel>
+            <v-expansion-panel-header expand-icon="mdi-menu-down">
+            Filter
+            </v-expansion-panel-header>
+            <v-expansion-panel-content style="height:auto;">
+              <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
+              <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </div>
       <div id="bar">
         <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
@@ -24,13 +33,14 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
 import moment from 'moment'
 
 export default {
   name : "BarTypeCom",
-  components: { BarChart},
+  components: { BarChart, Multiselect},
   props: {
     color:{
       type: String,
@@ -55,6 +65,7 @@ export default {
   },
   data () {
     return {
+      selectOption:null,
       tab:null,
       checked:true,
       setcolor: 0,
@@ -188,6 +199,9 @@ export default {
         return
       }
       var keys= Object.keys(res.data[0]);
+      if(protect_check==0){
+        this.selectOption=res.data.map(function(elem){return elem[keys[x]]});
+      }
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
       for(let i=0; i<y.length ; i++){
@@ -302,10 +316,15 @@ export default {
 </script>
 
 <style>
-
+  #select{
+    height: 20%;
+    overflow: visible !important;
+  }
   #filter {
+    margin: 5px 0px 0px 0px;
     font-size: 10pt;
-    height:10%
+    height:80%;
+    overflow: visible !important;
   }
   #header {
     height: 10%;
@@ -324,5 +343,15 @@ export default {
     width: 10%;
     float: right;
     box-sizing: border-box;
+  }
+  .v-expansion-panel-header{
+    margin: 2px 2px 2px 2px;
+    width: 98% !important;
+    height: 20px !important;
+    padding: 5px 5px !important;
+    min-height: 10px !important;
+  }
+  .v-expansion-panel-content{
+    background-color: white !important;
   }
 </style>
