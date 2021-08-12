@@ -21,7 +21,7 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content style="height:auto;">
               <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-              <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
+              <label v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -66,7 +66,7 @@ export default {
   data () {
     return {
       selectOption:null,
-      tab:null,
+      tab:0,
       checked:true,
       setcolor: 0,
       origin: {},
@@ -199,8 +199,15 @@ export default {
         return
       }
       var keys= Object.keys(res.data[0]);
-      if(protect_check==0){
+      if((protect_check==0)&&this.needCheck==false){
         this.selectOption=res.data.map(function(elem){return elem[keys[x]]});
+        this.checkBind=res.data.map(function(elem){return elem[keys[x]]});
+        this.labelList=res.data.map(function(elem){return elem[keys[x]]});
+        console.log("쳌바: "+this.checkBind)
+        return
+      }
+      else if((protect_check==0)&&this.needCheck==true){
+        return
       }
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
@@ -239,13 +246,15 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
-    .then((res)=>{
-      this.parseBarData(res, 0);
-    })
-    .then((err)=>{
-      console.log(err);
-    })
+    if(this.needCheck==false){
+      this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
+      .then((res)=>{
+        this.parseBarData(res, 0);
+      })
+      .then((err)=>{
+        console.log(err);
+      })
+    }
   },
   computed:{
     changeDate() {
@@ -299,14 +308,14 @@ export default {
           this.chartoptions.title.text=this.query.chartName
           this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate': this.end_date, 'type':this.YMD})
           .then((res)=>{
-            this.parseBarData(res, 0);
+            this.parseBarData(res, 1);
           })
           .then((err)=>{
             console.log(err);
           })
           this.change=1;
         }
-        ,10);
+        ,1);
 
       }
     }
