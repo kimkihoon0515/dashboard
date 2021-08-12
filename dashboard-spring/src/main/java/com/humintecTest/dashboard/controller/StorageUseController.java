@@ -59,7 +59,7 @@ public class StorageUseController {
         {
             if(storageUseService.insertStorageUse(target)==0)
             {
-                System.out.println(target);
+
             }
             else
             {
