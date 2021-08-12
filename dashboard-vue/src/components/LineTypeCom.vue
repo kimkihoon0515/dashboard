@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       predictDate:null,
-      maN:7,
+      maN:300,
       change:0,
      dataform:{
         label: null,
@@ -109,16 +109,19 @@ export default {
     parseLineData(res){
       var x= this.query.xKey;
       var y= this.query.yKey;
+      let total=res.data[0].total
+      console.log(total)
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
-      let currentIndex=this.getIndex(this.datacollection.labels,moment().format('YYYY-MM-DD'))
+      let currentIndex=this.getIndex(this.datacollection.labels,moment().add(1,'days').format('YYYY-MM-DD'))
       console.log(res.data)
-      console.log(currentIndex)
+      console.log("current: "+currentIndex)
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
-        tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        //tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
+        tmp.data=res.data.map(function(elem){return ((elem[keys[y[i]]])/ total *100).toFixed(1)});
         let tmpPredict= _.cloneDeep(tmp);
         tmpPredict.label=keys[y[i]]+"예측값";
         tmpPredict.borderDash=[5,5]
@@ -170,7 +173,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
+    this.$axios.post(this.query.url, {'n':this.maN})
     .then((res)=>{
       console.log(res)
       this.parseLineData(res);
@@ -189,8 +192,9 @@ export default {
   }
   #param{
     float: left;
-    width: 10%;
+    width: 15%;
     margin: 5px;
+    border: 2px solid rgb(0, 0, 0);
   }
   #predictDate{
     float: right;

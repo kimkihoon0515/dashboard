@@ -1,8 +1,9 @@
 <template>
+  <v-app>
   <div>
     <div class="container_A grid">
       <div id="slide-date">
-        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="slide_date" :needCheck=true></bar-type-com>
+        <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="tabs? size:slide_date" :needCheck=true @tabChange="tabChange"></bar-type-com>
       </div>
       <div id="under">
         <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
@@ -23,6 +24,7 @@
       </div>
     </div>
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -38,12 +40,13 @@ export default {
   name: 'home',
   data() {
     return {
+      tabs:0,
       palette: false,
       color: '#f87979',
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
-        chartName: "날짜 별 스캔 횟수",
+        chartName: "스캔 완료 횟수",
         xKey: 0,
         yKey: [1]
       },
@@ -64,7 +67,7 @@ export default {
       size:{
         name:"size",
         url:"/searchStorageUseByDate",
-        chartName: "일별 사용량",
+        chartName: "메모리 사용량",
         xKey: 0,
         yKey: [1]
       },
@@ -79,10 +82,10 @@ export default {
       storage_name_list: [],
       storage_full:{
         name:"storage-full",
-        url:"/selectStorageTableById",
-        chartName:"스토리지별 사용량 추이",
+        url:"/selectHupax",
+        chartName:"스토리지 사용량 추이",
         xKey: 0,
-        yKey: [3]
+        yKey: [2]
       },
       swatches: ['#1FBC9C', '#1CA085', '#2ECC70', '#27AF60', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E', '#222F3D']
     }
@@ -117,6 +120,10 @@ export default {
     },
     viewPalette(){
       this.palette = !this.palette
+    },
+    tabChange(tab){
+      this.tabs=tab
+      console.log(this.tabs)
     }
   },
   mounted() {
@@ -190,7 +197,7 @@ export default {
     height: 310px;
     display: inline-block;
     margin: 0 10px 10px 10px;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }

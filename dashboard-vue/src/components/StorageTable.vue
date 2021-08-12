@@ -6,15 +6,15 @@
         <thead>
           <tr >
             <th class="text-left">Name</th>
-            <th class="text-left">Usage (Total / used)</th>
-            <th class="text-left">MA predict</th>
+            <th class="text-left">Usage</th>
+            <th class="text-left">H/S</th>
           </tr>
         </thead>
         <tbody>
-          <tr  v-for="item in dataset" :class="selectedRow==item.id?'cyan':'yellow'" :key="item.name" @click="handleClick(item)">
-            <td>{{ item.storageName }}</td>
+          <tr  v-for="item in dataset" :class="selectedRow==item.id?'white':'yellow'" :key="item.name" @click="handleClick(item)">
+            <td>{{ item.storage_name }}</td>
             <td>{{sizeConvert(item.total)}} / {{ sizeConvert(item.used) }}</td>
-            <td>{{ item.predictDate }}</td>
+            <td>{{ item.hupax_or_sectra }}</td>
           </tr>
         </tbody>
       </template>
@@ -34,7 +34,7 @@
     },
     methods:{
       handleClick(value){
-        console.log(value.storageName)
+        console.log(value.storagename)
         this.toggleSelection(value.id);
         this.selectStorage=""
         this.selectStorage=value.storageName
@@ -63,22 +63,11 @@
       }
     },
     beforeCreate(){
-    this.$axios.get("/storageList")
+    this.$axios.get("/selectStorageStatus")
     .then((res)=>{
-      console.log("hello")
-      let tmp=res.data;
-      console.log(tmp)
-      for(let item in tmp){
-        this.$axios.post("/selectStorageTableById", {'storageName':tmp[item].storageName, 'n':7})
-        .then((res2)=>{
-          console.log(res2.data)
-          tmp[item].predictDate=res2.data.map(function(elem){return elem.date})[res2.data.length-1]
-          this.dataset=tmp
-        })
-        .then((err)=>{
-          console.log(err);
-        })
-      }
+      this.dataset=res.data;
+      console.log(res.data)
+
     })
     .then((err)=>{
       console.log(err);

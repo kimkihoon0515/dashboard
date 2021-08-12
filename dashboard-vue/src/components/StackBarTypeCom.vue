@@ -88,6 +88,15 @@ export default{
                 legend: {
                     display: false
                 },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var currentValue = dataset.data[tooltipItem.index];
+                            return currentValue +'%';
+                        }, 
+                    },
+                },
                 responsive: true,
                 maintainAspectRatio: false                
             }
@@ -104,8 +113,8 @@ export default{
                 return
             }
             this.datacollection.labels=res.data.map(function(elem){return elem.storageName})
-            this.datacollection.datasets[0].data=res.data.map(function(elem){return (elem.used)/(elem.total)*100})
-            this.datacollection.datasets[1].data=res.data.map(function(elem){return (elem.free)/(elem.total)*100})
+            this.datacollection.datasets[0].data=res.data.map(function(elem){return ((elem.used)/(elem.total)*100).toFixed(1)})
+            this.datacollection.datasets[1].data=res.data.map(function(elem){return ((elem.free)/(elem.total)*100).toFixed(1)})
             this.change=1;
         }
     },
