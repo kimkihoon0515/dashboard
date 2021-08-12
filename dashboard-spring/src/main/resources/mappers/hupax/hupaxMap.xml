@@ -11,5 +11,4 @@
         from storage_use
         order by date
     </select>
-
 </mapper>
