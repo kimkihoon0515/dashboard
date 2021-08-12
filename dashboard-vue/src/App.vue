@@ -1,4 +1,5 @@
 <template>
+  <v-app>
   <div id="app">
     <div id="nav">
       <form>
@@ -12,8 +13,8 @@
     </div>
     <div class="margindiv"></div>
     <home :start="startDate" :end="endDate"></home>
-    <!--<router-view :start="startDate" :end="endDate"></router-view>-->
   </div>
+    </v-app>
 </template>
 
 <script>
@@ -37,7 +38,6 @@ export default {
     aYearAgo() {
       this.endDate = moment().format('YYYY-MM-DD')
       this.startDate = moment().subtract(1,'years').format('YYYY-MM-DD')
-
     },
     aMonthAgo(){
       this.endDate = moment().format('YYYY-MM-DD')
@@ -49,8 +49,7 @@ export default {
     }
   },
   mounted(){
-    setTimeout(this.setToday,30);
-
+    setTimeout(this.setToday,1500);
   }
 }
 </script>
@@ -75,10 +74,6 @@ export default {
   border-bottom: 1px solid #eee;
   overflow: hidden;
 }
-
-/* .check {
-  margin-right: 10px;
-} */
 
 .margindiv {
   height: 60px;

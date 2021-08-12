@@ -3,6 +3,6 @@ package com.humintecTest.dashboard.request;
 import lombok.Data;
 
 @Data
-public class StorageTableRequestFormat {
-    private String StorageName;
+public class HupaxRequestFormat {
+    private int n;
 }

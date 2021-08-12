@@ -1,27 +1,46 @@
 <template>
     <div class="chartbox">
-      <span v-if="needCheck==true" id="check-box-group">
-        <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
-        <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
-        <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
-      </span>
-      <div v-if="needCheck==false" id="filter">
-        <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-        <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
+      <div v-if="needCheck==true" id="header">
+        <div class="radio">
+          <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
+          <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
+          <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
+        </div>
+        <div class="tab">
+          <v-tabs v-model="tab">
+            <v-tab >스캔 완료 횟수</v-tab>
+            <v-tab>메모리 사용량</v-tab>
+          </v-tabs>
+        </div>
       </div>
-      <div id="chart">
-      <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
+      <div v-if="needCheck==false" id="filter">
+        <v-expansion-panels class="mb-6">
+          <v-expansion-panel>
+            <v-expansion-panel-header expand-icon="mdi-menu-down">
+            Filter
+            </v-expansion-panel-header>
+            <v-expansion-panel-content style="height:auto;">
+              <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
+              <label v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </div>
+      <div id="bar">
+        <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
       </div>
     </div>
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 import BarChart from './BarChart.vue'
 import _ from 'lodash'
 import moment from 'moment'
+
 export default {
   name : "BarTypeCom",
-  components: { BarChart },
+  components: { BarChart, Multiselect},
   props: {
     color:{
       type: String,
@@ -42,11 +61,12 @@ export default {
     end_date: {
       type: String,
       default : null//moment().format('YYYY-MM-DD').toString,
-    }
+    },
   },
-
   data () {
     return {
+      selectOption:null,
+      tab:0,
       checked:true,
       setcolor: 0,
       origin: {},
@@ -57,6 +77,7 @@ export default {
         label: null,
         data: [],
         backgroundColor: [],
+        maxBarThickness:50,
         pointBackgroundColor: 'white',
         borderWidth: 1,
         pointBorderColor: '#249EBF'
@@ -69,79 +90,77 @@ export default {
         ]
       },
       chartoptions:{
-          onClick: this.handleChartClick,
-          title: {
-            display: true,
-            text: this.query.chartName,
-            fontSize: 16
-          },
-          plugins: {
+        onClick: this.handleChartClick,
+        title: {
+          display: true,
+          text: this.query.chartName,
+          fontSize: 16
+        },
+        plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'xy'
+            },
             zoom: {
-              pan: {
-                enabled: true,
-                mode: 'xy'
-              },
-              zoom: {
-                enabled: true,
-                mode: 'xy'
+              enabled: true,
+              mode: 'xy'
+            }
+          }
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var dataset = data.datasets[tooltipItem.datasetIndex];
+              var currentValue = dataset.data[tooltipItem.index];
+              if (currentValue >= 1000000000000) {
+                return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+              }
+              else if (currentValue>=1000000000 && currentValue < 1000000000000) {
+                return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+              }
+              else if (currentValue>=1000000 && currentValue < 1000000000) {
+                return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+              }
+              else {
+              return currentValue;
               }
             }
-          },
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                var dataset = data.datasets[tooltipItem.datasetIndex];
-                var currentValue = dataset.data[tooltipItem.index];
-                if (currentValue >= 1000000000000) {
-                  return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+          }
+        }, 
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              callback: function(value, index, values){
+                if (value >=1000000000000){
+                  return value = (value / 1000000000000).toFixed(1) + "TB";
                 }
-                else if (currentValue>=1000000000 && currentValue < 1000000000000) {
-                  return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+                else if (value>=1000000000 && value <1000000000000){
+                  return value = (value / 1000000000).toFixed(1) + "GB";
                 }
-                else if (currentValue>=1000000 && currentValue < 1000000000) {
-                  return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+                else if (value >=1000000 && value < 1000000000) {
+                  return value = (value / 1000000).toFixed(1) + "MB";
                 }
-                else 
-                return currentValue;
+                else {
+                  return value;
+                }
               }
-            }
-          }, 
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      callback: function(value, index, values){
-                        if (value >=1000000000000){
-                          return value = (value / 1000000000000).toFixed(1) + "TB";
-                        }
-                        else if (value>=1000000000 && value <1000000000000){
-                          return value = (value / 1000000000).toFixed(1) + "GB";
-                        }
-                        else if (value >=1000000 && value < 1000000000) {
-                          return value = (value / 1000000).toFixed(1) + "MB";
-                        }
-                        else 
-                        return value;
-                      }
-                  },
-                  gridLines: {
-                      display: true
-                  },
-                  stacked: false
-              }],
-              xAxes: [ {
-              
-                  gridLines: {
-                      display: false
-                  },
-                  stacked: false
-              }]
-          },
-          legend: {
+            },
+            gridLines: {
+              display: true
+            },
+            stacked: false
+          }],
+          xAxes: [{
+            gridLines: {
               display: false
-          },
-          responsive: true,
-          maintainAspectRatio: false
+            },
+            stacked: false
+          }]
+        },
+        responsive: true,
+        maintainAspectRatio: false
       }
     }
   },
@@ -180,6 +199,15 @@ export default {
         return
       }
       var keys= Object.keys(res.data[0]);
+      if((protect_check==0)&&this.needCheck==false){
+        this.selectOption=res.data.map(function(elem){return elem[keys[x]]});
+        this.checkBind=res.data.map(function(elem){return elem[keys[x]]});
+        this.labelList=res.data.map(function(elem){return elem[keys[x]]});
+        return
+      }
+      else if((protect_check==0)&&this.needCheck==true){
+        return
+      }
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
       var originLabel=res.data.map(function(elem){return elem[keys[x]]});
       for(let i=0; i<y.length ; i++){
@@ -217,14 +245,15 @@ export default {
     }
   },
   mounted() {
-
-    this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
-    .then((res)=>{
-      this.parseBarData(res, 0);
-    })
-    .then((err)=>{
-      console.log(err);
-    })
+    if(this.needCheck==false){
+      this.$axios.post(this.query.url, {'startDate':null,'finishDate': null, 'type':null})
+      .then((res)=>{
+        this.parseBarData(res, 0);
+      })
+      .then((err)=>{
+        console.log(err);
+      })
+    }
   },
   computed:{
     changeDate() {
@@ -237,7 +266,6 @@ export default {
         if(this.checked==true){
           console.log(this.labelList)
           this.checkBind=_.cloneDeep(this.labelList);
-
         }
         else{
           this.checkBind=[] 
@@ -271,6 +299,24 @@ export default {
         this.parseBarData_check();
         this.setcolor=0;
       }
+    },
+    tab:{
+      handler(){
+        this.$emit("tabChange",this.tab)
+        setTimeout( changeQuery =>{
+          this.chartoptions.title.text=this.query.chartName
+          this.$axios.post(this.query.url, {'startDate':this.start_date,'finishDate': this.end_date, 'type':this.YMD})
+          .then((res)=>{
+            this.parseBarData(res, 1);
+          })
+          .then((err)=>{
+            console.log(err);
+          })
+          this.change=1;
+        }
+        ,1);
+
+      }
     }
   }
 }
@@ -278,11 +324,42 @@ export default {
 </script>
 
 <style>
-  #filter {
-    font-size: 10pt;
-     height:10%
+  #select{
+    height: 20%;
+    overflow: visible !important;
   }
-  #chart{
-    height:100%
+  #filter {
+    margin: 5px 0px 0px 0px;
+    font-size: 10pt;
+    height:80%;
+    overflow: visible !important;
+  }
+  #header {
+    height: 10%;
+  }
+  #bar {
+    height: 90%;
+    margin: 1% 0 0 0;
+  }
+  div .tab {
+    width: 30%;
+    float: left;
+    box-sizing: border-box;
+  }
+  div .radio{
+    margin: 10px 10px 0 0px;
+    width: 10%;
+    float: right;
+    box-sizing: border-box;
+  }
+  .v-expansion-panel-header{
+    margin: 2px 2px 2px 2px;
+    width: 98% !important;
+    height: 20px !important;
+    padding: 5px 5px !important;
+    min-height: 10px !important;
+  }
+  .v-expansion-panel-content{
+    background-color: white !important;
   }
 </style>
