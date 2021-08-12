@@ -26,7 +26,10 @@ public class HupaxController {
     public List<hupaxResponseFormat> selectHupax(@RequestBody HupaxRequestFormat req){
 
         List<HupaxVo> vList = hupaxService.selectHupax(req);
-
+        List<HupaxVo> voList= new ArrayList<HupaxVo>();
+        for (HupaxVo target: vList){
+            voList.add(target);
+        }
         long sum=0,avg,all;
 
         int size = vList.size()-1;
@@ -73,6 +76,7 @@ public class HupaxController {
             }
 
             else if (avg == 0){
+                vList=voList;
                 break;
             }
 
