@@ -13,3 +13,4 @@ public class StorageTableVo {
     private double daily_used;
     private long total;
 }
+
