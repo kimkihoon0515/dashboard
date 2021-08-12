@@ -11,6 +11,7 @@
         <button @click="setDate">submit</button>
       </form>
     </div>
+    <div class="margindiv"></div>
     <home :start="startDate" :end="endDate"></home>
   </div>
   </v-app>
@@ -64,6 +65,7 @@ export default {
 }
 
 #nav {
+  position: fixed;
   padding: 15px;
   margin-bottom: 5px;
   width: 100%;
@@ -72,6 +74,7 @@ export default {
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
   border-bottom: 1px solid #eee;
   overflow: hidden;
+  z-index: 2;
 }
 
 .margindiv {

@@ -159,6 +159,9 @@ export default {
             stacked: false
           }]
         },
+        legend:{
+          display:false
+        },
         responsive: true,
         maintainAspectRatio: false
       }
