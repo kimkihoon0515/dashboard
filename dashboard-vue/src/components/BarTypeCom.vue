@@ -203,7 +203,6 @@ export default {
         this.selectOption=res.data.map(function(elem){return elem[keys[x]]});
         this.checkBind=res.data.map(function(elem){return elem[keys[x]]});
         this.labelList=res.data.map(function(elem){return elem[keys[x]]});
-        console.log("쳌바: "+this.checkBind)
         return
       }
       else if((protect_check==0)&&this.needCheck==true){
