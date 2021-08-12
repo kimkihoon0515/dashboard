@@ -11,10 +11,9 @@
         <button @click="setDate">submit</button>
       </form>
     </div>
-    <div class="margindiv"></div>
     <home :start="startDate" :end="endDate"></home>
   </div>
-    </v-app>
+  </v-app>
 </template>
 
 <script>
@@ -61,10 +60,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: right;
   color: #2c3e50;
+  background: rgb(248, 249, 253);
 }
 
 #nav {
-  position: fixed;
   padding: 15px;
   margin-bottom: 5px;
   width: 100%;

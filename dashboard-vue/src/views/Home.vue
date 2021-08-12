@@ -1,6 +1,6 @@
 <template>
   <v-app>
-  <div>
+  <div class="root">
     <div class="container_A grid">
       <div id="slide-date">
         <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="tabs? size:slide_date" :needCheck=true @tabChange="tabChange"></bar-type-com>
@@ -140,6 +140,9 @@ export default {
 </script>
 
 <style>
+  .root{
+    background: rgb(248, 249, 253);
+  }
   div {
     width: 100%;
     height: 90%;
@@ -180,6 +183,7 @@ export default {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background-color: white;
   }
 
   .container_A #under .chartbox {
@@ -190,6 +194,7 @@ export default {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background-color: white;
   }
 
   .container_B .chartbox {
@@ -200,6 +205,7 @@ export default {
     overflow: visible;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background-color: white;
   }
 
   input {

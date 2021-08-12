@@ -19,10 +19,10 @@
             <v-expansion-panel-header expand-icon="mdi-menu-down">
             Filter
             </v-expansion-panel-header>
-            <v-expansion-panel-content style="height:auto;">
-              <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-              <label v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
-            </v-expansion-panel-content>
+              <v-expansion-panel-content style="height:auto;">
+                  <label class="all"><input id="selectall" type="checkbox" v-model="checked">전체</label>
+                  <label class="checkbox" v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
+              </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -361,5 +361,28 @@ export default {
   }
   .v-expansion-panel-content{
     background-color: white !important;
+    border-width: thick  !important;
+    border-bottom-color: black !important;
+    width: 100% !important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50) !important;
+
+  }
+    .v-expansion-panel-content_wrap{
+    width: 70% !important;
+    background-color: white !important;
+    border-width: thick !important;
+  }
+  .checkbox{ display:inline-block;
+    width:90px;
+    line-height:30px; 
+  }
+  .all{ display:inline-block;
+    width:300px;
+    line-height:30px; 
+  }
+  .panel-border{
+    width: 99%;
+    height: 99%;
+    background-color: crimson;
   }
 </style>
