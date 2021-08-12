@@ -1,11 +1,11 @@
 <template>
     <div class="chartbox">
-      <!-- 필터
       <div id="filter">
+           <!-- 필터
         <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
         <label v-for="(name, index) in Object.keys(this.origin)" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}}</label>
+    -->
       </div>
-      -->
       <div id="chart">
       <horizontal-bar :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></horizontal-bar>
       </div>
@@ -136,9 +136,12 @@ export default{
 <style>
   #filter {
     font-size: 10pt;
-     height:10%
+     height:10%;
   }
   #chart{
-    height:100%
+    height:100%;
+    width: 98%;
+    margin:0px 5px;
+    float: left;
   }
 </style>

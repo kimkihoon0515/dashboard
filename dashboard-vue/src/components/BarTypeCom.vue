@@ -170,8 +170,10 @@ export default {
   methods: {
     handleChartClick(evt, elements) {
       if(this.needCheck==false){
-        var chart = this.$children[0]._data._chart;
+        var chart = this.$children[1]._data._chart;
+        console.log(chart);
         const chartIndex = chart.getElementAtEvent(evt);
+        console.log(chart);
         if (chartIndex.length !== 0) {
           const datasetIndex = chartIndex[0]._datasetIndex;
           const position = chartIndex[0]._index;
@@ -183,6 +185,7 @@ export default {
           };
           this.origin[info.label][1]=this.color;
           this.setcolor=1;
+          console.log(info.label);
         } else {
           console.log("Background clicked");
         }
