@@ -31,7 +31,7 @@ export default {
   data () {
     return {
       predictDate:null,
-      maN:300,
+      maN:120,
       change:0,
      dataform:{
         label: null,
@@ -113,7 +113,12 @@ export default {
       console.log(total)
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-      this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
+      if(moment().isAfter(moment(this.datacollection.labels[res.data.length-1]))){
+        this.predictDate="∞"
+      }
+      else{
+        this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
+      }
       let currentIndex=this.getIndex(this.datacollection.labels,moment().add(1,'days').format('YYYY-MM-DD'))
       console.log(res.data)
       console.log("current: "+currentIndex)
