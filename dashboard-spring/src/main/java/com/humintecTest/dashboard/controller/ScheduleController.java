@@ -1,8 +1,6 @@
 package com.humintecTest.dashboard.controller;
 
-import com.humintecTest.dashboard.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,14 +34,14 @@ public class ScheduleController {
 	StorageUseService storageUseService;
 	@Autowired
 	ScannerTableService scannerTableService;
-	@Autowired
-	StorageStatusService storageStatusService;
+
 	
 	@PutMapping("/updateAll")
 	@Transactional(readOnly = false)
 //	@Scheduled(fixedRate = 86400000)
 	public String uadateAll() {
 		int check = 0;
+
 		
 		check += storageTableService.updateStorageTable();
 		check += scannerTableService.updateScannerTable();

@@ -36,6 +36,7 @@ public class StorageUseController {
         return res;
     }
 
+
     @PostMapping("/searchStorageUseByDate")
     @Transactional(readOnly = true)
     public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
