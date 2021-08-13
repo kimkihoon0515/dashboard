@@ -8,7 +8,8 @@
       <div id="under">
         <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
         <stack-bar-type-com class="chartbox" :query="storage"></stack-bar-type-com>
-        <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
+        <line-type-com id="storage-full" :query="storage_full"></line-type-com>
+        
       </div>
     </div>
     <div class="form__field grid">
@@ -19,7 +20,7 @@
     </div>
     <div class="container_B grid">
       <div id="right">
-        <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
+        <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color+'4D'"></bar-type-com>
         <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
       </div>
     </div>
@@ -42,7 +43,7 @@ export default {
     return {
       tabs:0,
       palette: false,
-      color: '#f87979',
+      color: '#1FBC9C4D',
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
@@ -78,8 +79,6 @@ export default {
         xKey: null,
         yKey: null
       },
-      storageName:null,
-      storage_name_list: [],
       storage_full:{
         name:"storage-full",
         url:"/selectHupax",
@@ -87,7 +86,7 @@ export default {
         xKey: 0,
         yKey: [2]
       },
-      swatches: ['#1FBC9C', '#1CA085', '#2ECC70', '#27AF60', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E', '#222F3D']
+      swatches: [ ,'#1FBC9C', '#2ECC70', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E','#F2C511','#F39C19','#E84B3C']
     }
   },
   props: {
@@ -103,21 +102,7 @@ export default {
       default:0
     }
   },
-  watch:{
-    color:{
-      handler(){
-        console.log(this.color)
-      }
-    }
-  },
   methods:{
-    nameChange(name){
-      console.log(name)
-      this.storageName=name;
-    },
-    rowclick(selectStorage){
-      this.nameChange(selectStorage)
-    },
     viewPalette(){
       this.palette = !this.palette
     },
@@ -213,10 +198,10 @@ export default {
   }
 
   button {
-  border: 1px solid skyblue;
+
   border-radius: 5px;
   background-color: white;
-  color: skyblue;
+  color: rgb(32, 28, 231);
   padding: 5px;
   }
 

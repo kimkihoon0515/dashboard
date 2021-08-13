@@ -44,7 +44,7 @@ export default {
   props: {
     color:{
       type: String,
-      default:'#f87979'
+      default:'#1FBC9C4D'
     },
     needCheck: {
       type: Boolean,
@@ -80,10 +80,10 @@ export default {
         maxBarThickness:50,
         pointBackgroundColor: 'white',
         borderWidth: 1,
-        pointBorderColor: '#249EBF'
+        pointBorderColor: '#249EBF33'
         },
       change:0,
-      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
+      colorset:['#1FBC9C4D','#ffd95033', '#02bc7733', '#28c3d733', '#FF638433'],
       datacollection: {
         labels: null,
         datasets: [
@@ -344,7 +344,7 @@ export default {
     height: 10%;
   }
   #bar {
-    height: 90%;
+    height: 97%;
     margin: 1% 0 0 0;
   }
   div .tab {
@@ -366,7 +366,7 @@ export default {
     min-height: 10px !important;
   }
   .v-expansion-panel-content{
-    background-color: white !important;
+    background-color: rgb(255, 255, 255,0.5) !important;
     border-width: thick  !important;
     border-bottom-color: black !important;
     width: 100% !important;
@@ -375,7 +375,7 @@ export default {
   }
     .v-expansion-panel-content_wrap{
     width: 70% !important;
-    background-color: white !important;
+    background-color: rgb(255, 255, 255,0.5) !important;
     border-width: thick !important;
   }
   .checkbox{ display:inline-block;

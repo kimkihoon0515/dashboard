@@ -38,7 +38,7 @@ export default{
                     {
                         label: "Used",
                         data: [],
-                        backgroundColor: '#f87979',
+                        backgroundColor: '#f8797980',
                         borderWidth: 1,
                         pointBorderColor: '#249EBF',
                         barPercentage:0.7
@@ -46,7 +46,7 @@ export default{
                     {
                         label: "Free",
                         data: [],
-                        backgroundColor: '#3398DB',
+                        backgroundColor: '#3398DB80',
                         borderWidth: 1,
                         pointBorderColor: '#249EBF',
                         barPercentage:0.7
@@ -56,6 +56,9 @@ export default{
                 ]
             },
             chartoptions:{
+                animation:{
+                    duration:0
+                },
                 title: {
                     display: true,
                     text: this.query.chartName,

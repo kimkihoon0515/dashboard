@@ -19,10 +19,6 @@ export default {
   name : "LineTypeCom",
   components: { LineChart },
   props: {
-    storageName: {
-      type: String,
-      default: null
-    },
     query: {
        type: Object,
        default: null
@@ -53,6 +49,9 @@ export default {
         }]
       },
       chartoptions:{
+        animation:{
+          duration:5000
+        },
         elements:{
           point: {
             backgroundColor: 'white'
@@ -157,7 +156,7 @@ export default {
   },
   watch:{
     maN: function(){
-      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
+      this.$axios.post(this.query.url, {'n':this.maN})
       .then((res)=>{
       console.log(res)
       this.parseLineData(res);
@@ -166,16 +165,6 @@ export default {
         console.log(err);
       })
     },
-    storageName: function(){
-      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
-      .then((res)=>{
-      console.log(res)
-      this.parseLineData(res);
-      })
-      .then((err)=>{
-        console.log(err);
-      })
-    }
   },
   mounted() {
     this.$axios.post(this.query.url, {'n':this.maN})
