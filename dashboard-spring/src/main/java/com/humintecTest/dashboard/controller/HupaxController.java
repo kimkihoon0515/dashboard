@@ -4,7 +4,6 @@ import com.humintecTest.dashboard.request.HupaxRequestFormat;
 import com.humintecTest.dashboard.response.hupaxResponseFormat;
 import com.humintecTest.dashboard.service.HupaxService;
 import com.humintecTest.dashboard.vo.HupaxVo;
-import com.humintecTest.dashboard.vo.StorageStatusVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,6 @@ public class HupaxController {
 
     @PostMapping("/selectHupax")
     @Transactional(readOnly = true)
-    @CrossOrigin(origins = "*")
     public List<hupaxResponseFormat> selectHupax(@RequestBody HupaxRequestFormat req){
 
         List<HupaxVo> vList = hupaxService.selectHupax(req);

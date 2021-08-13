@@ -7,8 +7,6 @@ import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -39,6 +37,26 @@ public class SlideDateServiceImpl implements SlideDateService{
         }catch (Exception e){
             return -1;
         }
+    }
+    
+    public int updateSlideDate() {
+    	if(this.deleteSlideDate()== 0){
+			SlideDateVo vo = new SlideDateVo();
+			List<SlideDateVo> vList = this.selectSlideDate(vo);
+
+			for(SlideDateVo target : vList) {
+				if(this.insertSlideDate(target) == 0) {
+				}
+				else {
+					return -1;
+				}
+			}
+		}
+		else {
+			return -1;
+		}
+
+		return 0;
     }
 
     @Override

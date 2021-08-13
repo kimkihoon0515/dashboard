@@ -6,8 +6,9 @@ import com.humintecTest.dashboard.vo.StorageTableVo;
 import java.util.List;
 
 public interface StorageTableService {
-    List<StorageTableVo> selectStorageTable(StorageTableVo vo);
-    int insertStorageTable(StorageTableVo vo);
-    int deleteStorageTable();
-    List<StorageTableVo> selectStorageTableById(StorageTableRequestFormat req);
+    public List<StorageTableVo> selectStorageTable(StorageTableVo vo);
+    public int insertStorageTable(StorageTableVo vo);
+    public int deleteStorageTable();
+    public int updateStorageTable();
+    public List<StorageTableVo> selectStorageTableById(StorageTableRequestFormat req);
 }

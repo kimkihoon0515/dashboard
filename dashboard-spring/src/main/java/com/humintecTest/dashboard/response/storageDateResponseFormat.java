@@ -3,7 +3,6 @@ package com.humintecTest.dashboard.response;
 import com.humintecTest.dashboard.vo.StorageDateVo;
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 @Data
@@ -11,7 +10,7 @@ public class storageDateResponseFormat {
     private Date date;
     private double daily_sum;
     private String storage_name;
-    private BigInteger total;
+    private long total;
 
     public storageDateResponseFormat(StorageDateVo vo){
         date = vo.getDate();

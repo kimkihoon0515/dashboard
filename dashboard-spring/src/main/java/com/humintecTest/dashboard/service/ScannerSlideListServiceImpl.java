@@ -26,11 +26,6 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     }
 
     @Override
-    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) {
-        return scannerSlideListDao.selectScanner(vo);
-    }
-
-    @Override
     public int deleteScanner() {
         try{
             scannerSlideListDao.deleteScanner();
@@ -38,6 +33,31 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
         } catch (Exception e){
             return -1;
         }
+    }
+    
+	@Override
+	public int updateScanner() {
+		if(this.deleteScanner() == 0) {
+            ScannerSlideVo vo = new ScannerSlideVo();
+            List<ScannerSlideVo> vList = this.selectScanner(vo);
+
+            for(ScannerSlideVo target : vList) {
+                if(this.insertScanner(target) == 0){
+
+                }
+                else
+                    return -1;
+            }
+        }
+		else {
+			return -1;
+		}
+		return 0;
+	}
+    
+    @Override
+    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) {
+        return scannerSlideListDao.selectScanner(vo);
     }
 
     @Override
