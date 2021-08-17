@@ -20,8 +20,8 @@
             Filter
             </v-expansion-panel-header>
               <v-expansion-panel-content style="height:auto;">
-                  <label class="all"><input id="selectall" type="checkbox" v-model="checked">전체</label>
-                  <label class="checkbox" v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
+                  <label class="all"><input id="selectall" type="checkbox" v-model="checked">전체</label><br>
+                  <label class="checkbox" v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind" style="float:left; margin-top:10px;">{{name}} </label>
               </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -378,11 +378,13 @@ export default {
     background-color: rgb(255, 255, 255,0.5) !important;
     border-width: thick !important;
   }
-  .checkbox{ display:inline-block;
+  .checkbox{ 
+    display:inline-block;
     width:90px;
     line-height:30px; 
   }
-  .all{ display:inline-block;
+  .all{ 
+    display:inline-flexbox;
     width:300px;
     line-height:30px; 
   }
