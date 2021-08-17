@@ -348,13 +348,13 @@ export default {
     margin: 1% 0 0 0;
   }
   div .tab {
-    width: 30%;
+    width: 35%;
     float: left;
     box-sizing: border-box;
   }
   div .radio{
     margin: 10px 10px 0 0px;
-    width: 10%;
+    width: 15%;
     float: right;
     box-sizing: border-box;
   }

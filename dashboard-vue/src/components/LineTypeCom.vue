@@ -1,8 +1,10 @@
 <template>
   <div class="chartbox">
     <div id="filter">
-    <input id="param" type="Number" min=1 v-model="maN"/>
-    <span id="predict">용량 초과 예정일: {{predictDate}}</span>
+        <strong style="margin-left:2px;"> MA:
+        <input id="param" type="Number" min=1 v-model="maN"/>
+        </strong>
+        <span id="predict">용량 초과 예정일: {{predictDate}}</span>
     </div>
     <div id="chart">
     <line-chart class="line" :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
@@ -50,7 +52,7 @@ export default {
       },
       chartoptions:{
         animation:{
-          duration:5000
+          duration:2000
         },
         elements:{
           point: {
@@ -182,21 +184,21 @@ export default {
 <style>
   #filter {
     font-size: 10pt;
-     height:10%
+    height:10%
+  }
+  #MA{
+    float: left;
+    width: 30%;
   }
   #param{
-    float: left;
     width: 17%;
     margin: 5px 5px 0 5px;
-    border: 2px solid rgb(0, 0, 0);
-  }
-  #predictDate{
-    float: right;
-    font-size: 18pt;
+    border: 1px solid #eee !important;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
   }
   #predict{
     margin-top:7px;
-    float: left;
+    float: right;
     width: 66%;
     font-size: 12px;
   }

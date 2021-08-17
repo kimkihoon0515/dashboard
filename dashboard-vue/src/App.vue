@@ -11,25 +11,27 @@
         </div>
       </div>
       <div class="datePicker">
-        <form>
-          <v-btn elevation="3" small @click="aYearAgo" style="margin: 0 12px 0 0;">
-          일 년
-          </v-btn>
-          <v-btn elevation="3" small @click="aMonthAgo" style="margin: 0 12px 0 0;">
-          한 달
-          </v-btn>
-          <v-btn elevation="3" small @click="setToday" style="margin: 0 8px 0 0;">
-          오늘
-          </v-btn>
-                    <span class="material-icons">
-search
-</span>
-          <input type="date" id='start-date' value=''/>
-          <input type="date" id='end-date' value=''/>
-          <v-btn icon elevation="3" small @click="setDate" style="margin: 0 8px 0 0;">
-          <v-icon>fas fa-search</v-icon>
-          </v-btn>
-        </form>
+        <div class="recent">
+          <div >
+            <v-btn elevation="3" small @click="aYearAgo" style="margin: 0 12px 0 0;">
+            일 년
+            </v-btn>
+            <v-btn elevation="3" small @click="aMonthAgo" style="margin: 0 12px 0 0;">
+            한 달
+            </v-btn>
+            <v-btn elevation="3" small @click="setToday">
+            오늘
+            </v-btn>
+          </div>
+        </div>
+        <div class="range">
+            <input type="date" id='start-date' value=startDate/ style="margin-top: 1px ;">
+            <strong>~</strong>
+            <input type="date" id='end-date' value=endDate/ style="margin: 1px 8px 0 5px ;">
+            <v-btn icon elevation="5" small @click="setDate" style="margin: 0 8px 1px 0;">
+            <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+        </div>
       </div>
     </div>
     <div class="margindiv"></div>
@@ -121,7 +123,7 @@ h2{
   float: left;
 }
 .datePicker{
-  width: auto;
+  width: 650px;
   float: right;
 }
 .tit{
@@ -129,5 +131,23 @@ h2{
   font-weight:bold;
   font-size: xx-large;
   margin-right:10px ;
+}
+#start-date{
+  border: 1px solid #eee !important;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
+  margin-right: 4px;
+  float: left;
+}
+#end-date{
+  border: 1px solid #eee !important;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
+}
+.recent{
+  float: left;
+  width: 35%;
+}
+.range{
+  float: right;
+  width: 60%;
 }
 </style>
