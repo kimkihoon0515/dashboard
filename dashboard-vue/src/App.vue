@@ -2,19 +2,42 @@
   <v-app>
   <div id="app">
     <div id="nav">
-      <form>
-        <button @click="aYearAgo">일 년</button>
-        <button @click="aMonthAgo">한 달</button>
-        <button @click="setToday">오늘</button>
-        <input type="date" id='start-date' value=''/>
-        <input type="date" id='end-date' value=''/>
-        <button @click="setDate">submit</button>
-      </form>
+      <div class="title">
+        <div class="main">
+        <strong class="tit">DashBoard</strong>
+        </div>
+        <div class="sub">
+          <h2>Scanning Service</h2>
+        </div>
+      </div>
+      <div class="datePicker">
+        <div class="recent">
+          <div >
+            <v-btn elevation="3" small @click="aYearAgo" style="margin: 0 12px 0 0;">
+            일 년
+            </v-btn>
+            <v-btn elevation="3" small @click="aMonthAgo" style="margin: 0 12px 0 0;">
+            한 달
+            </v-btn>
+            <v-btn elevation="3" small @click="setToday">
+            오늘
+            </v-btn>
+          </div>
+        </div>
+        <div class="range">
+            <input type="date" id='start-date' value=startDate/ style="margin-top: 1px ;">
+            <strong>~</strong>
+            <input type="date" id='end-date' value=endDate/ style="margin: 1px 8px 0 5px ;">
+            <v-btn icon elevation="5" small @click="setDate" style="margin: 0 8px 1px 0;">
+            <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+        </div>
+      </div>
     </div>
     <div class="margindiv"></div>
     <home :start="startDate" :end="endDate"></home>
   </div>
-    </v-app>
+  </v-app>
 </template>
 
 <script>
@@ -49,7 +72,7 @@ export default {
     }
   },
   mounted(){
-    setTimeout(this.setToday,1500);
+    setTimeout(this.setToday,100);
   }
 }
 </script>
@@ -61,6 +84,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: right;
   color: #2c3e50;
+  background: rgb(248, 249, 253);
 }
 
 #nav {
@@ -69,13 +93,61 @@ export default {
   margin-bottom: 5px;
   width: 100%;
   height: 60px;
-  background-color: rgb(53, 196, 231);
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
   border-bottom: 1px solid #eee;
   overflow: hidden;
+  z-index: 2;
 }
 
 .margindiv {
   height: 60px;
+}
+.title{
+  width: 40%;
+  float: left;
+  font-weight: bold;
+  font-size: xx-large;
+}
+.main{
+  width: auto;
+  float: left;
+  white-space: nowrap;
+}
+.sub{
+  margin-left:20px ;
+  margin-top: 5px;
+  width: 70%;
+}
+h2{
+  float: left;
+}
+.datePicker{
+  width: 650px;
+  float: right;
+}
+.tit{
+  float: left;
+  font-weight:bold;
+  font-size: xx-large;
+  margin-right:10px ;
+}
+#start-date{
+  border: 1px solid #eee !important;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
+  margin-right: 4px;
+  float: left;
+}
+#end-date{
+  border: 1px solid #eee !important;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
+}
+.recent{
+  float: left;
+  width: 35%;
+}
+.range{
+  float: right;
+  width: 60%;
 }
 </style>

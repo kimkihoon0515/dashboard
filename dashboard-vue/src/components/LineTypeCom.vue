@@ -1,11 +1,13 @@
 <template>
   <div class="chartbox">
     <div id="filter">
-    <input id="param" type="Number" min=1 v-model="maN"/>
-    <span id="predict">용량 초과 예정일: {{predictDate}}</span>
+        <strong style="margin-left:2px;"> MA:
+        <input id="param" type="Number" min=1 v-model="maN"/>
+        </strong>
+        <span id="predict">용량 초과 예정일: {{predictDate}}</span>
     </div>
     <div id="chart">
-    <line-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
+    <line-chart class="line" :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
     </div>
   </div>
 </template>
@@ -19,10 +21,6 @@ export default {
   name : "LineTypeCom",
   components: { LineChart },
   props: {
-    storageName: {
-      type: String,
-      default: null
-    },
     query: {
        type: Object,
        default: null
@@ -30,20 +28,21 @@ export default {
   },
   data () {
     return {
+      gradient:null,
       predictDate:null,
-      maN:300,
+      maN:120,
       change:0,
      dataform:{
         label: null,
         data: null,
-        fill:false,
         interaction:{
             intersect:true
           },
         pointRadius:0,
         pointBackgroundColor: "transparent",
+        backgroundColor:null,
         borderWidth: 2,
-        borderColor: '#f87979',
+        borderColor: '#1FBC9C',
         borderDash:null
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
@@ -53,6 +52,9 @@ export default {
         }]
       },
       chartoptions:{
+        animation:{
+          duration:2000
+        },
         elements:{
           point: {
             backgroundColor: 'white'
@@ -107,13 +109,27 @@ export default {
       this.change=0;
     },
     parseLineData(res){
+      var ctx= this.$children[0]._data._chart.canvas.getContext("2d");
+      console.log(ctx)
+      var gradientFill = ctx.createLinearGradient(0, 0, 0, 450);
+      gradientFill.addColorStop(0.1, "rgba(31, 188,156,0.6 )");
+      gradientFill.addColorStop(0.2, "rgba(31, 188,156, 0.5)");
+      gradientFill.addColorStop(0.4, "rgba(31, 188,156, 0.2)");
+      gradientFill.addColorStop(0.6, "rgba(31, 188,156, 0.1)");
+      gradientFill.addColorStop(0.8, "rgba(31, 188,156, 0.1)");
+      gradientFill.addColorStop(1, "rgba(31, 188,156, 0)");
       var x= this.query.xKey;
       var y= this.query.yKey;
       let total=res.data[0].total
       console.log(total)
       var keys= Object.keys(res.data[0]);
       this.datacollection.labels=res.data.map(function(elem){return elem[keys[x]]});
-      this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
+      if(moment().isAfter(moment(this.datacollection.labels[res.data.length-1]))){
+        this.predictDate="∞"
+      }
+      else{
+        this.predictDate=this.datacollection.labels[this.datacollection.labels.length-1]
+      }
       let currentIndex=this.getIndex(this.datacollection.labels,moment().add(1,'days').format('YYYY-MM-DD'))
       console.log(res.data)
       console.log("current: "+currentIndex)
@@ -136,6 +152,8 @@ export default {
         }
         
         this.datacollection.datasets=[];
+        tmp.backgroundColor=gradientFill;
+        tmpPredict.backgroundColor=gradientFill;
         this.datacollection.datasets.push(tmp);
         this.datacollection.datasets.push(tmpPredict);
       }
@@ -152,7 +170,7 @@ export default {
   },
   watch:{
     maN: function(){
-      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
+      this.$axios.post(this.query.url, {'n':this.maN})
       .then((res)=>{
       console.log(res)
       this.parseLineData(res);
@@ -161,16 +179,6 @@ export default {
         console.log(err);
       })
     },
-    storageName: function(){
-      this.$axios.post(this.query.url, {'storageName':this.storageName, 'n':this.maN})
-      .then((res)=>{
-      console.log(res)
-      this.parseLineData(res);
-      })
-      .then((err)=>{
-        console.log(err);
-      })
-    }
   },
   mounted() {
     this.$axios.post(this.query.url, {'n':this.maN})
@@ -188,20 +196,26 @@ export default {
 <style>
   #filter {
     font-size: 10pt;
-     height:10%
+    height:10%
+  }
+  #MA{
+    float: left;
+    width: 30%;
   }
   #param{
-    float: left;
-    width: 15%;
-    margin: 5px;
-    border: 2px solid rgb(0, 0, 0);
-  }
-  #predictDate{
-    float: right;
-    font-size: 18pt;
+    width: 17%;
+    margin: 5px 5px 0 5px;
+    border: 1px solid #eee !important;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
   }
   #predict{
-    float: left;
-    width: 70%;
+    margin-top:7px;
+    float: right;
+    width: 66%;
+    font-size: 12px;
+  }
+  .line{
+    height: 87%;
+    margin: 0 0 20px 0;
   }
 </style>
