@@ -38,7 +38,27 @@ public class PidServiceImpl implements PidService {
             return -1;
         }
     }
+    
+	@Override
+	public int updatePid(){
+		if(this.deletePid() == 0) {
+            PidVo vo = new PidVo();
+            List<PidVo> vList = this.selectPid(vo);
 
+            for (PidVo target : vList){
+                if(this.insertPid(target) == 0){
+
+                }
+                else
+                    return -1;
+            }
+        }
+        else {
+            return -1;
+        }
+		return 0;
+	}
+	
     @Override
     public List<pidchResponseFormat> searchPid() {
         return pidDao.searchPid();

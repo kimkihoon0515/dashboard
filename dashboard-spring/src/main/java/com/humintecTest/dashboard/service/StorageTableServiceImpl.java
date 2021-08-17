@@ -2,7 +2,6 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageTableDao;
 import com.humintecTest.dashboard.request.StorageTableRequestFormat;
-import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageTableVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,26 @@ public class StorageTableServiceImpl implements StorageTableService{
             return -1;
         }
     }
+
+	@Override
+	public int updateStorageTable() {
+		StorageTableVo vo = new StorageTableVo();
+        if(this.deleteStorageTable()==0){
+            List<StorageTableVo> vList = this.selectStorageTable(vo);
+
+            for(StorageTableVo target : vList){
+                if(this.insertStorageTable(target)== 0){
+                }
+                else {
+                    return -1;
+                }
+            }
+        }
+        else {
+            return -1;
+        }
+        return 0;
+	}
 
     @Override
     public List<StorageTableVo> selectStorageTableById(StorageTableRequestFormat req) {

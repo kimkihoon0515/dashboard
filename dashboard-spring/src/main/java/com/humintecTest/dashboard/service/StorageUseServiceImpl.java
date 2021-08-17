@@ -4,11 +4,9 @@ import com.humintecTest.dashboard.dao.StorageUseDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
 import com.humintecTest.dashboard.response.storageUseMoveAvgResponseFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
-import com.humintecTest.dashboard.vo.StorageFreeVo;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -41,6 +39,28 @@ public class StorageUseServiceImpl implements StorageUseService {
             return -1;
         }
     }
+
+	@Override
+	public int updateStorageUse() {
+		if(this.deleteStorageUse() == 0) {
+            StorageUseVo vo = new StorageUseVo();
+            List<StorageUseVo> vList = this.selectStorageUse(vo);
+
+            for(StorageUseVo target : vList) {
+                if(this.insertStorageUse(target)==0) {
+
+                }
+                else {
+                    return -1;
+                }
+            }
+        }
+        else {
+            return -1;
+        }
+
+        return 0;
+	}
 
     @Override
     public List<StorageUseVo> showStorageUse(StorageUseVo vo) {

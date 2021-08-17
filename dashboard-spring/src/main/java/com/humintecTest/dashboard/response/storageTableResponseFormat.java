@@ -3,7 +3,6 @@ package com.humintecTest.dashboard.response;
 import com.humintecTest.dashboard.vo.StorageTableVo;
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 @Data

@@ -5,7 +5,6 @@ import com.humintecTest.dashboard.response.slideTypeResponseFormat;
 import com.humintecTest.dashboard.vo.SlideDateVo;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper

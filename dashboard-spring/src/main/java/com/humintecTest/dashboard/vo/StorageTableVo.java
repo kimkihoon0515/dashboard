@@ -2,7 +2,6 @@ package com.humintecTest.dashboard.vo;
 
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.sql.Date;
 
 @Data
@@ -13,4 +12,3 @@ public class StorageTableVo {
     private double daily_used;
     private long total;
 }
-
