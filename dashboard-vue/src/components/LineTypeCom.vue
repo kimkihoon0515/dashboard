@@ -28,20 +28,21 @@ export default {
   },
   data () {
     return {
+      gradient:null,
       predictDate:null,
       maN:120,
       change:0,
      dataform:{
         label: null,
         data: null,
-        fill:false,
         interaction:{
             intersect:true
           },
         pointRadius:0,
         pointBackgroundColor: "transparent",
+        backgroundColor:null,
         borderWidth: 2,
-        borderColor: '#f87979',
+        borderColor: '#1FBC9C',
         borderDash:null
         },
       colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
@@ -108,6 +109,15 @@ export default {
       this.change=0;
     },
     parseLineData(res){
+      var ctx= this.$children[0]._data._chart.canvas.getContext("2d");
+      console.log(ctx)
+      var gradientFill = ctx.createLinearGradient(0, 0, 0, 450);
+      gradientFill.addColorStop(0.1, "rgba(31, 188,156,0.6 )");
+      gradientFill.addColorStop(0.2, "rgba(31, 188,156, 0.5)");
+      gradientFill.addColorStop(0.4, "rgba(31, 188,156, 0.2)");
+      gradientFill.addColorStop(0.6, "rgba(31, 188,156, 0.1)");
+      gradientFill.addColorStop(0.8, "rgba(31, 188,156, 0.1)");
+      gradientFill.addColorStop(1, "rgba(31, 188,156, 0)");
       var x= this.query.xKey;
       var y= this.query.yKey;
       let total=res.data[0].total
@@ -142,6 +152,8 @@ export default {
         }
         
         this.datacollection.datasets=[];
+        tmp.backgroundColor=gradientFill;
+        tmpPredict.backgroundColor=gradientFill;
         this.datacollection.datasets.push(tmp);
         this.datacollection.datasets.push(tmpPredict);
       }
