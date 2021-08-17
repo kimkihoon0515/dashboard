@@ -13,11 +13,15 @@
 <script>
 import LineChart from './LineChart.vue'
 
+import Modal from './Modal.vue'
+
 import moment from 'moment'
+
+
 
 export default {
   name : "LineTypeCom",
-  components: { LineChart },
+  components: { LineChart, Modal },
   props: {
     storageName: {
       type: String,
@@ -46,13 +50,14 @@ export default {
         borderColor: '#f87979',
         borderDash:null
         },
-      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
+      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384','#fdfff5'],
       datacollection: {
         labels: null,
         datasets: [{
         }]
       },
       chartoptions:{
+        onClick : this.chartClick,
         elements:{
           point: {
             backgroundColor: 'white'
@@ -103,6 +108,11 @@ export default {
     }
   },
   methods: {
+    chartClick(){
+      //this.eventObj = evt.event;
+      console.log(this.$emit("show"))
+      this.$emit("show");
+    },
     reset() {
       this.change=0;
     },
@@ -183,6 +193,8 @@ export default {
     })
   }
 }
+
+
 </script>
 
 <style>
@@ -204,4 +216,21 @@ export default {
     float: left;
     width: 70%;
   }
+  .modal-container{
+    height:100%;
+  }
+  .modal-header{
+    height:0%;
+  }
+  .modal-body{
+    background-color: rgb(255, 255, 255);
+    height: 40%;
+  }
+  .modal-footer{
+    background-color: rgb(255, 255, 255);
+    height: 10%;
+  }
 </style>
+
+
+

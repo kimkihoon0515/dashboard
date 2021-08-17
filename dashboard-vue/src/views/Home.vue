@@ -8,7 +8,7 @@
       <div id="under">
         <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
         <stack-bar-type-com class="chartbox" :query="storage"></stack-bar-type-com>
-        <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
+        <line-type-com id="storage-full" :query="storage_full" :storageName="storageName" @show="show"></line-type-com>
       </div>
     </div>
     <div class="form__field grid">
@@ -23,6 +23,37 @@
         <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
       </div>
     </div>
+    <Modal v-if="showModal" :query="storage_full" :storageName="storageName" @close="showModal = false">
+      <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
+            <slot name="header">
+              
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <slot name="body">
+              <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              
+              <button class="modal-default-button" @click="showModal=false">
+                종료
+              </button>
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+    </Modal>
   </div>
   </v-app>
 </template>
@@ -41,6 +72,7 @@ export default {
   data() {
     return {
       tabs:0,
+      showModal:false,
       palette: false,
       color: '#f87979',
       slide_date:{
@@ -111,6 +143,9 @@ export default {
     }
   },
   methods:{
+    show(){
+      this.showModal=true;
+    },
     nameChange(name){
       console.log(name)
       this.storageName=name;
@@ -125,6 +160,7 @@ export default {
       this.tabs=tab
       console.log(this.tabs)
     }
+
   },
   mounted() {
     this.$axios.get(this.storage.url)
@@ -201,6 +237,64 @@ export default {
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
   }
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  position:absolute;
+  width: 900px;
+  margin: 0px auto;
+  padding: 0px 0px;
+  border-radius: 4px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-body {
+  margin: 0px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 
   input {
     background-color: #fff;
