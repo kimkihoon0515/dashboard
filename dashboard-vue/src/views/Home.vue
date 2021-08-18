@@ -14,8 +14,12 @@
     </div>
     <div class="form__field grid">
       <div class="form__label">
-        <strong @click="viewPalette">Color Palette</strong>
-        <v-swatches v-if="palette==true" v-model="color" :swatches="swatches" row-length="10" inline></v-swatches>
+        <strong  @click="viewPalette">
+        <v-btn icon elevation="5" large style="margin: 0 8px 1px 0;">
+        <v-icon x-large>mdi-palette</v-icon>
+        </v-btn>
+        <v-swatches style="margin-top:10px;" v-if="palette==true" v-model="color" shapes="circles" :swatches="swatches" row-length="10" inline></v-swatches>
+        </strong>
       </div>
     </div>
     <div class="container_B grid">
@@ -151,7 +155,9 @@ export default {
   .form__field {
     width: 4%;
   }
-
+  .v-btn__content{
+    width: 4% !important;
+  }
   .container_B {
     width: 28%;
   }
@@ -282,6 +288,9 @@ export default {
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    }
+    .vue-swatches .swatches{
+      margin-top: 20px !important;
     }
   }
 </style>
