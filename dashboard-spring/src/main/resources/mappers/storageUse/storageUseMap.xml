@@ -14,10 +14,10 @@
     
     <select id = "selectStorageUseByDateNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" fetchSize="1000">
         select
-               date_format(last_scan_date, '%Y-%m-%d')as type,
-               sum(file_size) as daily_sum
+               date_format(date, '%Y-%m-%d')as type,
+               sum(daily_sum) as daily_sum
         from
-        	slide_list
+        	storage_use
         group by
         	type
         order by type asc
@@ -25,10 +25,10 @@
     
     <select id = "selectStorageUseByMonthNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" fetchSize="1000">
         select
-               date_format(last_scan_date, '%Y-%m')as type,
-               sum(file_size) as daily_sum
+               date_format(date, '%Y-%m')as type,
+               sum(daily_sum) as daily_sum
         from
-        	slide_list
+        	storage_use
         group by
         	type
         order by type asc
@@ -36,10 +36,10 @@
     
     <select id = "selectStorageUseByYearNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" fetchSize="1000">
         select
-               date_format(last_scan_date, '%Y')as type,
-               sum(file_size) as daily_sum
+               date_format(date, '%Y')as type,
+               sum(daily_sum) as daily_sum
         from
-        	slide_list
+        	storage_use
         group by
         	type
         order by type asc
@@ -47,12 +47,12 @@
     
     <select id = "selectStorageUseByDate" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" fetchSize="1000">
         select
-               date_format(last_scan_date, '%Y-%m-%d')as type,
-               sum(file_size) as daily_sum
+               date_format(date, '%Y-%m-%d')as type,
+               sum(daily_sum) as daily_sum
         from
-        	slide_list
+        	storage_use
         where
-        	date_format(last_scan_date, '%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+        	date_format(date, '%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
         group by
         	type
         order by type asc
@@ -60,12 +60,12 @@
     
     <select id = "selectStorageUseByMonth" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" fetchSize="1000">
         select
-               date_format(last_scan_date, '%Y-%m')as type,
-               sum(file_size) as daily_sum
+               date_format(date, '%Y-%m')as type,
+               sum(daily_sum) as daily_sum
         from
-        	slide_list
+        	storage_use
         where
-        	date_format(last_scan_date, '%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
+        	date_format(date, '%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
         group by
         	type
         order by type asc
@@ -73,16 +73,18 @@
     
     <select id = "selectStorageUseByYear" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" fetchSize="1000">
         select
-               date_format(last_scan_date, '%Y')as type,
-               sum(file_size) as daily_sum
+               date_format(date, '%Y')as type,
+               sum(daily_sum) as daily_sum
         from
-        	slide_list
+        	storage_use
         where
-        	date_format(last_scan_date, '%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
+        	date_format(date, '%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
         group by
         	type
         order by type asc
     </select>
+
+
     
     <insert id = "insertStorageUse" parameterType="StorageUseVo">
         insert into
@@ -93,10 +95,15 @@
         truncate
             storage_use
     </delete>
-    <select id = "showStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo" fetchSize="1000">
-        select *
-        from storage_use
+
+    <select id = "showStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo">
+
+        select
+               *
+        from
+             storage_use
     </select>
+
     <select id = "searchStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo" fetchSize="1000">
         select *
         from storage_use

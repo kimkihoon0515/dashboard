@@ -1,6 +1,6 @@
 <template>
   <v-app>
-  <div>
+  <div class="root">
     <div class="container_A grid">
       <div id="slide-date">
         <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="tabs? size:slide_date" :needCheck=true @tabChange="tabChange"></bar-type-com>
@@ -8,6 +8,7 @@
       <div id="under">
         <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
         <stack-bar-type-com class="chartbox" :query="storage"></stack-bar-type-com>
+
         <line-type-com id="storage-full" :query="storage_full" :storageName="storageName" @show="show"></line-type-com>
       </div>
     </div>
@@ -19,7 +20,7 @@
     </div>
     <div class="container_B grid">
       <div id="right">
-        <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color"></bar-type-com>
+        <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color+'4D'"></bar-type-com>
         <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
       </div>
     </div>
@@ -74,7 +75,7 @@ export default {
       tabs:0,
       showModal:false,
       palette: false,
-      color: '#f87979',
+      color: '#1FBC9C4D',
       slide_date:{
         name:"slide-date",
         url:"/selectSlidePerDate",
@@ -110,8 +111,6 @@ export default {
         xKey: null,
         yKey: null
       },
-      storageName:null,
-      storage_name_list: [],
       storage_full:{
         name:"storage-full",
         url:"/selectHupax",
@@ -119,7 +118,7 @@ export default {
         xKey: 0,
         yKey: [2]
       },
-      swatches: ['#1FBC9C', '#1CA085', '#2ECC70', '#27AF60', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E', '#222F3D']
+      swatches: [ ,'#1FBC9C', '#2ECC70', '#3398DB', '#2980B9', '#A463BF', '#8E43AD', '#3D556E','#F2C511','#F39C19','#E84B3C']
     }
   },
   props: {
@@ -133,13 +132,6 @@ export default {
     },
     submit: {
       default:0
-    }
-  },
-  watch:{
-    color:{
-      handler(){
-        console.log(this.color)
-      }
     }
   },
   methods:{
@@ -176,6 +168,9 @@ export default {
 </script>
 
 <style>
+  .root{
+    background: rgb(248, 249, 253);
+  }
   div {
     width: 100%;
     height: 90%;
@@ -216,6 +211,7 @@ export default {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background-color: white;
   }
 
   .container_A #under .chartbox {
@@ -226,6 +222,7 @@ export default {
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background-color: white;
   }
 
   .container_B .chartbox {
@@ -236,6 +233,7 @@ export default {
     overflow: visible;
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background-color: white;
   }
 
 .modal-mask {
@@ -301,10 +299,10 @@ export default {
   }
 
   button {
-  border: 1px solid skyblue;
+
   border-radius: 5px;
   background-color: white;
-  color: skyblue;
+  color: rgb(32, 28, 231);
   padding: 5px;
   }
 

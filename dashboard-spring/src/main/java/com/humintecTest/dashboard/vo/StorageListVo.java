@@ -6,8 +6,8 @@ import lombok.Data;
 public class StorageListVo {
     private long id;
     private String storageName;
-    private Long total;
-    private Long used;
-    private Long free;
+    private long total;
+    private long used;
+    private long free;
     private String serverIp;
 }

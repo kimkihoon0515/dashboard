@@ -19,10 +19,10 @@
             <v-expansion-panel-header expand-icon="mdi-menu-down">
             Filter
             </v-expansion-panel-header>
-            <v-expansion-panel-content style="height:auto;">
-              <label><input id="selectall" type="checkbox" v-model="checked">전체</label>
-              <label v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind">{{name}} </label>
-            </v-expansion-panel-content>
+              <v-expansion-panel-content style="height:auto;">
+                  <label class="all"><input id="selectall" type="checkbox" v-model="checked">전체</label><br>
+                  <label class="checkbox" v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind" style="float:left; margin-top:10px;">{{name}} </label>
+              </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
@@ -44,7 +44,7 @@ export default {
   props: {
     color:{
       type: String,
-      default:'#f87979'
+      default:'#1FBC9C4D'
     },
     needCheck: {
       type: Boolean,
@@ -80,10 +80,10 @@ export default {
         maxBarThickness:50,
         pointBackgroundColor: 'white',
         borderWidth: 1,
-        pointBorderColor: '#249EBF'
+        pointBorderColor: '#249EBF33'
         },
       change:0,
-      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
+      colorset:['#1FBC9C4D','#ffd95033', '#02bc7733', '#28c3d733', '#FF638433'],
       datacollection: {
         labels: null,
         datasets: [
@@ -159,6 +159,9 @@ export default {
             stacked: false
           }]
         },
+        legend:{
+          display:false
+        },
         responsive: true,
         maintainAspectRatio: false
       }
@@ -167,8 +170,10 @@ export default {
   methods: {
     handleChartClick(evt, elements) {
       if(this.needCheck==false){
-        var chart = this.$children[0]._data._chart;
+        var chart = this.$children[1]._data._chart;
+        console.log(chart);
         const chartIndex = chart.getElementAtEvent(evt);
+        console.log(chart);
         if (chartIndex.length !== 0) {
           const datasetIndex = chartIndex[0]._datasetIndex;
           const position = chartIndex[0]._index;
@@ -180,6 +185,7 @@ export default {
           };
           this.origin[info.label][1]=this.color;
           this.setcolor=1;
+          console.log(info.label);
         } else {
           console.log("Background clicked");
         }
@@ -338,17 +344,17 @@ export default {
     height: 10%;
   }
   #bar {
-    height: 90%;
+    height: 97%;
     margin: 1% 0 0 0;
   }
   div .tab {
-    width: 30%;
+    width: 35%;
     float: left;
     box-sizing: border-box;
   }
   div .radio{
     margin: 10px 10px 0 0px;
-    width: 10%;
+    width: 15%;
     float: right;
     box-sizing: border-box;
   }
@@ -360,6 +366,31 @@ export default {
     min-height: 10px !important;
   }
   .v-expansion-panel-content{
-    background-color: white !important;
+    background-color: rgb(255, 255, 255,0.5) !important;
+    border-width: thick  !important;
+    border-bottom-color: black !important;
+    width: 100% !important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50) !important;
+
+  }
+    .v-expansion-panel-content_wrap{
+    width: 70% !important;
+    background-color: rgb(255, 255, 255,0.5) !important;
+    border-width: thick !important;
+  }
+  .checkbox{ 
+    display:inline-block;
+    width:90px;
+    line-height:30px; 
+  }
+  .all{ 
+    display:inline-flexbox;
+    width:300px;
+    line-height:30px; 
+  }
+  .panel-border{
+    width: 99%;
+    height: 99%;
+    background-color: crimson;
   }
 </style>
