@@ -27,16 +27,13 @@
     <Modal v-if="showModal" :query="storage_full" :storageName="storageName" @close="showModal = false">
       <transition name="modal">
     <div class="modal-mask">
-      <div class="modal-wrapper">
+      <div class="modal-wrapper" @click="showModal=false">
         <div class="modal-container">
-
           <div class="modal-header">
-            <slot name="header">
-              
+            <slot name="header">   
             </slot>
           </div>
-
-          <div class="modal-body">
+          <div class="modal-body" @click.stop="">
             <slot name="body">
               <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
             </slot>
@@ -45,9 +42,7 @@
           <div class="modal-footer">
             <slot name="footer">
               
-              <button class="modal-default-button" @click="showModal=false">
-                종료
-              </button>
+  
             </slot>
           </div>
         </div>
@@ -260,6 +255,7 @@ export default {
   padding: 0px 0px;
   border-radius: 4px;
   font-family: Helvetica, Arial, sans-serif;
+  
 }
 
 .modal-body {

@@ -232,18 +232,20 @@ export default {
     margin: 0 0 20px 0;
   }
   .modal-container{
-    height:100%;
+    position: relative;
+    height: 100%;
+    
   }
   .modal-header{
-    height:0%;
+    height:25%;
   }
   .modal-body{
+    border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    height: 40%;
+    height: 50%;
   }
   .modal-footer{
-    background-color: rgb(255, 255, 255);
-    height: 10%;
+    height:50%
   }
 </style>
 
