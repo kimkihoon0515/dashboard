@@ -15,11 +15,15 @@
 <script>
 import LineChart from './LineChart.vue'
 
+import Modal from './Modal.vue'
+
 import moment from 'moment'
+
+
 
 export default {
   name : "LineTypeCom",
-  components: { LineChart },
+  components: { LineChart, Modal },
   props: {
     query: {
        type: Object,
@@ -45,13 +49,15 @@ export default {
         borderColor: '#1FBC9C',
         borderDash:null
         },
-      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384'],
+      colorset:['#f87979','#ffd950', '#02bc77', '#28c3d7', '#FF6384','#fdfff5'],
       datacollection: {
         labels: null,
         datasets: [{
         }]
       },
       chartoptions:{
+
+        onClick : this.chartClick,
         animation:{
           duration:2000
         },
@@ -105,6 +111,11 @@ export default {
     }
   },
   methods: {
+    chartClick(){
+      //this.eventObj = evt.event;
+      console.log(this.$emit("show"))
+      this.$emit("show");
+    },
     reset() {
       this.change=0;
     },
@@ -191,6 +202,8 @@ export default {
     })
   }
 }
+
+
 </script>
 
 <style>
@@ -218,4 +231,21 @@ export default {
     height: 87%;
     margin: 0 0 20px 0;
   }
+  .modal-container{
+    height:100%;
+  }
+  .modal-header{
+    height:0%;
+  }
+  .modal-body{
+    background-color: rgb(255, 255, 255);
+    height: 40%;
+  }
+  .modal-footer{
+    background-color: rgb(255, 255, 255);
+    height: 10%;
+  }
 </style>
+
+
+
