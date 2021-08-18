@@ -83,7 +83,7 @@ export default {
         pointBorderColor: '#249EBF33'
         },
       change:0,
-      colorset:['#1FBC9C4D','#ffd95033', '#02bc7733', '#28c3d733', '#FF638433'],
+      colorset:['#28c3d770','#ffd95033', '#02bc7733', '#28c3d733', '#FF638433'],
       datacollection: {
         labels: null,
         datasets: [
