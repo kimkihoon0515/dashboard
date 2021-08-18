@@ -7,7 +7,7 @@
             Filter
             </v-expansion-panel-header>
               <v-expansion-panel-content style="height:auto;">
-                  <label  style="display: inline-flexbox; margin-top: 10px;"><input id="selectall" type="checkbox" v-model="checked">전체</label> 
+                  <label  style="display: inline-flexbox;"><input id="selectall" type="checkbox" v-model="checked">전체</label> 
                   <br>
                   <label class="checkbox" v-for="(name, index) in this.labelList" :key="index"><input :id="name" :value="name" type="checkbox" v-model="checkBind" style="float:left; margin-top:10px;">{{name}} </label>
               </v-expansion-panel-content>
