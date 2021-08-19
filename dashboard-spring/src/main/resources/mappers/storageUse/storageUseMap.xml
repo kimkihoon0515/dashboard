@@ -11,6 +11,13 @@
         group by date
         order by date asc
     </select>
+
+    <insert id = "insertStorageUse" parameterType="StorageUseVo">
+        insert into
+            storage_use(date,daily_sum)
+        values (#{date},#{daily_sum})
+    </insert>
+
     
     <select id = "selectStorageUseByDateNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" fetchSize="1000">
         select
@@ -85,12 +92,6 @@
     </select>
 
 
-    
-    <insert id = "insertStorageUse" parameterType="StorageUseVo">
-        insert into
-            storage_use(date,daily_sum)
-        values (#{date},#{daily_sum})
-    </insert>
     <delete id="deleteStorageUse">
         truncate
             storage_use

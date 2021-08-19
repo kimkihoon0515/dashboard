@@ -15,7 +15,6 @@
 <script>
 import LineChart from './LineChart.vue'
 
-import Modal from './Modal.vue'
 
 import moment from 'moment'
 
@@ -23,7 +22,7 @@ import moment from 'moment'
 
 export default {
   name : "LineTypeCom",
-  components: { LineChart, Modal },
+  components: { LineChart },
   props: {
     query: {
        type: Object,
