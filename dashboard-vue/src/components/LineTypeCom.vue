@@ -15,6 +15,7 @@
 <script>
 import LineChart from './LineChart.vue'
 import moment from 'moment'
+
 export default {
   name : "LineTypeCom",
   components: { LineChart },

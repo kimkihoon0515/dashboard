@@ -61,13 +61,12 @@
 <script>
 import BarTypeCom from '../components/BarTypeCom.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
-import PieTypeCom from '../components/PieTypeCom.vue'
 import StackBarTypeCom from '../components/StackBarTypeCom.vue'
 import VSwatches from 'vue-swatches'
 import 'vue-swatches/dist/vue-swatches.css'
 import StorageTable from '../components/StorageTable.vue'
 export default {
-  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches,StorageTable, StorageTable,StackBarTypeCom },
+  components: { BarTypeCom, LineTypeCom, VSwatches, StorageTable,StackBarTypeCom },
   name: 'home',
   data() {
     return {
