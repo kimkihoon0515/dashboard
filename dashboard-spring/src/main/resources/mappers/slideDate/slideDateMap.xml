@@ -74,7 +74,7 @@
     	from
     		slide_per_date
     	where
-    		date_format(date,'%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
+    		date_format(date,'%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
     	group by
         	type
         order by type asc
@@ -87,7 +87,7 @@
     	from
     		slide_per_date
     	where
-    		date_format(date,'%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
+    		date_format(date,'%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
     	group by
         	type
         order by type asc
