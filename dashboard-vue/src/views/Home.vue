@@ -98,7 +98,7 @@ export default {
       size:{
         name:"size",
         url:"/searchStorageUseByDate",
-        chartName: "메모리 사용량",
+        chartName: "스토리지 사용량",
         xKey: 0,
         yKey: [1]
       },
