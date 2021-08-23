@@ -51,7 +51,6 @@ export default {
         }]
       },
       chartoptions:{
-
         onClick : this.chartClick,
         animation:{
           duration:2000
@@ -79,7 +78,6 @@ export default {
           }, 
         }
       },
-
           scales: {
               yAxes: [{
                   ticks: {
@@ -197,8 +195,6 @@ export default {
     })
   }
 }
-
-
 </script>
 
 <style>
@@ -243,6 +239,3 @@ export default {
     height:50%
   }
 </style>
-
-
-

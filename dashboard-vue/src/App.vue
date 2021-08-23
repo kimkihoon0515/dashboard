@@ -4,10 +4,14 @@
     <div id="nav">
       <div class="title">
         <div class="main">
-        <strong class="tit">DashBoard</strong>
+        <strong class="tit">
+          <img src = "./data/humintec.jpg" alt="">
+        </strong>
         </div>
         <div class="sub">
-          <h2>Scanning Service</h2>
+          <h2>
+            DashBoard Service
+          </h2>
         </div>
       </div>
       <div class="datePicker">
@@ -100,6 +104,13 @@ export default {
   z-index: 2;
 }
 
+img {
+  position: relative;
+  bottom: 12px;
+  height: auto;
+  
+}
+
 .margindiv {
   height: 60px;
 }
@@ -120,6 +131,10 @@ export default {
   width: 70%;
 }
 h2{
+  position: relative;
+  bottom: 12px;
+  left : 200px;
+  font-size:xx-large;
   float: left;
 }
 .datePicker{

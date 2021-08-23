@@ -11,6 +11,13 @@
         group by date
         order by date asc
     </select>
+
+    <insert id = "insertStorageUse" parameterType="StorageUseVo">
+        insert into
+            storage_use(date,daily_sum)
+        values (#{date},#{daily_sum})
+    </insert>
+
     
     <select id = "selectStorageUseByDateNP" resultType="com.humintecTest.dashboard.response.storageUseTypeResponseFormat" fetchSize="1000">
         select
@@ -65,7 +72,7 @@
         from
         	storage_use
         where
-        	date_format(date, '%Y-%m') between date_format(#{startDate}, '%Y-%m') and date_format(#{finishDate}, '%Y-%m')
+        	date_format(date, '%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
         group by
         	type
         order by type asc
@@ -78,19 +85,13 @@
         from
         	storage_use
         where
-        	date_format(date, '%Y') between date_format(#{startDate}, '%Y') and date_format(#{finishDate}, '%Y')
+        	date_format(date, '%Y-%m-%d') between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
         group by
         	type
         order by type asc
     </select>
 
 
-    
-    <insert id = "insertStorageUse" parameterType="StorageUseVo">
-        insert into
-            storage_use(date,daily_sum)
-        values (#{date},#{daily_sum})
-    </insert>
     <delete id="deleteStorageUse">
         truncate
             storage_use
