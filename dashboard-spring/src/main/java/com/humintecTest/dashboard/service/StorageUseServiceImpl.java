@@ -2,7 +2,6 @@ package com.humintecTest.dashboard.service;
 
 import com.humintecTest.dashboard.dao.StorageUseDao;
 import com.humintecTest.dashboard.request.DateRequestFormat;
-import com.humintecTest.dashboard.response.storageUseMoveAvgResponseFormat;
 import com.humintecTest.dashboard.response.storageUseResponseFormat;
 import com.humintecTest.dashboard.vo.StorageUseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class StorageUseServiceImpl implements StorageUseService {
     StorageUseDao storageUseDao;
 
     @Override
-    public List<StorageUseVo> selectStorageUse(StorageUseVo vo) {
+    public List<StorageUseVo> selectStorageUse(StorageUseVo vo) { //storage_use table에 들어갈 데이터를 slide_list로부터 불러오기 위한 메소드.
         return storageUseDao.selectStorageUse(vo);
     }
 
@@ -41,7 +40,7 @@ public class StorageUseServiceImpl implements StorageUseService {
     }
 
 	@Override
-	public int updateStorageUse() {
+	public int updateStorageUse() { //delete 후에 insert 하는 방식으로 storage_use table을 update 한다.
 		if(this.deleteStorageUse() == 0) {
             StorageUseVo vo = new StorageUseVo();
             List<StorageUseVo> vList = this.selectStorageUse(vo);
@@ -63,46 +62,30 @@ public class StorageUseServiceImpl implements StorageUseService {
 	}
 
     @Override
-    public List<StorageUseVo> showStorageUse(StorageUseVo vo) {
-        return storageUseDao.showStorageUse(vo);
-    }
-
-    @Override
-    public List<StorageUseVo> searchStorageUse(DateRequestFormat req) {
-        return storageUseDao.searchStorageUse(req);
-    }
-
-    @Override
-    public List<storageUseMoveAvgResponseFormat> moveAvgStorageUse(StorageUseVo vo) {
-
-        return null;
-    }
-
-    @Override
-    public List<storageUseResponseFormat> selectStorageUseNP(DateRequestFormat req) {
-        if(req.getType() == 1) {
+    public List<storageUseResponseFormat> selectStorageUseNP(DateRequestFormat req) { //parameter에 기간이 들어오지 않았을 때 전체데이터를 불러오는 메소드.
+        if(req.getType() == 1) { //연
             return storageUseDao.selectStorageUseByYearNP();
         }
-        else if(req.getType() == 2) {
+        else if(req.getType() == 2) { //월
             return storageUseDao.selectStorageUseByMonthNP();
         }
-        else {
+        else { //일
             return storageUseDao.selectStorageUseByDateNP();
         }
     }
 
     @Override
-    public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) {
+    public List<storageUseResponseFormat> selectStorageUseByDate(DateRequestFormat req) { //parameter에 기간과 type이 3일 때 일 단위로 데이터를 불러오는 메소드.
         return storageUseDao.selectStorageUseByDate(req);
     }
 
     @Override
-    public List<storageUseResponseFormat> selectStorageUseByMonth(DateRequestFormat req) {
+    public List<storageUseResponseFormat> selectStorageUseByMonth(DateRequestFormat req) { //parameter에 기간과 type이 2일 때 월 단위로 데이터를 불러오는 메소드.
         return storageUseDao.selectStorageUseByMonth(req);
     }
 
     @Override
-    public List<storageUseResponseFormat> selectStorageUseByYear(DateRequestFormat req) {
+    public List<storageUseResponseFormat> selectStorageUseByYear(DateRequestFormat req) { //parameter에 기간과 type이 1일 때 일 단위로 데이터를 불러오는 메소드.
         return storageUseDao.selectStorageUseByYear(req);
     }
 }

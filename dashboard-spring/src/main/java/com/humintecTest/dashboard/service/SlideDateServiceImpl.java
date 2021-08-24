@@ -15,7 +15,7 @@ public class SlideDateServiceImpl implements SlideDateService{
     SlideDateDao slideDateDao;
 
     @Override
-    public List<SlideDateVo> selectSlideDate(SlideDateVo vo) {
+    public List<SlideDateVo> selectSlideDate(SlideDateVo vo) { //slide_list로부터 slide_per_date에 넣을 데이터를 불러오는 메소드.
         return slideDateDao.selectSlideDate(vo);
     }
 
@@ -39,7 +39,7 @@ public class SlideDateServiceImpl implements SlideDateService{
         }
     }
     
-    public int updateSlideDate() {
+    public int updateSlideDate() { // delete 후에 insert 하는 방식으로 slide_per_date table을 update한다.
     	if(this.deleteSlideDate()== 0){
 			SlideDateVo vo = new SlideDateVo();
 			List<SlideDateVo> vList = this.selectSlideDate(vo);
@@ -60,45 +60,30 @@ public class SlideDateServiceImpl implements SlideDateService{
     }
 
     @Override
-    public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req) {
-        if(req.getType() == 1) {
+    public List<slideTypeResponseFormat> selectSlidePerDateNP(DateRequestFormat req) { //parameter에 기간이 들어오지 않았을 때 전체데이터를 불러오는 메소드.
+        if(req.getType() == 1) { //연
             return slideDateDao.selectSlidePerDateByYearNP();
         }
-        else if(req.getType() == 2) {
+        else if(req.getType() == 2) { //월
             return slideDateDao.selectSlidePerDateByMonthNP();
         }
-        else {
+        else { //일
             return slideDateDao.selectSlidePerDateByDateNP();
         }
     }
 
     @Override
-    public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req) {
+    public List<slideTypeResponseFormat> selectSlidePerDateByDate(DateRequestFormat req) { //parameter에 기간과 type이 3일 때 일 단위로 데이터를 불러오는 메소드.
         return slideDateDao.selectSlidePerDateByDate(req);
     }
 
     @Override
-    public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req) {
+    public List<slideTypeResponseFormat> selectSlidePerDateByMonth(DateRequestFormat req) { //parameter에 기간과 type이 2일 때 월 단위로 데이터를 불러오는 메소드.
         return slideDateDao.selectSlidePerDateByMonth(req);
     }
 
     @Override
-    public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req) {
+    public List<slideTypeResponseFormat> selectSlidePerDateByYear(DateRequestFormat req) { //parameter에 기간과 type이 1일 때 연 단위로 데이터를 불러오는 메소드.
         return slideDateDao.selectSlidePerDateByYear(req);
-    }
-
-    @Override
-    public List<SlideDateVo> showSlideDate(SlideDateVo vo) {
-        return slideDateDao.showSlideDate(vo);
-    }
-
-    @Override
-    public List<SlideDateVo> selMonth(SlideDateVo vo) {
-        return slideDateDao.selMonth(vo);
-    }
-
-    @Override
-    public List<SlideDateVo> selYear(SlideDateVo vo) {
-        return slideDateDao.selYear(vo);
     }
 }

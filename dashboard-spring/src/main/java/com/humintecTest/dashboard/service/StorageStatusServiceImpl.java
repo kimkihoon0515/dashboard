@@ -12,7 +12,7 @@ public class StorageStatusServiceImpl  implements StorageStatusService{
     @Autowired
     StorageStatusDao storageStatusDao;
     @Override
-    public List<StorageStatusVo> selectStorageStatus(StorageStatusVo vo) {
+    public List<StorageStatusVo> selectStorageStatus(StorageStatusVo vo) { //slide_list, basefolder_list로부터 storage_type에 넣을 데이터를 불러오기 위한 메소드.
         return storageStatusDao.selectStorageStatus(vo);
     }
 
@@ -35,5 +35,23 @@ public class StorageStatusServiceImpl  implements StorageStatusService{
         {
             return -1;
         }
+    }
+
+    @Override
+    public int updateStorageStatus() { // delete 후에 insert 하는 방식으로 storage_type을 update한다.
+        StorageStatusVo vo = new StorageStatusVo();
+        if (this.deleteStorageStatus() == 0) {
+            List<StorageStatusVo> vList =  this.selectStorageStatus(vo);
+
+            for (StorageStatusVo target : vList) {
+                if (this.insertStorageStatus(target) == 0) {
+                } else {
+                    return -1;
+                }
+            }
+        } else {
+            return -1;
+        }
+        return 0;
     }
 }

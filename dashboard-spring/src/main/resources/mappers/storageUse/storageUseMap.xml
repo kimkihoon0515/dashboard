@@ -91,19 +91,10 @@
         order by type asc
     </select>
 
-
     <delete id="deleteStorageUse">
         truncate
             storage_use
     </delete>
-
-    <select id = "showStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo">
-
-        select
-               *
-        from
-             storage_use
-    </select>
 
     <select id = "searchStorageUse" parameterType="StorageUseVo" resultType="StorageUseVo" fetchSize="1000">
         select *

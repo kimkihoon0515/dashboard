@@ -22,11 +22,7 @@
         truncate
             scanner_per_slide
     </delete>
-    <select id = "showScanner" resultType="ScannerSlideVo" parameterType="ScannerSlideVo" fetchSize="1000">
-        select *
-        from scanner_per_slide
-    </select>
-    
+
     <select id = "searchScannerList" resultType="ScannerSlideVo" fetchSize="1000">
         select
         	scanner_type as scanner_type,
