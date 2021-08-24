@@ -117,7 +117,7 @@ export default{
     reset() {
       this.change=0;
     },
-    parseBarData(res){
+    parseBarData(res){ //호출한 데이터를 차트에 적용하는 함수
       if(res.data.length==0){
         this.datacollection.datasets.pop();
         this.change=1;
@@ -148,11 +148,10 @@ export default{
     checked:{
       handler(){
         if(this.checked==true){
-        console.log(this.labelList)
-        this.checkBind=_.cloneDeep(this.labelList);
+          this.checkBind=_.cloneDeep(this.labelList);
         }
         else{
-        this.checkBind=[] 
+          this.checkBind=[] 
         }
       }
     },

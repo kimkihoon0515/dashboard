@@ -113,7 +113,7 @@ export default {
       //재렌더링을 위한 리셋 함수
       this.change=0;
     },
-    parseLineData(res){ //차트에 데이터를 적용하는 함수
+    parseLineData(res){ //호출한 데이터를 차트에 적용하는 함수
       var ctx= this.$children[0]._data._chart.canvas.getContext("2d");
       console.log(ctx)
       var gradientFill = ctx.createLinearGradient(0, 0, 0, 450);
