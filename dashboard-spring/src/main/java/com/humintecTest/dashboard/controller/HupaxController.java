@@ -28,7 +28,7 @@ public class HupaxController {
         for (HupaxVo target: vList){
             voList.add(target);
         }
-        long sum=0,avg,all;
+        long sum=0,avg,all; // sum은 avg를 구하기위해 avg는 익일의 사용량, all은 새로 추가되고 계산되는 누적값
 
         int size = vList.size()-1;
         int n=0; // vList에 추가될 날짜 계산을 위한 변수

@@ -15,7 +15,7 @@ public class PidServiceImpl implements PidService {
     PidDao pidDao;
 
     @Override
-    public List<PidVo> selectPid(PidVo vo) {
+    public List<PidVo> selectPid(PidVo vo) { // slide_list table로부터 pathid_table에 넣을 데이터를 불러오는 메소드.
         return pidDao.selectPid(vo);
     }
 
@@ -40,7 +40,7 @@ public class PidServiceImpl implements PidService {
     }
     
 	@Override
-	public int updatePid(){
+	public int updatePid(){ // delete 후에 insert 하는 방식으로 진행.
 		if(this.deletePid() == 0) {
             PidVo vo = new PidVo();
             List<PidVo> vList = this.selectPid(vo);
@@ -60,22 +60,17 @@ public class PidServiceImpl implements PidService {
 	}
 	
     @Override
-    public List<pidchResponseFormat> searchPid() {
+    public List<pidchResponseFormat> searchPid() { // pid table의 모든 정보를 불러오는 메소드.
         return pidDao.searchPid();
     }
 
     @Override
-    public List<pidchResponseFormat> searchPidByDate(DateRequestFormat req) {
+    public List<pidchResponseFormat> searchPidByDate(DateRequestFormat req) { // 조건에 맞는 pid table의 정보를 불러오는 메소드.
         try {
             return pidDao.searchPidByDate(req);
         } catch (Exception e) {
             System.out.println(e);
             return null;
         }
-    }
-
-    @Override
-    public List<PidVo> showPid(PidVo vo) {
-        return pidDao.showPid(vo);
     }
 }

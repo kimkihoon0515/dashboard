@@ -105,7 +105,6 @@ export default {
   },
   methods: {
     chartClick(){
-      //this.eventObj = evt.event;
       console.log(this.$emit("show"))
       this.$emit("show");
     },

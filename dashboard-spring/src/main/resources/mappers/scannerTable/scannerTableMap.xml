@@ -24,47 +24,6 @@
         truncate
             scanner_table
     </delete>
-    
-    <select id = "searchScannerTable" resultType="ScannerTableVo" fetchSize="1000">
-    	select
-        	date as date,
-        	scanner_type as scannerType,
-        	sum(amount) as amount
-        from 
-        	scanner_table
-        group by
-        	scanner_type, date
-        order by date asc
-    </select>
-    
-    <select id = "searchScannerTableByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerTableVo" fetchSize="1000">
-        select
-        	date as date,
-        	scanner_type as scannerType,
-        	sum(amount) as amount
-        from 
-        	scanner_table
-        where 
-        	date between #{startDate} and #{finishDate}
-        group by
-        	scanner_type, date
-        order by date asc
-    </select>
-    
-    
-    <select id = "searchScannerTableById" parameterType="com.humintecTest.dashboard.request.ScannerTableRequestFormat" resultType="ScannerTableVo" fetchSize="1000">
-        select
-        	date as date,
-        	scanner_type as scannerType,
-        	sum(amount) as amount
-        from 
-        	scanner_table
-        where 
-        	(date between #{startDate} and #{finishDate}) and scanner_type = #{scannerType}
-        group by
-        	scanner_type, date
-        order by date asc
-    </select>
 </mapper>
 
 

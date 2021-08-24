@@ -15,7 +15,7 @@ public class ScannerTableServiceImpl implements ScannerTableService{
 	@Autowired
 	ScannerTableDao scannerTableDao;
 
-	public List<ScannerTableVo> selectScannerTable(ScannerTableVo vo){
+	public List<ScannerTableVo> selectScannerTable(ScannerTableVo vo){ //slide_list로부터 scanner_table에 넣을 데이터를 불러오기위한 메소드.
 		return scannerTableDao.selectScannerTable(vo);
 	}
 
@@ -41,7 +41,7 @@ public class ScannerTableServiceImpl implements ScannerTableService{
 		}
 	}
 	
-	public int updateScannerTable() {
+	public int updateScannerTable() { // delete 후에 insert 하는 방식으로 scanner_table을 update해준다.
 		if(this.deleteScannerTable() == 0) {
 			ScannerTableVo vo = new ScannerTableVo();
 			List<ScannerTableVo> vList = this.selectScannerTable(vo);
@@ -61,17 +61,4 @@ public class ScannerTableServiceImpl implements ScannerTableService{
 
 		return 0;
 	}
-	
-	public List<ScannerTableVo> searchScannerTable(){
-		return scannerTableDao.searchScannerTable();
-	}
-
-	public List<ScannerTableVo> searchScannerTableBydate(DateRequestFormat req){
-		return scannerTableDao.searchScannerTableByDate(req);
-	}
-
-	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req){
-		return scannerTableDao.searchScannerTableById(req);
-	}
-
 }

@@ -13,7 +13,4 @@ public interface ScannerTableDao {
 	public List<ScannerTableVo> selectScannerTable(ScannerTableVo vo);
 	public void insertScannerTable(ScannerTableVo vo);
 	public void deleteScannerTable();
-	public List<ScannerTableVo> searchScannerTable();
-	public List<ScannerTableVo> searchScannerTableByDate(DateRequestFormat req);
-	public List<ScannerTableVo> searchScannerTableById(ScannerTableRequestFormat req);
 }

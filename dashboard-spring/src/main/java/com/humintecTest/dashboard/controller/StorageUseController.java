@@ -23,38 +23,24 @@ public class StorageUseController {
     @Autowired
     StorageUseService storageUseService;
 
-    @GetMapping("/showStorageUse") //전체 데이터
-    @Transactional(readOnly = true)
-    public List<storageUseResponseFormat> showStorageUse () {
-        StorageUseVo vo = new StorageUseVo();
-        List<StorageUseVo> vList = storageUseService.showStorageUse(vo);
-        ArrayList<storageUseResponseFormat> res = new ArrayList<storageUseResponseFormat>();
-        for (StorageUseVo target : vList)
-        {
-            res.add(new storageUseResponseFormat(target));
-        }
-        return res;
-    }
-
-
     @PostMapping("/searchStorageUseByDate")
     @Transactional(readOnly = true)
-    public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){
+    public List<storageUseResponseFormat> searchStorageUseByDate(@RequestBody DateRequestFormat req){ //날짜를 parameter로 받아서 해당 기간 내 storage_use 데이터를 쿼리해오는 api
         List<storageUseResponseFormat> vList;
 
-        if(req.getStartDate() == null || req.getFinishDate() == null) {
+        if(req.getStartDate() == null || req.getFinishDate() == null) { //날짜가 입력안되었을 경우 전체 데이터를 보냄.
             vList = storageUseService.selectStorageUseNP(req);
 
             return vList;
         }
 
-        if(req.getType() == 1) {
+        if(req.getType() == 1) { //연
             vList = storageUseService.selectStorageUseByYear(req);
         }
-        else if(req.getType() == 2) {
+        else if(req.getType() == 2) { //월
             vList = storageUseService.selectStorageUseByMonth(req);
         }
-        else {
+        else { //일
             vList = storageUseService.selectStorageUseByDate(req);
         }
 
@@ -63,7 +49,7 @@ public class StorageUseController {
 
     @PutMapping("/updateStorageUse")
     @Transactional(readOnly = false)
-    public String updateStorageUse() {
+    public String updateStorageUse() { //storage_use table을 update 하기 위한 컨트롤러 부분.
         if(storageUseService.updateStorageUse() == 0) {
             return "ok";
         }
