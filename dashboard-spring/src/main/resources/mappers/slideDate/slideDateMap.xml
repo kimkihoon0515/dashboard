@@ -93,25 +93,4 @@
         order by type asc
     </select>
 
-
-    <select id = "showSlideDate" resultType="SlideDateVo" parameterType="SlideDateVo" fetchSize="1000">
-        select *
-        from slide_per_date
-    </select>
-    <select id = "selMonth" resultType="SlideDateVo" parameterType="SlideDateVo" fetchSize="1000">
-        select
-            date_format(date,'%Y-%m') as month,
-        sum(slide_sum) as slide_sum
-        from slide_per_date
-        group by
-        month
-    </select>
-    <select id = "selYear" resultType="SlideDateVo" parameterType="SlideDateVo" fetchSize="1000">
-        select
-            date_format(date,'%Y') as year,
-        sum(slide_sum) as slide_sum
-        from slide_per_date
-        group by
-        year
-    </select>
 </mapper>

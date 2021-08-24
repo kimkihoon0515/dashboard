@@ -17,19 +17,6 @@ public class ScannerSlideListController {
     @Autowired
     ScannerSlideListService scannerSlideListService;
 
-    @GetMapping("/showScanner") //전체 값 불러오기
-    @Transactional(readOnly = true)
-    public List<scannerResponseFormat> showScanner()
-    {
-        ScannerSlideVo vo = new ScannerSlideVo();
-        List<ScannerSlideVo> vList = scannerSlideListService.showScanner(vo);
-        ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();
-        for (ScannerSlideVo target : vList){
-            res.add(new scannerResponseFormat(target));
-        }
-        return res;
-    }
-
     @PutMapping("/updateScanner")
     @Transactional(readOnly = false)
     public String updateScanner() {
@@ -41,8 +28,8 @@ public class ScannerSlideListController {
 
     @PostMapping("/searchScannerListByDate")
     @Transactional(readOnly = true)
-    public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){
-        if(req.getStartDate() == null || req.getFinishDate() == null) {
+    public List<scannerResponseFormat> searchScannerListByDate(@RequestBody DateRequestFormat req){ //날짜를 parameter로 받아서 해당 기간 내 Scanner_list 데이터를 쿼리해오는 api
+        if(req.getStartDate() == null || req.getFinishDate() == null) { //날짜가 입력안되었을 경우 전체 데이터를 보냄.
             List<ScannerSlideVo> vList = scannerSlideListService.searchScannerList();
 
             ArrayList<scannerResponseFormat> res = new ArrayList<scannerResponseFormat>();

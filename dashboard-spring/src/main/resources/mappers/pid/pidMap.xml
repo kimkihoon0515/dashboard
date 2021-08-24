@@ -43,10 +43,4 @@
             pathID_ch
         order by last_scan_date asc
     </select>
-    <select id = "showPid" parameterType="PidVo" resultType="PidVo" fetchSize="1000">
-        select pathID_ch, sum(amount) as amount
-        from pathid_table
-        group by pathID_ch
-    </select>
-
 </mapper>

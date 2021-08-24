@@ -18,28 +18,19 @@ public class StorageStatusController {
     StorageStatusService storageStatusService;
 
     @GetMapping("/selectStorageStatus")
-    public List<StorageStatusVo> selectStorageStatus (StorageStatusVo vo)
+    public List<StorageStatusVo> selectStorageStatus (StorageStatusVo vo) // slide_list, basefolder_list로부터 storage_type table에 넣을 데이터를 불러오기 위한 컨트롤러.
     {
         List<StorageStatusVo> vList = storageStatusService.selectStorageStatus(vo);
         return vList;
     }
 
-    @PutMapping("/updateStorageStatus")
+    @PutMapping("/updateStorageStatus") // storage_type table을 update하기위한 컨트롤러.
     @Transactional(readOnly = false)
     public String updateStorageStatus() {
-        StorageStatusVo vo = new StorageStatusVo();
-        if (storageStatusService.deleteStorageStatus() == 0) {
-            List<StorageStatusVo> vList = storageStatusService.selectStorageStatus(vo);
-
-            for (StorageStatusVo target : vList) {
-                if (storageStatusService.insertStorageStatus(target) == 0) {
-                } else {
-                    return "false";
-                }
-            }
+        if (storageStatusService.updateStorageStatus() == 0) {
+            return "ok";
         } else {
             return "false";
         }
-        return "ok";
     }
 }
