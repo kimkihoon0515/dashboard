@@ -3,13 +3,13 @@
   <div class="root">
     <div class="container_A grid">
       <div id="slide-date">
+        <!--스토리지 사용량/ 슬라이드 완료 횟수 차트 태그 qurey가 탭버튼과 바인드된 변수에 따라 결정됨 (query는 차트 데이터 api 호출 및 차트에 맞는 형식으로 바꿔줄 때 필요한 데이터를 담은 객체)  -->
         <bar-type-com id="slide-date" :start_date="start" :end_date="end" :query="tabs? size:slide_date" :needCheck=true @tabChange="tabChange"></bar-type-com>
       </div>
       <div id="under">
-        <storage-table class="chartbox" @rowclick="rowclick"></storage-table>
+        <storage-table class="chartbox"></storage-table>
         <stack-bar-type-com class="chartbox" :query="storage"></stack-bar-type-com>
         <line-type-com id="storage-full" :query="storage_full"></line-type-com>
-        
       </div>
     </div>
     <div class="form__field grid">
@@ -107,23 +107,15 @@ export default {
     }
   },
   methods:{
-    viewPalette(){
+    viewPalette(){ //color picker 보이기/숨기기
       this.palette = !this.palette
     },
-    tabChange(tab){
+    tabChange(tab){ //탭버튼은 홈에 존재하는게 아니라 자식 컴포넌트인 <bar-type-com id="slide-date">에 존재하기에 emit으로 tab값을 전달받음
       this.tabs=tab
       console.log(this.tabs)
     }
   },
   mounted() {
-    this.$axios.get(this.storage.url)
-    .then((res)=>{
-      this.storage_name_list=res.data.map(function(elem){ return elem.storageName})
-      this.storageName=this.storage_name_list[0];
-    })
-    .then((err)=>{
-      console.log(err);
-    })
   }
 }
 </script>

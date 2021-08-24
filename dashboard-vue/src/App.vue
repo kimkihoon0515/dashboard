@@ -1,7 +1,7 @@
 <template>
   <v-app>
   <div id="app">
-    <div id="nav">
+    <div id="nav"> <!--네비게이션 바 시작-->
       <div class="title">
         <div class="main">
         <strong class="tit">DashBoard</strong>
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="datePicker">
-        <div class="recent">
+        <div class="recent"><!--최근데이터 불러오기 버튼 "v-" 붙은 태그는 vuetify 프레임워크의 ui 컴포넌트이며 v-btn의 elevation은 버튼의 그림자 정도에 대한 속성-->
           <div >
             <v-btn elevation="3" small @click="aYearAgo" style="margin: 0 12px 0 0;">
             일 년
@@ -24,7 +24,7 @@
             </v-btn>
           </div>
         </div>
-        <div class="range">
+        <div class="range"><!-- 날짜 입력 -->
             <input type="date" id='start-date' value=startDate/ style="margin-top: 1px ;">
             <strong>~</strong>
             <input type="date" id='end-date' value=endDate/ style="margin: 1px 8px 0 5px ;">
@@ -33,8 +33,8 @@
             </v-btn>
         </div>
       </div>
-    </div>
-    <div class="margindiv"></div>
+    </div> <!--네비게이션 바 끝-->
+    <div class="margindiv"></div> <!-- 여백 생성-->
     <home :start="startDate" :end="endDate"></home>
   </div>
   </v-app>
@@ -42,7 +42,7 @@
 
 <script>
 import home from "./views/Home.vue"
-import moment from 'moment'
+import moment from 'moment' //날짜 계산 라이브러리
 export default {
   components: {
     home
@@ -54,25 +54,25 @@ export default {
     }
   },
   methods: {
-    setDate() {
+    setDate() { //돋보기 아이콘 버튼 클릭시 실행되며 startDate, endDate를 입력받은 값으로 변경
       this.startDate = document.querySelector("#start-date").value;
       this.endDate = document.querySelector("#end-date").value;
     },
-    aYearAgo() {
+    aYearAgo() {// 최근 1년으로 날짜 설정 
       this.endDate = moment().format('YYYY-MM-DD')
       this.startDate = moment().subtract(1,'years').format('YYYY-MM-DD')
     },
-    aMonthAgo(){
+    aMonthAgo(){// 최근 한달로 날짜 설정
       this.endDate = moment().format('YYYY-MM-DD')
       this.startDate = moment().subtract(1,'months').format('YYYY-MM-DD')
     },
-    setToday(){
+    setToday(){// 오늘로 날짜 설정
       this.startDate = moment().format('YYYY-MM-DD')
       this.endDate = moment().format('YYYY-MM-DD')
     }
   },
-  mounted(){
-    setTimeout(this.setToday,100);
+  mounted(){ // 인스턴스 마운트시 실행되는 영역 
+    this.setToday(); // 초기 시작일과 끝일은 null로 설정 되어있기에 
   }
 }
 </script>
