@@ -1,13 +1,13 @@
 <template>
   <div class="chartbox">
     <div id="filter">
-        <strong style="margin-left:2px;"> MA:
+      <strong style="margin-left:2px;"> MA:
         <input id="param" type="Number" min=1 v-model="maN"/>
-        </strong>
-        <span id="predict">용량 초과 예정일: {{predictDate}}</span>
+      </strong>
+      <span id="predict">용량 초과 예정일: {{predictDate}}</span>
     </div>
     <div id="chart">
-    <line-chart class="line" :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
+      <line-chart class="line" :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></line-chart>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
       predictDate:null,
       maN:120,
       change:0,
-     dataform:{
+      dataform:{
         label: null,
         data: null,
         interaction:{
@@ -51,6 +51,7 @@ export default {
         }]
       },
       chartoptions:{
+        //modal기능을 위한 사용자 클릭 속성
         onClick : this.chartClick,
         animation:{
           duration:2000
@@ -78,41 +79,41 @@ export default {
           }, 
         }
       },
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      max: 100
-                  },
-                  gridLines: {
-                      display: true
-                  },
-              }],
-              xAxes: [ {
-              
-                  gridLines: {
-                      display: false
-                  },
-              }]
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
           },
-          legend: {
-              display: false
+          gridLines: {
+            display: true
           },
-          responsive: true,
-          maintainAspectRatio: false
+        }],
+        xAxes: [{
+          gridLines: {
+            display: false
+          },
+        }]
+      },
+      legend: {
+        display: false
+      },
+      responsive: true,
+      maintainAspectRatio: false
       }
     }
   },
   methods: {
     chartClick(){
-      //this.eventObj = evt.event;
-      console.log(this.$emit("show"))
+      //상위 컴포넌트(Home)에 이벤트 전달
+      //modal기능
       this.$emit("show");
     },
     reset() {
+      //재렌더링을 위한 리셋 함수
       this.change=0;
     },
-    parseLineData(res){
+    parseLineData(res){ //차트에 데이터를 적용하는 함수
       var ctx= this.$children[0]._data._chart.canvas.getContext("2d");
       console.log(ctx)
       var gradientFill = ctx.createLinearGradient(0, 0, 0, 450);
@@ -140,7 +141,6 @@ export default {
       for(let i=0; i<y.length ; i++){
         let tmp= _.cloneDeep(this.dataform);
         tmp.label=keys[y[i]];
-        //tmp.data=res.data.map(function(elem){return elem[keys[y[i]]]});
         tmp.data=res.data.map(function(elem){return ((elem[keys[y[i]]])/ total *100).toFixed(1)});
         let tmpPredict= _.cloneDeep(tmp);
         tmpPredict.label=keys[y[i]]+"예측값";
@@ -154,7 +154,6 @@ export default {
             tmpPredict.data[k]=""
           }
         }
-        
         this.datacollection.datasets=[];
         tmp.backgroundColor=gradientFill;
         tmpPredict.backgroundColor=gradientFill;
