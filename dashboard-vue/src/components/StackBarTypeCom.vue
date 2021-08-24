@@ -39,10 +39,10 @@ export default{
   },
   data () {
     return{
-      checked:true,
+      checked:true, //체크박스에 양방향 바인딩 되는 데이터
       origin: {},
-      checkBind: [],
-      labelList: [],
+      checkBind: [], // 체크박스에 따라 실제로 차트에 그려질 그래프의 라벨리스트
+      labelList: [], // 호출한 데이터 전체에 대한 라벨리스트
       change:0,
       datacollection: {
         labels: null,
@@ -135,7 +135,7 @@ export default{
       console.log(this.datacollection.datasets)
     }
   },
-  mounted() {
+  mounted() {//인스턴스 마운트 된 후 데이터 호출
     this.$axios.get(this.query.url)
     .then((res)=>{
       this.parseBarData(res);
@@ -145,7 +145,7 @@ export default{
     })
   },
   watch:{
-    checked:{
+    checked:{ // 체크박스의 변화를 감지하고 차트를 그리는 라벨리스트 수정
       handler(){
         if(this.checked==true){
           this.checkBind=_.cloneDeep(this.labelList);
@@ -155,7 +155,7 @@ export default{
         }
       }
     },
-    checkBind:{
+    checkBind:{ // 체크박스가 변화하면 호출되며, 체크박스에 맞게 차트 재렌더링
       handler(){
         this.datacollection.datasets[0].data=[]
         this.datacollection.datasets[1].data=[]

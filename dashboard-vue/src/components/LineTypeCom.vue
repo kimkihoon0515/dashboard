@@ -183,7 +183,7 @@ export default {
       })
     },
   },
-  mounted() {
+  mounted() {//인스턴스 마운트 된 후 데이터 호출
     this.$axios.post(this.query.url, {'n':this.maN})
     .then((res)=>{
       console.log(res)
