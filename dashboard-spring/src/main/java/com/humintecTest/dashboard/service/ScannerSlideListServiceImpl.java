@@ -15,6 +15,11 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     ScannerSlideListDao scannerSlideListDao;
 
     @Override
+    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) { // slide_list table로부터 pathid_table에 넣을 데이터를 불러오는 메소드.
+        return scannerSlideListDao.selectScanner(vo);
+    }
+
+    @Override
     public int insertScanner(ScannerSlideVo vo) {
         try{
             scannerSlideListDao.insertScanner(vo);
@@ -36,7 +41,7 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
     }
     
 	@Override
-	public int updateScanner() {
+	public int updateScanner() { // delete 후에 insert 하는 방식으로 진행.
 		if(this.deleteScanner() == 0) {
             ScannerSlideVo vo = new ScannerSlideVo();
             List<ScannerSlideVo> vList = this.selectScanner(vo);
@@ -54,24 +59,14 @@ public class ScannerSlideListServiceImpl implements ScannerSlideListService{
 		}
 		return 0;
 	}
-    
-    @Override
-    public List<ScannerSlideVo> selectScanner(ScannerSlideVo vo) {
-        return scannerSlideListDao.selectScanner(vo);
-    }
 
     @Override
-    public List<ScannerSlideVo> showScanner(ScannerSlideVo vo) {
-        return scannerSlideListDao.showScanner(vo);
-    }
-
-    @Override
-    public List<ScannerSlideVo> searchScannerList() {
+    public List<ScannerSlideVo> searchScannerList() { // 전체 scanner_per_slide 데이터를 쿼리해오는 메소드.
         return scannerSlideListDao.searchScannerList();
     }
 
     @Override
-    public List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req) {
+    public List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req) { // 조건에 맞는 scanner_per_slide 의 정보를 불러오는 메소드.
         return scannerSlideListDao.searchScannerListByDate(req);
     }
 }

@@ -16,10 +16,10 @@ public class PidController {
     @Autowired
     PidService pidService;
 
-    @PostMapping("/searchPidByDate")
+    @PostMapping("/searchPidByDate") //날짜를 parameter로 받아서 해당 기간 내 Pid 데이터를 쿼리해오는 api
     @Transactional(readOnly = true)
     public List<pidchResponseFormat> searchPid (@RequestBody DateRequestFormat req){
-        if(req.getFinishDate() == null || req.getStartDate() == null) {
+        if(req.getFinishDate() == null || req.getStartDate() == null) { //날짜가 입력안되었을 경우 전체 데이터를 보냄.
             List<pidchResponseFormat> vList = pidService.searchPid();
 
             return vList;

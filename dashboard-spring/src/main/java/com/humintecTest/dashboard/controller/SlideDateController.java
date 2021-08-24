@@ -26,7 +26,7 @@ public class SlideDateController {
 
 	@PostMapping("/selectSlidePerDate")
 	@Transactional(readOnly = true)
-	public List<slideTypeResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) {
+	public List<slideTypeResponseFormat> selectSlidePerDate(@RequestBody DateRequestFormat req) { //날짜와 type(연/월/일)을 parameter로 받아서 해당 기간 내 slide 데이터를 쿼리해오는 api
 		List<slideTypeResponseFormat> vList;
 		if(req.getStartDate() == null || req.getFinishDate() == null){
 			vList = slideDateService.selectSlidePerDateNP(req);
@@ -63,19 +63,4 @@ public class SlideDateController {
 
 		}
 	}
-
-	@GetMapping("/showSlideDate") //전체 데이터
-	@Transactional(readOnly = true)
-	public List<slideDateResponseFormat> showSlideDate(SlideDateVo vo)
-	{
-		SlideDateVo vo1 = new SlideDateVo();
-		List<SlideDateVo> vList = slideDateService.showSlideDate(vo1);
-		ArrayList<slideDateResponseFormat> res = new ArrayList<slideDateResponseFormat>();
-		for (SlideDateVo target : vList){
-			res.add(new slideDateResponseFormat(target));
-		}
-		return res;
-	}
-
-
 }

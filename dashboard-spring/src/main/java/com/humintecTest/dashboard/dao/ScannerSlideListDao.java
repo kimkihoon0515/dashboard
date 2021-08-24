@@ -12,7 +12,6 @@ public interface ScannerSlideListDao {
     void insertScanner(ScannerSlideVo vo);
     List<ScannerSlideVo> selectScanner(ScannerSlideVo vo);
     int deleteScanner();
-    List<ScannerSlideVo> showScanner(ScannerSlideVo vo);
     List<ScannerSlideVo> searchScannerList();
     List<ScannerSlideVo> searchScannerListByDate(DateRequestFormat req);
 }

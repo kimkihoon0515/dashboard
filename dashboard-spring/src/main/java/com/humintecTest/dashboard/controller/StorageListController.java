@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.humintecTest.dashboard.request.storageListRequestFormat;
 import com.humintecTest.dashboard.response.storageListResponseFormat;
 import com.humintecTest.dashboard.service.StorageListService;
 import com.humintecTest.dashboard.vo.StorageListVo;
@@ -24,7 +23,7 @@ public class StorageListController {
 
     @GetMapping("/storageList") //전체 데이터
     @Transactional(readOnly = true)
-    public List<storageListResponseFormat> selectStorageList(){
+    public List<storageListResponseFormat> selectStorageList(){ // storage_list table을 불러오기 위한 컨트롤러.
         StorageListVo vo = new StorageListVo();
         List<StorageListVo> vList = storageListService.selectStorageList(vo);
 
@@ -35,12 +34,5 @@ public class StorageListController {
         }
 
         return resList;
-    }
-
-    @GetMapping("/requestCheck")
-    @Transactional(readOnly = true)
-    public int requestCheck(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
-
-        return req.getCheck();
     }
 }

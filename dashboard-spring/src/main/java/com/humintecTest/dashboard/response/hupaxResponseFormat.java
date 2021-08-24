@@ -6,7 +6,7 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class hupaxResponseFormat {
+public class hupaxResponseFormat { // 결과값을 FE에 전달하는 객체
     private Date date;
     private long daily_used;
     private long daily_sum;

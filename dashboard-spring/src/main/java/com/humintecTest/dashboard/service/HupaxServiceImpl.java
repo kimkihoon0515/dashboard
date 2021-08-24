@@ -14,7 +14,7 @@ public class HupaxServiceImpl implements HupaxService{
     HupaxDao hupaxDao;
 
     @Override
-    public List<HupaxVo> selectHupax(HupaxRequestFormat req) {
+    public List<HupaxVo> selectHupax(HupaxRequestFormat req) { // storageUse 쿼리하는 메소드
         return hupaxDao.selectHupax(req);
     }
 }
