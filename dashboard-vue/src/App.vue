@@ -72,7 +72,7 @@ export default {
     }
   },
   mounted(){ // 인스턴스 마운트시 실행되는 영역 
-    this.setToday(); // 초기 시작일과 끝일은 null로 설정 되어있기에 
+    setTimeout(this.setToday,100); // 초기 시작일과 끝일은 null로 설정 되어있기에 마운트시 오늘로 설정해주는 함수 실행
   }
 }
 </script>

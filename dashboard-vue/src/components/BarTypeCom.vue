@@ -1,22 +1,22 @@
 <template>
     <div class="chartbox">
-      <div v-if="needCheck==true" id="header">
-        <div class="radio">
+      <div v-if="needCheck==true" id="header"> <!--needCheck 변수가 True이면 좌측 상단의 막대 차트유형-->
+        <div class="radio"><!--연/월/일 선택 라디오 버트-->
           <input :name=query.name type="radio" value="1" v-model="YMD"><label>Y</label>
           <input :name=query.name type="radio" value="2" v-model="YMD"><label>M</label>
           <input :name=query.name type="radio" value="3" v-model="YMD" checked="checked"><label>D</label>
         </div>
-        <div class="tab">
+        <div class="tab"><!--탭 버튼-->
           <v-tabs v-model="tab">
             <v-tab >스캔 완료 횟수</v-tab>
             <v-tab>메모리 사용량</v-tab>
           </v-tabs>
         </div>
       </div>
-      <div v-if="needCheck==false" id="filter">
+      <div v-if="needCheck==false" id="filter"> <!--needCheck 변수가 false이면 우측의 막대 차트유형-->
         <v-expansion-panels class="mb-6">
-          <v-expansion-panel>
-            <v-expansion-panel-header expand-icon="mdi-menu-down">
+          <v-expansion-panel><!--필터 목록 숨기기용 확장 패널-->
+            <v-expansion-panel-header expand-icon="mdi-menu-down"> 
             Filter
             </v-expansion-panel-header>
               <v-expansion-panel-content style="height:auto;">
@@ -26,21 +26,19 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
-      <div id="bar">
+      <div id="bar"> <!--막대 차트-->
         <bar-chart :datacollection="datacollection" :options="chartoptions" :change="change" @rerendered="reset"></bar-chart>
       </div>
     </div>
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
 import BarChart from './BarChart.vue'
-import _ from 'lodash'
-import moment from 'moment'
+import _ from 'lodash' //깊은 복사 함수를 위한 라이브러리
 
 export default {
   name : "BarTypeCom",
-  components: { BarChart, Multiselect},
+  components: { BarChart},
   props: {
     color:{
       type: String,
