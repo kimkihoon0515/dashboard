@@ -9,7 +9,7 @@
         <div class="tab">
           <v-tabs v-model="tab">
             <v-tab >스캔 완료 횟수</v-tab>
-            <v-tab>메모리 사용량</v-tab>
+            <v-tab>스토리지 사용량</v-tab>
           </v-tabs>
         </div>
       </div>
@@ -83,7 +83,7 @@ export default {
         pointBorderColor: '#249EBF33'
         },
       change:0,
-      colorset:['#1FBC9C4D','#ffd95033', '#02bc7733', '#28c3d733', '#FF638433'],
+      colorset:['#28c3d770','#ffd95033', '#02bc7733', '#28c3d733', '#FF638433'],
       datacollection: {
         labels: null,
         datasets: [
@@ -114,13 +114,13 @@ export default {
               var dataset = data.datasets[tooltipItem.datasetIndex];
               var currentValue = dataset.data[tooltipItem.index];
               if (currentValue >= 1000000000000) {
-                return currentValue = (currentValue/ 1000000000000).toFixed(1) + "TB";
+                return currentValue = (currentValue/ 1099511627776).toFixed(1) + "TB";
               }
               else if (currentValue>=1000000000 && currentValue < 1000000000000) {
-                return currentValue = (currentValue / 1000000000).toFixed(1) + "GB";
+                return currentValue = (currentValue / 1073741824).toFixed(1) + "GB";
               }
               else if (currentValue>=1000000 && currentValue < 1000000000) {
-                return currentValue = (currentValue / 1000000).toFixed(1) + "MB";
+                return currentValue = (currentValue / 1048576).toFixed(1) + "MB";
               }
               else {
               return currentValue;
@@ -134,13 +134,13 @@ export default {
               beginAtZero: true,
               callback: function(value, index, values){
                 if (value >=1000000000000){
-                  return value = (value / 1000000000000).toFixed(1) + "TB";
+                  return value = (value / 1099511627776).toFixed(1) + "TB";
                 }
                 else if (value>=1000000000 && value <1000000000000){
-                  return value = (value / 1000000000).toFixed(1) + "GB";
+                  return value = (value / 1073741824).toFixed(1) + "GB";
                 }
                 else if (value >=1000000 && value < 1000000000) {
-                  return value = (value / 1000000).toFixed(1) + "MB";
+                  return value = (value / 1048576).toFixed(1) + "MB";
                 }
                 else {
                   return value;
