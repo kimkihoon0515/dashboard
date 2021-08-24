@@ -1,7 +1,7 @@
 <template>
   <v-card style="width: 300px; display: inline-block;">
-    <v-simple-table dense fixed-header
-      height="300px" @click:row="handleClick" v-model="selectedRow">
+    <v-simple-table dense fixed-header 
+      height="300px" >
       <template v-slot:default>
         <thead>
           <tr >
@@ -27,26 +27,11 @@
     name:"StorageTable",
     data () {
       return {
-        selectedRow:null,
         dataset:[],
         selectStorage:"",
       }
     },
     methods:{
-      handleClick(value){
-        console.log(value.storagename)
-        this.toggleSelection(value.id);
-        this.selectStorage=""
-        this.selectStorage=value.storageName
-        this.$emit("rowclick",this.selectStorage)
-      },
-      toggleSelection(keyID) {
-        console.log(keyID)
-        if (this.selectedRow!=keyID) {
-          this.selectedRow=keyID
-          console.log(this.selectedRow)
-        }
-      },
       sizeConvert(currentValue){
           if (currentValue >= 1000000000000) {
             return currentValue = (currentValue/ 1099511627776).toFixed(1) + "TB";
