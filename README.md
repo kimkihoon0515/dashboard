@@ -13,7 +13,8 @@
 
 ## 선택한 기간내 데이터를 월별로 보여주는 기능  
 
-<img width="942" alt="KakaoTalk_20210824_172507164" src="https://user-images.githubusercontent.com/63439911/130583313-59842e7b-e144-4fdb-bb97-f74ec9536d49.png">  
+<img width="942" alt="KakaoTalk_20210824_172507164" src="https://user-images.githubusercontent.com/63439911/130583313-59842e7b-e144-4fdb-bb97-f74ec9536d49.png"> 
+
 ## 선택한 기간내 데이터를 연도별로 보여주는 기능  
 
 <img width="945" alt="KakaoTalk_20210824_172554494" src="https://user-images.githubusercontent.com/63439911/130583441-39fcbe6b-af7f-41a8-bb19-5a43c669586e.png">  
