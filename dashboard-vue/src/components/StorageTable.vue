@@ -32,7 +32,7 @@
       }
     },
     methods:{
-      sizeConvert(currentValue){
+      sizeConvert(currentValue){ //단위 변환 함수
           if (currentValue >= 1000000000000) {
             return currentValue = (currentValue/ 1099511627776).toFixed(1) + "TB";
           }

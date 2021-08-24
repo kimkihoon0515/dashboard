@@ -172,7 +172,7 @@ export default {
     }
   },
   watch:{
-    maN: function(){
+    maN: function(){ //이동평균 파라미터 수정시 예측 데이터 다시 호출
       this.$axios.post(this.query.url, {'n':this.maN})
       .then((res)=>{
       console.log(res)
