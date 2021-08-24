@@ -25,7 +25,7 @@
     <div class="container_B grid">
       <div id="right">
         <bar-type-com id="scanner" :start_date="start" :end_date="end" :query="scanner" :needCheck=false :color="color+'4D'"></bar-type-com>
-        <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color"></bar-type-com>
+        <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color+'4D'"></bar-type-com>
       </div>
     </div>
     <Modal v-if="showModal" :query="storage_full" :storageName="storageName" @close="showModal = false">
