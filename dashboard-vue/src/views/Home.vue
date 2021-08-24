@@ -9,7 +9,8 @@
       <div id="under">
         <storage-table class="chartbox"></storage-table>
         <stack-bar-type-com class="chartbox" :query="storage"></stack-bar-type-com>
-        <line-type-com id="storage-full" :query="storage_full"></line-type-com>
+
+        <line-type-com id="storage-full" :query="storage_full" :storageName="storageName" @show="show"></line-type-com>
       </div>
     </div>
     <div class="form__field grid">
@@ -28,6 +29,32 @@
         <bar-type-com id="pathID" :start_date="start" :end_date="end" :query="pathID" :needCheck=false :color="color+'4D'"></bar-type-com>
       </div>
     </div>
+    <Modal v-if="showModal" :query="storage_full" :storageName="storageName" @close="showModal = false">
+      <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper" @click="showModal=false">
+        <div class="modal-container">
+          <div class="modal-header">
+            <slot name="header">   
+            </slot>
+          </div>
+          <div class="modal-body" @click.stop="">
+            <slot name="body">
+              <line-type-com id="storage-full" :query="storage_full" :storageName="storageName"></line-type-com>
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              
+  
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+    </Modal>
   </div>
   </v-app>
 </template>
@@ -35,17 +62,17 @@
 <script>
 import BarTypeCom from '../components/BarTypeCom.vue'
 import LineTypeCom from '../components/LineTypeCom.vue'
-import PieTypeCom from '../components/PieTypeCom.vue'
 import StackBarTypeCom from '../components/StackBarTypeCom.vue'
 import VSwatches from 'vue-swatches'
 import 'vue-swatches/dist/vue-swatches.css'
 import StorageTable from '../components/StorageTable.vue'
 export default {
-  components: { BarTypeCom, PieTypeCom, LineTypeCom, VSwatches,StorageTable, StorageTable,StackBarTypeCom },
+  components: { BarTypeCom, LineTypeCom, VSwatches, StorageTable,StackBarTypeCom },
   name: 'home',
   data() {
     return {
       tabs:0,
+      showModal:false,
       palette: false,
       color: '#1FBC9C4D',
       slide_date:{
@@ -72,7 +99,7 @@ export default {
       size:{
         name:"size",
         url:"/searchStorageUseByDate",
-        chartName: "메모리 사용량",
+        chartName: "스토리지 사용량",
         xKey: 0,
         yKey: [1]
       },
@@ -107,13 +134,25 @@ export default {
     }
   },
   methods:{
-    viewPalette(){ //color picker 보이기/숨기기
+
+    show(){
+      this.showModal=true;
+    },
+    nameChange(name){
+      console.log(name)
+      this.storageName=name;
+    },
+    rowclick(selectStorage){
+      this.nameChange(selectStorage)
+    },
+    viewPalette(){
       this.palette = !this.palette
     },
     tabChange(tab){ //탭버튼은 홈에 존재하는게 아니라 자식 컴포넌트인 <bar-type-com id="slide-date">에 존재하기에 emit으로 tab값을 전달받음
       this.tabs=tab
       console.log(this.tabs)
     }
+
   },
   mounted() {
   }
@@ -190,6 +229,65 @@ export default {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
     background-color: white;
   }
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  position:absolute;
+  width: 900px;
+  margin: 0px auto;
+  padding: 0px 0px;
+  border-radius: 4px;
+  font-family: Helvetica, Arial, sans-serif;
+  
+}
+
+.modal-body {
+  margin: 0px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 
   input {
     background-color: #fff;
