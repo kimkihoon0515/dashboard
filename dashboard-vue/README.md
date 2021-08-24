@@ -8,6 +8,21 @@
 # install dependencies
 npm install
 
+# install vue-chartjs
+npm install vue-chartjs
+
+# install vue-swatches
+npm install vue-swatches
+
+# install vuetify
+npm install vuetify
+
+# install vue-multiselect
+npm install vue-multiselect
+
+# install font-awesome
+npm install font-awesome
+
 # serve with hot reload at localhost:8080
 npm run dev
 
@@ -26,5 +41,3 @@ npm run e2e
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
