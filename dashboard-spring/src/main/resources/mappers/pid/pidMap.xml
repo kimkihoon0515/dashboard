@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.PidDao">
+    <select id ="selectPid" parameterType="PidVo" resultType="PidVo" fetchSize="1000">
+        select date_format(last_scan_date, '%Y-%m-%d') as last_scan_date,
+               pathID_ch,
+               count(*) as amount
+        from slide_list
+        group by date_format(last_scan_date,'%Y-%m-%d')
+               ,pathID_ch
+        order by last_scan_date asc
+    </select>
+    <insert id = "insertPid" parameterType="PidVo">
+        insert into
+            pathid_table(last_scan_date,pathID_ch,amount)
+        values
+            (#{last_scan_date},#{pathID_ch},#{amount})
+    </insert>
+    <delete id = "deletePid">
+        truncate pathid_table
+    </delete>
+    <select id = "searchPid" resultType="com.humintecTest.dashboard.response.pidchResponseFormat" fetchSize="1000">
+        select
+            pathID_ch as pathID_ch,
+            sum(amount) as amount
+        from
+            pathid_table
+        group by
+            pathID_ch
+        order by last_scan_date asc
+    </select>
+    <select id = "searchPidByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="com.humintecTest.dashboard.response.pidchResponseFormat" fetchSize="1000">
+        select
+            pathID_ch as pathID_ch,
+            sum(amount) as amount
+        from
+            pathid_table
+        where
+            last_scan_date between #{startDate} and #{finishDate}
+        group by
+            pathID_ch
+        order by last_scan_date asc
+    </select>
+    <select id = "showPid" parameterType="PidVo" resultType="PidVo" fetchSize="1000">
+        select pathID_ch, sum(amount) as amount
+        from pathid_table
+        group by pathID_ch
+    </select>
+
+</mapper>

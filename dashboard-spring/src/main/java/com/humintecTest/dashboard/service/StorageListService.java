@@ -5,5 +5,5 @@ import java.util.List;
 import com.humintecTest.dashboard.vo.StorageListVo;
 
 public interface StorageListService {
-	List<StorageListVo> selectStorageList(StorageListVo vo);
+    List<StorageListVo> selectStorageList(StorageListVo vo);
 }

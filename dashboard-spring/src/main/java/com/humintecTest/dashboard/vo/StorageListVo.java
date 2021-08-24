@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class StorageListVo {
-	private int id;
-	private String storageName;
-	private Long total;
-	private Long used;
-	private Long free;
-	private String serverIp;
+    private long id;
+    private String storageName;
+    private long total;
+    private long used;
+    private long free;
+    private String serverIp;
 }

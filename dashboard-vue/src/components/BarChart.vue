@@ -7,8 +7,22 @@
     props: {
         datacollection: {
           type: Object, 
-          default: null 
+
+        },
+        options:{
+          type: Object, 
+
+        },
+        change:{
+          default:0
         }
+    },
+    watch:{
+      change: function(){
+        //this.update();
+        this.renderChart(this.datacollection, this.options)
+        this.$emit("rerendered")
+      }
     },
     mounted () {
       //renderChart function renders the chart with the datacollection and options object.

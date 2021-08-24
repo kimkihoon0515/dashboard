@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.ScannerSlideListDao">
+    <select id = "selectScanner" parameterType="ScannerSlideVo" resultType="ScannerSlideVo" fetchSize="1000">
+        select
+            scanner_type,
+            count(*) as slide_sum
+        from
+            slide_list
+        group by
+            scanner_type
+    </select>
+    <insert id = "insertScanner" parameterType="ScannerSlideVo">
+        insert into
+            scanner_per_slide(scanner_type,slide_sum)
+        values
+            (#{scanner_type},#{slide_sum})
+    </insert>
+    <delete id = "deleteScanner">
+        truncate
+            scanner_per_slide
+    </delete>
+    <select id = "showScanner" resultType="ScannerSlideVo" parameterType="ScannerSlideVo" fetchSize="1000">
+        select *
+        from scanner_per_slide
+    </select>
+    
+    <select id = "searchScannerList" resultType="ScannerSlideVo" fetchSize="1000">
+        select
+        	scanner_type as scanner_type,
+        	sum(amount) as slide_sum
+        from 
+        	scanner_table
+        group by
+        	scanner_type
+        order by scanner_type asc
+    </select>
+    <select id = "searchScannerListByDate" parameterType="com.humintecTest.dashboard.request.DateRequestFormat" resultType="ScannerSlideVo" fetchSize="1000">
+        select
+        	scanner_type as scanner_type,
+        	sum(amount) as slide_sum
+        from 
+        	scanner_table
+        where 
+        	date between #{startDate} and #{finishDate}
+        group by
+        	scanner_type
+        order by scanner_type asc
+    </select>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.humintecTest.dashboard.dao.StorageFreeDao">
+    <select id = "selectStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo" fetchSize="1000">
+        select date,
+               storage_name,
+               daily_sum as daily_used,
+               total
+        from storage_per_date
+    </select>
+    <insert id = "insertStorageFree" parameterType="StorageFreeVo">
+        insert into
+            storage_free(date, storage_name,daily_used, total)
+        values
+            (#{date},#{storage_name},#{daily_used},#{total})
+    </insert>
+    <delete id = "deleteStorageFree">
+        truncate
+            storage_free
+    </delete>
+    <select id="searchStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo" fetchSize="1000">
+        select *
+        from storage_free
+        where date between #{start_date} and #{end_date}
+    </select>
+    
+    <select id = "selectStorageFreeByDate" parameterType = "com.humintecTest.dashboard.request.DateRequestFormat" resultType = "StorageFreeVo" fetchSize="1000">
+    	select
+    		*
+    	from
+    		storage_free
+    	where
+    		date between date_format(#{startDate}, '%Y-%m-%d') and date_format(#{finishDate}, '%Y-%m-%d')
+    </select>
+    
+    
+    <select id = "selectStorageFreeById" parameterType = "com.humintecTest.dashboard.request.StorageTableRequestFormat" resultType = "StorageFreeVo" fetchSize="1000">
+    	select
+    		*
+    	from
+    		storage_free
+    	where
+    		storage_name=#{storageName}
+    	order by date asc
+    </select>
+    
+    
+    <select id = "showStorageFree" parameterType="StorageFreeVo" resultType="StorageFreeVo" fetchSize="1000">
+        select *
+        from storage_free
+    </select>
+</mapper>

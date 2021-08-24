@@ -5,14 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.humintecTest.dashboard.request.storageListRequestFormat;
@@ -23,28 +19,28 @@ import com.humintecTest.dashboard.vo.StorageListVo;
 @RestController
 @CrossOrigin(origins = "*")
 public class StorageListController {
-	@Autowired
-	StorageListService storageListService;
+    @Autowired
+    StorageListService storageListService;
 
-	@GetMapping("/storageList")
-	@Transactional(readOnly = true)
-	public List<storageListResponseFormat> selectStorageList(){
-		StorageListVo vo = new StorageListVo();
-		List<StorageListVo> vList = storageListService.selectStorageList(vo);
+    @GetMapping("/storageList") //전체 데이터
+    @Transactional(readOnly = true)
+    public List<storageListResponseFormat> selectStorageList(){
+        StorageListVo vo = new StorageListVo();
+        List<StorageListVo> vList = storageListService.selectStorageList(vo);
 
-		ArrayList<storageListResponseFormat> resList = new ArrayList<storageListResponseFormat>();
+        ArrayList<storageListResponseFormat> resList = new ArrayList<storageListResponseFormat>();
 
-		for(StorageListVo selectVo : vList) {
-			resList.add(new storageListResponseFormat(selectVo));
-		}
+        for(StorageListVo selectVo : vList) {
+            resList.add(new storageListResponseFormat(selectVo));
+        }
 
-		return resList;
-	}
+        return resList;
+    }
 
-	@GetMapping("/requestCheck")
-	@Transactional(readOnly = true)
-	public int requestCheck(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
+    @GetMapping("/requestCheck")
+    @Transactional(readOnly = true)
+    public int requestCheck(@RequestHeader("Authorization") @RequestBody storageListRequestFormat req){
 
-		return req.getCheck();
-	}
+        return req.getCheck();
+    }
 }
