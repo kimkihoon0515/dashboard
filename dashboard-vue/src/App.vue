@@ -65,14 +65,20 @@ export default {
     aYearAgo() {// 최근 1년으로 날짜 설정 
       this.endDate = moment().format('YYYY-MM-DD')
       this.startDate = moment().subtract(1,'years').format('YYYY-MM-DD')
+      document.querySelector("#start-date").value=this.startDate;
+      document.querySelector("#end-date").value=this.endDate;
     },
     aMonthAgo(){// 최근 한달로 날짜 설정
       this.endDate = moment().format('YYYY-MM-DD')
       this.startDate = moment().subtract(1,'months').format('YYYY-MM-DD')
+      document.querySelector("#start-date").value=this.startDate;
+      document.querySelector("#end-date").value=this.endDate;
     },
     setToday(){// 오늘로 날짜 설정
       this.startDate = moment().format('YYYY-MM-DD')
       this.endDate = moment().format('YYYY-MM-DD')
+      document.querySelector("#start-date").value=this.startDate;
+      document.querySelector("#end-date").value=this.endDate;
     }
   },
   mounted(){ // 인스턴스 마운트시 실행되는 영역 
